@@ -1,1 +1,718 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="color-scheme" content="light only">
+    <title>PopMinutes — Tạo tài khoản người dùng</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#1B2B7A',
+                        'navy-deep': '#131F5C',
+                        'navy-light': '#2D3FA6',
+                        'navy-pale': '#F0F3FF',
+                    },
+                    fontFamily: { sans: ['"Be Vietnam Pro"', 'system-ui', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --navy: #1B2B7A;
+            --navy-deep: #131F5C;
+            --navy-light: #2D3FA6;
+            --navy-pale: #F0F3FF;
+            --surface: #F8FAFC;
+            --border: #E2E8F0;
+            --text: #0F172A;
+            --muted: #64748B;
+            --success: #10B981;
+            --danger: #EF4444;
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --shadow-lg: 0 20px 48px rgba(27, 43, 122, 0.16);
+        }
+        * { box-sizing: border-box; }
+        html {
+            scroll-behavior: smooth;
+            overflow-x: clip;
+            scroll-padding-top: 80px;
+        }
+        @media (max-width: 640px) {
+            html { scroll-padding-top: 130px; }
+        }
+        body {
+            font-family: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
+            background-color: #fff !important;
+            color: var(--text) !important;
+            overflow-x: clip;
+            min-height: 100vh;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            padding-top: 62px;
+        }
+        @media (max-width: 640px) {
+            body { padding-top: 90px; }
+        }
+        ::selection { background: var(--navy); color: #fff; }
+        .title-bold { font-weight: 900; letter-spacing: -0.045em; line-height: 1.15; }
+        h1, h2, h3, h4 { text-wrap: balance; word-break: keep-all; overflow-wrap: break-word; }
+        .text-gradient { color: var(--navy); }
 
+        .section-white { background: #ffffff !important; }
+        .section-light {
+            background: var(--surface) !important;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .reveal {
+            opacity: 0; transform: translateY(48px);
+            transition: opacity 0.85s cubic-bezier(0.16, 0.67, 0.29, 0.99), transform 0.85s cubic-bezier(0.16, 0.67, 0.29, 0.99);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.12s; }
+        .reveal-delay-2 { transition-delay: 0.24s; }
+        .reveal-delay-3 { transition-delay: 0.36s; }
+
+        .btn-main {
+            background: var(--navy);
+            color: white;
+            padding: 1.2rem 2.6rem;
+            border-radius: 100px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            letter-spacing: 0.02em;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 8px 28px rgba(27,43,122,0.18);
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .btn-main:hover:not(:disabled) {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 22px 44px rgba(27,43,122,0.32);
+            background: var(--navy-deep);
+        }
+        .btn-main:active:not(:disabled) { transform: translateY(0) scale(0.98); }
+        .btn-main:disabled { opacity: 0.7; cursor: not-allowed; }
+        @media (max-width: 640px) {
+            .btn-main { padding: 0.9rem 1.6rem !important; font-size: 0.85rem !important; }
+        }
+
+        .wide-container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+        @media (min-width: 768px) { .wide-container { padding: 0 40px; } }
+
+        @keyframes floatCard {
+            0%,100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .float-anim { animation: floatCard 5.5s ease-in-out infinite; }
+        .bg-noise {
+            background-image: radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+        .glow-orb {
+            position: absolute; border-radius: 50%; filter: blur(120px);
+            opacity: 0.22; pointer-events: none; z-index: 0;
+        }
+
+        .input-elegant {
+            width: 100%;
+            padding: 1.1rem 1.5rem;
+            background: #fff;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            outline: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            color: var(--text);
+            font-family: inherit;
+        }
+        .input-elegant:focus {
+            border-color: var(--navy-light);
+            box-shadow: 0 0 0 4px rgba(45, 63, 166, 0.1);
+        }
+        .input-elegant::placeholder { color: #94a3b8; font-weight: 400; }
+
+        /* NAV */
+        .nav-mini {
+            position: fixed; top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid #edf0f5;
+            padding: 12px 40px;
+            box-sizing: border-box;
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+        .nav-inner {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 24px; width: 100%;
+        }
+        .nav-logo {
+            display: flex; align-items: center; gap: 10px;
+            text-decoration: none; flex-shrink: 0;
+        }
+        .nav-logo img { width: 36px; height: 36px; border-radius: 10px; display: block; }
+        .nav-logo-text {
+            font-weight: 900; font-size: 1rem; color: #0F172A;
+            letter-spacing: -0.02em; text-transform: none !important;
+            white-space: nowrap; line-height: 1;
+        }
+        .nav-logo-text .text-minutes { color: var(--navy); }
+        .nav-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--navy-pale);
+            color: var(--navy);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+        }
+        .nav-badge i { font-size: 0.75rem; }
+        @media (max-width: 640px) {
+            .nav-mini { padding: 10px 14px; }
+            .nav-inner { gap: 10px; }
+            .nav-logo img { width: 30px; height: 30px; }
+            .nav-logo-text { font-size: 0.95rem; }
+            .nav-badge { font-size: 0.68rem; padding: 6px 12px; }
+            .nav-badge span { display: none; }
+        }
+
+        /* MODAL */
+        .modal-overlay {
+            position: fixed; inset: 0;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            align-items: flex-start; justify-content: center;
+            z-index: 9999;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 16px;
+            box-sizing: border-box;
+        }
+        .modal-overlay:not(.hidden) { display: flex; }
+        .modal-overlay.hidden { display: none; }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.94); opacity: 0; }
+            to   { transform: scale(1); opacity: 1; }
+        }
+        .modal-box {
+            position: relative;
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 480px;
+            min-width: 0;
+            max-height: calc(100vh - 32px);
+            overflow-y: auto;
+            margin: auto;
+            padding: 28px 24px 24px;
+            box-sizing: border-box;
+            box-shadow: var(--shadow-lg);
+            animation: scaleIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        @media (max-width: 640px) {
+            .modal-overlay { padding: 12px; }
+            .modal-box { padding: 24px 20px 20px; }
+        }
+
+        .success-icon-wrap {
+            width: 72px; height: 72px;
+            background: #D1FAE5; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px;
+        }
+        .success-icon-wrap svg { width: 36px; height: 36px; color: var(--success); }
+
+        .modal-close {
+            position: absolute; top: 14px; right: 14px;
+            width: 34px; height: 34px;
+            background: #F1F5F9; border: none; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; color: var(--muted);
+            cursor: pointer; transition: background 0.15s;
+        }
+        .modal-close:hover { background: #E2E8F0; }
+
+        .btn-spinner {
+            display: inline-block;
+            width: 18px; height: 18px;
+            border: 2.5px solid rgba(255, 255, 255, 0.35);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .consent-wrapper { display: flex; align-items: flex-start; gap: 10px; margin-top: 6px; }
+        .consent-checkbox {
+            width: 20px; height: 20px; flex-shrink: 0; margin: 0; padding: 0; cursor: pointer;
+            border: 2px solid #cbd5e1; border-radius: 5px; background-color: #fff;
+            transition: all 0.2s ease; appearance: none; -webkit-appearance: none;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; color: var(--navy); font-size: 16px; font-weight: 700;
+        }
+        .consent-checkbox:checked { background-color: #fff; border-color: var(--navy); }
+        .consent-checkbox:checked::before {
+            content: "✓"; display: flex; align-items: center; justify-content: center;
+            width: 100%; height: 100%; color: var(--navy);
+        }
+        .consent-checkbox:focus { outline: none; box-shadow: 0 0 0 3px rgba(27, 43, 122, 0.15); }
+        .consent-label {
+            font-size: 0.85rem; color: #475569; font-weight: 500;
+            line-height: 1.5; cursor: pointer; margin: 0; padding: 0;
+        }
+        .consent-link {
+            color: var(--navy); font-weight: 700;
+            text-decoration: underline; text-underline-offset: 2px;
+        }
+
+        /* Info box */
+        .info-box {
+            background: #EFF6FF;
+            border: 1px solid #BFDBFE;
+            border-radius: 12px;
+            padding: 14px 16px;
+            font-size: 0.85rem;
+            color: #1E40AF;
+            line-height: 1.6;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+        .info-box i {
+            color: #1B2B7A;
+            flex-shrink: 0;
+            margin-top: 3px;
+            font-size: 1rem;
+        }
+
+        /* FOOTER */
+        .site-footer {
+            background: #F8FAFC; color: #64748B;
+            padding: 56px 0 24px;
+            border-top: 1px solid #E2E8F0;
+        }
+        .footer-grid {
+            display: grid; grid-template-columns: 1.1fr 1.3fr 1fr 1fr;
+            gap: 40px; padding-bottom: 40px;
+            border-bottom: 1px solid #E2E8F0;
+        }
+        .footer-col-title {
+            font-weight: 800; font-size: 0.78rem;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: #94A3B8; margin-bottom: 18px;
+        }
+        .footer-info-block { display: flex; flex-direction: column; gap: 8px; }
+        .footer-company-name { font-weight: 800; font-size: 0.92rem; color: #334155; line-height: 1.4; }
+        .footer-info-line { font-size: 0.88rem; color: #64748B; line-height: 1.6; }
+        .footer-info-line strong { color: #64748B; font-weight: 600; }
+        .footer-logo-bottom {
+            display: flex; align-items: center; gap: 14px; margin-top: 24px;
+        }
+        .footer-logo-bottom img { width: 56px; height: 56px; border-radius: 14px; display: block; }
+        .footer-logo-bottom span {
+            font-weight: 900; font-size: 1.5rem; color: #334155;
+            letter-spacing: -0.03em; line-height: 1;
+        }
+        .footer-logo-bottom span .text-minutes { color: var(--navy); }
+        .footer-contact-list { display: flex; flex-direction: column; gap: 12px; }
+        .footer-contact-item {
+            display: flex; align-items: flex-start; gap: 10px;
+            font-size: 0.88rem; color: #64748B; line-height: 1.55;
+        }
+        .footer-contact-item i {
+            color: var(--navy); font-size: 0.9rem; width: 16px;
+            text-align: center; flex-shrink: 0; margin-top: 3px;
+        }
+        .footer-contact-item a { color: #64748B; text-decoration: none; }
+        .footer-contact-item a:hover { color: var(--navy); }
+        .footer-links { display: flex; flex-direction: column; gap: 11px; }
+        .footer-links a {
+            color: #64748B; text-decoration: none; font-size: 0.88rem;
+            font-weight: 500; transition: color 0.2s, transform 0.2s;
+            display: inline-flex; align-items: center; gap: 6px; line-height: 1.5;
+        }
+        .footer-links a:hover { color: var(--navy); transform: translateX(3px); }
+        .footer-links a::before {
+            content: '→'; color: #CBD5E1; font-size: 0.78rem;
+            transition: color 0.2s; flex-shrink: 0;
+        }
+        .footer-links a:hover::before { color: var(--navy); }
+        .footer-bottom {
+            text-align: center; padding-top: 24px;
+            font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 0.15em; color: #A0AEC0;
+        }
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+        }
+        @media (max-width: 640px) {
+            .site-footer { padding: 40px 0 20px; }
+            .footer-grid {
+                grid-template-columns: 1fr; gap: 28px; padding-bottom: 28px;
+            }
+            .footer-logo-bottom img { width: 48px; height: 48px; }
+            .footer-logo-bottom span { font-size: 1.25rem; }
+            .footer-links a { font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+<div class="glow-orb w-[400px] h-[400px] bg-[#1B2B7A] top-[-100px] left-[-100px]" style="opacity:0.10;"></div>
+<div class="glow-orb w-[300px] h-[300px] bg-[#7c8ec9] bottom-[-50px] right-[-80px]" style="opacity:0.08;"></div>
+
+<!-- NAV -->
+<nav class="nav-mini">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">
+            <img src="https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png" alt="PopMinutes">
+            <span class="nav-logo-text">Pop<span class="text-minutes">Minutes</span></span>
+        </a>
+        <span class="nav-badge">
+            <i class="fa-solid fa-user-plus"></i>
+            <span>Đăng ký nội bộ</span>
+        </span>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="pt-12 pb-12 sm:pt-16 sm:pb-16 section-white bg-noise relative overflow-hidden">
+    <div class="wide-container max-w-4xl text-center relative z-10">
+        <div class="reveal active">
+            <div class="inline-flex items-center gap-2 bg-[#F0F3FF] px-4 py-2 rounded-full text-[0.7rem] sm:text-xs font-bold uppercase tracking-widest text-[#1B2B7A] mb-6 sm:mb-8">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Dành cho Sales nội bộ PopHubly
+            </div>
+            <h1 class="title-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-6 sm:mb-8">
+                Tạo tài khoản <br><span class="text-gradient">người dùng PopMinutes</span>
+            </h1>
+            <p class="text-base sm:text-lg text-slate-500 max-w-2xl mx-auto font-medium leading-relaxed">
+                Điền thông tin bên dưới để nhận <strong class="text-slate-800">email kích hoạt</strong> và bắt đầu sử dụng hệ thống PopMinutes AI.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="py-12 sm:py-16 section-light">
+    <div class="wide-container">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 max-w-5xl mx-auto">
+            <div class="reveal reveal-delay-1 bg-white p-6 rounded-[20px] shadow-md shadow-slate-100 border border-slate-100">
+                <div class="w-12 h-12 bg-[#F0F3FF] rounded-xl flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-microphone text-[#1B2B7A] text-lg"></i>
+                </div>
+                <h3 class="text-base font-black mb-2 text-slate-900">Ghi âm cuộc họp</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">Chuyển biên bản họp thành văn bản tự động với AI, tiết kiệm thời gian.</p>
+            </div>
+            <div class="reveal reveal-delay-2 bg-white p-6 rounded-[20px] shadow-md shadow-slate-100 border border-slate-100">
+                <div class="w-12 h-12 bg-[#F0F3FF] rounded-xl flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-envelope text-[#1B2B7A] text-lg"></i>
+                </div>
+                <h3 class="text-base font-black mb-2 text-slate-900">Email biên bản tức thì</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">Biên bản gửi tự động đến bạn, sếp và khách hàng sau cuộc họp.</p>
+            </div>
+            <div class="reveal reveal-delay-3 bg-white p-6 rounded-[20px] shadow-md shadow-slate-100 border border-slate-100">
+                <div class="w-12 h-12 bg-[#F0F3FF] rounded-xl flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-map-location-dot text-[#1B2B7A] text-lg"></i>
+                </div>
+                <h3 class="text-base font-black mb-2 text-slate-900">Đặt chỗ tại quán cafe</h3>
+                <p class="text-slate-500 text-sm leading-relaxed">Hơn 100+ quán cafe đối tác sẵn sàng phục vụ cuộc gặp khách chuyên nghiệp.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- REGISTRATION FORM -->
+<section id="registerSection" class="py-12 sm:py-20 section-white">
+    <div class="wide-container max-w-2xl">
+        <div class="bg-white rounded-[28px] shadow-2xl shadow-slate-200/60 p-6 sm:p-10 reveal border border-slate-50">
+            <div class="text-center mb-8">
+                <h2 class="title-bold text-2xl sm:text-3xl mb-3">Đăng ký tài khoản</h2>
+                <p class="text-slate-500 text-sm sm:text-base">Chỉ mất 30 giây. Chúng tôi sẽ gửi email kích hoạt ngay sau khi bạn hoàn tất.</p>
+            </div>
+
+            <div class="info-box mb-6">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>Nếu bạn chưa có <strong>Mã doanh nghiệp</strong>, vui lòng liên hệ Admin PopHubly qua <a href="mailto:info@pophubly.com" style="color:#1B2B7A; font-weight:700;">info@pophubly.com</a> để được cấp.</span>
+            </div>
+
+            <form id="registerForm" class="space-y-5" novalidate>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
+                        Họ và tên <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="regName" name="name" placeholder="Nguyễn Văn A" class="input-elegant" required autocomplete="name">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
+                        Email công ty <span class="text-red-500">*</span>
+                    </label>
+                    <input type="email" id="regEmail" name="email" placeholder="ban@congty.com" class="input-elegant" required autocomplete="email">
+                    <p class="text-xs text-slate-400 mt-2 ml-1">
+                        <i class="fa-solid fa-circle-info"></i>
+                        Đây là email nhận link kích hoạt. Vui lòng kiểm tra kỹ.
+                    </p>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
+                        Mã doanh nghiệp <span class="text-red-500">*</span>
+                    </label>
+                    <input type="text" id="regEnterpriseId" name="phone" placeholder="PM-APP-XXX" class="input-elegant" required 
+                           style="text-transform: uppercase;" 
+                           pattern="[A-Za-z0-9\-]+"
+                           title="Chỉ bao gồm chữ, số và dấu gạch ngang"
+                           autocomplete="off">
+                    <p class="text-xs text-slate-400 mt-2 ml-1">
+                        <i class="fa-solid fa-circle-info"></i>
+                        Mã do Admin PopHubly cấp (VD: PM-APP-101)
+                    </p>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">
+                        Ghi chú (tùy chọn)
+                    </label>
+                    <textarea id="regNote" name="note" placeholder="Phòng ban, chức vụ, hoặc thông tin thêm..." rows="3" class="input-elegant resize-none"></textarea>
+                </div>
+
+                <input type="hidden" name="source" value="MEMBER_REG">
+
+                <div class="consent-wrapper">
+                    <input type="checkbox" id="regConsent" name="consent" required class="consent-checkbox">
+                    <label for="regConsent" class="consent-label">
+                        Tôi đồng ý với 
+                        <a href="https://pophubly.com/pophubly-privacy-policy/" target="_blank" class="consent-link">Chính sách bảo mật</a> 
+                        và 
+                        <a href="https://pophubly.com/term-of-use/" target="_blank" class="consent-link">Điều khoản sử dụng</a>.
+                    </label>
+                </div>
+
+                <button type="submit" id="regSubmitBtn" class="btn-main w-full py-4 sm:py-5 text-base mt-2">
+                    TẠO TÀI KHOẢN
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="wide-container">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-col-title">Thông tin chung</div>
+                <div class="footer-info-block">
+                    <div class="footer-company-name">CÔNG TY TNHH POPHUBLY</div>
+                    <div class="footer-info-line"><strong>Người đại diện:</strong> HOÀNG TRÚC NHI</div>
+                    <div class="footer-info-line"><strong>MST:</strong> 1602232842</div>
+                </div>
+                <div class="footer-logo-bottom">
+                    <img src="https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png" alt="PopMinutes">
+                    <span>Pop<span class="text-minutes">Minutes</span></span>
+                </div>
+            </div>
+            <div>
+                <div class="footer-col-title">Liên hệ</div>
+                <div class="footer-contact-list">
+                    <div class="footer-contact-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>178 Tuy Biên, Tổ 6, Vĩnh Chánh 2, Vĩnh Ngươn, Phường Châu Đốc, Tỉnh An Giang, Việt Nam</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <a href="mailto:info@pophubly.com">info@pophubly.com</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <a href="tel:0384744368">0384 744 368</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="footer-col-title">Chính sách &amp; Điều khoản</div>
+                <div class="footer-links">
+                    <a href="https://pophubly.com/pophubly-privacy-policy/" target="_blank">Chính sách bảo mật</a>
+                    <a href="https://pophubly.com/term-of-use/" target="_blank">Điều khoản sử dụng</a>
+                    <a href="https://pophubly.com/chinh-sach-hoan-tien/" target="_blank">Chính sách hoàn tiền</a>
+                    <a href="https://pophubly.com/quy-trinh-thanh-toan/" target="_blank">Quy trình thanh toán</a>
+                    <a href="https://pophubly.com/quy-trinh-khieu-nai/" target="_blank">Quy trình khiếu nại</a>
+                </div>
+            </div>
+            <div>
+                <div class="footer-col-title">Hợp tác</div>
+                <div class="footer-links">
+                    <a href="#">Đối tác địa điểm</a>
+                    <a href="#">Đối tác chiến lược</a>
+                    <a href="#">Tiếp thị liên kết</a>
+                    <a href="#">Chương trình khác</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 POPHUBLY ECOSYSTEM &bull; POPMINUTES.AI
+        </div>
+    </div>
+</footer>
+
+<!-- SUCCESS MODAL -->
+<div id="successModal" class="modal-overlay hidden">
+    <div class="modal-box" style="text-align: center;">
+        <button onclick="closeSuccessModal()" class="modal-close" aria-label="Đóng">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="success-icon-wrap">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+            </svg>
+        </div>
+        <h3 id="modalTitle" style="font-size:1.5rem; font-weight:800; color:var(--text); margin-bottom:12px;">Đã gửi yêu cầu!</h3>
+        <p id="modalMessage" style="color:var(--muted); font-weight:500; line-height:1.6; margin-bottom:24px;"></p>
+        <button onclick="closeSuccessModal()" class="btn-main" style="width:100%;">Đã hiểu</button>
+    </div>
+</div>
+
+<script>
+    // ================= CONFIG =================
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxrYkvMg1JxGCzuPzdpUaBYIrqZu6DyX2Qh0IXV49OYhAaCb6NHBY9BZFmdBBxLe65i/exec";
+
+    // ================= MODAL =================
+    function openModal(id) {
+        document.getElementById(id).classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeModal(id) {
+        document.getElementById(id).classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+    function closeSuccessModal() { closeModal('successModal'); }
+
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+        overlay.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        });
+    });
+
+    // ================= FORM SUBMIT =================
+    const registerForm = document.getElementById('registerForm');
+    const submitBtn = document.getElementById('regSubmitBtn');
+
+    registerForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        if (!registerForm.checkValidity()) {
+            registerForm.reportValidity();
+            return;
+        }
+
+        const formData = new FormData(registerForm);
+        const data = Object.fromEntries(formData.entries());
+        data.source = "MEMBER_REG";
+        // GAS dùng "phone" cho enterprise_id
+        data.phone = (data.phone || '').trim().toUpperCase();
+
+        const originalHTML = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="btn-spinner"></span> Đang xử lý...';
+
+        console.log('📤 [MEMBER_REG] Submitting:', data);
+
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 25000);
+
+            const response = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                signal: controller.signal
+            });
+            clearTimeout(timeoutId);
+
+            const text = await response.text();
+            console.log('📥 Response:', text);
+
+            let result = {};
+            try { result = JSON.parse(text); } catch (e) { result = { result: "success" }; }
+
+            // Hiện modal thành công (vì GAS luôn trả success)
+            document.getElementById('modalMessage').innerHTML = `
+                Chúng tôi đã gửi <strong>email kích hoạt</strong> đến:<br>
+                <strong style="color:#1B2B7A;">${data.email}</strong><br><br>
+                Vui lòng kiểm tra hộp thư (cả thư mục <strong>Spam</strong>) và bấm vào link trong email để kích hoạt tài khoản.<br><br>
+                <span style="font-size:0.8rem; color:#94A3B8; display:block; margin-top:8px; padding-top:12px; border-top:1px dashed #CBD5E1;">
+                    ⏱ Nếu sau <strong>5 phút</strong> không nhận được email, có thể <strong>Mã doanh nghiệp</strong> chưa chính xác hoặc email đã được đăng ký trước đó. Vui lòng liên hệ <a href="mailto:info@pophubly.com" style="color:#1B2B7A; font-weight:700;">info@pophubly.com</a>.
+                </span>
+            `;
+            openModal('successModal');
+            registerForm.reset();
+
+        } catch (error) {
+            console.error('❌ Error:', error);
+            document.getElementById('modalTitle').textContent = 'Lỗi kết nối';
+            document.getElementById('modalMessage').innerHTML = error.name === 'AbortError'
+                ? 'Máy chủ phản hồi chậm. Vui lòng thử lại sau.'
+                : 'Không thể kết nối đến máy chủ. Vui lòng kiểm tra mạng.';
+            openModal('successModal');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalHTML;
+        }
+    });
+
+    // Auto uppercase Enterprise ID
+    document.getElementById('regEnterpriseId').addEventListener('input', function() {
+        this.value = this.value.toUpperCase();
+    });
+
+    // ================= REVEAL =================
+    const revealElements = document.querySelectorAll('.reveal');
+    const observerOptions = { threshold: 0.18, rootMargin: '0px 0px -60px 0px' };
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    revealElements.forEach(el => revealObserver.observe(el));
+    document.querySelectorAll('.reveal.active').forEach(el => revealObserver.unobserve(el));
+</script>
+</body>
+</html>

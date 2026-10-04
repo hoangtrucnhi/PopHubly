@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="color-scheme" content="light only">
+    <meta name="robots" content="noindex, nofollow">
+    <title>PopMinutes — Hệ thống đang nâng cấp</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --navy: #1B2B7A;
+            --navy-deep: #131F5C;
+            --navy-light: #2D3FA6;
+            --navy-pale: #F0F3FF;
+            --surface: #F8FAFC;
+            --border: #E2E8F0;
+            --text: #0F172A;
+            --muted: #64748B;
+            --warning: #F59E0B;
+            --success: #10B981;
+        }
+        * { box-sizing: border-box; }
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
+            background: #fff;
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* BACKGROUND */
+        .bg-wrap {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.35;
+        }
+        .bg-orb.o1 {
+            width: 500px; height: 500px;
+            background: linear-gradient(135deg, #1B2B7A, #2D3FA6);
+            top: -200px; left: -150px;
+        }
+        .bg-orb.o2 {
+            width: 400px; height: 400px;
+            background: linear-gradient(135deg, #7c8ec9, #c4d1f0);
+            bottom: -150px; right: -100px;
+            opacity: 0.25;
+        }
+        .bg-grid {
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(rgba(27,43,122,0.06) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        /* MAIN */
+        .main-wrap {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        /* LOGO TOP */
+        .logo-top {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            margin: 0 auto;
+            padding: 12px 0;
+        }
+        .logo-top img {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+        }
+        .logo-top-text {
+            font-weight: 900;
+            font-size: 1.15rem;
+            color: #0F172A;
+            letter-spacing: -0.02em;
+        }
+        .logo-top-text .text-minutes { color: var(--navy); }
+
+        /* CONTENT */
+        .content-wrap {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 0;
+        }
+
+        .maint-card {
+            width: 100%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            border-radius: 32px;
+            padding: 40px 32px;
+            box-shadow: 0 20px 60px rgba(27, 43, 122, 0.08);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        @media (max-width: 640px) {
+            .maint-card {
+                padding: 32px 20px;
+                border-radius: 24px;
+            }
+        }
+
+        .icon-hero {
+            width: 88px;
+            height: 88px;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, #1B2B7A 0%, #2D3FA6 100%);
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 16px 40px rgba(27, 43, 122, 0.3);
+        }
+        .icon-hero::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 32px;
+            background: linear-gradient(135deg, #1B2B7A 0%, #2D3FA6 100%);
+            opacity: 0.2;
+            animation: pulse 2s ease-in-out infinite;
+            z-index: -1;
+        }
+        @keyframes pulse {
+            0%,100% { transform: scale(1); opacity: 0.2; }
+            50%     { transform: scale(1.08); opacity: 0.08; }
+        }
+        .icon-hero i {
+            color: #fff;
+            font-size: 40px;
+        }
+        @media (max-width: 640px) {
+            .icon-hero { width: 72px; height: 72px; border-radius: 22px; }
+            .icon-hero i { font-size: 32px; }
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #FEF3C7;
+            color: #92400E;
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 18px;
+        }
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            background: #F59E0B;
+            border-radius: 50%;
+            animation: pulseDot 1.5s ease-in-out infinite;
+        }
+        @keyframes pulseDot {
+            0%,100% { opacity: 1; transform: scale(1); }
+            50%     { opacity: 0.5; transform: scale(1.3); }
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            line-height: 1.15;
+            margin: 0 0 16px;
+            color: var(--text);
+        }
+        h1 .accent { color: var(--navy); }
+        @media (max-width: 640px) {
+            h1 { font-size: 1.5rem; }
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: var(--muted);
+            line-height: 1.65;
+            margin: 0 0 28px;
+            font-weight: 500;
+        }
+
+        /* Progress bar */
+        .progress-wrap {
+            background: var(--navy-pale);
+            border-radius: 100px;
+            height: 8px;
+            overflow: hidden;
+            margin-bottom: 28px;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #1B2B7A, #2D3FA6);
+            border-radius: 100px;
+            width: 65%;
+            position: relative;
+            animation: progressAnim 3s ease-in-out infinite;
+        }
+        @keyframes progressAnim {
+            0%   { width: 35%; }
+            50%  { width: 75%; }
+            100% { width: 35%; }
+        }
+
+        /* ETA */
+        .eta-box {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .eta-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--navy-pale);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--navy);
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .eta-text {
+            text-align: left;
+        }
+        .eta-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 2px;
+        }
+        .eta-value {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--navy);
+        }
+
+        /* Contact */
+        .contact-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: #fff;
+            border: 1.5px solid var(--border);
+            border-radius: 100px;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .contact-btn:hover {
+            border-color: var(--navy);
+            color: var(--navy);
+            background: var(--navy-pale);
+            transform: translateY(-2px);
+        }
+        .contact-btn i { color: var(--navy); }
+
+        /* Footer mini */
+        .mini-footer {
+            text-align: center;
+            padding: 20px 0 8px;
+            font-size: 0.75rem;
+            color: #94A3B8;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        .mini-footer a {
+            color: var(--navy);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .mini-footer a:hover { text-decoration: underline; }
+
+        /* Info list */
+        .info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 24px;
+            text-align: left;
+        }
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            font-size: 0.88rem;
+            line-height: 1.5;
+            color: #475569;
+        }
+        .info-item i {
+            color: var(--navy);
+            font-size: 1rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .info-item strong { color: var(--text); font-weight: 800; }
+    </style>
+</head>
+<body>
+
+<!-- BACKGROUND -->
+<div class="bg-wrap">
+    <div class="bg-orb o1"></div>
+    <div class="bg-orb o2"></div>
+    <div class="bg-grid"></div>
+</div>
+
+<!-- MAIN -->
+<div class="main-wrap">
+
+    <!-- Logo -->
+    <a href="#" class="logo-top">
+        <img src="https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png" alt="PopMinutes">
+        <span class="logo-top-text">Pop<span class="text-minutes">Minutes</span></span>
+    </a>
+
+    <!-- Content -->
+    <div class="content-wrap">
+        <div class="maint-card">
+
+            <div class="icon-hero">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+            </div>
+
+            <div class="badge">
+                <span class="badge-dot"></span>
+                Đang bảo trì
+            </div>
+
+            <h1>
+                Hệ thống đang được <span class="accent">nâng cấp</span>
+            </h1>
+
+            <p class="subtitle">
+                Chúng tôi đang nâng cấp hạ tầng để mang đến trải nghiệm nhanh và ổn định hơn. 
+                Vui lòng quay lại sau ít phút.
+            </p>
+
+            <!-- Progress -->
+            <div class="progress-wrap">
+                <div class="progress-bar"></div>
+            </div>
+
+            <!-- ETA -->
+            <div class="eta-box">
+                <div class="eta-icon">
+                    <i class="fa-regular fa-clock"></i>
+                </div>
+                <div class="eta-text">
+                    <div class="eta-label">Dự kiến hoàn tất</div>
+                    <div class="eta-value" id="etaValue">Trong vòng 30 phút</div>
+                </div>
+            </div>
+
+            <!-- Info -->
+            <div class="info-list">
+                <div class="info-item">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Dữ liệu người dùng của bạn vẫn <strong>an toàn</strong> trong quá trình nâng cấp.</span>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Hệ thống mới sẽ có <strong>bảo mật cao hơn</strong> và tốc độ tải nhanh hơn.</span>
+                </div>
+            </div>
+
+            <!-- Contact -->
+            <div class="contact-wrap">
+                <a href="mailto:info@pophubly.com" class="contact-btn">
+                    <i class="fa-regular fa-envelope"></i>
+                    info@pophubly.com
+                </a>
+                <a href="tel:0384744368" class="contact-btn">
+                    <i class="fa-solid fa-phone"></i>
+                    0384 744 368
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer mini -->
+    <div class="mini-footer">
+        &copy; 2026 POPHUBLY ECOSYSTEM &bull; 
+        <a href="https://pophubly.com">pophubly.com</a>
+    </div>
+
+</div>
+
+<script>
+    // Đếm ngược ETA đơn giản
+    (function() {
+        const etaEl = document.getElementById('etaValue');
+        let minutes = 30;
+        
+        // Giảm 1 phút mỗi phút thực
+        setInterval(() => {
+            minutes = Math.max(1, minutes - 1);
+            if (minutes <= 5) {
+                etaEl.textContent = `Sắp xong (${minutes} phút)`;
+            } else {
+                etaEl.textContent = `Trong vòng ${minutes} phút`;
+            }
+        }, 60000);
+    })();
+</script>
+
+</body>
+</html>

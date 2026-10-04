@@ -1156,6 +1156,106 @@
             border-color: #fff;
             box-shadow: 0 16px 36px rgba(255, 255, 255, 0.18);
         }
+            /* ===== CUSTOM DROPDOWN (thay native select) ===== */
+        .custom-select {
+            position: relative;
+            width: 100%;
+        }
+        .custom-select-trigger {
+            width: 100%;
+            padding: 1.1rem 3.25rem 1.1rem 1.5rem;
+            background: #fff;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            outline: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text);
+            font-family: inherit;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            box-sizing: border-box;
+        }
+        .custom-select-trigger:hover {
+            border-color: var(--navy-light);
+        }
+        .custom-select-trigger.open {
+            border-color: var(--navy-light);
+            box-shadow: 0 0 0 4px rgba(45, 63, 166, 0.1);
+        }
+        .custom-select-trigger.placeholder {
+            color: #94a3b8;
+        }
+        .custom-select-arrow {
+            position: absolute;
+            right: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: var(--navy);
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+        .custom-select-trigger.open ~ .custom-select-arrow {
+            transform: translateY(-50%) rotate(180deg);
+        }
+        .custom-select-options {
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            box-shadow: 0 12px 32px rgba(15, 23, 42, 0.15), 0 2px 6px rgba(15, 23, 42, 0.06);
+            z-index: 99999;
+            max-height: 240px;
+            overflow-y: auto;
+            padding: 6px;
+            display: none;
+            animation: csFadeIn 0.18s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .custom-select-options.open {
+            display: block;
+        }
+        @keyframes csFadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .custom-select-option {
+            padding: 12px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text);
+            transition: background 0.12s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+        .custom-select-option:hover,
+        .custom-select-option.active {
+            background: var(--navy-pale);
+            color: var(--navy);
+        }
+        .custom-select-option.selected {
+            background: var(--navy-pale);
+            color: var(--navy);
+            font-weight: 700;
+        }
+        .custom-select-option.selected::after {
+            content: '✓';
+            color: var(--navy);
+            font-weight: 900;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -1547,18 +1647,21 @@
     <input type="tel" id="pricingPhone" name="phone" placeholder="Số điện thoại *" class="input-elegant" required>
     <input type="text" id="pricingCompany" name="company" placeholder="Công ty" class="input-elegant">
     <input type="text" id="pricingScale" name="scale" placeholder="Số lượng sales" class="input-elegant">
-    <div>
-        <div class="relative">
-            <select id="pricingPackage" name="package" class="input-elegant" required>
-                <option value="" disabled selected>Chọn gói mong muốn</option>
-                <option value="Đội nhóm">Đội nhóm</option>
-                <option value="Doanh nghiệp">Doanh nghiệp</option>
-                <option value="Cao cấp">Cao cấp</option>
-            </select>
-            <svg class="absolute right-5 top-1/2 -translate-y-1/2 w-5 h-5 text-[#1B2B7A] pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
-        </div>
-        <p class="text-[0.75rem] text-slate-400 mt-2 ml-2">Giá từ <strong>2.790k</strong> đến <strong>8.090k</strong>/tháng · Cao cấp liên hệ</p>
-    </div>
+                <div>
+                <div class="custom-select" id="pricingPackageSelect">
+                    <button type="button" class="custom-select-trigger placeholder" id="pricingPackageTrigger">
+                        <span id="pricingPackageLabel">Chọn gói mong muốn</span>
+                    </button>
+                    <i class="fa-solid fa-chevron-down custom-select-arrow"></i>
+                    <div class="custom-select-options" id="pricingPackageOptions">
+                        <div class="custom-select-option" data-value="Đội nhóm">Đội nhóm</div>
+                        <div class="custom-select-option" data-value="Doanh nghiệp">Doanh nghiệp</div>
+                        <div class="custom-select-option" data-value="Cao cấp">Cao cấp</div>
+                    </div>
+                    <input type="hidden" id="pricingPackage" name="package" required>
+                </div>
+                <p class="text-[0.75rem] text-slate-400 mt-2 ml-2">Giá từ <strong>2.790k</strong> đến <strong>8.090k</strong>/tháng · Cao cấp liên hệ</p>
+            </div>
     <div class="consent-wrapper">
         <input type="checkbox" id="pricingConsent" name="consent" required class="consent-checkbox">
         <label for="pricingConsent" class="consent-label">
@@ -1945,6 +2048,110 @@
                 }
             });
         });
+    })();
+</script>
+<script>
+    // ============================================================
+    // CUSTOM DROPDOWN cho pricingPackage
+    // ============================================================
+    (function() {
+        const trigger = document.getElementById('pricingPackageTrigger');
+        const optionsBox = document.getElementById('pricingPackageOptions');
+        const label = document.getElementById('pricingPackageLabel');
+        const hiddenInput = document.getElementById('pricingPackage');
+        const wrapper = document.getElementById('pricingPackageSelect');
+
+        if (!trigger || !optionsBox || !hiddenInput) return;
+
+        // Mở/đóng dropdown
+        trigger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const isOpen = optionsBox.classList.contains('open');
+            if (isOpen) {
+                closeDropdown();
+            } else {
+                openDropdown();
+            }
+        });
+
+        function openDropdown() {
+            optionsBox.classList.add('open');
+            trigger.classList.add('open');
+        }
+
+        function closeDropdown() {
+            optionsBox.classList.remove('open');
+            trigger.classList.remove('open');
+        }
+
+        // Chọn 1 option
+        optionsBox.querySelectorAll('.custom-select-option').forEach(function(opt) {
+            opt.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const value = this.dataset.value;
+
+                // Cập nhật hidden input
+                hiddenInput.value = value;
+                hiddenInput.dispatchEvent(new Event('change', { bubbles: true }));
+
+                // Cập nhật label
+                label.textContent = value;
+                trigger.classList.remove('placeholder');
+
+                // Đánh dấu selected
+                optionsBox.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+
+                closeDropdown();
+            });
+        });
+
+        // Click ra ngoài đóng
+        document.addEventListener('click', function(e) {
+            if (!wrapper.contains(e.target)) {
+                closeDropdown();
+            }
+        });
+
+        // Escape để đóng
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeDropdown();
+        });
+
+        // ===== Override hàm openPricingModal cũ để set label =====
+        const originalOpen = window.openPricingModal;
+        window.openPricingModal = function(packageName) {
+            // Gọi hàm cũ (mở modal)
+            if (typeof originalOpen === 'function') {
+                originalOpen(packageName);
+            }
+
+            // Update custom dropdown UI
+            if (packageName) {
+                hiddenInput.value = packageName;
+                label.textContent = packageName;
+                trigger.classList.remove('placeholder');
+                optionsBox.querySelectorAll('.custom-select-option').forEach(o => {
+                    o.classList.toggle('selected', o.dataset.value === packageName);
+                });
+            } else {
+                hiddenInput.value = '';
+                label.textContent = 'Chọn gói mong muốn';
+                trigger.classList.add('placeholder');
+                optionsBox.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
+            }
+        };
+
+        // ===== Reset khi form được reset =====
+        const pricingForm = document.getElementById('pricingForm');
+        if (pricingForm) {
+            pricingForm.addEventListener('reset', function() {
+                hiddenInput.value = '';
+                label.textContent = 'Chọn gói mong muốn';
+                trigger.classList.add('placeholder');
+                optionsBox.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
+            });
+        }
     })();
 </script>
 </body>

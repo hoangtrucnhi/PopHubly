@@ -1891,5 +1891,61 @@
         });
     }, 3000);
 </script>
+    <script>
+    // ============================================================
+    // FIX CHROME BUG: Native select bị cắt trong scroll container
+    // Khi user focus vào select, tạm thời bỏ overflow của overlay
+    // để dropdown hiển thị đầy đủ. Sau khi chọn xong, khôi phục.
+    // ============================================================
+    (function() {
+        const overlays = document.querySelectorAll('.modal-overlay');
+
+        overlays.forEach(function(overlay) {
+            // Khi user focus vào SELECT trong overlay này
+            overlay.addEventListener('focusin', function(e) {
+                if (e.target.tagName === 'SELECT') {
+                    // Lưu lại giá trị overflow cũ để khôi phục
+                    overlay.dataset.prevOverflow = overlay.style.overflowY || '';
+                    
+                    // Tạm thời cho phép tràn
+                    overlay.style.overflowY = 'visible';
+                    overlay.style.overflow = 'visible';
+
+                    // Fix thêm cho modal-box (nếu có set overflow)
+                    const box = e.target.closest('.modal-box');
+                    if (box) {
+                        box.dataset.prevOverflow = box.style.overflowY || '';
+                        box.style.overflowY = 'visible';
+                        box.style.overflow = 'visible';
+                    }
+                }
+            });
+
+            // Khi user rời khỏi SELECT (chọn xong hoặc click ra ngoài)
+            overlay.addEventListener('focusout', function(e) {
+                if (e.target.tagName === 'SELECT') {
+                    // Delay nhỏ để dropdown kịp đóng hoàn toàn
+                    setTimeout(function() {
+                        overlay.style.overflowY = overlay.dataset.prevOverflow || '';
+                        overlay.style.overflow = '';
+
+                        const box = e.target.closest('.modal-box');
+                        if (box) {
+                            box.style.overflowY = box.dataset.prevOverflow || '';
+                            box.style.overflow = '';
+                        }
+                    }, 150);
+                }
+            });
+
+            // Khi user chọn xong 1 option, auto blur để dropdown đóng
+            overlay.addEventListener('change', function(e) {
+                if (e.target.tagName === 'SELECT') {
+                    e.target.blur();
+                }
+            });
+        });
+    })();
+</script>
 </body>
 </html>

@@ -1537,6 +1537,7 @@
         <p class="text-slate-300 text-sm sm:text-lg mb-10 sm:mb-16 max-w-2xl mx-auto">Đăng ký nhận email để cập nhật tính năng mới nhất từ PopMinutes App và các cẩm nang Sales.</p>
         <form id="newsletterForm" class="flex flex-col sm:flex-row justify-center items-stretch gap-3 sm:gap-4 max-w-2xl mx-auto mt-6" novalidate>
     <input type="email" id="newsletterEmail" name="email" placeholder="Nhập địa chỉ email của bạn..." class="newsletter-input flex-1" required>
+    <input type="hidden" id="newsletterRef" name="ref" value="">
     <button type="submit" id="newsletterSubmitBtn" class="newsletter-btn">ĐĂNG KÝ NGAY</button>
 </form>
     </div>
@@ -1647,6 +1648,7 @@
     <input type="tel" id="pricingPhone" name="phone" placeholder="Số điện thoại *" class="input-elegant" required>
     <input type="text" id="pricingCompany" name="company" placeholder="Công ty" class="input-elegant">
     <input type="text" id="pricingScale" name="scale" placeholder="Số lượng sales" class="input-elegant">
+    <input type="hidden" id="pricingRef" name="ref" value="">
                 <div>
                 <div class="custom-select" id="pricingPackageSelect">
                     <button type="button" class="custom-select-trigger placeholder" id="pricingPackageTrigger">
@@ -1726,6 +1728,71 @@
 
 <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxrYkvMg1JxGCzuPzdpUaBYIrqZu6DyX2Qh0IXV49OYhAaCb6NHBY9BZFmdBBxLe65i/exec";
+        // ============================================================
+    // AFFILIATE: Đọc ?ref= từ URL và populate vào hidden inputs
+    // ============================================================
+    (function() {
+        try {
+            // 1. Đọc ref từ URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const refFromUrl = urlParams.get('ref');
+            
+            // 2. Đọc ref cũ từ localStorage (nếu chưa có ref mới)
+            const refFromStorage = localStorage.getItem('popminutes_affiliate_ref');
+            
+            // 3. Ưu tiên ref từ URL (mới), fallback về localStorage
+            let activeRef = refFromUrl || refFromStorage || '';
+            
+            console.log('🔗 [Affiliate] refFromUrl:', refFromUrl, '| refFromStorage:', refFromStorage, '| activeRef:', activeRef);
+            
+            // 4. Nếu có ref từ URL → lưu localStorage với expiry 365 ngày
+            if (refFromUrl) {
+                const expiresAt = Date.now() + (365 * 24 * 60 * 60 * 1000);
+                localStorage.setItem('popminutes_affiliate_ref', refFromUrl);
+                localStorage.setItem('popminutes_affiliate_ref_expires', String(expiresAt));
+                console.log('✅ [Affiliate] Saved ref to localStorage:', refFromUrl);
+            } else if (refFromStorage) {
+                // Check expiry
+                const expiresAt = Number(localStorage.getItem('popminutes_affiliate_ref_expires') || 0);
+                if (expiresAt > 0 && Date.now() > expiresAt) {
+                    localStorage.removeItem('popminutes_affiliate_ref');
+                    localStorage.removeItem('popminutes_affiliate_ref_expires');
+                    activeRef = '';
+                    console.log('⚠️ [Affiliate] Ref expired, cleared');
+                }
+            }
+            
+            // 5. Populate vào tất cả hidden inputs có id chứa "Ref"
+            function populateRefInputs() {
+                const inputs = [
+                    document.getElementById('ctaRef'),
+                    document.getElementById('pricingRef'),
+                    document.getElementById('newsletterRef')
+                ];
+                let count = 0;
+                inputs.forEach(input => {
+                    if (input) {
+                        input.value = activeRef;
+                        count++;
+                    }
+                });
+                console.log(`📝 [Affiliate] Populated ref to ${count} inputs`);
+            }
+            
+            // Populate khi DOM ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', populateRefInputs);
+            } else {
+                populateRefInputs();
+            }
+            
+            // Populate lại sau 500ms (phòng case DOM chưa có đủ inputs)
+            setTimeout(populateRefInputs, 500);
+            
+        } catch (e) {
+            console.error('❌ [Affiliate] Error:', e);
+        }
+    })();
 
     // ================= MODAL HELPERS =================
     function openModal(id) {
@@ -1976,6 +2043,47 @@
     }, observerOptions);
     revealElements.forEach(el => revealObserver.observe(el));
     document.querySelectorAll('.reveal.active').forEach(el => revealObserver.unobserve(el));
+        // ============================================================
+    // AFFILIATE: Track click khi user vào landing page với ?ref=
+    // ============================================================
+    (function() {
+        try {
+            const urlParams = new URLSearchParams(window.location.search);
+            const refFromUrl = urlParams.get('ref');
+            if (!refFromUrl) return;
+            
+            const CLOUD_RUN_URL = 'https://get-upload-url-test-824148866382.asia-southeast1.run.app';
+            
+            console.log('📊 [Affiliate] Tracking click for ref:', refFromUrl);
+            
+            fetch(CLOUD_RUN_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({
+                    action: 'affiliateTrack',
+                    partnerId: refFromUrl,
+                    channel: 'link',
+                    userAgent: navigator.userAgent,
+                    referrer: document.referrer || ''
+                }).toString()
+            })
+            .then(r => r.json())
+            .then(d => {
+                if (d.status === 200) {
+                    console.log('✅ [Affiliate] Click tracked:', d.referral_id);
+                    // Lưu referral_id để dùng khi submit form
+                    if (d.referral_id) {
+                        localStorage.setItem('popminutes_affiliate_referral_id', d.referral_id);
+                    }
+                } else {
+                    console.warn('⚠️ [Affiliate] Track failed:', d.message);
+                }
+            })
+            .catch(e => console.warn('❌ [Affiliate] Track error:', e));
+        } catch (e) {
+            console.error('❌ [Affiliate] Tracking setup error:', e);
+        }
+    })();
 </script>
 <noscript>
 <style>

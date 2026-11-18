@@ -1743,7 +1743,31 @@
             <p class="text-slate-500 text-base sm:text-lg max-w-2xl mx-auto font-medium leading-relaxed">
                 Tự động hóa liền mạch toàn bộ chu trình làm việc của đội ngũ Sales chỉ trên một nền tảng duy nhất.
             </p>
-            <!-- Cột phải: Thẻ diễn giải trực quan sang trọng, tối giản (Hiển thị mặc định Chặng 1 ngay khi load) -->
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <!-- Cột trái: 3 chặng hành trình -->
+            <div class="lg:col-span-5 space-y-3 sm:space-y-4 reveal">
+                <div id="step1" onclick="updateStep(0, this)" class="step-trigger active">
+                    <span class="text-xs font-extrabold uppercase tracking-[0.14em] text-[#1B2B7A] block mb-1.5">Chặng 1 • Trước cuộc gặp</span>
+                    <h3 class="text-lg sm:text-xl font-black text-slate-900 mb-1">Đặt chỗ tiếp khách</h3>
+                    <p class="text-sm text-slate-500 font-medium">Không gian cafe chọn lọc, chuyên nghiệp</p>
+                </div>
+
+                <div id="step2" onclick="updateStep(1, this)" class="step-trigger">
+                    <span class="text-xs font-extrabold uppercase tracking-[0.14em] text-[#1B2B7A] block mb-1.5">Chặng 2 • Trong cuộc gặp</span>
+                    <h3 class="text-lg sm:text-xl font-black text-slate-900 mb-1">Ghi âm, Tóm tắt &amp; Báo cáo</h3>
+                    <p class="text-sm text-slate-500 font-medium">Biên bản họp tự động chuẩn xác bằng AI</p>
+                </div>
+
+                <div id="step3" onclick="updateStep(2, this)" class="step-trigger">
+                    <span class="text-xs font-extrabold uppercase tracking-[0.14em] text-[#1B2B7A] block mb-1.5">Chặng 3 • Sau cuộc gặp</span>
+                    <h3 class="text-lg sm:text-xl font-black text-slate-900 mb-1">Tạo Task, Đồng bộ CRM &amp; CSKH</h3>
+                    <p class="text-sm text-slate-500 font-medium">Kích hoạt hành động sau họp chỉ với 1 chạm</p>
+                </div>
+            </div>
+
+            <!-- Cột phải: Thẻ diễn giải trực quan (Hiển thị mặc định Chặng 1 ngay khi load) -->
             <div class="lg:col-span-7 reveal active">
                 <div id="step-preview" class="bg-white rounded-[28px] sm:rounded-[36px] overflow-hidden shadow-[0_20px_50px_rgba(15,23,42,0.06)] border border-slate-200/90 flex flex-col justify-between text-slate-900 text-left transition-all duration-500 p-7 sm:p-11" style="min-height: 360px;">
                     <div class="flex flex-col justify-between h-full space-y-6">

@@ -4,161 +4,174 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="color-scheme" content="light only">
-<meta name="description" content="PopMinutes — AI meeting notes cho team Sales. Đặt chỗ gặp khách tại 100+ quán cafe đối tác, ghi âm, tóm tắt và gửi email báo cáo tự động cho sếp và khách hàng.">
+<meta name="description" content="PopMinutes — AI meeting notes cho team Sales. Đặt chỗ tại 100+ quán cafe đối tác, ghi âm, tóm tắt và gửi email báo cáo tự động.">
 <title>PopMinutes — AI Meeting Notes cho Team Sales</title>
 <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 /* ==========================================================
-   DESIGN TOKENS
+   DESIGN TOKENS — Semi Design (BytePlus) base
    ========================================================== */
 :root {
-  --navy: #1B2B7A;
-  --navy-hover: #131F5C;
-  --navy-soft: #EEF1FF;
-  --navy-ring: rgba(27, 43, 122, 0.15);
+  /* Primary — BytePlus blue */
+  --primary: #0064FA;
+  --primary-hover: #0052D9;
+  --primary-soft: #E8F0FF;
+  --primary-ring: rgba(0, 100, 250, 0.15);
 
-  --amber: #D97706;
-  --amber-soft: #FEF3C7;
-  --amber-hover: #B45309;
+  /* Neutral — Semi Design scale */
+  --ink: #1C1F23;
+  --body: #4E5969;
+  --muted: #86909C;
+  --subtle: #A9AEB8;
 
-  --ink: #0F172A;
-  --body: #475569;
-  --muted: #64748B;
-  --subtle: #94A3B8;
-
-  --border: #E5E7EB;
-  --border-strong: #CBD5E1;
+  --border: #E5E6EB;
+  --border-strong: #D0D6E0;
 
   --bg: #FFFFFF;
-  --surface: #F9FAFB;
-  --surface-alt: #F1F5F9;
+  --surface: #F7F8FA;
+  --surface-alt: #F2F3F5;
 
-  --success: #059669;
-  --success-soft: #D1FAE5;
-  --danger: #DC2626;
-  --danger-soft: #FEE2E2;
+  /* Semantic */
+  --success: #00B42A;
+  --success-soft: #E8FFEA;
+  --danger: #F53F3F;
+  --danger-soft: #FFECE8;
+  --warning: #FF7D00;
+  --warning-soft: #FFF7E8;
 
+  /* Partner accent — cực nhẹ, chỉ dùng cho section đối tác */
+  --partner: #D97706;
+  --partner-soft: #FFF8EE;
+
+  /* Radius — Semi Design 4px base */
+  --r-xs: 4px;
   --r-sm: 6px;
-  --r: 10px;
-  --r-lg: 14px;
-  --r-xl: 20px;
+  --r: 8px;
+  --r-lg: 12px;
 
-  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
-  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
-  --shadow: 0 4px 12px rgba(15, 23, 42, 0.06), 0 2px 4px rgba(15, 23, 42, 0.04);
-  --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.10), 0 4px 8px rgba(15, 23, 42, 0.04);
+  /* Shadow — gần như vô hình, dùng border thay thế */
+  --shadow-xs: 0 1px 2px rgba(29, 33, 41, 0.04);
+  --shadow-sm: 0 2px 6px rgba(29, 33, 41, 0.06);
+  --shadow-md: 0 6px 16px rgba(29, 33, 41, 0.08);
+  --shadow-lg: 0 12px 32px rgba(29, 33, 41, 0.10);
 }
 
 /* ==========================================================
    BASE
    ========================================================== */
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 body {
   margin: 0;
-  font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: var(--ink);
   background: var(--bg);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding-top: 64px;
+  font-size: 15px;
 }
-h1, h2, h3, h4, h5 { margin: 0; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; color: var(--ink); }
+h1, h2, h3, h4, h5 {
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  color: var(--ink);
+}
 p { margin: 0; }
-a { color: inherit; }
+a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
-button { font-family: inherit; }
+button { font-family: inherit; cursor: pointer; }
 input, textarea, select { font-family: inherit; }
-::selection { background: var(--navy); color: white; }
-:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; border-radius: 4px; }
+::selection { background: var(--primary); color: white; }
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; border-radius: var(--r-xs); }
 
-.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
 @media (min-width: 768px) { .container { padding: 0 40px; } }
 
 /* ==========================================================
-   TYPOGRAPHY
+   TYPOGRAPHY SYSTEM
    ========================================================== */
 .eyebrow {
   display: inline-block;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
-  color: var(--navy);
-  letter-spacing: 0.06em;
+  color: var(--primary);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 .section-title {
-  font-size: 40px;
-  font-weight: 800;
+  font-size: 36px;
+  font-weight: 600;
   letter-spacing: -0.03em;
-  line-height: 1.15;
-  margin-bottom: 16px;
-  max-width: 720px;
+  line-height: 1.18;
+  margin-bottom: 14px;
+  max-width: 680px;
 }
 .section-title.center { margin-left: auto; margin-right: auto; text-align: center; }
-@media (max-width: 767px) { .section-title { font-size: 30px; } }
+@media (max-width: 767px) { .section-title { font-size: 27px; } }
 .section-subtitle {
-  font-size: 18px;
+  font-size: 16px;
   color: var(--body);
-  max-width: 640px;
-  line-height: 1.6;
+  line-height: 1.7;
+  max-width: 600px;
 }
 .section-subtitle.center { margin-left: auto; margin-right: auto; text-align: center; }
-.section-header { margin-bottom: 56px; }
+.section-header { margin-bottom: 48px; }
 .section-header.center { text-align: center; }
 
 /* ==========================================================
-   BUTTONS
+   BUTTONS — Semi Design compact
    ========================================================== */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 18px;
-  border-radius: var(--r);
+  padding: 9px 16px;
+  border-radius: var(--r-sm);
   font-family: inherit;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 14px;
-  text-decoration: none;
+  line-height: 1.4;
   border: 1px solid transparent;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
   white-space: nowrap;
-  line-height: 1.4;
 }
-.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
 
-.btn-primary { background: var(--navy); color: white; border-color: var(--navy); }
-.btn-primary:hover:not(:disabled) { background: var(--navy-hover); border-color: var(--navy-hover); }
+.btn-primary { background: var(--primary); color: white; border-color: var(--primary); }
+.btn-primary:hover:not(:disabled) { background: var(--primary-hover); border-color: var(--primary-hover); }
 
 .btn-secondary { background: white; color: var(--ink); border-color: var(--border); }
 .btn-secondary:hover:not(:disabled) { border-color: var(--border-strong); background: var(--surface); }
 
-.btn-ghost { background: transparent; color: var(--body); }
+.btn-ghost { background: transparent; color: var(--body); border-color: transparent; }
 .btn-ghost:hover:not(:disabled) { background: var(--surface); color: var(--ink); }
 
-.btn-amber { background: var(--amber); color: white; border-color: var(--amber); }
-.btn-amber:hover:not(:disabled) { background: var(--amber-hover); border-color: var(--amber-hover); }
+.btn-partner { background: var(--partner); color: white; border-color: var(--partner); }
+.btn-partner:hover:not(:disabled) { background: #B45309; border-color: #B45309; }
 
-.btn-lg { padding: 13px 22px; font-size: 15px; border-radius: 12px; }
+.btn-lg { padding: 11px 20px; font-size: 15px; }
 .btn-block { width: 100%; }
 
 /* ==========================================================
-   NAV
+   NAV — clean, thin border
    ========================================================== */
 .nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   height: 64px;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   z-index: 100;
 }
@@ -172,16 +185,15 @@ input, textarea, select { font-family: inherit; }
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  font-weight: 800;
-  font-size: 17px;
+  gap: 9px;
+  font-weight: 600;
+  font-size: 16px;
   color: var(--ink);
   letter-spacing: -0.02em;
   flex-shrink: 0;
 }
-.logo img { width: 30px; height: 30px; border-radius: 8px; }
-.logo .brand-accent { color: var(--navy); }
+.logo img { width: 28px; height: 28px; border-radius: var(--r-sm); }
+.logo .brand-accent { color: var(--primary); }
 
 .nav-menu {
   display: flex;
@@ -190,16 +202,16 @@ input, textarea, select { font-family: inherit; }
   justify-content: center;
 }
 .nav-menu a {
-  padding: 8px 14px;
-  font-size: 14px;
+  padding: 7px 12px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--body);
-  text-decoration: none;
-  border-radius: 8px;
-  transition: all 0.15s;
+  border-radius: var(--r-xs);
+  transition: color 0.15s, background 0.15s;
 }
 .nav-menu a:hover { color: var(--ink); background: var(--surface); }
 .nav-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+.nav-actions .btn { font-size: 13px; padding: 7px 14px; }
 
 @media (max-width: 900px) {
   .nav-menu { display: none; }
@@ -207,20 +219,19 @@ input, textarea, select { font-family: inherit; }
 }
 
 /* ==========================================================
-   HERO
+   HERO — light, spacious, product mockup
    ========================================================== */
 .hero {
-  padding: 72px 0 96px;
+  padding: 80px 0 96px;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(180deg, #FAFBFF 0%, #FFFFFF 60%);
 }
 .hero::before {
   content: '';
   position: absolute;
-  top: -400px; right: -400px;
-  width: 800px; height: 800px;
-  background: radial-gradient(circle, rgba(27, 43, 122, 0.06) 0%, transparent 70%);
+  top: -300px; right: -200px;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(0, 100, 250, 0.05) 0%, transparent 70%);
   pointer-events: none;
 }
 .hero-grid {
@@ -231,30 +242,30 @@ input, textarea, select { font-family: inherit; }
   position: relative;
 }
 @media (min-width: 1024px) {
-  .hero-grid { grid-template-columns: 1.05fr 1fr; gap: 72px; }
+  .hero-grid { grid-template-columns: 1.02fr 1fr; gap: 64px; }
 }
 .hero-title {
-  font-size: 56px;
-  font-weight: 800;
+  font-size: 52px;
+  font-weight: 600;
   letter-spacing: -0.035em;
-  line-height: 1.08;
-  margin-bottom: 20px;
+  line-height: 1.1;
+  margin-bottom: 18px;
   text-wrap: balance;
 }
-@media (max-width: 767px) { .hero-title { font-size: 36px; } }
+@media (max-width: 767px) { .hero-title { font-size: 34px; } }
 .hero-subtitle {
-  font-size: 18px;
+  font-size: 17px;
   color: var(--body);
-  max-width: 520px;
+  max-width: 500px;
   line-height: 1.65;
-  margin-bottom: 28px;
+  margin-bottom: 26px;
 }
-@media (max-width: 767px) { .hero-subtitle { font-size: 16px; } }
+@media (max-width: 767px) { .hero-subtitle { font-size: 15px; } }
 .hero-ctas {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 .hero-note {
   font-size: 13px;
@@ -267,96 +278,96 @@ input, textarea, select { font-family: inherit; }
 .hero-note svg { color: var(--success); flex-shrink: 0; }
 .hero-note .sep { color: var(--border-strong); }
 
-/* PRODUCT MOCKUP */
+/* PRODUCT MOCKUP — app-like, light */
 .mockup {
   background: white;
   border-radius: var(--r-lg);
   border: 1px solid var(--border);
-  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.14), 0 8px 24px rgba(27, 43, 122, 0.08);
+  box-shadow: 0 20px 48px rgba(29, 33, 41, 0.08), 0 4px 12px rgba(0, 100, 250, 0.04);
   overflow: hidden;
 }
 .mockup-bar {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 12px 16px;
+  gap: 5px;
+  padding: 11px 14px;
   border-bottom: 1px solid var(--border);
   background: var(--surface);
 }
-.mockup-dot { width: 9px; height: 9px; border-radius: 50%; }
+.mockup-dot { width: 8px; height: 8px; border-radius: 50%; }
 .mockup-dot.r { background: #FF5F57; }
 .mockup-dot.y { background: #FEBC2E; }
 .mockup-dot.g { background: #28C840; }
-.mockup-body { padding: 22px; }
+.mockup-body { padding: 20px; }
 
 .mtk-meeting {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
-  padding-bottom: 16px;
+  padding-bottom: 14px;
   border-bottom: 1px solid var(--border);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
-.mtk-meeting-info h4 { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
-.mtk-meeting-info p { font-size: 12px; color: var(--muted); }
+.mtk-meeting-info h4 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+.mtk-meeting-info p { font-size: 11px; color: var(--muted); }
 .mtk-live {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
+  gap: 5px;
+  padding: 3px 9px;
   background: var(--danger-soft);
   color: var(--danger);
-  font-size: 11px;
-  font-weight: 700;
+  font-size: 10px;
+  font-weight: 600;
   border-radius: 100px;
   flex-shrink: 0;
 }
 .mtk-live::before {
   content: '';
-  width: 6px; height: 6px;
+  width: 5px; height: 5px;
   background: var(--danger);
   border-radius: 50%;
   animation: pulse 1.5s ease-in-out infinite;
 }
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 
-.mtk-transcript { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
-.mtk-line { display: flex; gap: 10px; font-size: 12px; line-height: 1.5; }
+.mtk-transcript { display: flex; flex-direction: column; gap: 9px; margin-bottom: 14px; }
+.mtk-line { display: flex; gap: 10px; font-size: 11px; line-height: 1.5; }
 .mtk-speaker {
-  font-weight: 700;
-  color: var(--navy);
+  font-weight: 600;
+  color: var(--primary);
   flex-shrink: 0;
-  min-width: 46px;
-  font-size: 11px;
+  min-width: 42px;
+  font-size: 10px;
   padding-top: 1px;
 }
-.mtk-speaker.customer { color: var(--amber); }
+.mtk-speaker.customer { color: var(--partner); }
 .mtk-text { color: var(--body); }
 .mtk-text strong { color: var(--ink); font-weight: 600; }
 
 .mtk-ai-card {
-  background: var(--navy-soft);
+  background: var(--primary-soft);
   border-radius: var(--r);
-  padding: 14px;
-  margin-bottom: 16px;
+  padding: 12px;
+  margin-bottom: 14px;
 }
 .mtk-ai-header {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--navy);
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--primary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: 8px;
+  margin-bottom: 7px;
 }
-.mtk-ai-list { display: flex; flex-direction: column; gap: 6px; }
+.mtk-ai-list { display: flex; flex-direction: column; gap: 5px; }
 .mtk-ai-item {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--ink);
-  padding-left: 16px;
+  padding-left: 14px;
   position: relative;
   line-height: 1.5;
 }
@@ -366,63 +377,51 @@ input, textarea, select { font-family: inherit; }
   left: 0; top: 0;
   color: var(--success);
   font-weight: 700;
-  font-size: 11px;
+  font-size: 10px;
 }
 
-.mtk-actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
+.mtk-actions { display: flex; gap: 6px; flex-wrap: wrap; }
 .mtk-action {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 6px 11px;
-  font-size: 11px;
-  font-weight: 600;
-  border-radius: 7px;
+  gap: 4px;
+  padding: 5px 9px;
+  font-size: 10px;
+  font-weight: 500;
+  border-radius: var(--r-xs);
   border: 1px solid var(--border);
   background: white;
   color: var(--body);
 }
-.mtk-action.primary { background: var(--navy); color: white; border-color: var(--navy); }
+.mtk-action.primary { background: var(--primary); color: white; border-color: var(--primary); }
 
 /* ==========================================================
    LOGO CLOUD
    ========================================================== */
 .logos-section {
-  padding: 32px 0 56px;
+  padding: 28px 0 48px;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
 .logos-label {
   text-align: center;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--subtle);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 .logos-grid {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 40px;
-  opacity: 0.7;
+  gap: 36px;
 }
-.logos-grid img {
-  height: 22px;
-  width: auto;
-  filter: grayscale(100%);
-  transition: filter 0.2s;
-}
-.logos-grid img:hover { filter: grayscale(0%); }
 .logos-grid .placeholder-logo {
-  font-size: 15px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
   color: var(--subtle);
   letter-spacing: -0.01em;
 }
@@ -430,18 +429,18 @@ input, textarea, select { font-family: inherit; }
 /* ==========================================================
    SECTIONS
    ========================================================== */
-.section { padding: 96px 0; }
-.section-sm { padding: 64px 0; }
+.section { padding: 88px 0; }
+.section-sm { padding: 56px 0; }
 .section-alt { background: var(--surface); }
-@media (max-width: 767px) { .section { padding: 64px 0; } }
+@media (max-width: 767px) { .section { padding: 60px 0; } }
 
 /* ==========================================================
-   AUDIENCE SELECTOR — 3 business models
+   AUDIENCE SELECTOR
    ========================================================== */
 .audience-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
+  gap: 16px;
 }
 @media (min-width: 768px) { .audience-grid { grid-template-columns: repeat(3, 1fr); } }
 
@@ -449,57 +448,51 @@ input, textarea, select { font-family: inherit; }
   background: white;
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
-  padding: 32px 28px;
+  padding: 28px 24px;
   display: flex;
   flex-direction: column;
-  transition: all 0.2s ease;
-  text-decoration: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
   color: inherit;
-  position: relative;
 }
 .audience-card:hover {
   border-color: var(--border-strong);
-  box-shadow: var(--shadow);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
 .audience-icon {
-  width: 44px; height: 44px;
-  background: var(--navy-soft);
-  border-radius: 10px;
+  width: 40px; height: 40px;
+  background: var(--surface);
+  border-radius: var(--r);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
-  color: var(--navy);
+  margin-bottom: 18px;
+  color: var(--primary);
 }
-.audience-card.partner .audience-icon {
-  background: var(--amber-soft);
-  color: var(--amber);
-}
+.audience-card.partner .audience-icon { background: var(--partner-soft); color: var(--partner); }
 .audience-card h3 {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 7px;
   letter-spacing: -0.015em;
 }
 .audience-card p {
-  font-size: 15px;
+  font-size: 14px;
   color: var(--body);
   line-height: 1.6;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   flex: 1;
 }
-.audience-card .audience-link {
+.audience-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--navy);
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--primary);
 }
-.audience-card.partner .audience-link { color: var(--amber); }
+.audience-card.partner .audience-link { color: var(--partner); }
 .audience-link svg { transition: transform 0.15s; }
-.audience-card:hover .audience-link svg { transform: translateX(3px); }
+.audience-card:hover .audience-link svg { transform: translateX(2px); }
 
 /* ==========================================================
    PROBLEM CARDS
@@ -507,7 +500,7 @@ input, textarea, select { font-family: inherit; }
 .problem-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
+  gap: 16px;
 }
 @media (min-width: 768px) { .problem-grid { grid-template-columns: repeat(3, 1fr); } }
 
@@ -515,128 +508,103 @@ input, textarea, select { font-family: inherit; }
   background: white;
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
-  padding: 32px 28px;
+  padding: 28px 24px;
 }
 .problem-icon {
-  width: 40px; height: 40px;
-  background: var(--surface-alt);
-  border-radius: 10px;
+  width: 36px; height: 36px;
+  background: var(--surface);
+  border-radius: var(--r);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
-  color: var(--navy);
+  margin-bottom: 18px;
+  color: var(--primary);
 }
 .problem-card h3 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
   line-height: 1.35;
 }
-.problem-card p { font-size: 15px; color: var(--body); line-height: 1.65; }
+.problem-card p { font-size: 14px; color: var(--body); line-height: 1.65; }
 .problem-card p strong { color: var(--ink); font-weight: 600; }
 
 /* ==========================================================
-   HOW IT WORKS — steps + mockup
+   HOW IT WORKS
    ========================================================== */
 .how-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 56px;
+  gap: 48px;
   align-items: center;
 }
-@media (min-width: 1024px) { .how-grid { grid-template-columns: 1fr 1fr; gap: 72px; } }
+@media (min-width: 1024px) { .how-grid { grid-template-columns: 1fr 1fr; gap: 64px; } }
 
-.steps { display: flex; flex-direction: column; gap: 8px; }
+.steps { display: flex; flex-direction: column; gap: 4px; }
 .step {
-  padding: 20px 24px;
+  padding: 18px 20px;
   border-radius: var(--r-lg);
   border: 1px solid transparent;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease;
   background: transparent;
 }
 .step:hover { background: var(--surface); }
 .step.active {
   background: white;
   border-color: var(--border);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-xs);
 }
 .step-num {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 26px; height: 26px;
+  width: 24px; height: 24px;
   border-radius: 50%;
   background: var(--surface-alt);
   color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 600;
   margin-right: 10px;
   flex-shrink: 0;
-  transition: all 0.2s;
+  transition: background 0.2s, color 0.2s;
 }
-.step.active .step-num {
-  background: var(--navy);
-  color: white;
-}
-.step-head {
-  display: flex;
-  align-items: center;
-  margin-bottom: 6px;
-}
-.step h3 {
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-.step p {
-  font-size: 14px;
-  color: var(--body);
-  line-height: 1.6;
-  padding-left: 36px;
-}
+.step.active .step-num { background: var(--primary); color: white; }
+.step-head { display: flex; align-items: center; margin-bottom: 5px; }
+.step h3 { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+.step p { font-size: 13px; color: var(--body); line-height: 1.6; padding-left: 34px; }
 
 .step-preview-wrap {
-  background: var(--surface-alt);
-  border-radius: var(--r-xl);
-  padding: 24px;
-  min-height: 400px;
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  padding: 20px;
+  min-height: 340px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid var(--border);
 }
 .step-preview {
   width: 100%;
   background: white;
-  border-radius: var(--r-lg);
+  border-radius: var(--r);
   border: 1px solid var(--border);
-  padding: 28px;
+  padding: 28px 24px;
   text-align: center;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.2s ease;
 }
 .step-preview-icon {
-  width: 56px; height: 56px;
-  background: var(--navy-soft);
-  border-radius: 14px;
+  width: 48px; height: 48px;
+  background: var(--surface);
+  border-radius: var(--r);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--navy);
-  margin-bottom: 18px;
+  color: var(--primary);
+  margin-bottom: 16px;
 }
-.step-preview h4 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 8px;
-  letter-spacing: -0.01em;
-}
-.step-preview p {
-  font-size: 14px;
-  color: var(--body);
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
+.step-preview h4 { font-size: 16px; font-weight: 600; margin-bottom: 7px; letter-spacing: -0.01em; }
+.step-preview p { font-size: 13px; color: var(--body); line-height: 1.6; margin-bottom: 18px; }
 .step-preview-ctas { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
 
 /* ==========================================================
@@ -645,13 +613,13 @@ input, textarea, select { font-family: inherit; }
 .feature-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
+  gap: 16px;
 }
 @media (min-width: 640px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1024px) { .feature-grid { grid-template-columns: repeat(3, 1fr); } }
 
 .feature-card {
-  padding: 28px 24px;
+  padding: 24px 22px;
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   background: white;
@@ -659,90 +627,75 @@ input, textarea, select { font-family: inherit; }
 }
 .feature-card:hover { border-color: var(--border-strong); }
 .feature-icon {
-  width: 36px; height: 36px;
-  background: var(--navy-soft);
-  border-radius: 9px;
+  width: 34px; height: 34px;
+  background: var(--surface);
+  border-radius: var(--r-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--navy);
-  margin-bottom: 16px;
+  color: var(--primary);
+  margin-bottom: 14px;
 }
-.feature-card h3 {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 6px;
-  letter-spacing: -0.01em;
-}
-.feature-card p { font-size: 14px; color: var(--body); line-height: 1.6; }
+.feature-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 5px; letter-spacing: -0.01em; }
+.feature-card p { font-size: 13px; color: var(--body); line-height: 1.6; }
 
 /* ==========================================================
-   CAFE PARTNER SECTION (B2B2C) — amber themed
+   PARTNER SECTION — accent cực nhẹ
    ========================================================== */
 .partner-section {
-  background: linear-gradient(180deg, #FFFBEB 0%, #FEF3C7 100%);
-  padding: 96px 0;
-  position: relative;
-  overflow: hidden;
+  background: var(--partner-soft);
+  padding: 88px 0;
+  border-top: 1px solid #F5E6D3;
+  border-bottom: 1px solid #F5E6D3;
 }
 .partner-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 56px;
+  gap: 48px;
   align-items: center;
 }
-@media (min-width: 1024px) { .partner-grid { grid-template-columns: 1fr 1fr; gap: 80px; } }
+@media (min-width: 1024px) { .partner-grid { grid-template-columns: 1fr 1fr; gap: 64px; } }
 
-.partner-content .eyebrow { color: var(--amber); }
+.partner-content .eyebrow { color: var(--partner); }
 .partner-content .section-title { color: #7C2D12; }
-.partner-content .section-subtitle { color: #78350F; opacity: 0.85; }
+.partner-content .section-subtitle { color: #78350F; opacity: 0.8; }
 
-.partner-benefits {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  margin: 28px 0;
-}
-.partner-benefit {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-}
+.partner-benefits { display: flex; flex-direction: column; gap: 12px; margin: 24px 0; }
+.partner-benefit { display: flex; gap: 10px; align-items: flex-start; }
 .partner-benefit-icon {
-  width: 22px; height: 22px;
+  width: 20px; height: 20px;
   background: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--amber);
+  color: var(--partner);
   flex-shrink: 0;
   margin-top: 2px;
-  box-shadow: var(--shadow-xs);
 }
-.partner-benefit-text { font-size: 15px; color: #78350F; line-height: 1.55; }
-.partner-benefit-text strong { color: #7C2D12; font-weight: 700; }
+.partner-benefit-text { font-size: 14px; color: #78350F; line-height: 1.55; }
+.partner-benefit-text strong { color: #7C2D12; font-weight: 600; }
 
 .partner-stat-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 12px;
 }
 .partner-stat {
   background: white;
   border-radius: var(--r-lg);
-  padding: 24px 20px;
-  box-shadow: var(--shadow-sm);
+  padding: 20px 18px;
+  border: 1px solid #F5E6D3;
 }
 .partner-stat-num {
-  font-size: 32px;
-  font-weight: 800;
-  color: var(--amber);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--partner);
   letter-spacing: -0.03em;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
   line-height: 1.1;
 }
-.partner-stat-label { font-size: 13px; color: #78350F; font-weight: 500; opacity: 0.8; }
+.partner-stat-label { font-size: 12px; color: #78350F; font-weight: 400; opacity: 0.75; line-height: 1.4; }
 
 /* ==========================================================
    TESTIMONIALS
@@ -750,7 +703,7 @@ input, textarea, select { font-family: inherit; }
 .testimonial-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
+  gap: 16px;
 }
 @media (min-width: 768px) { .testimonial-grid { grid-template-columns: repeat(3, 1fr); } }
 
@@ -758,54 +711,52 @@ input, textarea, select { font-family: inherit; }
   background: white;
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
-  padding: 28px 24px;
+  padding: 24px 22px;
   display: flex;
   flex-direction: column;
 }
 .testimonial-audience {
   display: inline-block;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 4px 10px;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 9px;
   border-radius: 100px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   align-self: flex-start;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
-.testimonial-audience.b2c { background: var(--navy-soft); color: var(--navy); }
+.testimonial-audience.b2c { background: var(--primary-soft); color: var(--primary); }
 .testimonial-audience.b2b { background: var(--surface-alt); color: var(--body); }
-.testimonial-audience.partner { background: var(--amber-soft); color: var(--amber); }
+.testimonial-audience.partner { background: var(--partner-soft); color: var(--partner); }
 .testimonial-quote {
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.65;
   color: var(--ink);
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   flex: 1;
 }
-.testimonial-quote strong { font-weight: 600; }
 .testimonial-author {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding-top: 20px;
+  gap: 10px;
+  padding-top: 18px;
   border-top: 1px solid var(--border);
 }
 .testimonial-avatar {
-  width: 40px; height: 40px;
+  width: 36px; height: 36px;
   border-radius: 50%;
-  background: var(--navy);
+  background: var(--primary);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  font-size: 14px;
+  font-weight: 600;
+  font-size: 12px;
   flex-shrink: 0;
 }
-.testimonial-info { min-width: 0; }
-.testimonial-name { font-size: 14px; font-weight: 700; color: var(--ink); line-height: 1.3; }
-.testimonial-role { font-size: 13px; color: var(--muted); line-height: 1.3; }
+.testimonial-name { font-size: 13px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+.testimonial-role { font-size: 12px; color: var(--muted); line-height: 1.3; }
 
 /* ==========================================================
    PRICING
@@ -813,7 +764,7 @@ input, textarea, select { font-family: inherit; }
 .pricing-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
+  gap: 16px;
   align-items: stretch;
 }
 @media (min-width: 640px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -823,7 +774,7 @@ input, textarea, select { font-family: inherit; }
   background: white;
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
-  padding: 28px 24px;
+  padding: 26px 22px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -831,83 +782,74 @@ input, textarea, select { font-family: inherit; }
 }
 .pricing-card:hover { border-color: var(--border-strong); }
 .pricing-card.featured {
-  border-color: var(--navy);
+  border-color: var(--primary);
   border-width: 2px;
-  box-shadow: 0 8px 24px rgba(27, 43, 122, 0.12);
+  box-shadow: 0 4px 16px rgba(0, 100, 250, 0.08);
 }
 .pricing-badge {
   position: absolute;
-  top: -12px;
-  left: 24px;
-  background: var(--navy);
+  top: -11px;
+  left: 22px;
+  background: var(--primary);
   color: white;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 4px 12px;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 10px;
   border-radius: 100px;
   letter-spacing: 0.04em;
 }
 .pricing-name {
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 600;
   color: var(--muted);
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  margin-bottom: 10px;
+  margin-bottom: 9px;
 }
 .pricing-price {
-  font-size: 32px;
-  font-weight: 800;
+  font-size: 28px;
+  font-weight: 600;
   color: var(--ink);
   letter-spacing: -0.03em;
   line-height: 1.1;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
-.pricing-price .unit { font-size: 14px; font-weight: 500; color: var(--muted); }
+.pricing-price .unit { font-size: 12px; font-weight: 400; color: var(--muted); }
 .pricing-desc {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--muted);
-  margin-bottom: 20px;
-  padding-bottom: 20px;
+  margin-bottom: 18px;
+  padding-bottom: 18px;
   border-bottom: 1px solid var(--border);
   line-height: 1.5;
-  min-height: 60px;
+  min-height: 54px;
 }
 .pricing-features {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 24px;
+  gap: 8px;
+  margin-bottom: 20px;
   flex: 1;
   list-style: none;
   padding: 0;
 }
 .pricing-features li {
   display: flex;
-  gap: 8px;
+  gap: 7px;
   align-items: flex-start;
-  font-size: 13px;
+  font-size: 12px;
   color: var(--body);
   line-height: 1.55;
 }
 .pricing-features li svg { flex-shrink: 0; margin-top: 3px; color: var(--success); }
-.pricing-features li.highlight {
-  color: var(--ink);
-  font-weight: 500;
-}
-.pricing-features li.highlight svg { color: var(--navy); }
+.pricing-features li.highlight { color: var(--ink); font-weight: 500; }
+.pricing-features li.highlight svg { color: var(--primary); }
 .pricing-cta { margin-top: auto; }
 
 /* ==========================================================
    FAQ
    ========================================================== */
-.faq-list {
-  max-width: 780px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+.faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
 .faq-item {
   background: white;
   border: 1px solid var(--border);
@@ -917,23 +859,22 @@ input, textarea, select { font-family: inherit; }
 }
 .faq-item[open] { border-color: var(--border-strong); }
 .faq-item summary {
-  padding: 20px 24px;
+  padding: 18px 22px;
   cursor: pointer;
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
   color: var(--ink);
   list-style: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  transition: background 0.15s;
 }
 .faq-item summary::-webkit-details-marker { display: none; }
 .faq-item summary:hover { background: var(--surface); }
 .faq-item summary::after {
   content: '+';
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 400;
   color: var(--muted);
   flex-shrink: 0;
@@ -941,103 +882,72 @@ input, textarea, select { font-family: inherit; }
   line-height: 1;
 }
 .faq-item[open] summary::after { transform: rotate(45deg); }
-.faq-answer {
-  padding: 0 24px 22px;
-  font-size: 14px;
-  color: var(--body);
-  line-height: 1.7;
-}
-.faq-answer a { color: var(--navy); font-weight: 600; }
+.faq-answer { padding: 0 22px 20px; font-size: 13px; color: var(--body); line-height: 1.7; }
+.faq-answer a { color: var(--primary); font-weight: 500; }
 
 /* ==========================================================
-   CTA FORM SECTION
+   CTA FORM — light card, no dark section
    ========================================================== */
 .cta-section {
-  background: var(--navy);
-  color: white;
-  padding: 96px 0;
-  position: relative;
-  overflow: hidden;
-}
-.cta-section::before {
-  content: '';
-  position: absolute;
-  top: -200px; right: -200px;
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
-  pointer-events: none;
+  background: var(--surface);
+  padding: 88px 0;
+  border-top: 1px solid var(--border);
 }
 .cta-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 56px;
+  gap: 48px;
   align-items: start;
-  position: relative;
 }
-@media (min-width: 1024px) { .cta-grid { grid-template-columns: 1fr 1.05fr; gap: 80px; } }
+@media (min-width: 1024px) { .cta-grid { grid-template-columns: 1fr 1.05fr; gap: 64px; } }
 
-.cta-content .eyebrow { color: #B4C2F0; }
 .cta-content h2 {
-  font-size: 40px;
-  font-weight: 800;
-  color: white;
+  font-size: 36px;
+  font-weight: 600;
   letter-spacing: -0.03em;
-  line-height: 1.15;
-  margin-bottom: 20px;
+  line-height: 1.18;
+  margin-bottom: 16px;
 }
-@media (max-width: 767px) { .cta-content h2 { font-size: 30px; } }
+@media (max-width: 767px) { .cta-content h2 { font-size: 27px; } }
 .cta-content p {
-  font-size: 17px;
-  color: #C7D2F1;
-  line-height: 1.65;
-  margin-bottom: 28px;
-  max-width: 460px;
-}
-.cta-content p strong { color: white; font-weight: 600; }
-.cta-bullets {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.cta-bullets li {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
   font-size: 15px;
-  color: #E0E7FA;
-  line-height: 1.5;
+  color: var(--body);
+  line-height: 1.65;
+  margin-bottom: 24px;
+  max-width: 440px;
 }
-.cta-bullets svg { flex-shrink: 0; margin-top: 2px; color: #6EE7B7; }
+.cta-content p strong { color: var(--ink); font-weight: 600; }
+.cta-bullets { display: flex; flex-direction: column; gap: 10px; list-style: none; padding: 0; margin: 0; }
+.cta-bullets li { display: flex; gap: 9px; align-items: flex-start; font-size: 14px; color: var(--body); line-height: 1.5; }
+.cta-bullets svg { flex-shrink: 0; margin-top: 2px; color: var(--success); }
 
 .cta-form-card {
   background: white;
-  border-radius: var(--r-xl);
-  padding: 32px;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.20);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
 }
-@media (max-width: 640px) { .cta-form-card { padding: 24px; } }
+@media (max-width: 640px) { .cta-form-card { padding: 22px; } }
 
 /* ==========================================================
    FORMS
    ========================================================== */
-.form-group { margin-bottom: 16px; }
+.form-group { margin-bottom: 14px; }
 .form-label {
   display: block;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 500;
   color: var(--ink);
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 .form-label .req { color: var(--danger); margin-left: 2px; }
 .form-input {
   width: 100%;
-  padding: 11px 14px;
+  padding: 9px 12px;
   border: 1px solid var(--border);
-  border-radius: var(--r);
-  font-size: 14px;
+  border-radius: var(--r-sm);
+  font-size: 13px;
   font-family: inherit;
   color: var(--ink);
   background: white;
@@ -1045,62 +955,36 @@ input, textarea, select { font-family: inherit; }
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 .form-input::placeholder { color: var(--subtle); }
-.form-input:focus {
-  border-color: var(--navy);
-  box-shadow: 0 0 0 3px var(--navy-ring);
-}
+.form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-ring); }
 .form-input.error { border-color: var(--danger); }
-.form-input.error:focus { box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12); }
-textarea.form-input { resize: vertical; min-height: 90px; }
-.form-error {
-  font-size: 12px;
-  color: var(--danger);
-  margin-top: 4px;
-  display: none;
-}
+textarea.form-input { resize: vertical; min-height: 80px; }
+.form-error { font-size: 11px; color: var(--danger); margin-top: 4px; display: none; }
 .form-error.show { display: block; }
 
-.form-consent {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin: 16px 0;
-}
+.form-consent { display: flex; align-items: flex-start; gap: 9px; margin: 14px 0; }
 .form-consent input[type="checkbox"] {
-  width: 16px; height: 16px;
+  width: 15px; height: 15px;
   margin: 2px 0 0 0;
   flex-shrink: 0;
-  accent-color: var(--navy);
+  accent-color: var(--primary);
   cursor: pointer;
 }
-.form-consent label {
-  font-size: 13px;
-  color: var(--body);
-  line-height: 1.5;
-  cursor: pointer;
-}
-.form-consent a {
-  color: var(--navy);
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
+.form-consent label { font-size: 12px; color: var(--body); line-height: 1.5; cursor: pointer; }
+.form-consent a { color: var(--primary); font-weight: 500; text-decoration: underline; text-underline-offset: 2px; }
 
 .form-note {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 12px;
+  gap: 5px;
+  font-size: 11px;
   color: var(--muted);
-  margin-top: 12px;
+  margin-top: 10px;
   justify-content: center;
 }
 
-/* Spinner */
 .btn-spinner {
   display: inline-block;
-  width: 14px;
-  height: 14px;
+  width: 13px; height: 13px;
   border: 2px solid rgba(255, 255, 255, 0.35);
   border-top-color: white;
   border-radius: 50%;
@@ -1109,127 +993,70 @@ textarea.form-input { resize: vertical; min-height: 90px; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* ==========================================================
-   FOOTER
+   FOOTER — light, thin border
    ========================================================== */
 .footer {
-  background: #0A0E27;
-  color: #94A3B8;
-  padding: 72px 0 32px;
+  background: white;
+  border-top: 1px solid var(--border);
+  padding: 56px 0 28px;
 }
 .footer-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 40px;
-  padding-bottom: 48px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 36px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
 }
 @media (min-width: 768px) { .footer-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; } }
 
 .footer-col h4 {
-  font-size: 12px;
-  font-weight: 700;
-  color: #CBD5E1;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--subtle);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
-.footer-brand-block {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.footer-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  color: white;
-  font-weight: 800;
-  font-size: 16px;
-  margin-bottom: 8px;
-}
-.footer-logo img { width: 32px; height: 32px; border-radius: 8px; }
-.footer-logo .brand-accent { color: #93AEFF; }
-.footer-brand-desc {
-  font-size: 13px;
-  line-height: 1.6;
-  color: #94A3B8;
-  max-width: 280px;
-}
-.footer-company-info {
-  font-size: 12px;
-  line-height: 1.7;
-  color: #64748B;
-  margin-top: 8px;
-}
-.footer-company-info strong { color: #94A3B8; font-weight: 500; }
+.footer-logo { display: flex; align-items: center; gap: 9px; font-weight: 600; font-size: 15px; color: var(--ink); margin-bottom: 10px; }
+.footer-logo img { width: 28px; height: 28px; border-radius: var(--r-sm); }
+.footer-logo .brand-accent { color: var(--primary); }
+.footer-brand-desc { font-size: 12px; line-height: 1.65; color: var(--muted); max-width: 260px; margin-bottom: 12px; }
+.footer-company-info { font-size: 11px; line-height: 1.7; color: var(--subtle); }
+.footer-company-info strong { color: var(--muted); font-weight: 500; }
 
-.footer-links {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.footer-links a {
-  color: #94A3B8;
-  text-decoration: none;
-  font-size: 13px;
-  transition: color 0.15s;
-  line-height: 1.5;
-}
-.footer-links a:hover { color: white; }
+.footer-links { display: flex; flex-direction: column; gap: 9px; list-style: none; padding: 0; margin: 0; }
+.footer-links a { color: var(--muted); font-size: 12px; transition: color 0.15s; line-height: 1.5; }
+.footer-links a:hover { color: var(--ink); }
 
-.footer-contact {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.footer-contact-item {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  font-size: 13px;
-  line-height: 1.55;
-  color: #94A3B8;
-}
-.footer-contact-item svg { flex-shrink: 0; margin-top: 3px; color: #64748B; width: 14px; height: 14px; }
-.footer-contact-item a { color: #94A3B8; text-decoration: none; transition: color 0.15s; }
-.footer-contact-item a:hover { color: white; }
+.footer-contact { display: flex; flex-direction: column; gap: 10px; }
+.footer-contact-item { display: flex; gap: 8px; align-items: flex-start; font-size: 12px; line-height: 1.55; color: var(--muted); }
+.footer-contact-item svg { flex-shrink: 0; margin-top: 3px; color: var(--subtle); width: 13px; height: 13px; }
+.footer-contact-item a { color: var(--muted); transition: color 0.15s; }
+.footer-contact-item a:hover { color: var(--ink); }
 
-.footer-social {
-  display: flex;
-  gap: 8px;
-  margin-top: 16px;
-}
+.footer-social { display: flex; gap: 6px; margin-top: 14px; }
 .footer-social a {
-  width: 34px; height: 34px;
+  width: 30px; height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #94A3B8;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  font-size: 14px;
-  transition: all 0.15s;
+  color: var(--muted);
+  background: var(--surface);
+  border-radius: var(--r-xs);
+  font-size: 12px;
+  transition: background 0.15s, color 0.15s;
 }
-.footer-social a:hover {
-  color: white;
-  background: rgba(255, 255, 255, 0.1);
-}
+.footer-social a:hover { color: var(--ink); background: var(--surface-alt); }
 
 .footer-bottom {
-  padding-top: 28px;
+  padding-top: 24px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 12px;
-  font-size: 12px;
-  color: #64748B;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--subtle);
 }
-.footer-bottom a { color: #94A3B8; text-decoration: none; }
-.footer-bottom a:hover { color: white; }
 
 /* ==========================================================
    MODALS
@@ -1237,7 +1064,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.55);
+  background: rgba(29, 33, 41, 0.45);
   backdrop-filter: blur(4px);
   display: none;
   align-items: flex-start;
@@ -1251,115 +1078,79 @@ textarea.form-input { resize: vertical; min-height: 90px; }
 
 .modal {
   background: white;
-  border-radius: var(--r-xl);
+  border-radius: var(--r-lg);
   width: 100%;
-  max-width: 480px;
+  max-width: 440px;
   margin: auto;
-  padding: 28px;
+  padding: 24px;
   position: relative;
-  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.20);
-  animation: modalIn 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 24px 64px rgba(29, 33, 41, 0.18);
+  animation: modalIn 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  border: 1px solid var(--border);
 }
-.modal.lg { max-width: 640px; }
-.modal.xl { max-width: 900px; padding: 0; display: flex; flex-direction: column; max-height: calc(100dvh - 40px); }
-@keyframes modalIn {
-  from { opacity: 0; transform: translateY(8px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
+.modal.lg { max-width: 600px; }
+.modal.xl { max-width: 860px; padding: 0; display: flex; flex-direction: column; max-height: calc(100dvh - 40px); }
+@keyframes modalIn { from { opacity: 0; transform: translateY(6px) scale(0.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
 .modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding-bottom: 18px;
   border-bottom: 1px solid var(--border);
 }
-.modal.xl .modal-header { padding: 20px 24px; margin: 0; }
-.modal-title { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+.modal.xl .modal-header { padding: 18px 22px; margin: 0; }
+.modal-title { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
 .modal-close {
-  width: 32px; height: 32px;
-  border-radius: 8px;
+  width: 28px; height: 28px;
+  border-radius: var(--r-xs);
   border: none;
   background: var(--surface);
   color: var(--muted);
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   flex-shrink: 0;
   transition: background 0.15s;
 }
 .modal-close:hover { background: var(--surface-alt); color: var(--ink); }
 
 .modal-success-icon {
-  width: 56px; height: 56px;
+  width: 52px; height: 52px;
   border-radius: 50%;
   background: var(--success-soft);
   color: var(--success);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 20px;
+  margin: 0 auto 18px;
 }
-.modal-success-icon.error {
-  background: var(--danger-soft);
-  color: var(--danger);
-}
-.modal-success-icon.warning {
-  background: var(--amber-soft);
-  color: var(--amber);
-}
-.modal-success-title {
-  text-align: center;
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-.modal-success-desc {
-  text-align: center;
-  font-size: 14px;
-  color: var(--body);
-  line-height: 1.6;
-  margin-bottom: 24px;
-}
+.modal-success-icon.error { background: var(--danger-soft); color: var(--danger); }
+.modal-success-icon.warning { background: var(--warning-soft); color: var(--warning); }
+.modal-success-title { text-align: center; font-size: 18px; font-weight: 600; margin-bottom: 7px; }
+.modal-success-desc { text-align: center; font-size: 13px; color: var(--body); line-height: 1.6; margin-bottom: 22px; }
 
-/* PDF Modal specific */
-.pdf-body {
-  flex: 1;
-  overflow: hidden;
-  min-height: 300px;
-  background: var(--surface);
-}
-.pdf-body iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  display: block;
-}
-.pdf-footer {
-  padding: 12px 20px;
-  border-top: 1px solid var(--border);
-}
+.pdf-body { flex: 1; overflow: hidden; min-height: 280px; background: var(--surface); }
+.pdf-body iframe { width: 100%; height: 100%; border: none; display: block; }
+.pdf-footer { padding: 10px 18px; border-top: 1px solid var(--border); }
 
 /* ==========================================================
    UTILS
    ========================================================== */
-.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.55s ease, transform 0.55s ease; }
 .reveal.active { opacity: 1; transform: translateY(0); }
 .hidden { display: none !important; }
 
-/* ==========================================================
-   MOBILE NAV ADJUSTMENTS
-   ========================================================== */
 @media (max-width: 640px) {
   .nav { height: 56px; }
   body { padding-top: 56px; }
-  .nav-actions .btn-primary { padding: 8px 14px; font-size: 13px; }
+  .nav-actions .btn-primary { padding: 7px 12px; font-size: 12px; }
   .hero { padding: 48px 0 64px; }
-  .section-sm { padding: 48px 0; }
+  .section-sm { padding: 44px 0; }
   .partner-stat-grid { grid-template-columns: 1fr 1fr; }
-  .partner-stat-num { font-size: 24px; }
+  .partner-stat-num { font-size: 22px; }
 }
 </style>
 </head>
@@ -1390,25 +1181,23 @@ textarea.form-input { resize: vertical; min-height: 90px; }
 <section class="hero">
   <div class="container hero-grid">
     <div class="reveal active">
-      <span class="eyebrow">AI Meeting Notes cho Team Sales</span>
+      <span class="eyebrow">AI Meeting Notes · Built for Sales</span>
       <h1 class="hero-title">Chốt Sales tại quán.<br>Biên bản để AI lo.</h1>
       <p class="hero-subtitle">
-        Đặt chỗ gặp khách tại hơn <strong>100 quán cafe đối tác</strong>. AI ghi âm, tóm tắt và gửi email báo cáo cho bạn, sếp và khách hàng — ngay khi bạn đứng dậy khỏi ghế.
+        Đặt chỗ tại hơn <strong>100 quán cafe đối tác</strong>. AI ghi âm, tóm tắt và gửi email báo cáo cho bạn, sếp và khách hàng — ngay khi bạn đứng dậy.
       </p>
       <div class="hero-ctas">
         <a href="#cta-form" class="btn btn-primary btn-lg">
           Dùng thử 14 ngày
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <a href="#partners" class="btn btn-secondary btn-lg">
-          Tôi là chủ quán
-        </a>
+        <a href="#partners" class="btn btn-secondary btn-lg">Tôi là chủ quán</a>
       </div>
       <div class="hero-note">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         Miễn phí 14 ngày
         <span class="sep">·</span>
-        Không cần thẻ tín dụng
+        Không cần thẻ
         <span class="sep">·</span>
         Huỷ bất cứ lúc nào
       </div>
@@ -1433,17 +1222,17 @@ textarea.form-input { resize: vertical; min-height: 90px; }
           <div class="mtk-transcript">
             <div class="mtk-line">
               <span class="mtk-speaker">Bạn</span>
-              <span class="mtk-text">Về gói <strong>Enterprise 30 seats</strong>, bên em có thể linh động thời gian triển khai trong 2 tuần.</span>
+              <span class="mtk-text">Về gói <strong>Enterprise 30 seats</strong>, bên em có thể triển khai trong 2 tuần.</span>
             </div>
             <div class="mtk-line">
               <span class="mtk-speaker customer">Khách</span>
-              <span class="mtk-text">OK. Chị cần báo giá chính thức <strong>trước thứ Sáu</strong> để kịp họp board tuần sau.</span>
+              <span class="mtk-text">OK. Chị cần báo giá <strong>trước thứ Sáu</strong> để kịp họp board.</span>
             </div>
           </div>
 
           <div class="mtk-ai-card">
             <div class="mtk-ai-header">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.5 4.5L18 8l-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5L12 2z"/></svg>
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.5 4.5L18 8l-4.5 1.5L12 14l-1.5-4.5L6 8l4.5-1.5L12 2z"/></svg>
               AI tóm tắt
             </div>
             <div class="mtk-ai-list">
@@ -1455,7 +1244,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
 
           <div class="mtk-actions">
             <span class="mtk-action primary">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
               Gửi email
             </span>
             <span class="mtk-action">Xem biên bản</span>
@@ -1482,49 +1271,49 @@ textarea.form-input { resize: vertical; min-height: 90px; }
   </div>
 </section>
 
-<!-- ============ AUDIENCE SELECTOR ============ -->
+<!-- ============ AUDIENCE ============ -->
 <section id="audience" class="section">
   <div class="container">
     <div class="section-header center reveal">
       <span class="eyebrow">Dành cho ai</span>
       <h2 class="section-title center">Một nền tảng — ba cách đồng hành</h2>
-      <p class="section-subtitle center">Dù bạn là sales cá nhân, đội ngũ doanh nghiệp hay chủ quán cafe, PopMinutes đều có con đường riêng được thiết kế phù hợp.</p>
+      <p class="section-subtitle center">Dù bạn là sales cá nhân, đội ngũ doanh nghiệp hay chủ quán cafe, PopMinutes đều có con đường riêng.</p>
     </div>
 
     <div class="audience-grid">
       <a href="#pricing" class="audience-card reveal">
         <div class="audience-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
         <h3>Sales cá nhân</h3>
         <p>Tự ghi âm, tự tóm tắt, tự follow-up. Bắt đầu miễn phí, không cần chờ ai duyệt.</p>
         <span class="audience-link">
           Dùng thử ngay
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </span>
       </a>
 
       <a href="#pricing" class="audience-card reveal">
         <div class="audience-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M9 13h.01M9 17h.01M15 9h.01M15 13h.01M15 17h.01"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h.01M9 13h.01M9 17h.01M15 9h.01M15 13h.01M15 17h.01"/></svg>
         </div>
         <h3>Doanh nghiệp</h3>
-        <p>Quản trị đội nhóm, phân quyền, dashboard báo cáo và tích hợp hệ thống. SSO & audit log.</p>
+        <p>Quản trị đội nhóm, phân quyền, dashboard báo cáo. SSO & audit log cho Enterprise.</p>
         <span class="audience-link">
           Đặt lịch demo
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </span>
       </a>
 
       <a href="#partners" class="audience-card partner reveal">
         <div class="audience-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>
         </div>
         <h3>Đối tác quán cafe</h3>
         <p>Tăng doanh thu giờ thấp điểm, thu hút khách doanh nghiệp. Miễn phí tham gia.</p>
         <span class="audience-link">
           Trở thành đối tác
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </span>
       </a>
     </div>
@@ -1543,26 +1332,26 @@ textarea.form-input { resize: vertical; min-height: 90px; }
     <div class="problem-grid">
       <div class="problem-card reveal">
         <div class="problem-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
         <h3>Quán ồn, hết chỗ, không chuyên nghiệp</h3>
-        <p>Đến điểm hẹn thì hết chỗ, không gian ồn không phù hợp gặp khách. <strong>100+ quán đối tác</strong> được chọn lọc — đặt trước, có chỗ, yên tĩnh.</p>
+        <p>Đến điểm hẹn thì hết chỗ, không gian ồn. <strong>100+ quán đối tác</strong> được chọn lọc — đặt trước, có chỗ, yên tĩnh.</p>
       </div>
 
       <div class="problem-card reveal">
         <div class="problem-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
         </div>
         <h3>Ghi chú bằng tay, sót nội dung quan trọng</h3>
-        <p>Khách nói cần báo giá trước thứ Sáu — bạn có nhớ? <strong>AI bắt trọn từng câu</strong>, biến thành biên bản có cấu trúc, không bỏ sót.</p>
+        <p>Khách nói cần báo giá trước thứ Sáu — bạn có nhớ? <strong>AI bắt trọn từng câu</strong>, biến thành biên bản có cấu trúc.</p>
       </div>
 
       <div class="problem-card reveal">
         <div class="problem-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
         </div>
         <h3>Kết thúc họp, quên follow-up ngay</h3>
-        <p>Bạn vừa rời quán, email báo cáo đã gửi đến bạn, sếp và khách — tuỳ chọn. <strong>Không cần nhớ follow-up</strong>, tiết kiệm thời gian cho deal tiếp theo.</p>
+        <p>Bạn vừa rời quán, email báo cáo đã gửi đến bạn, sếp và khách. <strong>Không cần nhớ follow-up</strong>, tiết kiệm thời gian.</p>
       </div>
     </div>
   </div>
@@ -1605,9 +1394,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
       </div>
 
       <div class="step-preview-wrap reveal">
-        <div id="step-preview" class="step-preview">
-          <!-- Content injected by JS -->
-        </div>
+        <div id="step-preview" class="step-preview"></div>
       </div>
     </div>
   </div>
@@ -1618,37 +1405,37 @@ textarea.form-input { resize: vertical; min-height: 90px; }
   <div class="container">
     <div class="section-header center reveal">
       <span class="eyebrow">Tính năng</span>
-      <h2 class="section-title center">Mọi thứ team Sales cần, gói gọn một app</h2>
+      <h2 class="section-title center">Mọi thứ team Sales cần, trong một app</h2>
     </div>
 
     <div class="feature-grid">
       <div class="feature-card reveal">
         <div class="feature-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"/></svg>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"/></svg>
         </div>
         <h3>Transcript tiếng Việt chính xác cao</h3>
-        <p>Được tinh chỉnh cho ngữ cảnh sales B2B — thuật ngữ, tên riêng, số liệu.</p>
+        <p>Tinh chỉnh cho ngữ cảnh sales B2B — thuật ngữ, tên riêng, số liệu.</p>
       </div>
 
       <div class="feature-card reveal">
         <div class="feature-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
         <h3>Tóm tắt trong 30 giây</h3>
-        <p>Không phải chờ. Kết thúc họp, biên bản sẵn sàng trước khi bạn về đến văn phòng.</p>
+        <p>Kết thúc họp, biên bản sẵn sàng trước khi bạn về đến văn phòng.</p>
       </div>
 
       <div class="feature-card reveal">
         <div class="feature-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
         </div>
         <h3>Email tự động cho 3 bên</h3>
-        <p>Gửi bạn, sếp, và khách hàng với template chuyên nghiệp — tuỳ chỉnh theo công ty.</p>
+        <p>Gửi bạn, sếp, và khách với template chuyên nghiệp — tuỳ chỉnh theo công ty.</p>
       </div>
 
       <div class="feature-card reveal">
         <div class="feature-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
         <h3>Geofencing check-in/out</h3>
         <p>Xác thực vị trí bằng GPS. Báo cáo minh bạch, không thể gian lận.</p>
@@ -1656,15 +1443,15 @@ textarea.form-input { resize: vertical; min-height: 90px; }
 
       <div class="feature-card reveal">
         <div class="feature-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
         </div>
         <h3>Dashboard quản trị</h3>
-        <p>Xem hiệu suất đội, số cuộc họp, tỷ lệ follow-up — tất cả một màn hình.</p>
+        <p>Xem hiệu suất đội, số cuộc họp, tỷ lệ follow-up — một màn hình.</p>
       </div>
 
       <div class="feature-card reveal">
         <div class="feature-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
         </div>
         <h3>Bảo mật & tuân thủ</h3>
         <p>Mã hoá end-to-end, phân quyền chi tiết, SSO cho Enterprise.</p>
@@ -1673,7 +1460,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
   </div>
 </section>
 
-<!-- ============ PARTNERS (B2B2C) ============ -->
+<!-- ============ PARTNERS ============ -->
 <section id="partners" class="partner-section">
   <div class="container partner-grid">
     <div class="partner-content reveal">
@@ -1684,33 +1471,33 @@ textarea.form-input { resize: vertical; min-height: 90px; }
       <div class="partner-benefits">
         <div class="partner-benefit">
           <div class="partner-benefit-icon">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
           <span class="partner-benefit-text"><strong>Tăng doanh thu 20–35%</strong> ở khung 9h–11h và 14h–17h — giờ thường vắng khách.</span>
         </div>
         <div class="partner-benefit">
           <div class="partner-benefit-icon">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
-          <span class="partner-benefit-text"><strong>Thu hút khách B2B chất lượng cao</strong> — nhân viên văn phòng, sales manager, lãnh đạo doanh nghiệp.</span>
+          <span class="partner-benefit-text"><strong>Thu hút khách B2B chất lượng cao</strong> — nhân viên văn phòng, sales manager, lãnh đạo.</span>
         </div>
         <div class="partner-benefit">
           <div class="partner-benefit-icon">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
-          <span class="partner-benefit-text"><strong>Không phí, không ràng buộc</strong> — chỉ cần đảm bảo không gian yên tĩnh và wifi ổn định.</span>
+          <span class="partner-benefit-text"><strong>Không phí, không ràng buộc</strong> — chỉ cần không gian yên tĩnh và wifi ổn định.</span>
         </div>
         <div class="partner-benefit">
           <div class="partner-benefit-icon">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
-          <span class="partner-benefit-text"><strong>Dashboard quản lý đặt chỗ</strong> — xem lịch, xác nhận, đối soát doanh thu theo tháng.</span>
+          <span class="partner-benefit-text"><strong>Dashboard quản lý đặt chỗ</strong> — xem lịch, xác nhận, đối soát doanh thu.</span>
         </div>
       </div>
 
-      <a href="#cta-form" class="btn btn-amber btn-lg">
+      <a href="#cta-form" class="btn btn-partner btn-lg">
         Đăng ký làm đối tác
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
 
@@ -1751,7 +1538,7 @@ textarea.form-input { resize: vertical; min-height: 90px; }
         <p class="testimonial-quote">"Trước đây mỗi tối mình phải ngồi gõ lại biên bản. Giờ cứ kết thúc họp là email báo cáo đã sẵn trong hộp thư, chỉ cần review 2 phút."</p>
         <div class="testimonial-author">
           <div class="testimonial-avatar">TH</div>
-          <div class="testimonial-info">
+          <div>
             <div class="testimonial-name">Trần Hùng</div>
             <div class="testimonial-role">Key Account Manager · CEN Group</div>
           </div>
@@ -1760,10 +1547,10 @@ textarea.form-input { resize: vertical; min-height: 90px; }
 
       <div class="testimonial-card reveal">
         <span class="testimonial-audience b2b">Doanh nghiệp</span>
-        <p class="testimonial-quote">"Chúng tôi triển khai cho 20 bạn sales trong 2 tuần. Chất lượng biên bản đồng đều và đội manager có dashboard để theo dõi follow-up."</p>
+        <p class="testimonial-quote">"Triển khai cho 20 bạn sales trong 2 tuần. Chất lượng biên bản đồng đều và manager có dashboard theo dõi follow-up."</p>
         <div class="testimonial-author">
           <div class="testimonial-avatar">LM</div>
-          <div class="testimonial-info">
+          <div>
             <div class="testimonial-name">Lê Mai</div>
             <div class="testimonial-role">Sales Director · Mekong Capital</div>
           </div>
@@ -1772,10 +1559,10 @@ textarea.form-input { resize: vertical; min-height: 90px; }
 
       <div class="testimonial-card reveal">
         <span class="testimonial-audience partner">Đối tác quán</span>
-        <p class="testimonial-quote">"Buổi sáng thường vắng, từ khi tham gia PopMinutes quán tôi có thêm 8–10 lượt khách họp mỗi ngày. Doanh thu tăng rõ rệt."</p>
+        <p class="testimonial-quote">"Buổi sáng thường vắng, từ khi tham gia PopMinutes quán tôi có thêm 8–10 lượt khách họp mỗi ngày. Doanh thu tăng rõ."</p>
         <div class="testimonial-author">
           <div class="testimonial-avatar">NA</div>
-          <div class="testimonial-info">
+          <div>
             <div class="testimonial-name">Nguyễn Anh</div>
             <div class="testimonial-role">Chủ quán The Workshop Coffee · Q.1</div>
           </div>
@@ -1791,137 +1578,65 @@ textarea.form-input { resize: vertical; min-height: 90px; }
     <div class="section-header center reveal">
       <span class="eyebrow">Bảng giá</span>
       <h2 class="section-title center">Bắt đầu nhỏ, mở rộng khi cần</h2>
-      <p class="section-subtitle center">Bắt đầu miễn phí 14 ngày. Sau đó chọn gói phù hợp quy mô — huỷ bất cứ lúc nào, không phí ẩn.</p>
+      <p class="section-subtitle center">Miễn phí 14 ngày. Sau đó chọn gói phù hợp — huỷ bất cứ lúc nào, không phí ẩn.</p>
     </div>
 
     <div class="pricing-grid">
-      <!-- Free Trial -->
       <div class="pricing-card reveal">
         <div class="pricing-name">Dùng thử</div>
         <div class="pricing-price">0đ<span class="unit"> / 14 ngày</span></div>
-        <p class="pricing-desc">Trải nghiệm đầy đủ tính năng AI, không cần thẻ tín dụng.</p>
+        <p class="pricing-desc">Trải nghiệm đầy đủ tính năng AI, không cần thẻ.</p>
         <ul class="pricing-features">
-          <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            1 tài khoản
-          </li>
-          <li class="highlight">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            AI ghi âm + tóm tắt (giới hạn 10 giờ)
-          </li>
-          <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Email báo cáo tự động
-          </li>
-          <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Đặt chỗ quán (trả phí theo giờ)
-          </li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>1 tài khoản</li>
+          <li class="highlight"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>AI ghi âm + tóm tắt (10 giờ)</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Email báo cáo tự động</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Đặt chỗ quán (trả theo giờ)</li>
         </ul>
-        <div class="pricing-cta">
-          <a href="#cta-form" class="btn btn-secondary btn-block">Dùng thử miễn phí</a>
-        </div>
+        <div class="pricing-cta"><a href="#cta-form" class="btn btn-secondary btn-block">Dùng thử miễn phí</a></div>
       </div>
 
-      <!-- Sales Pro -->
       <div class="pricing-card reveal">
         <div class="pricing-name">Sales Pro</div>
         <div class="pricing-price">319K<span class="unit"> / tháng</span></div>
         <p class="pricing-desc">Dành cho sales cá nhân muốn AI lo toàn bộ biên bản.</p>
         <ul class="pricing-features">
-          <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            1 tài khoản
-          </li>
-          <li class="highlight">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            AI ghi âm + tóm tắt không giới hạn
-          </li>
-          <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Email báo cáo 3 bên
-          </li>
-          <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Đặt chỗ quán (trả theo giờ)
-          </li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>1 tài khoản</li>
+          <li class="highlight"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>AI ghi âm + tóm tắt không giới hạn</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Email báo cáo 3 bên</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Đặt chỗ quán (trả theo giờ)</li>
         </ul>
-        <div class="pricing-cta">
-          <a href="#cta-form" class="btn btn-secondary btn-block">Bắt đầu ngay</a>
-        </div>
+        <div class="pricing-cta"><a href="#cta-form" class="btn btn-secondary btn-block">Bắt đầu ngay</a></div>
       </div>
 
-      <!-- Team -->
       <div class="pricing-card featured reveal">
-        <span class="pricing-badge">Phổ biến nhất</span>
+        <span class="pricing-badge">Phổ biến</span>
         <div class="pricing-name">Team</div>
         <div class="pricing-price">2.79TR<span class="unit"> / tháng</span></div>
         <p class="pricing-desc">Đầy đủ công cụ quản trị cho đội sales 10 người.</p>
         <ul class="pricing-features">
-          <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            10 tài khoản
-          </li>
-          <li class="highlight">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            AI ghi âm + tóm tắt không giới hạn
-          </li>
-          <li class="highlight">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            100 giờ đặt chỗ quán
-          </li>
-          <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Dashboard quản trị
-          </li>
-          <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Geofencing GPS
-          </li>
-          <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Giảm 10% hoá đơn cafe · Xuất hoá đơn
-          </li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>10 tài khoản</li>
+          <li class="highlight"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>AI ghi âm + tóm tắt không giới hạn</li>
+          <li class="highlight"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>100 giờ đặt chỗ quán</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Dashboard quản trị</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Geofencing GPS</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Giảm 10% hoá đơn · Xuất hoá đơn</li>
         </ul>
-        <div class="pricing-cta">
-          <a href="#cta-form" class="btn btn-primary btn-block">Mua ngay</a>
-        </div>
+        <div class="pricing-cta"><a href="#cta-form" class="btn btn-primary btn-block">Mua ngay</a></div>
       </div>
 
-      <!-- Enterprise -->
       <div class="pricing-card reveal">
         <div class="pricing-name">Enterprise</div>
         <div class="pricing-price">Liên hệ</div>
         <p class="pricing-desc">Dành cho doanh nghiệp vừa & lớn với yêu cầu tuỳ chỉnh.</p>
         <ul class="pricing-features">
-          <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            30+ tài khoản
-          </li>
-          <li class="highlight">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            AI nâng cao + phân tích khách hàng
-          </li>
-          <li class="highlight">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Giờ đặt chỗ quán tuỳ chỉnh
-          </li>
-          <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            SSO, phân quyền chuyên sâu
-          </li>
-          <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Dashboard báo cáo tuỳ chỉnh
-          </li>
-          <li>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Lưu lịch sử vĩnh viễn · Hỗ trợ 24/7
-          </li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>30+ tài khoản</li>
+          <li class="highlight"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>AI nâng cao + phân tích khách hàng</li>
+          <li class="highlight"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Giờ đặt chỗ quán tuỳ chỉnh</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>SSO, phân quyền chuyên sâu</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Dashboard báo cáo tuỳ chỉnh</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Lưu lịch sử vĩnh viễn · Hỗ trợ 24/7</li>
         </ul>
-        <div class="pricing-cta">
-          <a href="#cta-form" class="btn btn-secondary btn-block">Liên hệ tư vấn</a>
-        </div>
+        <div class="pricing-cta"><a href="#cta-form" class="btn btn-secondary btn-block">Liên hệ tư vấn</a></div>
       </div>
     </div>
   </div>
@@ -1938,32 +1653,27 @@ textarea.form-input { resize: vertical; min-height: 90px; }
     <div class="faq-list">
       <details class="faq-item reveal">
         <summary>AI ghi âm có cần xin phép khách hàng không?</summary>
-        <div class="faq-answer">Có. PopMinutes có template thông báo lịch sự để bạn gửi trước buổi họp hoặc đọc đầu cuộc gặp. App cũng hỗ trợ ẩn danh thông tin khách hàng nếu cần.</div>
+        <div class="faq-answer">Có. PopMinutes có template thông báo lịch sự để bạn gửi trước hoặc đọc đầu cuộc gặp. App cũng hỗ trợ ẩn danh thông tin khách hàng nếu cần.</div>
       </details>
-
       <details class="faq-item reveal">
         <summary>Dữ liệu cuộc họp được bảo mật như thế nào?</summary>
-        <div class="faq-answer">Tất cả file ghi âm và transcript đều được mã hoá AES-256 cả khi lưu trữ và truyền tải. Chỉ những người được phân quyền trong tổ chức của bạn mới truy cập được.</div>
+        <div class="faq-answer">File ghi âm và transcript được mã hoá AES-256 cả khi lưu trữ và truyền tải. Chỉ người được phân quyền trong tổ chức mới truy cập được.</div>
       </details>
-
       <details class="faq-item reveal">
         <summary>Tôi có thể dùng PopMinutes mà không cần đặt chỗ quán không?</summary>
-        <div class="faq-answer">Hoàn toàn được. Bạn có thể dùng AI ghi âm & tóm tắt cho bất kỳ cuộc họp nào — online, tại văn phòng khách, hay tại quán cafe bạn tự chọn. Tính năng đặt chỗ quán là tuỳ chọn, giúp tiết kiệm thời gian và đảm bảo không gian chuyên nghiệp.</div>
+        <div class="faq-answer">Hoàn toàn được. AI ghi âm & tóm tắt hoạt động cho bất kỳ cuộc họp nào — online, tại văn phòng khách, hay quán bạn tự chọn. Đặt chỗ quán là tuỳ chọn.</div>
       </details>
-
       <details class="faq-item reveal">
         <summary>Đối tác quán cafe cần đáp ứng điều kiện gì?</summary>
-        <div class="faq-answer">Không gian yên tĩnh vừa phải, wifi ổn định, có ổ cắm điện, và có khu vực phù hợp cho 2–4 người họp. Chúng tôi sẽ khảo sát và xác nhận trong vòng 48 giờ sau khi bạn đăng ký.</div>
+        <div class="faq-answer">Không gian yên tĩnh vừa phải, wifi ổn định, có ổ cắm, và khu vực phù hợp cho 2–4 người họp. Chúng tôi khảo sát và xác nhận trong 48 giờ.</div>
       </details>
-
       <details class="faq-item reveal">
         <summary>Có thể xuất hoá đơn VAT cho công ty không?</summary>
-        <div class="faq-answer">Có. Tất cả gói từ Team trở lên đều hỗ trợ xuất hoá đơn VAT. Bạn chỉ cần cung cấp thông tin công ty trong phần cài đặt thanh toán.</div>
+        <div class="faq-answer">Có. Tất cả gói từ Team trở lên đều hỗ trợ xuất hoá đơn VAT. Chỉ cần cung cấp thông tin công ty trong phần cài đặt thanh toán.</div>
       </details>
-
       <details class="faq-item reveal">
         <summary>Nếu tôi huỷ gói giữa chừng thì sao?</summary>
-        <div class="faq-answer">Bạn có thể huỷ bất cứ lúc nào. Gói sẽ tiếp tục có hiệu lực đến hết chu kỳ thanh toán hiện tại. Xem chi tiết tại <a href="https://pophubly.com/chinh-sach-hoan-tien/" target="_blank" rel="noopener">Chính sách hoàn tiền</a>.</div>
+        <div class="faq-answer">Huỷ bất cứ lúc nào. Gói tiếp tục có hiệu lực đến hết chu kỳ thanh toán hiện tại. Xem chi tiết tại <a href="https://pophubly.com/chinh-sach-hoan-tien/" target="_blank" rel="noopener">Chính sách hoàn tiền</a>.</div>
       </details>
     </div>
   </div>
@@ -1975,20 +1685,11 @@ textarea.form-input { resize: vertical; min-height: 90px; }
     <div class="cta-content reveal">
       <span class="eyebrow">Bắt đầu ngay</span>
       <h2>Sẵn sàng tăng tốc team Sales?</h2>
-      <p>Để lại thông tin. Đội ngũ <strong>PopHubly</strong> sẽ liên hệ trong vòng 24 giờ để setup bản demo và tặng bạn voucher trải nghiệm PopMinutes AI.</p>
+      <p>Để lại thông tin. Đội ngũ <strong>PopHubly</strong> sẽ liên hệ trong vòng 24 giờ để setup demo và tặng voucher trải nghiệm PopMinutes AI.</p>
       <ul class="cta-bullets">
-        <li>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-          14 ngày dùng thử, không cần thẻ tín dụng
-        </li>
-        <li>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Setup & onboarding trong 10 phút
-        </li>
-        <li>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Hỗ trợ tiếng Việt 1-1 qua Zalo
-        </li>
+        <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>14 ngày dùng thử, không cần thẻ</li>
+        <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Setup & onboarding trong 10 phút</li>
+        <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Hỗ trợ tiếng Việt 1-1 qua Zalo</li>
       </ul>
     </div>
 
@@ -1998,38 +1699,27 @@ textarea.form-input { resize: vertical; min-height: 90px; }
           <label for="ctaName" class="form-label">Họ và tên <span class="req">*</span></label>
           <input type="text" id="ctaName" name="name" class="form-input" placeholder="Nguyễn Văn A" required>
         </div>
-
         <div class="form-group">
           <label for="ctaEmail" class="form-label">Email công việc <span class="req">*</span></label>
           <input type="email" id="ctaEmail" name="email" class="form-input" placeholder="ban@congty.com" required>
         </div>
-
         <div class="form-group">
           <label for="ctaPhone" class="form-label">Số điện thoại <span class="req">*</span></label>
           <input type="tel" id="ctaPhone" name="phone" class="form-input" placeholder="0901 234 567" required>
         </div>
-
         <div class="form-group">
           <label for="ctaNote" class="form-label">Bạn muốn dùng cho mục đích gì?</label>
           <textarea id="ctaNote" name="note" class="form-input" placeholder="Ví dụ: Team 5 sales cần AI ghi âm + báo cáo cho sếp..."></textarea>
         </div>
-
         <input type="hidden" id="ctaRef" name="ref" value="">
-
         <div class="form-consent">
           <input type="checkbox" id="ctaConsent" required>
-          <label for="ctaConsent">
-            Tôi đồng ý với <a href="https://pophubly.com/pophubly-privacy-policy/" target="_blank">Chính sách bảo mật</a> và <a href="https://pophubly.com/term-of-use/" target="_blank">Điều khoản sử dụng</a>.
-          </label>
+          <label for="ctaConsent">Tôi đồng ý với <a href="https://pophubly.com/pophubly-privacy-policy/" target="_blank">Chính sách bảo mật</a> và <a href="https://pophubly.com/term-of-use/" target="_blank">Điều khoản sử dụng</a>.</label>
         </div>
-
-        <button type="submit" id="ctaSubmitBtn" class="btn btn-primary btn-lg btn-block">
-          Đăng ký dùng thử
-        </button>
-
+        <button type="submit" id="ctaSubmitBtn" class="btn btn-primary btn-lg btn-block">Đăng ký dùng thử</button>
         <div class="form-note">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-          Thông tin của bạn được bảo mật tuyệt đối
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          Thông tin của bạn được bảo mật
         </div>
       </form>
     </div>
@@ -2102,52 +1792,39 @@ textarea.form-input { resize: vertical; min-height: 90px; }
 
     <div class="footer-bottom">
       <span>&copy; 2026 POPHUBLY ECOSYSTEM · POPMINUTES.AI</span>
-      <span>Made in Vietnam 🇻🇳</span>
+      <span>Made in Vietnam</span>
     </div>
   </div>
 </footer>
 
-<!-- ============ SUCCESS MODAL ============ -->
+<!-- ============ MODALS ============ -->
 <div id="successModal" class="modal-overlay">
-  <div class="modal" style="max-width: 400px; text-align: center;">
-    <button class="modal-close" style="position:absolute; top:16px; right:16px;" onclick="closeModal('successModal')" aria-label="Đóng">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  <div class="modal" style="max-width: 380px; text-align: center;">
+    <button class="modal-close" style="position:absolute; top:14px; right:14px;" onclick="closeModal('successModal')" aria-label="Đóng">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
     <div id="modalIcon" class="modal-success-icon">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
     </div>
     <h3 id="modalTitle" class="modal-success-title">Thành công</h3>
     <p id="modalMessage" class="modal-success-desc"></p>
-    <button onclick="closeModal('successModal')" class="btn btn-primary btn-block btn-lg">Đã hiểu</button>
+    <button onclick="closeModal('successModal')" class="btn btn-primary btn-block">Đã hiểu</button>
   </div>
 </div>
 
-<!-- ============ PRICING MODAL ============ -->
 <div id="pricingModal" class="modal-overlay">
   <div class="modal lg">
     <div class="modal-header">
       <h3 class="modal-title">Đăng ký gói dịch vụ</h3>
       <button class="modal-close" onclick="closeModal('pricingModal')" aria-label="Đóng">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
     </div>
     <form id="pricingForm" novalidate>
-      <div class="form-group">
-        <label class="form-label" for="pricingName">Họ và tên <span class="req">*</span></label>
-        <input type="text" id="pricingName" name="name" class="form-input" required>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="pricingEmail">Email <span class="req">*</span></label>
-        <input type="email" id="pricingEmail" name="email" class="form-input" required>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="pricingPhone">Số điện thoại <span class="req">*</span></label>
-        <input type="tel" id="pricingPhone" name="phone" class="form-input" required>
-      </div>
-      <div class="form-group">
-        <label class="form-label" for="pricingCompany">Công ty</label>
-        <input type="text" id="pricingCompany" name="company" class="form-input">
-      </div>
+      <div class="form-group"><label class="form-label" for="pricingName">Họ và tên <span class="req">*</span></label><input type="text" id="pricingName" name="name" class="form-input" required></div>
+      <div class="form-group"><label class="form-label" for="pricingEmail">Email <span class="req">*</span></label><input type="email" id="pricingEmail" name="email" class="form-input" required></div>
+      <div class="form-group"><label class="form-label" for="pricingPhone">Số điện thoại <span class="req">*</span></label><input type="tel" id="pricingPhone" name="phone" class="form-input" required></div>
+      <div class="form-group"><label class="form-label" for="pricingCompany">Công ty</label><input type="text" id="pricingCompany" name="company" class="form-input"></div>
       <div class="form-group">
         <label class="form-label" for="pricingPackage">Gói mong muốn <span class="req">*</span></label>
         <select id="pricingPackage" name="package" class="form-input" required>
@@ -2161,18 +1838,17 @@ textarea.form-input { resize: vertical; min-height: 90px; }
         <input type="checkbox" id="pricingConsent" required>
         <label for="pricingConsent">Tôi đồng ý với <a href="https://pophubly.com/pophubly-privacy-policy/" target="_blank">Chính sách bảo mật</a> và <a href="https://pophubly.com/term-of-use/" target="_blank">Điều khoản sử dụng</a>.</label>
       </div>
-      <button type="submit" id="pricingSubmitBtn" class="btn btn-primary btn-lg btn-block">Gửi đăng ký</button>
+      <button type="submit" id="pricingSubmitBtn" class="btn btn-primary btn-block">Gửi đăng ký</button>
     </form>
   </div>
 </div>
 
-<!-- ============ PDF MODAL ============ -->
 <div id="pdfModal" class="modal-overlay">
   <div class="modal xl">
     <div class="modal-header">
       <h3 class="modal-title">Biên bản mẫu (PDF)</h3>
       <button class="modal-close" onclick="closeModal('pdfModal')" aria-label="Đóng">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
     </div>
     <div class="pdf-body">
@@ -2185,67 +1861,40 @@ textarea.form-input { resize: vertical; min-height: 90px; }
 </div>
 
 <script>
-/* ==========================================================
-   CONFIG
-   ========================================================== */
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxrYkvMg1JxGCzuPzdpUaBYIrqZu6DyX2Qh0IXV49OYhAaCb6NHBY9BZFmdBBxLe65i/exec";
 const AFFILIATE_TRACK_URL = "https://get-upload-url-test-824148866382.asia-southeast1.run.app";
 
-/* ==========================================================
-   MODAL HELPERS
-   ========================================================== */
-function openModal(id) {
-  document.getElementById(id).classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeModal(id) {
-  document.getElementById(id).classList.remove('open');
-  document.body.style.overflow = '';
-}
-document.querySelectorAll('.modal-overlay').forEach(overlay => {
-  overlay.addEventListener('click', e => {
-    if (e.target === overlay) {
-      overlay.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-  });
-});
+/* ===== MODAL ===== */
+function openModal(id) { document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow = ''; }
+document.querySelectorAll('.modal-overlay').forEach(o => o.addEventListener('click', e => {
+  if (e.target === o) { o.classList.remove('open'); document.body.style.overflow = ''; }
+}));
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    document.querySelectorAll('.modal-overlay.open').forEach(m => {
-      m.classList.remove('open');
-      document.body.style.overflow = '';
-    });
-  }
+  if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(m => { m.classList.remove('open'); document.body.style.overflow = ''; });
 });
 
-/* ==========================================================
-   SUCCESS MODAL WITH DYNAMIC ICON
-   ========================================================== */
+/* ===== SUCCESS MODAL ===== */
 function showModal(type, title, message) {
   const icon = document.getElementById('modalIcon');
   icon.className = 'modal-success-icon' + (type === 'success' ? '' : ' ' + type);
-
   const iconSvg = type === 'success'
     ? '<polyline points="20 6 9 17 4 12"/>'
     : type === 'warning'
       ? '<path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="10"/>'
       : '<path d="M18 6L6 18M6 6l12 12"/>';
-
-  icon.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${iconSvg}</svg>`;
+  icon.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${iconSvg}</svg>`;
   document.getElementById('modalTitle').textContent = title;
   document.getElementById('modalMessage').textContent = message;
   openModal('successModal');
 }
 
-/* ==========================================================
-   STEPS INTERACTION
-   ========================================================== */
+/* ===== STEPS ===== */
 const STEP_DATA = [
   {
     icon: '<path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"/>',
     title: 'Transcript rõ từng người nói',
-    desc: 'AI chuyển hội thoại thành văn bản với độ chính xác cao cho tiếng Việt — phân biệt được bạn và khách.',
+    desc: 'AI chuyển hội thoại thành văn bản với độ chính xác cao cho tiếng Việt — phân biệt bạn và khách.',
     ctas: '<button class="btn btn-secondary" onclick="openModal(\'pdfModal\')">Xem biên bản mẫu</button>'
   },
   {
@@ -2271,32 +1920,25 @@ function updateStep(index, el) {
   setTimeout(() => {
     preview.innerHTML = `
       <div class="step-preview-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${data.icon}</svg>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${data.icon}</svg>
       </div>
       <h4>${data.title}</h4>
       <p>${data.desc}</p>
       <div class="step-preview-ctas">${data.ctas}</div>
     `;
     preview.style.opacity = '1';
-  }, 180);
+  }, 160);
 }
 
-/* ==========================================================
-   REVEAL ON SCROLL
-   ========================================================== */
-const revealObserver = new IntersectionObserver((entries) => {
+/* ===== REVEAL ===== */
+const revealObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('active');
-      revealObserver.unobserve(entry.target);
-    }
+    if (entry.isIntersecting) { entry.target.classList.add('active'); revealObserver.unobserve(entry.target); }
   });
-}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+}, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-/* ==========================================================
-   AFFILIATE — read ?ref= and persist (single source of truth)
-   ========================================================== */
+/* ===== AFFILIATE ===== */
 const AFFILIATE_KEY = 'popminutes_affiliate_ref';
 const AFFILIATE_EXPIRES_KEY = 'popminutes_affiliate_ref_expires';
 const AFFILIATE_REFERRAL_ID_KEY = 'popminutes_affiliate_referral_id';
@@ -2312,9 +1954,7 @@ function getActiveRef() {
   if (!stored) return '';
   const expiresAt = Number(localStorage.getItem(AFFILIATE_EXPIRES_KEY) || 0);
   if (expiresAt > 0 && Date.now() > expiresAt) {
-    localStorage.removeItem(AFFILIATE_KEY);
-    localStorage.removeItem(AFFILIATE_EXPIRES_KEY);
-    return '';
+    localStorage.removeItem(AFFILIATE_KEY); localStorage.removeItem(AFFILIATE_EXPIRES_KEY); return '';
   }
   return stored;
 }
@@ -2326,95 +1966,50 @@ function populateRefInputs() {
     if (input) input.value = ref;
   });
 }
-
 document.addEventListener('DOMContentLoaded', populateRefInputs);
 
-/* Track click — only once per session */
 const CLICK_TRACKED_KEY = 'popminutes_click_tracked';
 (function trackAffiliateClick() {
   const ref = getActiveRef();
-  if (!ref) return;
-  if (sessionStorage.getItem(CLICK_TRACKED_KEY) === '1') return;
+  if (!ref || sessionStorage.getItem(CLICK_TRACKED_KEY) === '1') return;
   sessionStorage.setItem(CLICK_TRACKED_KEY, '1');
-
   fetch(AFFILIATE_TRACK_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
-      action: 'affiliateTrack',
-      partnerId: ref,
-      channel: 'link',
-      userAgent: navigator.userAgent,
-      referrer: document.referrer || ''
-    }).toString()
-  })
-  .then(r => r.json())
-  .then(d => {
-    if (d.status === 200 && d.referral_id) {
-      localStorage.setItem(AFFILIATE_REFERRAL_ID_KEY, d.referral_id);
-    }
-  })
-  .catch(e => console.warn('[Affiliate] Track error:', e));
+    body: new URLSearchParams({ action: 'affiliateTrack', partnerId: ref, channel: 'link', userAgent: navigator.userAgent, referrer: document.referrer || '' }).toString()
+  }).then(r => r.json()).then(d => {
+    if (d.status === 200 && d.referral_id) localStorage.setItem(AFFILIATE_REFERRAL_ID_KEY, d.referral_id);
+  }).catch(e => console.warn('[Affiliate]', e));
 })();
 
-/* ==========================================================
-   FORM SUBMISSION
-   ========================================================== */
+/* ===== FORM ===== */
 async function submitFormToGAS(formId, buttonId, source, successMsg) {
   const form = document.getElementById(formId);
   const btn = document.getElementById(buttonId);
   if (!form || !btn) return;
-
   const originalHTML = btn.innerHTML;
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
-
+    if (!form.checkValidity()) { form.reportValidity(); return; }
     btn.disabled = true;
     btn.innerHTML = '<span class="btn-spinner"></span> Đang gửi...';
-
     const data = Object.fromEntries(new FormData(form).entries());
     data.source = source;
     data.referral_id = localStorage.getItem(AFFILIATE_REFERRAL_ID_KEY) || '';
-
     try {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 20000);
-
-      const response = await fetch(SCRIPT_URL, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        signal: controller.signal
-      });
+      const response = await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(data), headers: { 'Content-Type': 'text/plain;charset=utf-8' }, signal: controller.signal });
       clearTimeout(timeout);
-
       const text = await response.text();
-      let result;
-      try { result = JSON.parse(text); }
-      catch { throw new Error('Phản hồi server không hợp lệ'); }
-
-      const ok = result.result === 'success'
-              || result.status === 'success'
-              || result.status === 200
-              || result.success === true;
-
-      if (ok) {
-        showModal('success', 'Thành công', successMsg);
-        form.reset();
-      } else {
-        showModal('warning', 'Có lỗi xảy ra', result.message || 'Vui lòng thử lại sau.');
-      }
+      let result; try { result = JSON.parse(text); } catch { throw new Error('Invalid response'); }
+      const ok = result.result === 'success' || result.status === 'success' || result.status === 200 || result.success === true;
+      if (ok) { showModal('success', 'Thành công', successMsg); form.reset(); }
+      else { showModal('warning', 'Có lỗi xảy ra', result.message || 'Vui lòng thử lại sau.'); }
     } catch (error) {
-      if (error.name === 'AbortError') {
-        showModal('warning', 'Hết thời gian', 'Server phản hồi chậm. Vui lòng thử lại.');
-      } else {
-        showModal('error', 'Lỗi kết nối', 'Không thể kết nối server. Vui lòng kiểm tra mạng.');
-      }
+      if (error.name === 'AbortError') showModal('warning', 'Hết thời gian', 'Server phản hồi chậm. Vui lòng thử lại.');
+      else showModal('error', 'Lỗi kết nối', 'Không thể kết nối server. Kiểm tra mạng và thử lại.');
     } finally {
       btn.disabled = false;
       btn.innerHTML = originalHTML;
@@ -2425,12 +2020,9 @@ async function submitFormToGAS(formId, buttonId, source, successMsg) {
 submitFormToGAS('ctaForm', 'ctaSubmitBtn', 'CTA', 'Cảm ơn bạn! Đội ngũ PopHubly sẽ liên hệ trong vòng 24 giờ.');
 submitFormToGAS('pricingForm', 'pricingSubmitBtn', 'PRICING', 'Đăng ký thành công! Chúng tôi sẽ liên hệ xác nhận.');
 
-/* ==========================================================
-   INIT: activate step 1 on load
-   ========================================================== */
 window.addEventListener('load', () => {
-  const firstStep = document.querySelector('.step');
-  if (firstStep) updateStep(0, firstStep);
+  const first = document.querySelector('.step');
+  if (first) updateStep(0, first);
 });
 </script>
 </body>

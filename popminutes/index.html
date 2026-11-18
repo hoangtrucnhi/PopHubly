@@ -1828,7 +1828,7 @@
                 <div id="priceHint" class="text-xs font-medium text-emerald-600 mb-3 hidden">(thanh toán 807k cho 3 tháng)</div>
 
                 <div id="personalNote" class="bg-[#F0F3FF] text-[#1B2B7A] text-xs font-semibold px-3.5 py-2.5 rounded-xl mb-6 leading-relaxed">
-                    14 ngày miễn phí · Không cần thẻ tín dụng
+                    90 ngày miễn phí · Không cần thẻ tín dụng
                 </div>
 
                 <div class="border-t border-slate-100 pt-5 mb-8 grow">
@@ -2103,7 +2103,7 @@
             <a href="https://pophubly.com/term-of-use/" target="_blank" class="consent-link">Điều khoản sử dụng</a>.
         </label>
     </div>
-    <button type="submit" id="ctaSubmitBtn" class="btn-main w-full py-4 sm:py-5 text-base sm:text-lg mt-2">DÙNG THỬ 14 NGÀY</button>
+    <button type="submit" id="ctaSubmitBtn" class="btn-main w-full py-4 sm:py-5 text-base sm:text-lg mt-2">DÙNG THỬ 90 NGÀY</button>
 </form>
         </div>
     </div>
@@ -2634,12 +2634,12 @@
     function updatePersonalPlan() {
         if (toggleCheckbox.checked) {
             priceSpan.innerText = '269k';
-            noteDiv.innerHTML = '14 ngày miễn phí · Không cần thẻ tín dụng';
+            noteDiv.innerHTML = '90 ngày miễn phí · Không cần thẻ tín dụng';
             priceHint.classList.remove('hidden');
             priceHint.innerText = '(thanh toán 807k cho 3 tháng)';
         } else {
             priceSpan.innerText = '319k';
-            noteDiv.innerHTML = '14 ngày miễn phí · Không cần thẻ tín dụng';
+            noteDiv.innerHTML = '90 ngày miễn phí · Không cần thẻ tín dụng';
             priceHint.classList.add('hidden');
         }
     }

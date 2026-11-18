@@ -307,28 +307,64 @@
            MODAL — LUÔN CĂN GIỮA, AN TOÀN MỌI VIEWPORT
            ============================================ */
         .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
-    background: rgba(15, 23, 42, 0.65);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    display: none;
-    align-items: flex-start;
-    justify-content: center;
-    z-index: 9999;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: 16px;
-    box-sizing: border-box;
-}
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            max-width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            z-index: 9999;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            padding: 16px;
+            box-sizing: border-box;
+        }
         .modal-overlay:not(.hidden) {
             display: flex;
+        }
+        .modal-overlay.hidden { display: none; }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.94); opacity: 0; }
+            to   { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-box {
+            position: relative;
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 500px;
+            min-width: 0;
+            margin: auto 0;
+            padding: 24px;
+            box-sizing: border-box;
+            box-shadow: var(--shadow-lg);
+            animation: scaleIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+            word-break: break-word;
+            overflow-wrap: anywhere;
+        }
+        .modal-box.modal-lg { max-width: 640px; }
+        .modal-box img, .modal-box svg, .modal-box iframe, .modal-box video { max-width: 100%; height: auto; box-sizing: border-box; }
+        .modal-box * { max-width: 100%; }
+
+        @media (max-width: 640px) {
+            .modal-overlay { padding: 14px; }
+            .modal-box {
+                border-radius: var(--radius-lg);
+                padding: 18px;
+                width: 100%;
+                max-width: calc(100vw - 28px);
+            }
+            .modal-box.modal-lg { max-width: calc(100vw - 28px); }
         }
         .modal-overlay.hidden { display: none; }
 
@@ -1421,11 +1457,11 @@
             <div class="inline-flex items-center gap-2 bg-[#F0F3FF] px-4 py-2 rounded-full text-[0.7rem] sm:text-xs font-bold uppercase tracking-widest text-[#1B2B7A] mb-6 sm:mb-8">
                 <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Đã có mặt 100+ chỗ ngồi Cafe
             </div>
-            <h1 class="title-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl mb-6 sm:mb-10">
-                Chốt Sales tại quán,<br><span class="text-gradient">Biên bản để AI lo.</span>
+            <h1 class="title-bold text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem] xl:text-[3.85rem] mb-6 sm:mb-8 leading-[1.16]">
+                Rời văn phòng gặp khách, chỉ cần mang theo một quy trình trên <span class="text-gradient">PopMinutes.</span>
             </h1>
-            <p class="text-base sm:text-lg text-slate-500 mb-8 sm:mb-10 max-w-lg font-medium leading-relaxed">
-                Giải pháp toàn diện cho <strong class="text-slate-800">Team Sales</strong>: Đặt chỗ gặp khách tại mạng lưới Cafe chọn lọc & Tự động ghi chép, gửi email báo cáo cho sếp/khách hàng ngay sau khi đứng dậy.
+            <p class="text-base sm:text-lg text-slate-500 mb-7 sm:mb-9 max-w-xl font-medium leading-relaxed">
+                Gom trọn <strong class="text-slate-800">6 khâu</strong> từ đặt bàn tiếp khách, ghi âm tóm tắt cuộc trò chuyện, báo cáo cuộc họp, cho tới giao Task, đổ dữ liệu về CRM và theo dõi CSKH — giúp Sales làm việc tinh gọn.
             </p>
             <div class="flex flex-row items-center gap-2 sm:gap-4 mt-6 sm:mt-8">
                 <button onclick="scrollToForm()" class="btn-main">
@@ -1436,6 +1472,22 @@
                     <svg class="w-4 h-4 sm:w-5 sm:h-5 text-[#1B2B7A]" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     XEM DEMO
                 </button>
+            </div>
+            <!-- Thanh quy trình 6 bước tinh gọn ngay dưới nút CTA -->
+            <div class="mt-7 sm:mt-9 pt-5 border-t border-slate-200/70">
+                <div class="flex flex-wrap items-center gap-x-2 gap-y-2 text-[0.72rem] sm:text-xs font-bold text-slate-600">
+                    <span class="inline-flex items-center gap-1.5 text-[#1B2B7A] bg-[#F0F3FF] px-2.5 py-1 rounded-full">1. Đặt chỗ</span>
+                    <span class="text-slate-300 font-normal">➔</span>
+                    <span class="inline-flex items-center gap-1.5 text-[#1B2B7A] bg-[#F0F3FF] px-2.5 py-1 rounded-full">2. Ghi âm</span>
+                    <span class="text-slate-300 font-normal">➔</span>
+                    <span class="inline-flex items-center gap-1.5 text-[#1B2B7A] bg-[#F0F3FF] px-2.5 py-1 rounded-full">3. Tóm tắt &amp; Báo cáo</span>
+                    <span class="text-slate-300 font-normal">➔</span>
+                    <span class="inline-flex items-center gap-1.5 text-[#1B2B7A] bg-[#F0F3FF] px-2.5 py-1 rounded-full">4. Giao Task</span>
+                    <span class="text-slate-300 font-normal">➔</span>
+                    <span class="inline-flex items-center gap-1.5 text-[#1B2B7A] bg-[#F0F3FF] px-2.5 py-1 rounded-full">5. Đồng bộ CRM</span>
+                    <span class="text-slate-300 font-normal">➔</span>
+                    <span class="inline-flex items-center gap-1.5 text-[#1B2B7A] bg-[#F0F3FF] px-2.5 py-1 rounded-full">6. CSKH</span>
+                </div>
             </div>
         </div>
         <div class="relative reveal active reveal-delay-1 flex items-center justify-center">
@@ -1490,8 +1542,8 @@
 
         <!-- 2. Frameless Infinite Scrolling Logo Marquee -->
         <div class="reveal pt-6 sm:pt-8 border-t border-slate-100">
-            <p class="text-center text-[0.7rem] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-slate-400 mb-6 sm:mb-8">
-                Đồng bộ
+            <p class="text-center text-xs sm:text-sm font-bold text-slate-500 max-w-2xl mx-auto mb-6 sm:mb-8 leading-relaxed">
+                Nói chuyện ở quán cafe — Dữ liệu tự động chảy thẳng về hệ thống làm việc của công ty
             </p>
             <div class="marquee-wrapper" role="region" aria-label="Các nền tảng tích hợp">
                 <div class="marquee-track">
@@ -1521,41 +1573,6 @@
                             <span>Google Task</span>
                         </div>
 
-                        <!-- Google Meeting -->
-                        <div class="integration-item">
-                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
-                                <path d="M4 7.5C4 6.11929 5.11929 5 6.5 5H13.5C14.8807 5 16 6.11929 16 7.5V16.5C16 17.8807 14.8807 19 13.5 19H6.5C5.11929 19 4 17.8807 4 16.5V7.5Z" fill="#00832D"/>
-                                <path d="M4 7.5C4 6.11929 5.11929 5 6.5 5H10V12H4V7.5Z" fill="#0066DA"/>
-                                <path d="M4 12H10V19H6.5C5.11929 19 4 17.8807 4 16.5V12Z" fill="#EA4335"/>
-                                <path d="M10 5H13.5C14.8807 5 16 6.11929 16 7.5V12H10V5Z" fill="#FFBA00"/>
-                                <path d="M16 9.5L20.2 6.7C20.65 6.4 21.25 6.72 21.25 7.26V16.74C21.25 17.28 20.65 17.6 20.2 17.3L16 14.5V9.5Z" fill="#00AC47"/>
-                            </svg>
-                            <span>Google Meeting</span>
-                        </div>
-
-                        <!-- Teams -->
-                        <div class="integration-item">
-                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
-                                <circle cx="17.5" cy="7.5" r="2.2" fill="#7B83EB"/>
-                                <path d="M15 11H19.5C20.6 11 21.5 11.9 21.5 13V16.5C21.5 17.9 20.4 19 19 19H15V11Z" fill="#7B83EB"/>
-                                <circle cx="12.5" cy="6.5" r="2.7" fill="#5059C9"/>
-                                <path d="M8 10.5H16C17.1 10.5 18 11.4 18 12.5V17.5C18 19.2 16.6 20.5 15 20.5H11C9.3 20.5 8 19.2 8 17.5V10.5Z" fill="#5059C9"/>
-                                <rect x="2.5" y="7.5" width="9" height="9" rx="2" fill="#4B53BC"/>
-                                <path d="M5.2 10.2H8.8M7 10.2V14.2" stroke="#FFFFFF" stroke-width="1.7" stroke-linecap="round"/>
-                            </svg>
-                            <span>Teams</span>
-                        </div>
-
-                        <!-- Zoom -->
-                        <div class="integration-item">
-                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
-                                <rect x="2.5" y="4.5" width="19" height="15" rx="4.5" fill="#2D8CFF"/>
-                                <rect x="5.5" y="8.8" width="8.5" height="6.4" rx="1.6" fill="#FFFFFF"/>
-                                <path d="M14.8 10.6L18.2 8.7C18.55 8.5 19 8.75 19 9.15V14.85C19 15.25 18.55 15.5 18.2 15.3L14.8 13.4V10.6Z" fill="#FFFFFF"/>
-                            </svg>
-                            <span>Zoom</span>
-                        </div>
-
                         <!-- Trello -->
                         <div class="integration-item">
                             <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
@@ -1586,6 +1603,41 @@
                                 <text x="12" y="12.2" text-anchor="middle" fill="#FFFFFF" font-size="4.6" font-weight="800" font-style="italic" font-family="sans-serif">salesforce</text>
                             </svg>
                             <span>Salesforce</span>
+                        </div>
+
+                        <!-- Google Meet -->
+                        <div class="integration-item">
+                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                                <path d="M4 7.5C4 6.11929 5.11929 5 6.5 5H13.5C14.8807 5 16 6.11929 16 7.5V16.5C16 17.8807 14.8807 19 13.5 19H6.5C5.11929 19 4 17.8807 4 16.5V7.5Z" fill="#00832D"/>
+                                <path d="M4 7.5C4 6.11929 5.11929 5 6.5 5H10V12H4V7.5Z" fill="#0066DA"/>
+                                <path d="M4 12H10V19H6.5C5.11929 19 4 17.8807 4 16.5V12Z" fill="#EA4335"/>
+                                <path d="M10 5H13.5C14.8807 5 16 6.11929 16 7.5V12H10V5Z" fill="#FFBA00"/>
+                                <path d="M16 9.5L20.2 6.7C20.65 6.4 21.25 6.72 21.25 7.26V16.74C21.25 17.28 20.65 17.6 20.2 17.3L16 14.5V9.5Z" fill="#00AC47"/>
+                            </svg>
+                            <span>Google Meet</span>
+                        </div>
+
+                        <!-- Teams -->
+                        <div class="integration-item">
+                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                                <circle cx="17.5" cy="7.5" r="2.2" fill="#7B83EB"/>
+                                <path d="M15 11H19.5C20.6 11 21.5 11.9 21.5 13V16.5C21.5 17.9 20.4 19 19 19H15V11Z" fill="#7B83EB"/>
+                                <circle cx="12.5" cy="6.5" r="2.7" fill="#5059C9"/>
+                                <path d="M8 10.5H16C17.1 10.5 18 11.4 18 12.5V17.5C18 19.2 16.6 20.5 15 20.5H11C9.3 20.5 8 19.2 8 17.5V10.5Z" fill="#5059C9"/>
+                                <rect x="2.5" y="7.5" width="9" height="9" rx="2" fill="#4B53BC"/>
+                                <path d="M5.2 10.2H8.8M7 10.2V14.2" stroke="#FFFFFF" stroke-width="1.7" stroke-linecap="round"/>
+                            </svg>
+                            <span>Teams</span>
+                        </div>
+
+                        <!-- Zoom -->
+                        <div class="integration-item">
+                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                                <rect x="2.5" y="4.5" width="19" height="15" rx="4.5" fill="#2D8CFF"/>
+                                <rect x="5.5" y="8.8" width="8.5" height="6.4" rx="1.6" fill="#FFFFFF"/>
+                                <path d="M14.8 10.6L18.2 8.7C18.55 8.5 19 8.75 19 9.15V14.85C19 15.25 18.55 15.5 18.2 15.3L14.8 13.4V10.6Z" fill="#FFFFFF"/>
+                            </svg>
+                            <span>Zoom</span>
                         </div>
                     </div>
 
@@ -1615,41 +1667,6 @@
                             <span>Google Task</span>
                         </div>
 
-                        <!-- Google Meeting -->
-                        <div class="integration-item">
-                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
-                                <path d="M4 7.5C4 6.11929 5.11929 5 6.5 5H13.5C14.8807 5 16 6.11929 16 7.5V16.5C16 17.8807 14.8807 19 13.5 19H6.5C5.11929 19 4 17.8807 4 16.5V7.5Z" fill="#00832D"/>
-                                <path d="M4 7.5C4 6.11929 5.11929 5 6.5 5H10V12H4V7.5Z" fill="#0066DA"/>
-                                <path d="M4 12H10V19H6.5C5.11929 19 4 17.8807 4 16.5V12Z" fill="#EA4335"/>
-                                <path d="M10 5H13.5C14.8807 5 16 6.11929 16 7.5V12H10V5Z" fill="#FFBA00"/>
-                                <path d="M16 9.5L20.2 6.7C20.65 6.4 21.25 6.72 21.25 7.26V16.74C21.25 17.28 20.65 17.6 20.2 17.3L16 14.5V9.5Z" fill="#00AC47"/>
-                            </svg>
-                            <span>Google Meeting</span>
-                        </div>
-
-                        <!-- Teams -->
-                        <div class="integration-item">
-                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
-                                <circle cx="17.5" cy="7.5" r="2.2" fill="#7B83EB"/>
-                                <path d="M15 11H19.5C20.6 11 21.5 11.9 21.5 13V16.5C21.5 17.9 20.4 19 19 19H15V11Z" fill="#7B83EB"/>
-                                <circle cx="12.5" cy="6.5" r="2.7" fill="#5059C9"/>
-                                <path d="M8 10.5H16C17.1 10.5 18 11.4 18 12.5V17.5C18 19.2 16.6 20.5 15 20.5H11C9.3 20.5 8 19.2 8 17.5V10.5Z" fill="#5059C9"/>
-                                <rect x="2.5" y="7.5" width="9" height="9" rx="2" fill="#4B53BC"/>
-                                <path d="M5.2 10.2H8.8M7 10.2V14.2" stroke="#FFFFFF" stroke-width="1.7" stroke-linecap="round"/>
-                            </svg>
-                            <span>Teams</span>
-                        </div>
-
-                        <!-- Zoom -->
-                        <div class="integration-item">
-                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
-                                <rect x="2.5" y="4.5" width="19" height="15" rx="4.5" fill="#2D8CFF"/>
-                                <rect x="5.5" y="8.8" width="8.5" height="6.4" rx="1.6" fill="#FFFFFF"/>
-                                <path d="M14.8 10.6L18.2 8.7C18.55 8.5 19 8.75 19 9.15V14.85C19 15.25 18.55 15.5 18.2 15.3L14.8 13.4V10.6Z" fill="#FFFFFF"/>
-                            </svg>
-                            <span>Zoom</span>
-                        </div>
-
                         <!-- Trello -->
                         <div class="integration-item">
                             <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
@@ -1680,6 +1697,41 @@
                                 <text x="12" y="12.2" text-anchor="middle" fill="#FFFFFF" font-size="4.6" font-weight="800" font-style="italic" font-family="sans-serif">salesforce</text>
                             </svg>
                             <span>Salesforce</span>
+                        </div>
+
+                        <!-- Google Meet -->
+                        <div class="integration-item">
+                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                                <path d="M4 7.5C4 6.11929 5.11929 5 6.5 5H13.5C14.8807 5 16 6.11929 16 7.5V16.5C16 17.8807 14.8807 19 13.5 19H6.5C5.11929 19 4 17.8807 4 16.5V7.5Z" fill="#00832D"/>
+                                <path d="M4 7.5C4 6.11929 5.11929 5 6.5 5H10V12H4V7.5Z" fill="#0066DA"/>
+                                <path d="M4 12H10V19H6.5C5.11929 19 4 17.8807 4 16.5V12Z" fill="#EA4335"/>
+                                <path d="M10 5H13.5C14.8807 5 16 6.11929 16 7.5V12H10V5Z" fill="#FFBA00"/>
+                                <path d="M16 9.5L20.2 6.7C20.65 6.4 21.25 6.72 21.25 7.26V16.74C21.25 17.28 20.65 17.6 20.2 17.3L16 14.5V9.5Z" fill="#00AC47"/>
+                            </svg>
+                            <span>Google Meet</span>
+                        </div>
+
+                        <!-- Teams -->
+                        <div class="integration-item">
+                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                                <circle cx="17.5" cy="7.5" r="2.2" fill="#7B83EB"/>
+                                <path d="M15 11H19.5C20.6 11 21.5 11.9 21.5 13V16.5C21.5 17.9 20.4 19 19 19H15V11Z" fill="#7B83EB"/>
+                                <circle cx="12.5" cy="6.5" r="2.7" fill="#5059C9"/>
+                                <path d="M8 10.5H16C17.1 10.5 18 11.4 18 12.5V17.5C18 19.2 16.6 20.5 15 20.5H11C9.3 20.5 8 19.2 8 17.5V10.5Z" fill="#5059C9"/>
+                                <rect x="2.5" y="7.5" width="9" height="9" rx="2" fill="#4B53BC"/>
+                                <path d="M5.2 10.2H8.8M7 10.2V14.2" stroke="#FFFFFF" stroke-width="1.7" stroke-linecap="round"/>
+                            </svg>
+                            <span>Teams</span>
+                        </div>
+
+                        <!-- Zoom -->
+                        <div class="integration-item">
+                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                                <rect x="2.5" y="4.5" width="19" height="15" rx="4.5" fill="#2D8CFF"/>
+                                <rect x="5.5" y="8.8" width="8.5" height="6.4" rx="1.6" fill="#FFFFFF"/>
+                                <path d="M14.8 10.6L18.2 8.7C18.55 8.5 19 8.75 19 9.15V14.85C19 15.25 18.55 15.5 18.2 15.3L14.8 13.4V10.6Z" fill="#FFFFFF"/>
+                            </svg>
+                            <span>Zoom</span>
                         </div>
                     </div>
                 </div>
@@ -1719,47 +1771,47 @@
                 </div>
                 <h3 class="text-base sm:text-xl md:text-2xl font-black mb-3 sm:mb-4 leading-snug text-slate-900">Kết thúc họp,<br>quên follow‑up ngay</h3>
                 <p class="text-slate-500 font-medium leading-relaxed text-sm sm:text-[0.95rem]">Bạn vừa rời quán, trên đường trở về công ty, tóm tắt đã gửi đến email cá nhân và sếp/khách (tùy chọn). Không cần phải nhớ follow‑up. Tiết kiệm thời gian để chuẩn bị cho buổi gặp khác.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Solutions -->
+<!-- Solutions / Hành trình giải pháp -->
 <section id="how" class="py-20 sm:py-32 section-white relative overflow-hidden">
     <div class="glow-orb w-[400px] h-[400px] bg-[#eef1fa] top-[10%] right-[-120px]" style="opacity:0.3;"></div>
     <div class="wide-container relative z-10">
-        <h2 class="title-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-12 sm:mb-24 text-center">Các giải pháp trong <span class="text-[#1B2B7A]">PopMinutes App</span></h2>
+        <div class="text-center mb-12 sm:mb-20 reveal">
+            <h2 class="title-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4 sm:mb-6">Hành trình một buổi gặp khách <span class="text-[#1B2B7A]">(Trước – Trong – Sau)</span></h2>
+            <p class="text-slate-500 text-sm sm:text-lg max-w-2xl mx-auto font-medium leading-relaxed">
+                Mọi bước của một cuộc hẹn đều được nối tiếp tự động theo đúng trục thời gian làm việc của Sales.
+            </p>
+        </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-20 items-center">
             <div class="space-y-4 sm:space-y-8">
                 <div class="step-trigger active" id="step1" onclick="updateStep(0, this)">
                     <div class="flex items-center gap-3 mb-2 sm:mb-3">
                         <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#F0F3FF] rounded-xl flex items-center justify-center flex-shrink-0">
-                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#1B2B7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#1B2B7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                         </div>
-                        <span class="label-md font-black uppercase text-[#1B2B7A]">Giải pháp 01</span>
+                        <span class="label-md font-black uppercase text-[#1B2B7A]">Thẻ 01 | Chặng 1 — Trước cuộc gặp (Bước 1)</span>
                     </div>
-                    <h3 class="text-lg sm:text-2xl md:text-3xl font-black mb-2 leading-snug">AI chuyển toàn bộ file ghi âm thành biên bản</h3>
-                    <p class="text-sm sm:text-base text-slate-500 font-medium">Kèm theo <strong>toàn bộ đoạn hội thoại</strong> được chuyển thành văn bản, rõ từng người nói.</p>
+                    <h3 class="text-lg sm:text-2xl md:text-3xl font-black mb-2 leading-snug">Đặt chỗ</h3>
+                    <p class="text-sm sm:text-base text-slate-500 font-medium leading-relaxed">Chọn nhanh không gian cafe đối tác chuẩn tiếp khách, không lo ồn hay hết bàn.</p>
                 </div>
                 <div class="step-trigger" onclick="updateStep(1, this)">
                     <div class="flex items-center gap-3 mb-2 sm:mb-3">
                         <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#F0F3FF] rounded-xl flex items-center justify-center flex-shrink-0">
-                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#1B2B7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#1B2B7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
                         </div>
-                        <span class="label-md font-black uppercase text-[#1B2B7A]">Giải pháp 02</span>
+                        <span class="label-md font-black uppercase text-[#1B2B7A]">Thẻ 02 | Chặng 2 — Trong cuộc gặp (Bước 2 &amp; 3)</span>
                     </div>
-                    <h3 class="text-lg sm:text-2xl md:text-3xl font-black leading-snug">Nhận biên bản tức thì qua email</h3>
-                    <p class="text-sm sm:text-base text-slate-500 font-medium">Sau khi buổi họp kết thúc, biên bản tự động gửi đến bạn, sếp và khách hàng.</p>
+                    <h3 class="text-lg sm:text-2xl md:text-3xl font-black mb-2 leading-snug">Ghi âm, Tóm tắt &amp; Báo cáo</h3>
+                    <p class="text-sm sm:text-base text-slate-500 font-medium leading-relaxed">Sales chỉ việc tập trung 100% vào câu chuyện với khách. AI tự phân tách giọng nói, lọc nhiễu quán cafe, xuất ngay bản tóm tắt các cam kết, báo giá quan trọng và hoàn thiện báo cáo cuộc họp.</p>
                 </div>
                 <div class="step-trigger" onclick="updateStep(2, this)">
                     <div class="flex items-center gap-3 mb-2 sm:mb-3">
                         <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#F0F3FF] rounded-xl flex items-center justify-center flex-shrink-0">
-                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#1B2B7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#1B2B7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
                         </div>
-                        <span class="label-md font-black uppercase text-[#1B2B7A]">Giải pháp 03</span>
+                        <span class="label-md font-black uppercase text-[#1B2B7A]">Thẻ 03 | Chặng 3 — Sau cuộc gặp (Bước 4, 5 &amp; 6)</span>
                     </div>
-                    <h3 class="text-lg sm:text-2xl md:text-3xl font-black leading-snug">Linh hoạt sử dụng chỗ ngồi tại quán cafe chọn lọc</h3>
-                    <p class="text-sm sm:text-base text-slate-500 font-medium">Hệ thống <strong>quán</strong> với app check-in/check-out minh bạch.</p>
+                    <h3 class="text-lg sm:text-2xl md:text-3xl font-black mb-2 leading-snug">Tạo Task, Đổ CRM &amp; Chăm sóc</h3>
+                    <p class="text-sm sm:text-base text-slate-500 font-medium leading-relaxed">Chỉ cần 1 chạm, các đầu việc cần làm đã tự đẩy sang Google Task/Trello/CRM; lịch sử trao đổi cập nhật thẳng vào hồ sơ khách hàng trên HubSpot/Salesforce; email cảm ơn và lịch follow-up chăm sóc khách được kích hoạt đúng hẹn để không rơi rớt bất kỳ cơ hội nào.</p>
                 </div>
             </div>
             <div class="reveal">
@@ -2448,17 +2500,26 @@
         const previews = [
             `<div class="space-y-4 sm:space-y-6">
                 <div class="w-16 h-16 sm:w-24 sm:h-24 bg-[#1B2B7A] rounded-full mx-auto flex items-center justify-center mb-4 sm:mb-6 shadow-xl shadow-[#1B2B7A]/30">
+                    <svg class="w-8 h-8 sm:w-12 sm:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                </div>
+                <div class="inline-block bg-white/10 text-[#8ea5d9] text-xs font-extrabold uppercase tracking-widest px-3 py-1 rounded-full">Chặng 1 • Trước cuộc gặp</div>
+                <h4 class="text-lg sm:text-2xl font-bold text-white leading-snug">Check-in chỗ ngồi Cafe đối tác chuẩn tiếp khách</h4>
+                <p class="text-slate-400 text-xs sm:text-sm max-w-md mx-auto">Hơn 100+ chỗ ngồi yên tĩnh, đặt giữ chỗ trước và check-in/check-out minh bạch trên app.</p>
+            </div>`,
+            `<div class="space-y-4 sm:space-y-6">
+                <div class="w-16 h-16 sm:w-24 sm:h-24 bg-[#1B2B7A] rounded-full mx-auto flex items-center justify-center mb-4 sm:mb-6 shadow-xl shadow-[#1B2B7A]/30">
                     <svg class="w-8 h-8 sm:w-12 sm:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
                 </div>
-                <h4 class="text-lg sm:text-2xl font-bold text-white leading-snug">Transcript đầy đủ, chính xác đến từng từ</h4>
+                <div class="inline-block bg-white/10 text-[#8ea5d9] text-xs font-extrabold uppercase tracking-widest px-3 py-1 rounded-full">Chặng 2 • Trong cuộc gặp</div>
+                <h4 class="text-lg sm:text-2xl font-bold text-white leading-snug">Lọc nhiễu quán cafe, tách giọng nói &amp; xuất báo cáo tức thì</h4>
                 <div class="flex flex-col sm:flex-row justify-center gap-3 mt-5 sm:mt-8">
                     <button onclick="openAudioModal()" class="px-4 sm:px-6 py-2.5 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18.5a6.5 6.5 0 100-13 6.5 6.5 0 000 13zM12 11v3m0 0l-1.5-1.5M12 14l1.5-1.5"/></svg>
-                        1. File ghi âm
+                        1. Nghe file ghi âm mẫu
                     </button>
                     <button onclick="openPdfModal()" class="px-4 sm:px-6 py-2.5 bg-[#1B2B7A] hover:bg-[#131F5C] rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all shadow-lg">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        2. Kết quả
+                        2. Xem biên bản kết quả
                     </button>
                 </div>
             </div>`,
@@ -2466,20 +2527,18 @@
                 <div class="w-16 h-16 sm:w-24 sm:h-24 bg-[#1B2B7A] rounded-full mx-auto flex items-center justify-center mb-4 sm:mb-6 shadow-xl shadow-[#1B2B7A]/30">
                     <svg class="w-8 h-8 sm:w-12 sm:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                 </div>
-                <h4 class="text-lg sm:text-2xl font-bold text-white leading-snug">Biên bản tự động gửi đến hộp thư</h4>
-                <div class="bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-left mt-3 sm:mt-4">
-                    <div class="text-[#8ea5d9] font-black text-xs sm:text-sm mb-2">TO: sales@pophubly.com</div>
-                    <div class="text-white text-sm sm:text-base font-bold mb-2 leading-snug">[PopHubly] Tóm Tắt Buổi Làm Việc</div>
-                    <div class="h-px w-full bg-slate-700 mb-2"></div>
-                    <p class="text-slate-400 italic text-xs sm:text-sm">"Nội dung tổng hợp từ buổi làm việc..."</p>
+                <div class="inline-block bg-white/10 text-[#8ea5d9] text-xs font-extrabold uppercase tracking-widest px-3 py-1 rounded-full">Chặng 3 • Sau cuộc gặp</div>
+                <h4 class="text-lg sm:text-2xl font-bold text-white leading-snug">1 chạm giao Task, đổ CRM &amp; kích hoạt CSKH</h4>
+                <div class="bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-left mt-3 sm:mt-4 space-y-2">
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-emerald-400 font-bold">✓ Đã đẩy Task sang Google Task / Trello</span>
+                    </div>
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-emerald-400 font-bold">✓ Đã cập nhật hồ sơ HubSpot / Salesforce</span>
+                    </div>
+                    <div class="h-px w-full bg-slate-700 my-1"></div>
+                    <p class="text-slate-300 text-xs font-medium">Email cảm ơn &amp; lịch follow-up CSKH đã được lên lịch tự động.</p>
                 </div>
-            </div>`,
-            `<div class="space-y-4 sm:space-y-6">
-                <div class="w-16 h-16 sm:w-24 sm:h-24 bg-[#1B2B7A] rounded-full mx-auto flex items-center justify-center mb-4 sm:mb-6 shadow-xl shadow-[#1B2B7A]/30">
-                    <svg class="w-8 h-8 sm:w-12 sm:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
-                </div>
-                <h4 class="text-lg sm:text-2xl font-bold text-white leading-snug">Check-in/Check-out minh bạch</h4>
-                <p class="text-slate-400 text-xs sm:text-sm">Hơn 100 chỗ ngồi cafe đối tác</p>
             </div>`
         ];
         const display = document.getElementById('step-preview');

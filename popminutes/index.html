@@ -1843,4 +1843,424 @@
         });
     });
 
-    function showSucc
+    function showSuccessModal(title, message) {
+        document.getElementById('modalTitle').textContent = title;
+        document.getElementById('modalMessage').textContent = message;
+        openModal('successModal');
+    }
+
+    // ================= NAV =================
+    function scrollToForm() {
+        document.getElementById('ctaSection').scrollIntoView({ behavior: 'smooth' });
+    }
+    function scrollToDemo() {
+        document.getElementById('how').scrollIntoView({ behavior: 'smooth' });
+        const step1 = document.getElementById('step1');
+        if(step1) updateStep(0, step1);
+    }
+
+    // ================= SUBMIT FORM VỚI SPINNER =================
+        async function submitFormToGAS(formId, buttonId, sourceName, successMessage) {
+        const form = document.getElementById(formId);
+        const btn = document.getElementById(buttonId);
+        if (!form || !btn) {
+            console.warn(`⚠️ Form/Button not found: ${formId}/${buttonId}`);
+            return;
+        }
+
+        const originalHTML = btn.innerHTML;
+
+        form.addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            // Kiểm tra validation
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                console.log('❌ Validation failed');
+                return;
+            }
+
+            // Đổi trạng thái nút
+            btn.disabled = true;
+            btn.innerHTML = '<span class="btn-spinner"></span> Đang gửi...';
+
+            // Chuẩn bị data
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            data.source = sourceName;
+
+            if (formId === "pricingForm") {
+                data.note = `Công ty: ${data.company || ''}, Số lượng sales: ${data.scale || ''}`;
+            }
+
+            console.log('📤 [' + sourceName + '] Submitting:', data);
+
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 20000);
+
+                const response = await fetch(SCRIPT_URL, {
+                    method: "POST",
+                    body: JSON.stringify(data),
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    signal: controller.signal
+                });
+
+                clearTimeout(timeoutId);
+                console.log('📥 HTTP status:', response.status);
+
+                const text = await response.text();
+                console.log('📥 Response body:', text);
+
+                // Parse JSON an toàn
+                let result;
+                try {
+                    result = JSON.parse(text);
+                } catch (parseError) {
+                    console.error('❌ JSON parse failed:', parseError);
+                    throw new Error('Máy chủ trả về dữ liệu không hợp lệ. Vui lòng thử lại.');
+                }
+
+                console.log('📥 Parsed result:', result);
+
+                // Kiểm tra success theo nhiều format
+                const isSuccess = result.result === "success" 
+                               || result.status === "success"
+                               || result.status === 200
+                               || result.success === true;
+
+                if (isSuccess) {
+                    console.log('✅ Form submitted successfully');
+                    showSuccessModal("Thành công", successMessage);
+                    form.reset();
+                } else {
+                    console.warn('⚠️ Server returned error:', result);
+                    showSuccessModal("Lỗi", result.message || "Có lỗi xảy ra, vui lòng thử lại.");
+                }
+            } catch (error) {
+                console.error("❌ Submit error:", error);
+                if (error.name === 'AbortError') {
+                    showSuccessModal("Hết thời gian", "Máy chủ phản hồi chậm. Vui lòng thử lại sau.");
+                } else {
+                    showSuccessModal("Lỗi kết nối", "Không thể kết nối đến máy chủ. Vui lòng kiểm tra mạng.");
+                }
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalHTML;
+            }
+        });
+    }
+
+    submitFormToGAS("ctaForm", "ctaSubmitBtn", "CTA", "Cảm ơn bạn! Đội ngũ PopHubly sẽ liên hệ trong thời gian sớm nhất.");
+    submitFormToGAS("newsletterForm", "newsletterSubmitBtn", "NEWSLETTER", "Đăng ký nhận tin thành công!");
+    submitFormToGAS("pricingForm", "pricingSubmitBtn", "PRICING", "Đăng ký gói dịch vụ thành công! Chúng tôi sẽ liên hệ để xác nhận.");
+
+    // ================= STEP PREVIEW =================
+    function updateStep(index, el) {
+        document.querySelectorAll('.step-trigger').forEach(item => item.classList.remove('active'));
+        el.classList.add('active');
+        const previews = [
+            `<div class="space-y-4 sm:space-y-6">
+                <div class="w-16 h-16 sm:w-24 sm:h-24 bg-[#1B2B7A] rounded-full mx-auto flex items-center justify-center mb-4 sm:mb-6 shadow-xl shadow-[#1B2B7A]/30">
+                    <svg class="w-8 h-8 sm:w-12 sm:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
+                </div>
+                <h4 class="text-lg sm:text-2xl font-bold text-white leading-snug">Transcript đầy đủ, chính xác đến từng từ</h4>
+                <div class="flex flex-col sm:flex-row justify-center gap-3 mt-5 sm:mt-8">
+                    <button onclick="openAudioModal()" class="px-4 sm:px-6 py-2.5 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18.5a6.5 6.5 0 100-13 6.5 6.5 0 000 13zM12 11v3m0 0l-1.5-1.5M12 14l1.5-1.5"/></svg>
+                        1. File ghi âm
+                    </button>
+                    <button onclick="openPdfModal()" class="px-4 sm:px-6 py-2.5 bg-[#1B2B7A] hover:bg-[#131F5C] rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all shadow-lg">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        2. Kết quả
+                    </button>
+                </div>
+            </div>`,
+                        `<div class="space-y-4 sm:space-y-6">
+                <div class="w-16 h-16 sm:w-24 sm:h-24 bg-[#1B2B7A] rounded-full mx-auto flex items-center justify-center mb-4 sm:mb-6 shadow-xl shadow-[#1B2B7A]/30">
+                    <svg class="w-8 h-8 sm:w-12 sm:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </div>
+                <h4 class="text-lg sm:text-2xl font-bold text-white leading-snug">Biên bản tự động gửi đến hộp thư</h4>
+                <div class="bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-left mt-3 sm:mt-4">
+                    <div class="text-[#8ea5d9] font-black text-xs sm:text-sm mb-2">TO: sales@pophubly.com</div>
+                    <div class="text-white text-sm sm:text-base font-bold mb-2 leading-snug">[PopHubly] Tóm Tắt Buổi Làm Việc</div>
+                    <div class="h-px w-full bg-slate-700 mb-2"></div>
+                    <p class="text-slate-400 italic text-xs sm:text-sm">"Nội dung tổng hợp từ buổi làm việc..."</p>
+                </div>
+            </div>`,
+            `<div class="space-y-4 sm:space-y-6">
+                <div class="w-16 h-16 sm:w-24 sm:h-24 bg-[#1B2B7A] rounded-full mx-auto flex items-center justify-center mb-4 sm:mb-6 shadow-xl shadow-[#1B2B7A]/30">
+                    <svg class="w-8 h-8 sm:w-12 sm:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+                </div>
+                <h4 class="text-lg sm:text-2xl font-bold text-white leading-snug">Check-in/Check-out minh bạch</h4>
+                <p class="text-slate-400 text-xs sm:text-sm">Hơn 100 chỗ ngồi cafe đối tác</p>
+            </div>`
+        ];
+        const display = document.getElementById('step-preview');
+        display.style.opacity = '0'; display.style.transform = 'scale(0.96)';
+        setTimeout(() => {
+            display.innerHTML = previews[index];
+            display.style.opacity = '1'; display.style.transform = 'scale(1)';
+        }, 250);
+    }
+    window.addEventListener('load', () => {
+        const firstStep = document.getElementById('step1');
+        if(firstStep) updateStep(0, firstStep);
+    });
+
+    // ================= TOGGLE PLAN =================
+    const toggleCheckbox = document.getElementById('planToggle');
+    const priceSpan = document.getElementById('personalPrice');
+    const noteDiv = document.getElementById('personalNote');
+    const priceHint = document.getElementById('priceHint');
+    function updatePersonalPlan() {
+        if (toggleCheckbox.checked) {
+            priceSpan.innerText = '269k';
+            noteDiv.innerHTML = '14 ngày miễn phí.<br>Không cần thẻ tín dụng.';
+            priceHint.classList.remove('hidden');
+            priceHint.innerText = '(thanh toán 807k cho 3 tháng)';
+        } else {
+            priceSpan.innerText = '319k';
+            noteDiv.innerHTML = '14 ngày miễn phí.<br>Không cần thẻ tín dụng.';
+            priceHint.classList.add('hidden');
+        }
+    }
+    if (toggleCheckbox) {
+        toggleCheckbox.addEventListener('change', updatePersonalPlan);
+        updatePersonalPlan();
+    }
+
+    // ================= REVEAL =================
+    const revealElements = document.querySelectorAll('.reveal');
+    const observerOptions = { threshold: 0.05, rootMargin: '0px 0px 0px 0px' };
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    revealElements.forEach(el => revealObserver.observe(el));
+    document.querySelectorAll('.reveal.active').forEach(el => revealObserver.unobserve(el));
+        // ============================================================
+    // AFFILIATE: Track click khi user vào landing page với ?ref=
+    // ============================================================
+    (function() {
+        try {
+            const urlParams = new URLSearchParams(window.location.search);
+            const refFromUrl = urlParams.get('ref');
+            if (!refFromUrl) return;
+            
+            const CLOUD_RUN_URL = 'https://get-upload-url-test-824148866382.asia-southeast1.run.app';
+            
+            console.log('📊 [Affiliate] Tracking click for ref:', refFromUrl);
+            
+            fetch(CLOUD_RUN_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({
+                    action: 'affiliateTrack',
+                    partnerId: refFromUrl,
+                    channel: 'link',
+                    userAgent: navigator.userAgent,
+                    referrer: document.referrer || ''
+                }).toString()
+            })
+            .then(r => r.json())
+            .then(d => {
+                if (d.status === 200) {
+                    console.log('✅ [Affiliate] Click tracked:', d.referral_id);
+                    // Lưu referral_id để dùng khi submit form
+                    if (d.referral_id) {
+                        localStorage.setItem('popminutes_affiliate_referral_id', d.referral_id);
+                    }
+                } else {
+                    console.warn('⚠️ [Affiliate] Track failed:', d.message);
+                }
+            })
+            .catch(e => console.warn('❌ [Affiliate] Track error:', e));
+        } catch (e) {
+            console.error('❌ [Affiliate] Tracking setup error:', e);
+        }
+    })();
+</script>
+<noscript>
+<style>
+    .reveal { opacity: 1 !important; transform: none !important; }
+</style>
+</noscript>
+<script>
+    // Fallback: nếu sau 3s mà observer không chạy, tự hiện hết
+    setTimeout(function() {
+        document.querySelectorAll('.reveal:not(.active)').forEach(function(el) {
+            var rect = el.getBoundingClientRect();
+            // Chỉ auto-active nếu element đã vào viewport
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                el.classList.add('active');
+            }
+        });
+    }, 3000);
+</script>
+    <script>
+    // ============================================================
+    // FIX CHROME BUG: Native select bị cắt trong scroll container
+    // Khi user focus vào select, tạm thời bỏ overflow của overlay
+    // để dropdown hiển thị đầy đủ. Sau khi chọn xong, khôi phục.
+    // ============================================================
+    (function() {
+        const overlays = document.querySelectorAll('.modal-overlay');
+
+        overlays.forEach(function(overlay) {
+            // Khi user focus vào SELECT trong overlay này
+            overlay.addEventListener('focusin', function(e) {
+                if (e.target.tagName === 'SELECT') {
+                    // Lưu lại giá trị overflow cũ để khôi phục
+                    overlay.dataset.prevOverflow = overlay.style.overflowY || '';
+                    
+                    // Tạm thời cho phép tràn
+                    overlay.style.overflowY = 'visible';
+                    overlay.style.overflow = 'visible';
+
+                    // Fix thêm cho modal-box (nếu có set overflow)
+                    const box = e.target.closest('.modal-box');
+                    if (box) {
+                        box.dataset.prevOverflow = box.style.overflowY || '';
+                        box.style.overflowY = 'visible';
+                        box.style.overflow = 'visible';
+                    }
+                }
+            });
+
+            // Khi user rời khỏi SELECT (chọn xong hoặc click ra ngoài)
+            overlay.addEventListener('focusout', function(e) {
+                if (e.target.tagName === 'SELECT') {
+                    // Delay nhỏ để dropdown kịp đóng hoàn toàn
+                    setTimeout(function() {
+                        overlay.style.overflowY = overlay.dataset.prevOverflow || '';
+                        overlay.style.overflow = '';
+
+                        const box = e.target.closest('.modal-box');
+                        if (box) {
+                            box.style.overflowY = box.dataset.prevOverflow || '';
+                            box.style.overflow = '';
+                        }
+                    }, 150);
+                }
+            });
+
+            // Khi user chọn xong 1 option, auto blur để dropdown đóng
+            overlay.addEventListener('change', function(e) {
+                if (e.target.tagName === 'SELECT') {
+                    e.target.blur();
+                }
+            });
+        });
+    })();
+</script>
+<script>
+    // ============================================================
+    // CUSTOM DROPDOWN cho pricingPackage
+    // ============================================================
+    (function() {
+        const trigger = document.getElementById('pricingPackageTrigger');
+        const optionsBox = document.getElementById('pricingPackageOptions');
+        const label = document.getElementById('pricingPackageLabel');
+        const hiddenInput = document.getElementById('pricingPackage');
+        const wrapper = document.getElementById('pricingPackageSelect');
+
+        if (!trigger || !optionsBox || !hiddenInput) return;
+
+        // Mở/đóng dropdown
+        trigger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const isOpen = optionsBox.classList.contains('open');
+            if (isOpen) {
+                closeDropdown();
+            } else {
+                openDropdown();
+            }
+        });
+
+        function openDropdown() {
+            optionsBox.classList.add('open');
+            trigger.classList.add('open');
+        }
+
+        function closeDropdown() {
+            optionsBox.classList.remove('open');
+            trigger.classList.remove('open');
+        }
+
+        // Chọn 1 option
+        optionsBox.querySelectorAll('.custom-select-option').forEach(function(opt) {
+            opt.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const value = this.dataset.value;
+
+                // Cập nhật hidden input
+                hiddenInput.value = value;
+                hiddenInput.dispatchEvent(new Event('change', { bubbles: true }));
+
+                // Cập nhật label
+                label.textContent = value;
+                trigger.classList.remove('placeholder');
+
+                // Đánh dấu selected
+                optionsBox.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+
+                closeDropdown();
+            });
+        });
+
+        // Click ra ngoài đóng
+        document.addEventListener('click', function(e) {
+            if (!wrapper.contains(e.target)) {
+                closeDropdown();
+            }
+        });
+
+        // Escape để đóng
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeDropdown();
+        });
+
+        // ===== Override hàm openPricingModal cũ để set label =====
+        const originalOpen = window.openPricingModal;
+        window.openPricingModal = function(packageName) {
+            // Gọi hàm cũ (mở modal)
+            if (typeof originalOpen === 'function') {
+                originalOpen(packageName);
+            }
+
+            // Update custom dropdown UI
+            if (packageName) {
+                hiddenInput.value = packageName;
+                label.textContent = packageName;
+                trigger.classList.remove('placeholder');
+                optionsBox.querySelectorAll('.custom-select-option').forEach(o => {
+                    o.classList.toggle('selected', o.dataset.value === packageName);
+                });
+            } else {
+                hiddenInput.value = '';
+                label.textContent = 'Chọn gói mong muốn';
+                trigger.classList.add('placeholder');
+                optionsBox.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
+            }
+        };
+
+        // ===== Reset khi form được reset =====
+        const pricingForm = document.getElementById('pricingForm');
+        if (pricingForm) {
+            pricingForm.addEventListener('reset', function() {
+                hiddenInput.value = '';
+                label.textContent = 'Chọn gói mong muốn';
+                trigger.classList.add('placeholder');
+                optionsBox.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
+            });
+        }
+    })();
+</script>
+</body>
+</html>

@@ -1433,10 +1433,10 @@
     <div class="wide-container grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center relative z-10">
         <div class="reveal active">
             <h1 class="title-bold text-3xl sm:text-4xl md:text-5xl lg:text-[3.3rem] xl:text-[3.7rem] mb-6 sm:mb-8 leading-[1.24]">
-                Đi gặp khách, chỉ cần duy nhất 01 quy trình trên <span class="text-gradient brand-logo-font">PopMinutes.</span>
+                Rời văn phòng gặp khách, chỉ cần mang theo một quy trình trên <span class="text-gradient brand-logo-font">PopMinutes.</span>
             </h1>
             <p class="text-base sm:text-lg text-slate-500 mb-7 sm:mb-9 max-w-xl font-medium leading-relaxed">
-                Đóng gói <strong class="text-slate-800">6 bước</strong> từ đặt bàn tiếp khách, tóm tắt cuộc trò chuyện, báo cáo cuộc họp, tạo Task, cho tới cập nhật dữ liệu về CRM và theo dõi CSKH — giúp Sales làm việc tinh gọn.
+                Gom trọn <strong class="text-slate-800">6 khâu</strong> từ đặt bàn tiếp khách, ghi âm tóm tắt cuộc trò chuyện, báo cáo cuộc họp, cho tới giao Task, đổ dữ liệu về CRM và theo dõi CSKH — giúp Sales làm việc tinh gọn.
             </p>
             <div class="flex flex-row items-center gap-2 sm:gap-4 mt-6 sm:mt-8">
                 <button onclick="scrollToForm()" class="btn-main">
@@ -1821,15 +1821,11 @@
                 </div>
                 <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-5">Sales độc lập</p>
 
-                <div class="mb-2 flex items-baseline gap-1.5">
+                <div id="personalPriceWrap" class="mb-6 flex items-baseline gap-1.5">
                     <span id="personalPrice" class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">319k</span>
                     <span class="text-xs text-slate-500 font-semibold">/ tháng</span>
                 </div>
-                <div id="priceHint" class="text-xs font-medium text-emerald-600 mb-3 hidden">(thanh toán 807k cho 3 tháng)</div>
-
-                <div id="personalNote" class="bg-[#F0F3FF] text-[#1B2B7A] text-xs font-semibold px-3.5 py-2.5 rounded-xl mb-6 leading-relaxed">
-                    90 ngày miễn phí · Không cần thẻ tín dụng
-                </div>
+                <div id="priceHint" class="text-xs font-medium text-emerald-600 mb-6 hidden">(thanh toán 807k cho 3 tháng)</div>
 
                 <div class="border-t border-slate-100 pt-5 mb-8 grow">
                     <ul class="space-y-3.5 text-slate-600 font-medium text-sm">
@@ -2077,7 +2073,7 @@
                     Sẵn sàng để<span class="block mt-2 sm:mt-3 text-gradient">tăng trưởng 3.7x doanh số?</span>
                 </h2>
                 <p class="text-base sm:text-lg text-slate-500 font-medium leading-relaxed">
-                    Để lại thông tin của bạn. <strong>PopMinutes</strong> sẽ gửi email kích hoạt tài khoản ngay lập tức.
+                    Để lại thông tin của bạn. Đội ngũ <strong>PopHubly</strong> sẽ liên hệ để setup bản Demo miễn phí và tặng bạn voucher trải nghiệm PopMinutes AI đầu tiên.
                 </p>
                 <div class="mt-7 pt-6 border-t border-slate-100 flex items-center gap-3">
                     <span class="w-6 h-6 rounded-full bg-[#F0F3FF] text-[#1B2B7A] flex items-center justify-center flex-shrink-0">
@@ -2103,7 +2099,7 @@
             <a href="https://pophubly.com/term-of-use/" target="_blank" class="consent-link">Điều khoản sử dụng</a>.
         </label>
     </div>
-    <button type="submit" id="ctaSubmitBtn" class="btn-main w-full py-4 sm:py-5 text-base sm:text-lg mt-2">DÙNG THỬ 90 NGÀY</button>
+    <button type="submit" id="ctaSubmitBtn" class="btn-main w-full py-4 sm:py-5 text-base sm:text-lg mt-2">DÙNG THỬ 14 NGÀY</button>
 </form>
         </div>
     </div>
@@ -2532,7 +2528,7 @@
         });
     }
 
-    submitFormToGAS("ctaForm", "ctaSubmitBtn", "CTA", "Cảm ơn bạn! Vui lòng kiểm tra email (inbox/spam) để kích hoạt tài khoản.");
+    submitFormToGAS("ctaForm", "ctaSubmitBtn", "CTA", "Cảm ơn bạn! Đội ngũ PopHubly sẽ liên hệ trong thời gian sớm nhất.");
     submitFormToGAS("newsletterForm", "newsletterSubmitBtn", "NEWSLETTER", "Đăng ký nhận tin thành công!");
     submitFormToGAS("pricingForm", "pricingSubmitBtn", "PRICING", "Đăng ký gói dịch vụ thành công! Chúng tôi sẽ liên hệ để xác nhận.");
 
@@ -2628,18 +2624,24 @@
 
     // ================= TOGGLE PLAN =================
     const toggleCheckbox = document.getElementById('planToggle');
+    const priceWrap = document.getElementById('personalPriceWrap');
     const priceSpan = document.getElementById('personalPrice');
-    const noteDiv = document.getElementById('personalNote');
     const priceHint = document.getElementById('priceHint');
     function updatePersonalPlan() {
         if (toggleCheckbox.checked) {
             priceSpan.innerText = '269k';
-            noteDiv.innerHTML = '90 ngày miễn phí · Không cần thẻ tín dụng';
+            if (priceWrap) {
+                priceWrap.classList.remove('mb-6');
+                priceWrap.classList.add('mb-1.5');
+            }
             priceHint.classList.remove('hidden');
             priceHint.innerText = '(thanh toán 807k cho 3 tháng)';
         } else {
             priceSpan.innerText = '319k';
-            noteDiv.innerHTML = '90 ngày miễn phí · Không cần thẻ tín dụng';
+            if (priceWrap) {
+                priceWrap.classList.remove('mb-1.5');
+                priceWrap.classList.add('mb-6');
+            }
             priceHint.classList.add('hidden');
         }
     }
@@ -2647,6 +2649,68 @@
         toggleCheckbox.addEventListener('change', updatePersonalPlan);
         updatePersonalPlan();
     }
+
+    // ================= HERO VIDEO AUTOPLAY =================
+    (function() {
+        const heroVideo = document.getElementById('heroDemoVideo');
+        if (!heroVideo) return;
+        heroVideo.muted = true;
+        const tryPlay = () => {
+            const playPromise = heroVideo.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {});
+            }
+        };
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', tryPlay);
+        } else {
+            tryPlay();
+        }
+        heroVideo.addEventListener('loadeddata', tryPlay);
+        heroVideo.addEventListener('canplay', tryPlay);
+    })();
+
+    // ================= ANIMATED METRIC COUNTERS =================
+    (function() {
+        const counters = document.querySelectorAll('.counter-number');
+        if (!counters.length) return;
+
+        function animateCounter(el) {
+            if (el.dataset.animated === 'true') return;
+            el.dataset.animated = 'true';
+
+            const target = parseInt(el.dataset.target || '0', 10);
+            const prefix = el.dataset.prefix || '';
+            const suffix = el.dataset.suffix || '';
+            const duration = 1600;
+            const startTime = performance.now();
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const currentVal = Math.round(eased * target);
+                el.textContent = prefix + currentVal + suffix;
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    el.textContent = prefix + target + suffix;
+                }
+            }
+            requestAnimationFrame(update);
+        }
+
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        counters.forEach(c => counterObserver.observe(c));
+    })();
 
     // ================= REVEAL =================
     const revealElements = document.querySelectorAll('.reveal');
@@ -2662,60 +2726,7 @@
     revealElements.forEach(el => revealObserver.observe(el));
     document.querySelectorAll('.reveal.active').forEach(el => revealObserver.unobserve(el));
 
-    // ================= ANIMATED COUNTER METRICS =================
-    (function() {
-        const counters = document.querySelectorAll('.counter-number');
-        if (!counters.length) return;
-
-        function animateCounter(el) {
-            if (el.dataset.counted === 'true') return;
-            el.dataset.counted = 'true';
-
-            const target = parseInt(el.dataset.target || '0', 10);
-            const prefix = el.dataset.prefix || '';
-            const suffix = el.dataset.suffix || '';
-            const duration = 1800;
-            const startTime = performance.now();
-
-            function step(now) {
-                const elapsed = now - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                const eased = 1 - Math.pow(1 - progress, 3);
-                const current = Math.round(eased * target);
-                el.textContent = prefix + current + suffix;
-
-                if (progress < 1) {
-                    requestAnimationFrame(step);
-                } else {
-                    el.textContent = prefix + target + suffix;
-                }
-            }
-
-            requestAnimationFrame(step);
-        }
-
-        const counterObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounter(entry.target);
-                    counterObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.25 });
-
-        counters.forEach(counter => counterObserver.observe(counter));
-
-        setTimeout(() => {
-            counters.forEach(counter => {
-                const rect = counter.getBoundingClientRect();
-                if (rect.top < window.innerHeight && rect.bottom > 0) {
-                    animateCounter(counter);
-                }
-            });
-        }, 2500);
-    })();
-
-        // ============================================================
+    // ============================================================
     // AFFILIATE: Track click khi user vào landing page với ?ref=
     // ============================================================
     (function() {
@@ -2743,7 +2754,6 @@
             .then(d => {
                 if (d.status === 200) {
                     console.log('✅ [Affiliate] Click tracked:', d.referral_id);
-                    // Lưu referral_id để dùng khi submit form
                     if (d.referral_id) {
                         localStorage.setItem('popminutes_affiliate_referral_id', d.referral_id);
                     }
@@ -2767,34 +2777,26 @@
     setTimeout(function() {
         document.querySelectorAll('.reveal:not(.active)').forEach(function(el) {
             var rect = el.getBoundingClientRect();
-            // Chỉ auto-active nếu element đã vào viewport
             if (rect.top < window.innerHeight && rect.bottom > 0) {
                 el.classList.add('active');
             }
         });
     }, 3000);
 </script>
-    <script>
+<script>
     // ============================================================
     // FIX CHROME BUG: Native select bị cắt trong scroll container
-    // Khi user focus vào select, tạm thời bỏ overflow của overlay
-    // để dropdown hiển thị đầy đủ. Sau khi chọn xong, khôi phục.
     // ============================================================
     (function() {
         const overlays = document.querySelectorAll('.modal-overlay');
 
         overlays.forEach(function(overlay) {
-            // Khi user focus vào SELECT trong overlay này
             overlay.addEventListener('focusin', function(e) {
                 if (e.target.tagName === 'SELECT') {
-                    // Lưu lại giá trị overflow cũ để khôi phục
                     overlay.dataset.prevOverflow = overlay.style.overflowY || '';
-                    
-                    // Tạm thời cho phép tràn
                     overlay.style.overflowY = 'visible';
                     overlay.style.overflow = 'visible';
 
-                    // Fix thêm cho modal-box (nếu có set overflow)
                     const box = e.target.closest('.modal-box');
                     if (box) {
                         box.dataset.prevOverflow = box.style.overflowY || '';
@@ -2804,10 +2806,8 @@
                 }
             });
 
-            // Khi user rời khỏi SELECT (chọn xong hoặc click ra ngoài)
             overlay.addEventListener('focusout', function(e) {
                 if (e.target.tagName === 'SELECT') {
-                    // Delay nhỏ để dropdown kịp đóng hoàn toàn
                     setTimeout(function() {
                         overlay.style.overflowY = overlay.dataset.prevOverflow || '';
                         overlay.style.overflow = '';
@@ -2821,7 +2821,6 @@
                 }
             });
 
-            // Khi user chọn xong 1 option, auto blur để dropdown đóng
             overlay.addEventListener('change', function(e) {
                 if (e.target.tagName === 'SELECT') {
                     e.target.blur();
@@ -2843,7 +2842,6 @@
 
         if (!trigger || !optionsBox || !hiddenInput) return;
 
-        // Mở/đóng dropdown
         trigger.addEventListener('click', function(e) {
             e.stopPropagation();
             const isOpen = optionsBox.classList.contains('open');
@@ -2864,21 +2862,17 @@
             trigger.classList.remove('open');
         }
 
-        // Chọn 1 option
         optionsBox.querySelectorAll('.custom-select-option').forEach(function(opt) {
             opt.addEventListener('click', function(e) {
                 e.stopPropagation();
                 const value = this.dataset.value;
 
-                // Cập nhật hidden input
                 hiddenInput.value = value;
                 hiddenInput.dispatchEvent(new Event('change', { bubbles: true }));
 
-                // Cập nhật label
                 label.textContent = value;
                 trigger.classList.remove('placeholder');
 
-                // Đánh dấu selected
                 optionsBox.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
                 this.classList.add('selected');
 
@@ -2886,27 +2880,22 @@
             });
         });
 
-        // Click ra ngoài đóng
         document.addEventListener('click', function(e) {
             if (!wrapper.contains(e.target)) {
                 closeDropdown();
             }
         });
 
-        // Escape để đóng
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') closeDropdown();
         });
 
-        // ===== Override hàm openPricingModal cũ để set label =====
         const originalOpen = window.openPricingModal;
         window.openPricingModal = function(packageName) {
-            // Gọi hàm cũ (mở modal)
             if (typeof originalOpen === 'function') {
                 originalOpen(packageName);
             }
 
-            // Update custom dropdown UI
             if (packageName) {
                 hiddenInput.value = packageName;
                 label.textContent = packageName;
@@ -2922,7 +2911,6 @@
             }
         };
 
-        // ===== Reset khi form được reset =====
         const pricingForm = document.getElementById('pricingForm');
         if (pricingForm) {
             pricingForm.addEventListener('reset', function() {

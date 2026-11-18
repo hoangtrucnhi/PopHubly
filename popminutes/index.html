@@ -1433,10 +1433,10 @@
     <div class="wide-container grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center relative z-10">
         <div class="reveal active">
             <h1 class="title-bold text-3xl sm:text-4xl md:text-5xl lg:text-[3.3rem] xl:text-[3.7rem] mb-6 sm:mb-8 leading-[1.24]">
-                Rời văn phòng gặp khách, chỉ cần mang theo một quy trình trên <span class="text-gradient brand-logo-font">PopMinutes.</span>
+                Đi gặp khách, chỉ cần duy nhất 01 quy trình trên <span class="text-gradient brand-logo-font">PopMinutes.</span>
             </h1>
             <p class="text-base sm:text-lg text-slate-500 mb-7 sm:mb-9 max-w-xl font-medium leading-relaxed">
-                Gom trọn <strong class="text-slate-800">6 khâu</strong> từ đặt bàn tiếp khách, ghi âm tóm tắt cuộc trò chuyện, báo cáo cuộc họp, cho tới giao Task, đổ dữ liệu về CRM và theo dõi CSKH — giúp Sales làm việc tinh gọn.
+                Đóng gói <strong class="text-slate-800">6 bước</strong> từ đặt bàn, tóm tắt cuộc trò chuyện, báo cáo cuộc họp, tạo task, cho tới đồng bộ dữ liệu về CRM và theo dõi CSKH — giúp Sales làm việc tinh gọn.
             </p>
             <div class="flex flex-row items-center gap-2 sm:gap-4 mt-6 sm:mt-8">
                 <button onclick="scrollToForm()" class="btn-main">
@@ -2073,7 +2073,7 @@
                     Sẵn sàng để<span class="block mt-2 sm:mt-3 text-gradient">tăng trưởng 3.7x doanh số?</span>
                 </h2>
                 <p class="text-base sm:text-lg text-slate-500 font-medium leading-relaxed">
-                    Để lại thông tin của bạn. Đội ngũ <strong>PopHubly</strong> sẽ liên hệ để setup bản Demo miễn phí và tặng bạn voucher trải nghiệm PopMinutes AI đầu tiên.
+                    Để lại thông tin của bạn. <strong>PopMinutes</strong> sẽ gửi email kích hoạt ngay lập tức.
                 </p>
                 <div class="mt-7 pt-6 border-t border-slate-100 flex items-center gap-3">
                     <span class="w-6 h-6 rounded-full bg-[#F0F3FF] text-[#1B2B7A] flex items-center justify-center flex-shrink-0">
@@ -2099,7 +2099,7 @@
             <a href="https://pophubly.com/term-of-use/" target="_blank" class="consent-link">Điều khoản sử dụng</a>.
         </label>
     </div>
-    <button type="submit" id="ctaSubmitBtn" class="btn-main w-full py-4 sm:py-5 text-base sm:text-lg mt-2">DÙNG THỬ 14 NGÀY</button>
+    <button type="submit" id="ctaSubmitBtn" class="btn-main w-full py-4 sm:py-5 text-base sm:text-lg mt-2">DÙNG THỬ 90 NGÀY</button>
 </form>
         </div>
     </div>
@@ -2196,7 +2196,7 @@
 </footer>
 
 <!-- Success Modal -->
-<div id="successModal" class="modal-overlay hidden">
+<div id="successModal" class="modal-overlay hidden" style="z-index: 10050;">
     <div class="modal-box" style="max-width: 400px; text-align: center;">
         <button onclick="closeSuccessModal()" class="modal-close" style="position:absolute; top:16px; right:16px;" aria-label="Đóng">
             <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
@@ -2508,8 +2508,15 @@
 
                 if (isSuccess) {
                     console.log('✅ Form submitted successfully');
-                    showSuccessModal("Thành công", successMessage);
+                    const refInput = form.querySelector('input[name="ref"]');
+                    const savedRef = refInput ? refInput.value : '';
                     form.reset();
+                    if (refInput) refInput.value = savedRef;
+
+                    if (formId === "pricingForm") {
+                        closePricingModal();
+                    }
+                    showSuccessModal("Thành công", successMessage);
                 } else {
                     console.warn('⚠️ Server returned error:', result);
                     showSuccessModal("Lỗi", result.message || "Có lỗi xảy ra, vui lòng thử lại.");
@@ -2528,14 +2535,15 @@
         });
     }
 
-    submitFormToGAS("ctaForm", "ctaSubmitBtn", "CTA", "Cảm ơn bạn! Vui lòng kiểm tra email (inbox/spam) để kích hoạt.");
+    submitFormToGAS("ctaForm", "ctaSubmitBtn", "CTA", "Cảm ơn bạn! Vui lòng kiểm tra inbox/spam để kích hoạt.");
     submitFormToGAS("newsletterForm", "newsletterSubmitBtn", "NEWSLETTER", "Đăng ký nhận tin thành công!");
     submitFormToGAS("pricingForm", "pricingSubmitBtn", "PRICING", "Đăng ký gói dịch vụ thành công! Chúng tôi sẽ liên hệ để xác nhận.");
 
-    // ================= STEP PREVIEW =================
+    // ================= STEP PREVIEW (HÀNH TRÌNH 3 CHẶNG) =================
     function updateStep(index, el) {
         document.querySelectorAll('.step-trigger').forEach(item => item.classList.remove('active'));
-        el.classList.add('active');
+        if (el) el.classList.add('active');
+
         const previews = [
             `<div class="flex flex-col justify-between h-full space-y-6">
                 <div class="flex items-center justify-between border-b border-slate-100 pb-5">
@@ -2544,11 +2552,9 @@
                         <h4 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Đặt giữ chỗ</h4>
                     </div>
                 </div>
-
                 <p class="text-slate-600 text-base sm:text-lg leading-relaxed font-medium">
                     Đặt trước bàn tiếp khách tại hơn <strong class="text-slate-900">100+ quán cafe đối tác</strong> được tuyển chọn kỹ lưỡng, đảm bảo không gian yên tĩnh, chuyên nghiệp để gặp khách mà không lo ồn hay hết chỗ.
                 </p>
-
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                     <div class="bg-[#F8FAFC] border border-slate-200/80 rounded-2xl p-4 sm:p-5">
                         <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Không gian</div>
@@ -2563,86 +2569,76 @@
             `<div class="flex flex-col justify-between h-full space-y-6">
                 <div class="flex items-center justify-between border-b border-slate-100 pb-5">
                     <div>
-                        <span class="text-xs font-extrabold uppercase tracking-widest text-[#1B2B7A] block">Bước 02 &amp; 03 • AI Meeting</span>
-                        <h4 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Tập trung 100% vào khách hàng</h4>
+                        <span class="text-xs font-extrabold uppercase tracking-widest text-[#1B2B7A] block">Bước 02 • AI Meeting Intelligence</span>
+                        <h4 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Ghi âm, Tóm tắt &amp; Báo cáo</h4>
                     </div>
                 </div>
-
                 <p class="text-slate-600 text-base sm:text-lg leading-relaxed font-medium">
-                    AI tự động lọc tạp âm quán cafe, phân tách giọng nói và trích xuất đầy đủ <strong class="text-slate-900">cam kết, báo giá, đầu việc</strong> thành biên bản cuộc họp chuẩn xác ngay khi kết thúc.
+                    Sales chỉ việc tập trung 100% vào câu chuyện với khách. AI tự phân tách giọng nói, lọc nhiễu quán cafe, xuất ngay bản tóm tắt các cam kết, báo giá quan trọng và hoàn thiện báo cáo cuộc họp.
                 </p>
-
-                <div class="flex flex-col sm:flex-row gap-3.5 pt-2">
-                    <button onclick="openAudioModal()" class="flex-1 px-5 py-3.5 bg-[#F8FAFC] hover:bg-[#F0F3FF] border border-slate-200 hover:border-[#1B2B7A]/30 rounded-xl text-sm font-bold text-slate-800 flex items-center justify-center gap-2.5 transition-all cursor-pointer">
-                        <svg class="w-5 h-5 text-[#1B2B7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        Nghe file ghi âm mẫu
+                <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                    <button type="button" onclick="openAudioModal()" class="px-5 py-3 bg-[#F8FAFC] hover:bg-[#F0F3FF] border border-slate-200 hover:border-[#1B2B7A] rounded-xl text-sm font-bold text-slate-800 hover:text-[#1B2B7A] flex items-center justify-center gap-2.5 transition-all cursor-pointer">
+                        <svg class="w-4 h-4 text-[#1B2B7A]" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg>
+                        1. Nghe thử ghi âm
                     </button>
-                    <button onclick="openPdfModal()" class="flex-1 px-5 py-3.5 bg-[#1B2B7A] hover:bg-[#131F5C] text-white rounded-xl text-sm font-extrabold flex items-center justify-center gap-2.5 transition-all shadow-lg shadow-[#1B2B7A]/20 cursor-pointer">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                        Xem biên bản kết quả
+                    <button type="button" onclick="openPdfModal()" class="px-5 py-3 bg-[#1B2B7A] hover:bg-[#131F5C] text-white rounded-xl text-sm font-bold flex items-center justify-center gap-2.5 transition-all shadow-md cursor-pointer">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        2. Xem biên bản mẫu
                     </button>
                 </div>
             </div>`,
             `<div class="flex flex-col justify-between h-full space-y-6">
                 <div class="flex items-center justify-between border-b border-slate-100 pb-5">
                     <div>
-                        <span class="text-xs font-extrabold uppercase tracking-widest text-[#1B2B7A] block">Bước 04, 05 &amp; 06 • Automation</span>
-                        <h4 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Luồng dữ liệu khép kín sau họp</h4>
+                        <span class="text-xs font-extrabold uppercase tracking-widest text-[#1B2B7A] block">Bước 03 • Post-Meeting Automation</span>
+                        <h4 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Tạo Task, Đồng bộ CRM &amp; CSKH</h4>
                     </div>
                 </div>
-
-                <div class="space-y-3">
-                    <div class="bg-[#F8FAFC] border border-slate-200/80 rounded-2xl p-4 flex items-center gap-3.5">
-                        <span class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm flex-shrink-0">✓</span>
-                        <span class="text-sm sm:text-base font-semibold text-slate-800">Tự động giao việc &amp; đẩy lịch sang hệ thống quản lý Task</span>
+                <p class="text-slate-600 text-base sm:text-lg leading-relaxed font-medium">
+                    Chỉ cần 1 chạm, các đầu việc cần làm đã tự đẩy sang hệ thống quản lý công việc; dữ liệu trao đổi <strong class="text-slate-900">đồng bộ CRM</strong> tức thì; email cảm ơn và lịch follow-up chăm sóc khách được kích hoạt đúng hẹn để không rơi rớt bất kỳ cơ hội nào.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                    <div class="bg-[#F8FAFC] border border-slate-200/80 rounded-2xl p-4 sm:p-5">
+                        <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Dữ liệu &amp; Công việc</div>
+                        <div class="text-base font-bold text-slate-900">Giao Task &amp; Đồng bộ CRM</div>
                     </div>
-                    <div class="bg-[#F8FAFC] border border-slate-200/80 rounded-2xl p-4 flex items-center gap-3.5">
-                        <span class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm flex-shrink-0">✓</span>
-                        <span class="text-sm sm:text-base font-semibold text-slate-800">Đồng bộ CRM tức thì, lưu trữ trọn vẹn lịch sử trao đổi</span>
-                    </div>
-                    <div class="bg-[#F8FAFC] border border-slate-200/80 rounded-2xl p-4 flex items-center gap-3.5">
-                        <span class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm flex-shrink-0">✓</span>
-                        <span class="text-sm sm:text-base font-semibold text-slate-800">Gửi biên bản &amp; kích hoạt lịch chăm sóc khách hàng đúng hẹn</span>
+                    <div class="bg-[#F8FAFC] border border-slate-200/80 rounded-2xl p-4 sm:p-5">
+                        <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Chăm sóc khách hàng</div>
+                        <div class="text-base font-bold text-slate-900">Email &amp; Follow-up tự động</div>
                     </div>
                 </div>
             </div>`
         ];
-        const display = document.getElementById('step-preview');
-        display.style.opacity = '0'; display.style.transform = 'translateY(6px)';
-        setTimeout(() => {
-            display.innerHTML = previews[index];
-            display.style.opacity = '1'; display.style.transform = 'translateY(0)';
-        }, 160);
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-        const firstStep = document.getElementById('step1');
-        if (firstStep) {
-            document.querySelectorAll('.step-trigger').forEach(item => item.classList.remove('active'));
-            firstStep.classList.add('active');
-        }
-    });
 
-    // ================= TOGGLE PLAN =================
+        const display = document.getElementById('step-preview');
+        if (!display) return;
+        display.style.opacity = '0';
+        display.style.transform = 'scale(0.98)';
+        setTimeout(() => {
+            display.innerHTML = previews[index] || previews[0];
+            display.style.opacity = '1';
+            display.style.transform = 'scale(1)';
+        }, 200);
+    }
+
+    // ================= TOGGLE PLAN (TRẢI NGHIỆM 1 THÁNG / 3 THÁNG) =================
     const toggleCheckbox = document.getElementById('planToggle');
-    const priceWrap = document.getElementById('personalPriceWrap');
     const priceSpan = document.getElementById('personalPrice');
     const priceHint = document.getElementById('priceHint');
+
     function updatePersonalPlan() {
+        if (!toggleCheckbox || !priceSpan) return;
         if (toggleCheckbox.checked) {
             priceSpan.innerText = '269k';
-            if (priceWrap) {
-                priceWrap.classList.remove('mb-6');
-                priceWrap.classList.add('mb-1.5');
+            if (priceHint) {
+                priceHint.classList.remove('hidden');
+                priceHint.innerText = '(thanh toán 807k cho 3 tháng)';
             }
-            priceHint.classList.remove('hidden');
-            priceHint.innerText = '(thanh toán 807k cho 3 tháng)';
         } else {
             priceSpan.innerText = '319k';
-            if (priceWrap) {
-                priceWrap.classList.remove('mb-1.5');
-                priceWrap.classList.add('mb-6');
+            if (priceHint) {
+                priceHint.classList.add('hidden');
             }
-            priceHint.classList.add('hidden');
         }
     }
     if (toggleCheckbox) {
@@ -2650,27 +2646,7 @@
         updatePersonalPlan();
     }
 
-    // ================= HERO VIDEO AUTOPLAY =================
-    (function() {
-        const heroVideo = document.getElementById('heroDemoVideo');
-        if (!heroVideo) return;
-        heroVideo.muted = true;
-        const tryPlay = () => {
-            const playPromise = heroVideo.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(() => {});
-            }
-        };
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', tryPlay);
-        } else {
-            tryPlay();
-        }
-        heroVideo.addEventListener('loadeddata', tryPlay);
-        heroVideo.addEventListener('canplay', tryPlay);
-    })();
-
-    // ================= ANIMATED METRIC COUNTERS =================
+    // ================= ANIMATED METRICS COUNTER =================
     (function() {
         const counters = document.querySelectorAll('.counter-number');
         if (!counters.length) return;
@@ -2685,34 +2661,60 @@
             const duration = 1600;
             const startTime = performance.now();
 
-            function update(currentTime) {
-                const elapsed = currentTime - startTime;
+            function tick(now) {
+                const elapsed = now - startTime;
                 const progress = Math.min(elapsed / duration, 1);
-                const eased = 1 - Math.pow(1 - progress, 3);
-                const currentVal = Math.round(eased * target);
-                el.textContent = prefix + currentVal + suffix;
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                const current = Math.round(target * easeOut);
+                el.textContent = prefix + current + suffix;
                 if (progress < 1) {
-                    requestAnimationFrame(update);
+                    requestAnimationFrame(tick);
                 } else {
                     el.textContent = prefix + target + suffix;
                 }
             }
-            requestAnimationFrame(update);
+            requestAnimationFrame(tick);
         }
 
-        const counterObserver = new IntersectionObserver((entries) => {
+        const metricsObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    animateCounter(entry.target);
-                    counterObserver.unobserve(entry.target);
+                    counters.forEach(animateCounter);
+                    metricsObserver.disconnect();
                 }
             });
         }, { threshold: 0.2 });
 
-        counters.forEach(c => counterObserver.observe(c));
+        const metricsGrid = document.getElementById('metricsGrid');
+        if (metricsGrid) {
+            metricsObserver.observe(metricsGrid);
+        } else {
+            counters.forEach(animateCounter);
+        }
     })();
 
-    // ================= REVEAL =================
+    // ================= HERO VIDEO AUTOPLAY GUARD =================
+    (function() {
+        const heroVideo = document.getElementById('heroDemoVideo');
+        if (!heroVideo) return;
+
+        function ensurePlay() {
+            heroVideo.muted = true;
+            const playPromise = heroVideo.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {});
+            }
+        }
+
+        heroVideo.addEventListener('loadeddata', ensurePlay);
+        heroVideo.addEventListener('canplay', ensurePlay);
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) ensurePlay();
+        });
+        window.addEventListener('load', ensurePlay);
+    })();
+
+    // ================= REVEAL ON SCROLL =================
     const revealElements = document.querySelectorAll('.reveal');
     const observerOptions = { threshold: 0.05, rootMargin: '0px 0px 0px 0px' };
     const revealObserver = new IntersectionObserver((entries) => {
@@ -2726,19 +2728,26 @@
     revealElements.forEach(el => revealObserver.observe(el));
     document.querySelectorAll('.reveal.active').forEach(el => revealObserver.unobserve(el));
 
-    // ============================================================
-    // AFFILIATE: Track click khi user vào landing page với ?ref=
-    // ============================================================
+    // Fallback: tự kích hoạt reveal nếu element đã vào viewport
+    setTimeout(function() {
+        document.querySelectorAll('.reveal:not(.active)').forEach(function(el) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                el.classList.add('active');
+            }
+        });
+    }, 2500);
+
+    // ================= AFFILIATE CLICK TRACKING =================
     (function() {
         try {
             const urlParams = new URLSearchParams(window.location.search);
             const refFromUrl = urlParams.get('ref');
             if (!refFromUrl) return;
-            
+
             const CLOUD_RUN_URL = 'https://get-upload-url-test-824148866382.asia-southeast1.run.app';
-            
             console.log('📊 [Affiliate] Tracking click for ref:', refFromUrl);
-            
+
             fetch(CLOUD_RUN_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -2766,73 +2775,8 @@
             console.error('❌ [Affiliate] Tracking setup error:', e);
         }
     })();
-</script>
-<noscript>
-<style>
-    .reveal { opacity: 1 !important; transform: none !important; }
-</style>
-</noscript>
-<script>
-    // Fallback: nếu sau 3s mà observer không chạy, tự hiện hết
-    setTimeout(function() {
-        document.querySelectorAll('.reveal:not(.active)').forEach(function(el) {
-            var rect = el.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-                el.classList.add('active');
-            }
-        });
-    }, 3000);
-</script>
-<script>
-    // ============================================================
-    // FIX CHROME BUG: Native select bị cắt trong scroll container
-    // ============================================================
-    (function() {
-        const overlays = document.querySelectorAll('.modal-overlay');
 
-        overlays.forEach(function(overlay) {
-            overlay.addEventListener('focusin', function(e) {
-                if (e.target.tagName === 'SELECT') {
-                    overlay.dataset.prevOverflow = overlay.style.overflowY || '';
-                    overlay.style.overflowY = 'visible';
-                    overlay.style.overflow = 'visible';
-
-                    const box = e.target.closest('.modal-box');
-                    if (box) {
-                        box.dataset.prevOverflow = box.style.overflowY || '';
-                        box.style.overflowY = 'visible';
-                        box.style.overflow = 'visible';
-                    }
-                }
-            });
-
-            overlay.addEventListener('focusout', function(e) {
-                if (e.target.tagName === 'SELECT') {
-                    setTimeout(function() {
-                        overlay.style.overflowY = overlay.dataset.prevOverflow || '';
-                        overlay.style.overflow = '';
-
-                        const box = e.target.closest('.modal-box');
-                        if (box) {
-                            box.style.overflowY = box.dataset.prevOverflow || '';
-                            box.style.overflow = '';
-                        }
-                    }, 150);
-                }
-            });
-
-            overlay.addEventListener('change', function(e) {
-                if (e.target.tagName === 'SELECT') {
-                    e.target.blur();
-                }
-            });
-        });
-    })();
-</script>
-<script>
-    // ============================================================
-    // CUSTOM DROPDOWN cho pricingPackage
-    // ============================================================
+    // ================= CUSTOM DROPDOWN CHO PRICING PACKAGE =================
     (function() {
         const trigger = document.getElementById('pricingPackageTrigger');
         const optionsBox = document.getElementById('pricingPackageOptions');
@@ -2840,17 +2784,7 @@
         const hiddenInput = document.getElementById('pricingPackage');
         const wrapper = document.getElementById('pricingPackageSelect');
 
-        if (!trigger || !optionsBox || !hiddenInput) return;
-
-        trigger.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const isOpen = optionsBox.classList.contains('open');
-            if (isOpen) {
-                closeDropdown();
-            } else {
-                openDropdown();
-            }
-        });
+        if (!trigger || !optionsBox || !hiddenInput || !wrapper) return;
 
         function openDropdown() {
             optionsBox.classList.add('open');
@@ -2861,6 +2795,15 @@
             optionsBox.classList.remove('open');
             trigger.classList.remove('open');
         }
+
+        trigger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (optionsBox.classList.contains('open')) {
+                closeDropdown();
+            } else {
+                openDropdown();
+            }
+        });
 
         optionsBox.querySelectorAll('.custom-select-option').forEach(function(opt) {
             opt.addEventListener('click', function(e) {
@@ -2922,5 +2865,10 @@
         }
     })();
 </script>
+<noscript>
+<style>
+    .reveal { opacity: 1 !important; transform: none !important; }
+</style>
+</noscript>
 </body>
 </html>

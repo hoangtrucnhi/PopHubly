@@ -2,14 +2,14 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="color-scheme" content="light only">
     <title>PopMinutes — Sales Meeting Intelligence</title>
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png">
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -25,7 +25,8 @@
                         surface: '#F8FAFC',
                     },
                     fontFamily: {
-                        sans: ['"Be Vietnam Pro"', 'system-ui', 'sans-serif'],
+                        sans: ['"Be Vietnam Pro"', '"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+                        brand: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
                     },
                 }
             }
@@ -54,9 +55,11 @@
             --shadow-lg: 0 20px 48px rgba(27, 43, 122, 0.16);
         }
         * { box-sizing: border-box; }
-                html {
+        html {
             scroll-behavior: smooth;
-            overflow-x: clip;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
             scroll-padding-top: 80px;
         }
         @media (max-width: 640px) {
@@ -66,30 +69,36 @@
         }
 
         body {
-            font-family: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
+            font-family: 'Be Vietnam Pro', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
             background-color: #fff !important;
             color: var(--text) !important;
-            overflow-x: clip;
+            overflow-x: hidden;
             min-height: 100vh;
             width: 100%;
+            max-width: 100%;
+            position: relative;
             margin: 0;
             padding: 0;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            padding-top: 62px;
+            padding-top: 70px;
         }
         @media (max-width: 640px) {
             body {
-                padding-top: 118px;
+                padding-top: 122px;
             }
         }
 
         ::selection { background: var(--navy); color: #fff; }
 
+        .brand-logo-font {
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+        }
+
         .title-bold {
-            font-weight: 900;
-            letter-spacing: -0.045em;
-            line-height: 1.15;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.3;
         }
         h1, h2, h3, h4 {
             text-wrap: balance;
@@ -122,20 +131,20 @@
             opacity: 0.45;
             transition: all 0.45s cubic-bezier(0.16, 0.67, 0.29, 0.99);
             border-left: 3px solid transparent;
-            padding: 0.75rem 1.25rem 0.75rem 1.75rem;
+            padding: 1.1rem 1.25rem 1.1rem 1.5rem;
             cursor: pointer;
-            border-radius: 0 8px 8px 0;
+            border-radius: 0 16px 16px 0;
         }
         @media (min-width: 640px) {
-            .step-trigger { padding: 1rem 1.75rem 1rem 2.5rem; }
+            .step-trigger { padding: 1.35rem 1.75rem 1.35rem 2rem; }
         }
         .step-trigger.active {
             opacity: 1;
             border-left-color: var(--navy);
             background: linear-gradient(90deg, rgba(27,43,122,0.06) 0%, transparent 100%);
-            transform: translateX(8px);
+            transform: translateX(6px);
         }
-        .step-trigger:hover { opacity: 0.75; }
+        .step-trigger:hover { opacity: 0.8; }
 
         .btn-main {
             background: var(--navy);
@@ -194,7 +203,7 @@
             .btn-main svg, .btn-outline svg { width: 14px !important; height: 14px !important; }
         }
 
-        .wide-container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+        .wide-container { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
         @media (min-width: 768px) {
             .wide-container { padding: 0 40px; }
         }
@@ -254,10 +263,10 @@
         select.input-elegant:required:invalid { color: #94a3b8; }
 
         #step-preview { transition: opacity 0.35s ease, transform 0.35s ease; }
-        .label-sm { font-size: 0.8rem; letter-spacing: 0.18em; }
-        .label-md { font-size: 0.75rem; letter-spacing: 0.18em; }
+        .label-sm { font-size: 0.85rem; letter-spacing: 0.14em; }
+        .label-md { font-size: 0.8rem; letter-spacing: 0.14em; }
         @media (min-width: 640px) {
-            .label-md { font-size: 0.85rem; letter-spacing: 0.2em; }
+            .label-md { font-size: 0.875rem; letter-spacing: 0.16em; }
         }
         .nav-links a {
             font-weight: 600;
@@ -307,26 +316,26 @@
            MODAL — LUÔN CĂN GIỮA, AN TOÀN MỌI VIEWPORT
            ============================================ */
         .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
-    background: rgba(15, 23, 42, 0.65);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    display: none;
-    align-items: flex-start;
-    justify-content: center;
-    z-index: 9999;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: 16px;
-    box-sizing: border-box;
-}
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            max-width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            z-index: 9999;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            padding: 16px;
+            box-sizing: border-box;
+        }
         .modal-overlay:not(.hidden) {
             display: flex;
         }
@@ -337,30 +346,31 @@
             to   { transform: scale(1); opacity: 1; }
         }
 
-.modal-box {
-    position: relative;
-    background: var(--surface);
-    border-radius: var(--radius-lg);
-    width: 100%;
-    max-width: 500px;
-    min-width: 0;
-    margin: auto;
-    padding: 24px;
-    box-sizing: border-box;
-    box-shadow: var(--shadow-lg);
-    animation: scaleIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
-    word-break: break-word;
-    overflow-wrap: anywhere;
-}
-.modal-box.modal-lg { max-width: 640px; }
-.modal-box img, .modal-box svg, .modal-box iframe, .modal-box video { max-width: 100%; height: auto; box-sizing: border-box; }
-.modal-box * { max-width: 100%; }
+        .modal-box {
+            position: relative;
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 500px;
+            min-width: 0;
+            margin: auto 0;
+            padding: 24px;
+            box-sizing: border-box;
+            box-shadow: var(--shadow-lg);
+            animation: scaleIn 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+            word-break: break-word;
+            overflow-wrap: anywhere;
+        }
+        .modal-box.modal-lg { max-width: 640px; }
+        .modal-box img, .modal-box svg, .modal-box iframe, .modal-box video { max-width: 100%; height: auto; box-sizing: border-box; }
+        .modal-box * { max-width: 100%; }
 
         @media (max-width: 640px) {
-            .modal-overlay { padding: 12px; }
+            .modal-overlay { padding: 14px; }
             .modal-box {
                 border-radius: var(--radius-lg);
-                padding: 20px;
+                padding: 18px;
+                width: 100%;
                 max-width: 100%;
             }
             .modal-box.modal-lg { max-width: 100%; }
@@ -729,21 +739,22 @@
         .nav-logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             text-decoration: none;
             flex-shrink: 0;
         }
         .nav-logo img {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
             display: block;
         }
         .nav-logo-text {
-            font-weight: 900;
-            font-size: 1rem;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+            font-weight: 800;
+            font-size: 1.25rem;
             color: #0F172A;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.025em;
             text-transform: none !important;
             white-space: nowrap;
             line-height: 1;
@@ -753,22 +764,22 @@
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 2.25rem;
             flex: 1;
             justify-content: center;
         }
         .nav-links a {
             font-weight: 600;
-            font-size: 1rem;
-            letter-spacing: 0.05em;
+            font-size: 0.85rem;
+            letter-spacing: 0.06em;
             text-transform: uppercase;
-            color: var(--text);
+            color: #334155;
             text-decoration: none;
             transition: color 0.2s;
             white-space: nowrap;
             line-height: 1;
         }
-                .nav-links a:hover { color: var(--navy); }
+        .nav-links a:hover { color: var(--navy); }
 
         /* Download button */
         .nav-download-btn {
@@ -807,16 +818,16 @@
 
         /* Body padding để không bị nav che */
         body {
-            padding-top: 62px;
+            padding-top: 70px;
         }
         @media (max-width: 640px) {
-            body { padding-top: 118px; }
+            body { padding-top: 122px; }
         }
 
                 /* ===== MOBILE: logo + download cùng hàng, menu xuống dưới ===== */
                 @media (max-width: 640px) {
             .nav-mini {
-                padding: 10px 14px;
+                padding: 12px 24px;
             }
             .nav-inner {
                 display: flex !important;
@@ -830,16 +841,16 @@
             .nav-logo {
                 order: 1;
                 flex: 0 0 auto;
-                max-width: 60%;
+                max-width: 65%;
                 overflow: hidden;
             }
             .nav-logo img { 
-                width: 30px; 
-                height: 30px; 
+                width: 34px; 
+                height: 34px; 
                 flex-shrink: 0;
             }
             .nav-logo-text { 
-                font-size: 0.9rem;
+                font-size: 1.05rem;
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
@@ -847,16 +858,14 @@
                 order: 2;
                 flex: 0 0 auto;
                 margin-left: auto;
-                padding: 7px 12px;
-                font-size: 0.72rem;
-                gap: 4px;
+                padding: 8px 16px;
+                font-size: 0.78rem;
             }
-            .nav-download-btn i { font-size: 0.72rem; }
             .nav-links {
                 order: 3;
                 flex: 0 0 100% !important;
                 justify-content: center !important;
-                gap: 1rem;
+                gap: 1.25rem;
                 margin-top: 4px;
                 padding-top: 8px;
                 border-top: 1px solid #edf0f5;
@@ -923,8 +932,9 @@
             flex-shrink: 0;
         }
         .footer-logo-bottom span {
-            font-weight: 900;
-            font-size: 1.5rem;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+            font-weight: 800;
+            font-size: 1.55rem;
             color: #334155;
             letter-spacing: -0.03em;
             line-height: 1;
@@ -1061,6 +1071,88 @@
             font-size: 0.75rem;
             letter-spacing: 0;
             white-space: nowrap;
+            color: #475569;
+        }
+        .pricing-header .slider {
+            width: 42px;
+            height: 22px;
+        }
+        .pricing-header .slider:before {
+            height: 18px;
+            width: 18px;
+        }
+        .pricing-header input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+        @media (max-width: 1280px) and (min-width: 1025px) {
+            .pricing-header h4 {
+                font-size: 0.72rem !important;
+            }
+            .pricing-header .toggle-label {
+                font-size: 0.7rem;
+            }
+        }
+        @media (max-width: 640px) {
+            .pricing-header h4 {
+                font-size: 0.85rem !important;
+            }
+        }
+@media (max-width: 380px) {
+    .pricing-header {
+        gap: 4px;
+    }
+    .toggle-label { font-size: 0.7rem; }
+}
+        /* ===== PRICING BUTTONS — B2B Business Unified ===== */
+        .btn-price {
+            width: 100%;
+            padding: 13px 20px;
+            border-radius: 12px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1.5px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+        .btn-price:hover {
+            transform: translateY(-2px);
+        }
+        .btn-price:active {
+            transform: translateY(0) scale(0.99);
+        }
+
+        /* Variant: Primary Navy (Đội nhóm & Dùng thử) */
+        .btn-price.btn-price-primary {
+            background: var(--navy);
+            color: #fff;
+            border-color: var(--navy);
+            box-shadow: 0 6px 20px rgba(27, 43, 122, 0.22);
+        }
+        .btn-price.btn-price-primary:hover {
+            background: var(--navy-deep);
+            border-color: var(--navy-deep);
+            box-shadow: 0 12px 28px rgba(27, 43, 122, 0.32);
+        }
+
+        /* Variant: Secondary Subtle Navy (Dùng thử / Doanh nghiệp / Cao cấp) */
+        .btn-price.btn-price-secondary {
+            background: #F8FAFC;
+            color: var(--navy);
+            border-color: #CBD5E1;
+        }
+        .btn-price.btn-price-secondary:hover {
+            background: var(--navy-pale);
+            border-color: var(--navy);
+            color: var(--navy-deep);
+            box-shadow: 0 8px 20px rgba(27, 43, 122, 0.08);
         }
         .pricing-header .slider {
             width: 42px;
@@ -1314,8 +1406,10 @@
 </head>
 <body class="antialiased">
 
-<div class="glow-orb w-[400px] h-[400px] bg-[#1B2B7A] top-[-100px] left-[-100px]" style="opacity:0.10;"></div>
-<div class="glow-orb w-[300px] h-[300px] bg-[#7c8ec9] bottom-[-50px] right-[-80px]" style="opacity:0.08;"></div>
+<div class="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
+    <div class="glow-orb w-[400px] h-[400px] bg-[#1B2B7A] top-[-100px] left-[-100px]" style="opacity:0.10;"></div>
+    <div class="glow-orb w-[300px] h-[300px] bg-[#7c8ec9] bottom-[-50px] right-[-80px]" style="opacity:0.08;"></div>
+</div>
 
 <nav class="nav-mini">
     <div class="nav-inner">
@@ -1329,7 +1423,6 @@
             <a href="#pricing">Bảng giá</a>
         </div>
         <a href="https://hoangtrucnhi.github.io/PopMinutes-Update/" target="_blank" rel="noopener" class="nav-download-btn">
-            <i class="fa-solid fa-download"></i>
             <span>Tải app</span>
         </a>
     </div>
@@ -1339,22 +1432,19 @@
 <section class="pt-10 pb-20 sm:pt-12 sm:pb-36 section-white bg-noise relative overflow-hidden">
     <div class="wide-container grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center relative z-10">
         <div class="reveal active">
-            <div class="inline-flex items-center gap-2 bg-[#F0F3FF] px-4 py-2 rounded-full text-[0.7rem] sm:text-xs font-bold uppercase tracking-widest text-[#1B2B7A] mb-6 sm:mb-8">
-                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span> Đã có mặt 100+ chỗ ngồi Cafe
-            </div>
-            <h1 class="title-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl mb-6 sm:mb-10">
-                Chốt Sales tại quán,<br><span class="text-gradient">Biên bản để AI lo.</span>
+            <h1 class="title-bold text-3xl sm:text-4xl md:text-5xl lg:text-[3.3rem] xl:text-[3.7rem] mb-6 sm:mb-8 leading-[1.24]">
+                Rời văn phòng gặp khách, chỉ cần mang theo một quy trình trên <span class="text-gradient brand-logo-font">PopMinutes.</span>
             </h1>
-            <p class="text-base sm:text-lg text-slate-500 mb-8 sm:mb-10 max-w-lg font-medium leading-relaxed">
-                Giải pháp toàn diện cho <strong class="text-slate-800">Team Sales</strong>: Đặt chỗ gặp khách tại mạng lưới Cafe chọn lọc & Tự động ghi chép, gửi email báo cáo cho sếp/khách hàng ngay sau khi đứng dậy.
+            <p class="text-base sm:text-lg text-slate-500 mb-7 sm:mb-9 max-w-xl font-medium leading-relaxed">
+                Gom trọn <strong class="text-slate-800">6 khâu</strong> từ đặt bàn tiếp khách, ghi âm tóm tắt cuộc trò chuyện, báo cáo cuộc họp, cho tới giao Task, đổ dữ liệu về CRM và theo dõi CSKH — giúp Sales làm việc tinh gọn.
             </p>
             <div class="flex flex-row items-center gap-2 sm:gap-4 mt-6 sm:mt-8">
                 <button onclick="scrollToForm()" class="btn-main">
                     DÙNG THỬ
-                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                 </button>
-                <button onclick="scrollToDemo()" class="btn-outline group">
-                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-[#1B2B7A]" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <button onclick="scrollToDemo()" class="btn-outline">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-[#1B2B7A]" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg>
                     XEM DEMO
                 </button>
             </div>
@@ -1380,39 +1470,39 @@
 </section>
 
 <!-- Luxury Borderless Metrics & Frameless Integration Marquee -->
-<section class="py-12 sm:py-16 section-white border-t border-slate-100 relative overflow-hidden">
+<section class="py-10 sm:py-16 section-white border-t border-slate-100 relative overflow-hidden">
     <div class="wide-container">
-        <!-- 1. Minimalist Editorial Animated Metrics -->
-        <div id="metricsGrid" class="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-slate-200/80 pb-12 sm:pb-16">
+        <!-- 1. Minimalist Editorial Animated Metrics (Always 3 columns horizontal) -->
+        <div id="metricsGrid" class="grid grid-cols-3 divide-x divide-slate-200/80 pb-10 sm:pb-16">
             <!-- Metric 1: 250+ Người dùng -->
-            <div class="reveal reveal-delay-1 py-6 sm:py-2 sm:px-8 text-center">
-                <div class="text-3xl sm:text-5xl font-black text-[#1B2B7A] tracking-tight tabular-nums">
+            <div class="reveal reveal-delay-1 py-2 px-1.5 sm:px-8 text-center">
+                <div class="text-xl sm:text-4xl lg:text-5xl font-black text-[#1B2B7A] tracking-tight tabular-nums leading-none">
                     <span class="counter-number" data-target="250" data-prefix="" data-suffix="+">0+</span>
                 </div>
-                <p class="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-slate-500 mt-2.5">Người dùng</p>
+                <p class="text-[0.65rem] sm:text-sm font-bold uppercase tracking-[0.08em] sm:tracking-[0.2em] text-slate-500 mt-1.5 sm:mt-2.5 leading-snug">Người dùng</p>
             </div>
 
             <!-- Metric 2: 35+ Doanh nghiệp -->
-            <div class="reveal reveal-delay-2 py-6 sm:py-2 sm:px-8 text-center">
-                <div class="text-3xl sm:text-5xl font-black text-[#1B2B7A] tracking-tight tabular-nums">
+            <div class="reveal reveal-delay-2 py-2 px-1.5 sm:px-8 text-center">
+                <div class="text-xl sm:text-4xl lg:text-5xl font-black text-[#1B2B7A] tracking-tight tabular-nums leading-none">
                     <span class="counter-number" data-target="35" data-prefix="" data-suffix="+">0+</span>
                 </div>
-                <p class="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-slate-500 mt-2.5">Doanh nghiệp</p>
+                <p class="text-[0.65rem] sm:text-sm font-bold uppercase tracking-[0.08em] sm:tracking-[0.2em] text-slate-500 mt-1.5 sm:mt-2.5 leading-snug">Doanh nghiệp</p>
             </div>
 
-            <!-- Metric 3: +100 Chỗ ngồi tiếp khách -->
-            <div class="reveal reveal-delay-3 py-6 sm:py-2 sm:px-8 text-center">
-                <div class="text-3xl sm:text-5xl font-black text-[#1B2B7A] tracking-tight tabular-nums">
-                    <span class="counter-number" data-target="100" data-prefix="+" data-suffix="">+0</span>
+            <!-- Metric 3: 5000+ Giờ ngồi -->
+            <div class="reveal reveal-delay-3 py-2 px-1.5 sm:px-8 text-center">
+                <div class="text-xl sm:text-4xl lg:text-5xl font-black text-[#1B2B7A] tracking-tight tabular-nums leading-none">
+                    <span class="counter-number" data-target="5000" data-prefix="" data-suffix="+">0+</span>
                 </div>
-                <p class="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-slate-500 mt-2.5">Chỗ ngồi tiếp khách</p>
+                <p class="text-[0.65rem] sm:text-sm font-bold uppercase tracking-[0.08em] sm:tracking-[0.2em] text-slate-500 mt-1.5 sm:mt-2.5 leading-snug">Giờ ngồi</p>
             </div>
         </div>
 
         <!-- 2. Frameless Infinite Scrolling Logo Marquee -->
         <div class="reveal pt-6 sm:pt-8 border-t border-slate-100">
-            <p class="text-center text-[0.7rem] sm:text-xs font-extrabold uppercase tracking-[0.24em] text-slate-400 mb-6 sm:mb-8">
-                Đồng bộ liền mạch với công cụ làm việc của bạn
+            <p class="text-center text-xs sm:text-sm font-bold text-slate-500 max-w-2xl mx-auto mb-6 sm:mb-8 leading-relaxed">
+                Nói chuyện ở quán cafe — Dữ liệu tự động chảy thẳng về hệ thống làm việc của công ty
             </p>
             <div class="marquee-wrapper" role="region" aria-label="Các nền tảng tích hợp">
                 <div class="marquee-track">
@@ -1442,41 +1532,6 @@
                             <span>Google Task</span>
                         </div>
 
-                        <!-- Google Meeting -->
-                        <div class="integration-item">
-                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
-                                <path d="M4 7.5C4 6.11929 5.11929 5 6.5 5H13.5C14.8807 5 16 6.11929 16 7.5V16.5C16 17.8807 14.8807 19 13.5 19H6.5C5.11929 19 4 17.8807 4 16.5V7.5Z" fill="#00832D"/>
-                                <path d="M4 7.5C4 6.11929 5.11929 5 6.5 5H10V12H4V7.5Z" fill="#0066DA"/>
-                                <path d="M4 12H10V19H6.5C5.11929 19 4 17.8807 4 16.5V12Z" fill="#EA4335"/>
-                                <path d="M10 5H13.5C14.8807 5 16 6.11929 16 7.5V12H10V5Z" fill="#FFBA00"/>
-                                <path d="M16 9.5L20.2 6.7C20.65 6.4 21.25 6.72 21.25 7.26V16.74C21.25 17.28 20.65 17.6 20.2 17.3L16 14.5V9.5Z" fill="#00AC47"/>
-                            </svg>
-                            <span>Google Meeting</span>
-                        </div>
-
-                        <!-- Teams -->
-                        <div class="integration-item">
-                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
-                                <circle cx="17.5" cy="7.5" r="2.2" fill="#7B83EB"/>
-                                <path d="M15 11H19.5C20.6 11 21.5 11.9 21.5 13V16.5C21.5 17.9 20.4 19 19 19H15V11Z" fill="#7B83EB"/>
-                                <circle cx="12.5" cy="6.5" r="2.7" fill="#5059C9"/>
-                                <path d="M8 10.5H16C17.1 10.5 18 11.4 18 12.5V17.5C18 19.2 16.6 20.5 15 20.5H11C9.3 20.5 8 19.2 8 17.5V10.5Z" fill="#5059C9"/>
-                                <rect x="2.5" y="7.5" width="9" height="9" rx="2" fill="#4B53BC"/>
-                                <path d="M5.2 10.2H8.8M7 10.2V14.2" stroke="#FFFFFF" stroke-width="1.7" stroke-linecap="round"/>
-                            </svg>
-                            <span>Teams</span>
-                        </div>
-
-                        <!-- Zoom -->
-                        <div class="integration-item">
-                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
-                                <rect x="2.5" y="4.5" width="19" height="15" rx="4.5" fill="#2D8CFF"/>
-                                <rect x="5.5" y="8.8" width="8.5" height="6.4" rx="1.6" fill="#FFFFFF"/>
-                                <path d="M14.8 10.6L18.2 8.7C18.55 8.5 19 8.75 19 9.15V14.85C19 15.25 18.55 15.5 18.2 15.3L14.8 13.4V10.6Z" fill="#FFFFFF"/>
-                            </svg>
-                            <span>Zoom</span>
-                        </div>
-
                         <!-- Trello -->
                         <div class="integration-item">
                             <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
@@ -1507,6 +1562,41 @@
                                 <text x="12" y="12.2" text-anchor="middle" fill="#FFFFFF" font-size="4.6" font-weight="800" font-style="italic" font-family="sans-serif">salesforce</text>
                             </svg>
                             <span>Salesforce</span>
+                        </div>
+
+                        <!-- Google Meet -->
+                        <div class="integration-item">
+                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                                <path d="M4 7.5C4 6.11929 5.11929 5 6.5 5H13.5C14.8807 5 16 6.11929 16 7.5V16.5C16 17.8807 14.8807 19 13.5 19H6.5C5.11929 19 4 17.8807 4 16.5V7.5Z" fill="#00832D"/>
+                                <path d="M4 7.5C4 6.11929 5.11929 5 6.5 5H10V12H4V7.5Z" fill="#0066DA"/>
+                                <path d="M4 12H10V19H6.5C5.11929 19 4 17.8807 4 16.5V12Z" fill="#EA4335"/>
+                                <path d="M10 5H13.5C14.8807 5 16 6.11929 16 7.5V12H10V5Z" fill="#FFBA00"/>
+                                <path d="M16 9.5L20.2 6.7C20.65 6.4 21.25 6.72 21.25 7.26V16.74C21.25 17.28 20.65 17.6 20.2 17.3L16 14.5V9.5Z" fill="#00AC47"/>
+                            </svg>
+                            <span>Google Meet</span>
+                        </div>
+
+                        <!-- Teams -->
+                        <div class="integration-item">
+                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                                <circle cx="17.5" cy="7.5" r="2.2" fill="#7B83EB"/>
+                                <path d="M15 11H19.5C20.6 11 21.5 11.9 21.5 13V16.5C21.5 17.9 20.4 19 19 19H15V11Z" fill="#7B83EB"/>
+                                <circle cx="12.5" cy="6.5" r="2.7" fill="#5059C9"/>
+                                <path d="M8 10.5H16C17.1 10.5 18 11.4 18 12.5V17.5C18 19.2 16.6 20.5 15 20.5H11C9.3 20.5 8 19.2 8 17.5V10.5Z" fill="#5059C9"/>
+                                <rect x="2.5" y="7.5" width="9" height="9" rx="2" fill="#4B53BC"/>
+                                <path d="M5.2 10.2H8.8M7 10.2V14.2" stroke="#FFFFFF" stroke-width="1.7" stroke-linecap="round"/>
+                            </svg>
+                            <span>Teams</span>
+                        </div>
+
+                        <!-- Zoom -->
+                        <div class="integration-item">
+                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                                <rect x="2.5" y="4.5" width="19" height="15" rx="4.5" fill="#2D8CFF"/>
+                                <rect x="5.5" y="8.8" width="8.5" height="6.4" rx="1.6" fill="#FFFFFF"/>
+                                <path d="M14.8 10.6L18.2 8.7C18.55 8.5 19 8.75 19 9.15V14.85C19 15.25 18.55 15.5 18.2 15.3L14.8 13.4V10.6Z" fill="#FFFFFF"/>
+                            </svg>
+                            <span>Zoom</span>
                         </div>
                     </div>
 
@@ -1536,41 +1626,6 @@
                             <span>Google Task</span>
                         </div>
 
-                        <!-- Google Meeting -->
-                        <div class="integration-item">
-                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
-                                <path d="M4 7.5C4 6.11929 5.11929 5 6.5 5H13.5C14.8807 5 16 6.11929 16 7.5V16.5C16 17.8807 14.8807 19 13.5 19H6.5C5.11929 19 4 17.8807 4 16.5V7.5Z" fill="#00832D"/>
-                                <path d="M4 7.5C4 6.11929 5.11929 5 6.5 5H10V12H4V7.5Z" fill="#0066DA"/>
-                                <path d="M4 12H10V19H6.5C5.11929 19 4 17.8807 4 16.5V12Z" fill="#EA4335"/>
-                                <path d="M10 5H13.5C14.8807 5 16 6.11929 16 7.5V12H10V5Z" fill="#FFBA00"/>
-                                <path d="M16 9.5L20.2 6.7C20.65 6.4 21.25 6.72 21.25 7.26V16.74C21.25 17.28 20.65 17.6 20.2 17.3L16 14.5V9.5Z" fill="#00AC47"/>
-                            </svg>
-                            <span>Google Meeting</span>
-                        </div>
-
-                        <!-- Teams -->
-                        <div class="integration-item">
-                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
-                                <circle cx="17.5" cy="7.5" r="2.2" fill="#7B83EB"/>
-                                <path d="M15 11H19.5C20.6 11 21.5 11.9 21.5 13V16.5C21.5 17.9 20.4 19 19 19H15V11Z" fill="#7B83EB"/>
-                                <circle cx="12.5" cy="6.5" r="2.7" fill="#5059C9"/>
-                                <path d="M8 10.5H16C17.1 10.5 18 11.4 18 12.5V17.5C18 19.2 16.6 20.5 15 20.5H11C9.3 20.5 8 19.2 8 17.5V10.5Z" fill="#5059C9"/>
-                                <rect x="2.5" y="7.5" width="9" height="9" rx="2" fill="#4B53BC"/>
-                                <path d="M5.2 10.2H8.8M7 10.2V14.2" stroke="#FFFFFF" stroke-width="1.7" stroke-linecap="round"/>
-                            </svg>
-                            <span>Teams</span>
-                        </div>
-
-                        <!-- Zoom -->
-                        <div class="integration-item">
-                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
-                                <rect x="2.5" y="4.5" width="19" height="15" rx="4.5" fill="#2D8CFF"/>
-                                <rect x="5.5" y="8.8" width="8.5" height="6.4" rx="1.6" fill="#FFFFFF"/>
-                                <path d="M14.8 10.6L18.2 8.7C18.55 8.5 19 8.75 19 9.15V14.85C19 15.25 18.55 15.5 18.2 15.3L14.8 13.4V10.6Z" fill="#FFFFFF"/>
-                            </svg>
-                            <span>Zoom</span>
-                        </div>
-
                         <!-- Trello -->
                         <div class="integration-item">
                             <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
@@ -1602,6 +1657,41 @@
                             </svg>
                             <span>Salesforce</span>
                         </div>
+
+                        <!-- Google Meet -->
+                        <div class="integration-item">
+                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                                <path d="M4 7.5C4 6.11929 5.11929 5 6.5 5H13.5C14.8807 5 16 6.11929 16 7.5V16.5C16 17.8807 14.8807 19 13.5 19H6.5C5.11929 19 4 17.8807 4 16.5V7.5Z" fill="#00832D"/>
+                                <path d="M4 7.5C4 6.11929 5.11929 5 6.5 5H10V12H4V7.5Z" fill="#0066DA"/>
+                                <path d="M4 12H10V19H6.5C5.11929 19 4 17.8807 4 16.5V12Z" fill="#EA4335"/>
+                                <path d="M10 5H13.5C14.8807 5 16 6.11929 16 7.5V12H10V5Z" fill="#FFBA00"/>
+                                <path d="M16 9.5L20.2 6.7C20.65 6.4 21.25 6.72 21.25 7.26V16.74C21.25 17.28 20.65 17.6 20.2 17.3L16 14.5V9.5Z" fill="#00AC47"/>
+                            </svg>
+                            <span>Google Meet</span>
+                        </div>
+
+                        <!-- Teams -->
+                        <div class="integration-item">
+                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                                <circle cx="17.5" cy="7.5" r="2.2" fill="#7B83EB"/>
+                                <path d="M15 11H19.5C20.6 11 21.5 11.9 21.5 13V16.5C21.5 17.9 20.4 19 19 19H15V11Z" fill="#7B83EB"/>
+                                <circle cx="12.5" cy="6.5" r="2.7" fill="#5059C9"/>
+                                <path d="M8 10.5H16C17.1 10.5 18 11.4 18 12.5V17.5C18 19.2 16.6 20.5 15 20.5H11C9.3 20.5 8 19.2 8 17.5V10.5Z" fill="#5059C9"/>
+                                <rect x="2.5" y="7.5" width="9" height="9" rx="2" fill="#4B53BC"/>
+                                <path d="M5.2 10.2H8.8M7 10.2V14.2" stroke="#FFFFFF" stroke-width="1.7" stroke-linecap="round"/>
+                            </svg>
+                            <span>Teams</span>
+                        </div>
+
+                        <!-- Zoom -->
+                        <div class="integration-item">
+                            <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 24 24" fill="none">
+                                <rect x="2.5" y="4.5" width="19" height="15" rx="4.5" fill="#2D8CFF"/>
+                                <rect x="5.5" y="8.8" width="8.5" height="6.4" rx="1.6" fill="#FFFFFF"/>
+                                <path d="M14.8 10.6L18.2 8.7C18.55 8.5 19 8.75 19 9.15V14.85C19 15.25 18.55 15.5 18.2 15.3L14.8 13.4V10.6Z" fill="#FFFFFF"/>
+                            </svg>
+                            <span>Zoom</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1613,9 +1703,8 @@
 <section id="features" class="py-20 sm:py-32 section-light">
     <div class="wide-container">
         <div class="text-center mb-12 sm:mb-20 reveal">
-            <span class="text-[#1B2B7A] font-black text-xs sm:text-sm uppercase tracking-[0.2em]">Tại sao chọn PopMinutes</span>
-            <h2 class="title-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mt-4 sm:mt-6 mb-6 sm:mb-10">
-                Đừng để buổi gặp khách chỉ là <br><span class="text-gradient">một buổi nói chuyện rồi quên.</span>
+            <h2 class="title-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-6 sm:mb-10 leading-[1.28]">
+                Đừng để buổi gặp khách chỉ là<span class="block mt-2 sm:mt-3 text-gradient">một buổi nói chuyện rồi quên</span>
             </h2>
             <p class="text-slate-500 text-sm sm:text-lg max-w-2xl mx-auto">Ba vấn đề lớn nhất của sales khi gặp khách ngoài văn phòng – và cách PopMinutes giải quyết triệt để.</p>
         </div>
@@ -1645,46 +1734,65 @@
     </div>
 </section>
 
-<!-- Solutions -->
+<!-- Solutions / Hành trình giải pháp -->
 <section id="how" class="py-20 sm:py-32 section-white relative overflow-hidden">
     <div class="glow-orb w-[400px] h-[400px] bg-[#eef1fa] top-[10%] right-[-120px]" style="opacity:0.3;"></div>
     <div class="wide-container relative z-10">
-        <h2 class="title-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-12 sm:mb-24 text-center">Các giải pháp trong <span class="text-[#1B2B7A]">PopMinutes App</span></h2>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-20 items-center">
-            <div class="space-y-4 sm:space-y-8">
-                <div class="step-trigger active" id="step1" onclick="updateStep(0, this)">
-                    <div class="flex items-center gap-3 mb-2 sm:mb-3">
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#F0F3FF] rounded-xl flex items-center justify-center flex-shrink-0">
-                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#1B2B7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
-                        </div>
-                        <span class="label-md font-black uppercase text-[#1B2B7A]">Giải pháp 01</span>
-                    </div>
-                    <h3 class="text-lg sm:text-2xl md:text-3xl font-black mb-2 leading-snug">AI chuyển toàn bộ file ghi âm thành biên bản</h3>
-                    <p class="text-sm sm:text-base text-slate-500 font-medium">Kèm theo <strong>toàn bộ đoạn hội thoại</strong> được chuyển thành văn bản, rõ từng người nói.</p>
+        <div class="text-center mb-12 sm:mb-20 reveal">
+            <h2 class="title-bold text-3xl sm:text-4xl md:text-5xl mb-4 sm:mb-6">Hành trình một buổi gặp khách</h2>
+            <p class="text-slate-500 text-base sm:text-lg max-w-2xl mx-auto font-medium leading-relaxed">
+                Tự động hóa liền mạch toàn bộ chu trình làm việc của đội ngũ Sales chỉ trên một nền tảng duy nhất.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <!-- Cột trái: 3 chặng hành trình -->
+            <div class="lg:col-span-5 space-y-3 sm:space-y-4 reveal">
+                <div id="step1" onclick="updateStep(0, this)" class="step-trigger active">
+                    <span class="text-xs font-extrabold uppercase tracking-[0.14em] text-[#1B2B7A] block mb-1.5">Chặng 1 • Trước cuộc gặp</span>
+                    <h3 class="text-lg sm:text-xl font-black text-slate-900 mb-1">Đặt chỗ tiếp khách</h3>
+                    <p class="text-sm text-slate-500 font-medium">Không gian cafe chọn lọc, chuyên nghiệp</p>
                 </div>
-                <div class="step-trigger" onclick="updateStep(1, this)">
-                    <div class="flex items-center gap-3 mb-2 sm:mb-3">
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#F0F3FF] rounded-xl flex items-center justify-center flex-shrink-0">
-                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#1B2B7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                        </div>
-                        <span class="label-md font-black uppercase text-[#1B2B7A]">Giải pháp 02</span>
-                    </div>
-                    <h3 class="text-lg sm:text-2xl md:text-3xl font-black leading-snug">Nhận biên bản tức thì qua email</h3>
-                    <p class="text-sm sm:text-base text-slate-500 font-medium">Sau khi buổi họp kết thúc, biên bản tự động gửi đến bạn, sếp và khách hàng.</p>
+
+                <div id="step2" onclick="updateStep(1, this)" class="step-trigger">
+                    <span class="text-xs font-extrabold uppercase tracking-[0.14em] text-[#1B2B7A] block mb-1.5">Chặng 2 • Trong cuộc gặp</span>
+                    <h3 class="text-lg sm:text-xl font-black text-slate-900 mb-1">Ghi âm, Tóm tắt &amp; Báo cáo</h3>
+                    <p class="text-sm text-slate-500 font-medium">Biên bản họp tự động chuẩn xác bằng AI</p>
                 </div>
-                <div class="step-trigger" onclick="updateStep(2, this)">
-                    <div class="flex items-center gap-3 mb-2 sm:mb-3">
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-[#F0F3FF] rounded-xl flex items-center justify-center flex-shrink-0">
-                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#1B2B7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                        </div>
-                        <span class="label-md font-black uppercase text-[#1B2B7A]">Giải pháp 03</span>
-                    </div>
-                    <h3 class="text-lg sm:text-2xl md:text-3xl font-black leading-snug">Linh hoạt sử dụng chỗ ngồi tại quán cafe chọn lọc</h3>
-                    <p class="text-sm sm:text-base text-slate-500 font-medium">Hệ thống <strong>quán</strong> với app check-in/check-out minh bạch.</p>
+
+                <div id="step3" onclick="updateStep(2, this)" class="step-trigger">
+                    <span class="text-xs font-extrabold uppercase tracking-[0.14em] text-[#1B2B7A] block mb-1.5">Chặng 3 • Sau cuộc gặp</span>
+                    <h3 class="text-lg sm:text-xl font-black text-slate-900 mb-1">Tạo Task, Đồng bộ CRM &amp; CSKH</h3>
+                    <p class="text-sm text-slate-500 font-medium">Kích hoạt hành động sau họp chỉ với 1 chạm</p>
                 </div>
             </div>
-            <div class="reveal">
-                <div id="step-preview" class="bg-[#0b1628] rounded-[24px] sm:rounded-[48px] overflow-hidden shadow-2xl border-[8px] sm:border-[16px] border-[#f1f5f9] flex items-center justify-center text-white text-center transition-all duration-500" style="min-height: 380px; padding: 1.5rem;">
+
+            <!-- Cột phải: Thẻ diễn giải trực quan (Hiển thị mặc định Chặng 1 ngay khi load) -->
+            <div class="lg:col-span-7 reveal active">
+                <div id="step-preview" class="bg-white rounded-[28px] sm:rounded-[36px] overflow-hidden shadow-[0_20px_50px_rgba(15,23,42,0.06)] border border-slate-200/90 flex flex-col justify-between text-slate-900 text-left transition-all duration-500 p-7 sm:p-11" style="min-height: 360px;">
+                    <div class="flex flex-col justify-between h-full space-y-6">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-5">
+                            <div>
+                                <span class="text-xs font-extrabold uppercase tracking-widest text-[#1B2B7A] block">Bước 01 • Space</span>
+                                <h4 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Đặt giữ chỗ</h4>
+                            </div>
+                        </div>
+
+                        <p class="text-slate-600 text-base sm:text-lg leading-relaxed font-medium">
+                            Đặt trước bàn tiếp khách tại hơn <strong class="text-slate-900">100+ quán cafe đối tác</strong> được tuyển chọn kỹ lưỡng, đảm bảo không gian yên tĩnh, chuyên nghiệp để gặp khách mà không lo ồn hay hết chỗ.
+                        </p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                            <div class="bg-[#F8FAFC] border border-slate-200/80 rounded-2xl p-4 sm:p-5">
+                                <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Không gian</div>
+                                <div class="text-base font-bold text-slate-900">Yên tĩnh, chuyên nghiệp</div>
+                            </div>
+                            <div class="bg-[#F8FAFC] border border-slate-200/80 rounded-2xl p-4 sm:p-5">
+                                <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Quản trị</div>
+                                <div class="text-base font-bold text-slate-900">Check-in / Check-out minh bạch</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1692,88 +1800,269 @@
 </section>
 
 <!-- Pricing -->
-<section id="pricing" class="py-20 sm:py-32 section-dark relative overflow-hidden">
-    <div class="glow-orb w-[400px] h-[400px] bg-[#1B2B7A] top-[-40px] left-[-120px]" style="opacity:0.15;"></div>
+<section id="pricing" class="py-20 sm:py-32 section-light relative overflow-hidden">
+    <div class="glow-orb w-[450px] h-[450px] bg-[#1B2B7A] top-[-60px] right-[-120px]" style="opacity:0.06;"></div>
     <div class="wide-container relative z-10">
         <div class="text-center mb-12 sm:mb-20 reveal">
-            <span class="text-[#8ea5d9] font-black text-xs sm:text-sm uppercase tracking-[0.2em]">Bảng giá chi tiết</span>
-            <h2 class="title-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mt-4 sm:mt-6 mb-6 sm:mb-10">Đầu tư vào sự <span class="text-gradient-light">Hiệu quả</span></h2>
-            <p class="text-slate-300 font-medium text-base sm:text-lg max-w-xl mx-auto">Không phí khởi tạo. Chọn gói phù hợp với quy mô.</p>
+            <h2 class="title-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-slate-900 mb-4 sm:mb-6">Giải pháp linh hoạt cho <span class="text-gradient">mọi quy mô Sales</span></h2>
+            <p class="text-slate-500 font-medium text-sm sm:text-lg max-w-xl mx-auto">Minh bạch chi phí, không phí khởi tạo. Nâng cấp hoặc điều chỉnh gói bất cứ lúc nào.</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
-            <div class="reveal reveal-delay-1 bg-white/[0.07] backdrop-blur-sm p-6 rounded-[28px] border border-white/10 hover:border-[#2D3FA6]/60 transition-all flex flex-col group">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+            <!-- Card 1: Trải nghiệm -->
+            <div class="reveal reveal-delay-1 bg-white p-7 rounded-3xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-slate-300 transition-all duration-300 flex flex-col">
                 <div class="pricing-header">
-    <h4 class="text-slate-300 font-black text-[0.85rem] sm:text-[0.95rem] uppercase tracking-[0.18em]">Dùng thử</h4>
-    <label class="toggle-switch">
-        <span class="toggle-label">3 tháng</span>
-        <input type="checkbox" id="planToggle">
-        <span class="slider"></span>
-    </label>
-</div>
-                <div id="personalNote" class="bg-[#1B2B7A]/20 border border-[#2D3FA6]/50 text-blue-50 text-[0.8rem] font-semibold p-3.5 rounded-2xl mb-5 leading-relaxed">
-                    14 ngày miễn phí.<br>Không cần thẻ tín dụng.
+                    <h4 class="text-slate-900 font-extrabold text-sm uppercase tracking-[0.14em]">Trải nghiệm</h4>
+                    <label class="toggle-switch">
+                        <span class="toggle-label">3 tháng</span>
+                        <input type="checkbox" id="planToggle">
+                        <span class="slider"></span>
+                    </label>
                 </div>
-                <div class="text-3xl font-black mb-2 text-white">
-                    <span id="personalPrice">319k</span> <span class="text-xs text-slate-300 font-medium">/ tháng</span>
+                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-5">Sales độc lập</p>
+
+                <div class="mb-2 flex items-baseline gap-1.5">
+                    <span id="personalPrice" class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">319k</span>
+                    <span class="text-xs text-slate-500 font-semibold">/ tháng</span>
                 </div>
-                <div id="priceHint" class="text-[0.7rem] text-slate-400 mb-4 hidden">(thanh toán 807k cho 3 tháng)</div>
-                <div class="text-[0.9rem] font-bold uppercase tracking-widest text-slate-500 mb-4 pb-3 border-b border-white/10">Sales độc lập</div>
-                <ul class="space-y-4 mb-8 text-slate-300 font-medium grow text-[0.9rem]">
-                    <li>• Tối đa 1 tài khoản</li>
-                    <li class="bg-emerald-500/15 border border-emerald-500/30 text-emerald-100 px-3 py-2 rounded-xl">• PopMinutes AI bản chuẩn (tóm tắt + transcript)</li>
-                    <li>• 0 giờ sử dụng chỗ ngồi tại quán cafe trong hệ thống PopHubly</li>
-                </ul>
-                <button onclick="scrollToForm()" class="btn-price btn-price-red">DÙNG THỬ NGAY</button>
-            </div>
-            <div class="reveal reveal-delay-2 bg-white/90 backdrop-blur-sm text-slate-900 p-6 rounded-[28px] shadow-2xl transform lg:-translate-y-6 flex flex-col relative ring-4 ring-[#1B2B7A]/30 group z-10">
-                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#1B2B7A] text-white text-[0.65rem] font-black py-1.5 px-4 rounded-full tracking-widest shadow-lg shadow-[#1B2B7A]/40 flex items-center gap-1.5 whitespace-nowrap">
-                    <svg class="w-3.5 h-3.5 text-yellow-300" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg> PHỔ BIẾN
+                <div id="priceHint" class="text-xs font-medium text-emerald-600 mb-3 hidden">(thanh toán 807k cho 3 tháng)</div>
+
+                <div id="personalNote" class="bg-[#F0F3FF] text-[#1B2B7A] text-xs font-semibold px-3.5 py-2.5 rounded-xl mb-6 leading-relaxed">
+                    14 ngày miễn phí · Không cần thẻ tín dụng
                 </div>
-                <h4 class="text-slate-700 font-black text-[0.85rem] sm:text-[0.95rem] uppercase tracking-[0.18em] mb-4 mt-2">Đội nhóm</h4>
-                <div class="text-3xl font-black mb-6 text-[#1B2B7A]">2.790k <span class="text-xs text-slate-400 font-medium">/ tháng</span></div>
-                <div class="text-[0.9rem] font-bold uppercase tracking-widest text-[#1B2B7A] mb-4 pb-3 border-b border-slate-100">Đội kinh doanh</div>
-                <ul class="space-y-3 mb-8 font-bold grow text-[0.9rem] text-slate-700">
-                    <li>• Tối đa 10 tài khoản</li>
-                    <li class="bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 px-3 py-2 rounded-xl">• PopMinutes AI bản chuẩn (tóm tắt + transcript)</li>
-                    <li>• 100 giờ sử dụng chỗ ngồi tại quán cafe trong hệ thống PopHubly</li>
-                    <li>• Quản trị Geofencing (GPS)</li>
-                    <li>• Giảm 10% hóa đơn cafe</li>
-                    <li>• Xuất hóa đơn</li>
-                </ul>
-                <button onclick="openPricingModal('Đội nhóm')" class="btn-price btn-price-navy">MUA NGAY</button>
+
+                <div class="border-t border-slate-100 pt-5 mb-8 grow">
+                    <ul class="space-y-3.5 text-slate-600 font-medium text-sm">
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Tối đa 1 tài khoản</span>
+                        </li>
+                        <li class="flex items-start gap-2.5 bg-[#F8FAFC] border border-slate-200/80 text-slate-800 font-semibold p-2.5 rounded-xl">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>PopMinutes AI bản chuẩn (tóm tắt + transcript)</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Biên bản song ngữ</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Dịch biên bản sang 21 ngôn ngữ</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Quản lý task</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Tích hợp Trello, Google</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <button onclick="scrollToForm()" class="btn-price btn-price-secondary">Dùng thử miễn phí</button>
             </div>
-            <div class="reveal reveal-delay-3 bg-white/[0.07] backdrop-blur-sm p-6 rounded-[28px] border border-white/10 hover:border-[#2D3FA6]/60 transition-all flex flex-col group">
-                <h4 class="text-slate-300 font-black text-[0.85rem] sm:text-[0.95rem] uppercase tracking-[0.18em] mb-4">Doanh nghiệp</h4>
-                <div class="text-3xl font-black mb-6 text-white">8.090k <span class="text-xs text-slate-500 font-medium">/ tháng</span></div>
-                <div class="text-[0.9rem] font-bold uppercase tracking-widest text-slate-500 mb-4 pb-3 border-b border-white/10">Phòng kinh doanh</div>
-                <ul class="space-y-4 mb-8 text-slate-300 font-medium grow text-[0.9rem]">
-                    <li>• Tối đa 30 tài khoản</li>
-                    <li class="bg-emerald-500/15 border border-emerald-500/30 text-emerald-100 px-3 py-2 rounded-xl">• PopMinutes AI bản chuẩn (tóm tắt + transcript)</li>
-                    <li>• 320 giờ sử dụng chỗ ngồi tại quán cafe trong hệ thống PopHubly</li>
-                    <li>• Lưu lịch sử 6 tháng</li>
-                    <li>• Phân quyền chuyên sâu</li>
-                    <li>• Quản trị Geofencing (GPS)</li>
-                    <li>• Giảm 15% hóa đơn cafe</li>
-                    <li>• Xuất hóa đơn</li>
-                </ul>
-                <button onclick="openPricingModal('Doanh nghiệp')" class="btn-price btn-price-outline">MUA NGAY</button>
+
+            <!-- Card 2: Đội nhóm (Featured) -->
+            <div class="reveal reveal-delay-2 bg-white p-7 rounded-3xl border-2 border-[#1B2B7A] shadow-xl shadow-[#1B2B7A]/10 flex flex-col relative lg:-translate-y-3">
+                <div class="absolute -top-3.5 left-6 bg-[#1B2B7A] text-white text-[0.65rem] font-extrabold py-1 px-3.5 rounded-full tracking-widest uppercase shadow-md">
+                    Phổ biến nhất
+                </div>
+                <div class="pricing-header mt-1">
+                    <h4 class="text-[#1B2B7A] font-extrabold text-sm uppercase tracking-[0.14em]">Đội nhóm</h4>
+                </div>
+                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-5">Đội kinh doanh</p>
+
+                <div class="mb-6 flex items-baseline gap-1.5">
+                    <span class="text-3xl sm:text-4xl font-black text-[#1B2B7A] tracking-tight">2.790k</span>
+                    <span class="text-xs text-slate-500 font-semibold">/ tháng</span>
+                </div>
+
+                <div class="border-t border-slate-100 pt-5 mb-8 grow">
+                    <ul class="space-y-3.5 text-slate-700 font-medium text-sm">
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Tối đa 10 tài khoản</span>
+                        </li>
+                        <li class="flex items-start gap-2.5 bg-[#F0F3FF] border border-[#1B2B7A]/15 text-[#1B2B7A] font-semibold p-2.5 rounded-xl">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>PopMinutes AI bản chuẩn (tóm tắt + transcript)</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Biên bản song ngữ</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Dịch biên bản sang 21 ngôn ngữ</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Quản lý task</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Tích hợp Trello, Google</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>100 giờ sử dụng chỗ ngồi tại quán cafe trong hệ thống PopHubly</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Quản trị Geofencing (GPS)</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Giảm 10% hóa đơn cafe</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Xuất hóa đơn VAT</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <button onclick="openPricingModal('Đội nhóm')" class="btn-price btn-price-primary">Đăng ký gói Đội nhóm</button>
             </div>
-            <div class="reveal reveal-delay-1 bg-white/[0.07] backdrop-blur-sm p-6 rounded-[28px] border border-white/10 hover:border-[#2D3FA6]/60 transition-all flex flex-col group">
-                <h4 class="text-slate-300 font-black text-[0.85rem] sm:text-[0.95rem] uppercase tracking-[0.18em] mb-4">Cao cấp</h4>
-                <div class="text-3xl font-black mb-6 text-white">Liên hệ</div>
-                <div class="text-[0.9rem] font-bold uppercase tracking-widest text-slate-500 mb-4 pb-3 border-b border-white/10">Phòng kinh doanh</div>
-                <ul class="space-y-4 mb-8 text-slate-300 font-medium grow text-[0.9rem]">
-                    <li>• Không giới hạn tài khoản</li>
-                    <li class="bg-emerald-500/15 border border-emerald-500/30 text-emerald-100 px-3 py-2 rounded-xl">• PopMinutes AI bản nâng cao (bản chuẩn + phân tích khách hàng)</li>
-                    <li>• Giờ sử dụng chỗ ngồi tại quán cafe trong hệ thống tùy chỉnh</li>
-                    <li>• Lưu lịch sử vĩnh viễn</li>
-                    <li>• Phân quyền chuyên sâu</li>
-                    <li>• Quản trị Geofencing (GPS)</li>
-                    <li>• Dashboard báo cáo</li>
-                    <li>• Giảm 15% hóa đơn cafe</li>
-                    <li>• Xuất hóa đơn</li>
-                </ul>
-                <button onclick="openPricingModal('Cao cấp')" class="btn-price btn-price-outline">LIÊN HỆ NGAY</button>
+
+            <!-- Card 3: Doanh nghiệp -->
+            <div class="reveal reveal-delay-3 bg-white p-7 rounded-3xl border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-slate-300 transition-all duration-300 flex flex-col">
+                <div class="pricing-header">
+                    <h4 class="text-slate-900 font-extrabold text-sm uppercase tracking-[0.14em]">Doanh nghiệp</h4>
+                </div>
+                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-5">Phòng kinh doanh</p>
+
+                <div class="mb-6 flex items-baseline gap-1.5">
+                    <span class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">8.090k</span>
+                    <span class="text-xs text-slate-500 font-semibold">/ tháng</span>
+                </div>
+
+                <div class="border-t border-slate-100 pt-5 mb-8 grow">
+                    <ul class="space-y-3.5 text-slate-600 font-medium text-sm">
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Tối đa 30 tài khoản</span>
+                        </li>
+                        <li class="flex items-start gap-2.5 bg-[#F8FAFC] border border-slate-200/80 text-slate-800 font-semibold p-2.5 rounded-xl">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>PopMinutes AI bản chuẩn (tóm tắt + transcript)</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Biên bản song ngữ</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Dịch biên bản sang 21 ngôn ngữ</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Quản lý task</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Tích hợp Trello, Google</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>320 giờ sử dụng chỗ ngồi tại quán cafe trong hệ thống PopHubly</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Lưu lịch sử 6 tháng</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Phân quyền chuyên sâu</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Quản trị Geofencing (GPS)</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Giảm 15% hóa đơn cafe</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#1B2B7A] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Xuất hóa đơn VAT</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <button onclick="openPricingModal('Doanh nghiệp')" class="btn-price btn-price-secondary">Đăng ký Doanh nghiệp</button>
+            </div>
+
+            <!-- Card 4: Cao cấp (Enterprise) -->
+            <div class="reveal reveal-delay-1 bg-slate-900 text-white p-7 rounded-3xl border border-slate-800 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col">
+                <div class="pricing-header">
+                    <h4 class="text-white font-extrabold text-sm uppercase tracking-[0.14em]">Cao cấp</h4>
+                </div>
+                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-5">Tổ chức &amp; Tập đoàn</p>
+
+                <div class="mb-6 flex items-baseline gap-1.5">
+                    <span class="text-3xl sm:text-4xl font-black text-white tracking-tight">Liên hệ</span>
+                </div>
+
+                <div class="border-t border-slate-800 pt-5 mb-8 grow">
+                    <ul class="space-y-3.5 text-slate-300 font-medium text-sm">
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#8ea5d9] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Không giới hạn tài khoản</span>
+                        </li>
+                        <li class="flex items-start gap-2.5 bg-white/10 border border-white/15 text-white font-semibold p-2.5 rounded-xl">
+                            <svg class="w-4 h-4 text-[#8ea5d9] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>PopMinutes AI bản nâng cao (bản chuẩn + phân tích khách hàng)</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#8ea5d9] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Biên bản song ngữ</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#8ea5d9] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Dịch biên bản sang 21 ngôn ngữ</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#8ea5d9] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Quản lý task</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#8ea5d9] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Tích hợp Trello, Google</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#8ea5d9] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Giờ sử dụng chỗ ngồi tại quán cafe trong hệ thống tùy chỉnh</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#8ea5d9] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Lưu lịch sử vĩnh viễn</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#8ea5d9] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Phân quyền chuyên sâu</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#8ea5d9] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Quản trị Geofencing (GPS)</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#8ea5d9] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Dashboard báo cáo quản trị</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#8ea5d9] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Giảm 15% hóa đơn cafe</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <svg class="w-4 h-4 text-[#8ea5d9] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span>Xuất hóa đơn VAT</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <button onclick="openPricingModal('Cao cấp')" class="btn-price bg-white text-slate-900 hover:bg-[#F0F3FF] hover:text-[#1B2B7A]">Liên hệ tư vấn</button>
             </div>
         </div>
     </div>
@@ -1784,12 +2073,19 @@
     <div class="wide-container">
         <div class="bg-white rounded-[32px] sm:rounded-[48px] shadow-2xl shadow-slate-200/60 p-6 sm:p-16 lg:p-20 grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 reveal border border-slate-50">
             <div class="flex flex-col justify-center">
-                <h2 class="title-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-6 sm:mb-8">Sẵn sàng để<br><span class="text-gradient">tăng trưởng 3.7x doanh số?</span></h2>
-                <p class="text-base sm:text-lg text-slate-500 font-medium leading-relaxed mb-2">
+                <h2 class="title-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-6 sm:mb-8 leading-[1.28]">
+                    Sẵn sàng để<span class="block mt-2 sm:mt-3 text-gradient">tăng trưởng 3.7x doanh số?</span>
+                </h2>
+                <p class="text-base sm:text-lg text-slate-500 font-medium leading-relaxed">
                     Để lại thông tin của bạn. Đội ngũ <strong>PopHubly</strong> sẽ liên hệ để setup bản Demo miễn phí và tặng bạn voucher trải nghiệm PopMinutes AI đầu tiên.
                 </p>
-                <div class="flex items-center gap-4 mt-4 text-sm text-slate-400 font-medium">
-                    <svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg> Miễn phí — không cần thẻ tín dụng
+                <div class="mt-7 pt-6 border-t border-slate-100 flex items-center gap-3">
+                    <span class="w-6 h-6 rounded-full bg-[#F0F3FF] text-[#1B2B7A] flex items-center justify-center flex-shrink-0">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.75" d="M5 13l4 4L19 7"/></svg>
+                    </span>
+                    <p class="text-base sm:text-lg font-bold text-slate-900 tracking-tight">
+                        <span class="text-[#1B2B7A]">Miễn phí</span> — không cần thẻ tín dụng
+                    </p>
                 </div>
             </div>
             <form id="ctaForm" class="space-y-4 sm:space-y-5" novalidate>
@@ -2245,52 +2541,89 @@
         document.querySelectorAll('.step-trigger').forEach(item => item.classList.remove('active'));
         el.classList.add('active');
         const previews = [
-            `<div class="space-y-4 sm:space-y-6">
-                <div class="w-16 h-16 sm:w-24 sm:h-24 bg-[#1B2B7A] rounded-full mx-auto flex items-center justify-center mb-4 sm:mb-6 shadow-xl shadow-[#1B2B7A]/30">
-                    <svg class="w-8 h-8 sm:w-12 sm:h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
+            `<div class="flex flex-col justify-between h-full space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-5">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-widest text-[#1B2B7A] block">Bước 01 • Space</span>
+                        <h4 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Đặt giữ chỗ</h4>
+                    </div>
                 </div>
-                <h4 class="text-lg sm:text-2xl font-bold text-white leading-snug">Transcript đầy đủ, chính xác đến từng từ</h4>
-                <div class="flex flex-col sm:flex-row justify-center gap-3 mt-5 sm:mt-8">
-                    <button onclick="openAudioModal()" class="px-4 sm:px-6 py-2.5 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18.5a6.5 6.5 0 100-13 6.5 6.5 0 000 13zM12 11v3m0 0l-1.5-1.5M12 14l1.5-1.5"/></svg>
-                        1. File ghi âm
+
+                <p class="text-slate-600 text-base sm:text-lg leading-relaxed font-medium">
+                    Đặt trước bàn tiếp khách tại hơn <strong class="text-slate-900">100+ quán cafe đối tác</strong> được tuyển chọn kỹ lưỡng, đảm bảo không gian yên tĩnh, chuyên nghiệp để gặp khách mà không lo ồn hay hết chỗ.
+                </p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                    <div class="bg-[#F8FAFC] border border-slate-200/80 rounded-2xl p-4 sm:p-5">
+                        <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Không gian</div>
+                        <div class="text-base font-bold text-slate-900">Yên tĩnh, chuyên nghiệp</div>
+                    </div>
+                    <div class="bg-[#F8FAFC] border border-slate-200/80 rounded-2xl p-4 sm:p-5">
+                        <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Quản trị</div>
+                        <div class="text-base font-bold text-slate-900">Check-in / Check-out minh bạch</div>
+                    </div>
+                </div>
+            </div>`,
+            `<div class="flex flex-col justify-between h-full space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-5">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-widest text-[#1B2B7A] block">Bước 02 &amp; 03 • AI Meeting</span>
+                        <h4 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Tập trung 100% vào khách hàng</h4>
+                    </div>
+                </div>
+
+                <p class="text-slate-600 text-base sm:text-lg leading-relaxed font-medium">
+                    AI tự động lọc tạp âm quán cafe, phân tách giọng nói và trích xuất đầy đủ <strong class="text-slate-900">cam kết, báo giá, đầu việc</strong> thành biên bản cuộc họp chuẩn xác ngay khi kết thúc.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-3.5 pt-2">
+                    <button onclick="openAudioModal()" class="flex-1 px-5 py-3.5 bg-[#F8FAFC] hover:bg-[#F0F3FF] border border-slate-200 hover:border-[#1B2B7A]/30 rounded-xl text-sm font-bold text-slate-800 flex items-center justify-center gap-2.5 transition-all cursor-pointer">
+                        <svg class="w-5 h-5 text-[#1B2B7A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        Nghe file ghi âm mẫu
                     </button>
-                    <button onclick="openPdfModal()" class="px-4 sm:px-6 py-2.5 bg-[#1B2B7A] hover:bg-[#131F5C] rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all shadow-lg">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        2. Kết quả
+                    <button onclick="openPdfModal()" class="flex-1 px-5 py-3.5 bg-[#1B2B7A] hover:bg-[#131F5C] text-white rounded-xl text-sm font-extrabold flex items-center justify-center gap-2.5 transition-all shadow-lg shadow-[#1B2B7A]/20 cursor-pointer">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        Xem biên bản kết quả
                     </button>
                 </div>
             </div>`,
-            `<div class="space-y-4 sm:space-y-6">
-                <div class="w-16 h-16 sm:w-24 sm:h-24 bg-[#1B2B7A] rounded-full mx-auto flex items-center justify-center mb-4 sm:mb-6 shadow-xl shadow-[#1B2B7A]/30">
-                    <svg class="w-8 h-8 sm:w-12 sm:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            `<div class="flex flex-col justify-between h-full space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-5">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase tracking-widest text-[#1B2B7A] block">Bước 04, 05 &amp; 06 • Automation</span>
+                        <h4 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Luồng dữ liệu khép kín sau họp</h4>
+                    </div>
                 </div>
-                <h4 class="text-lg sm:text-2xl font-bold text-white leading-snug">Biên bản tự động gửi đến hộp thư</h4>
-                <div class="bg-white/5 border border-white/10 rounded-xl p-3 sm:p-4 text-left mt-3 sm:mt-4">
-                    <div class="text-[#8ea5d9] font-black text-xs sm:text-sm mb-2">TO: sales@pophubly.com</div>
-                    <div class="text-white text-sm sm:text-base font-bold mb-2 leading-snug">[PopHubly] Tóm Tắt Buổi Làm Việc</div>
-                    <div class="h-px w-full bg-slate-700 mb-2"></div>
-                    <p class="text-slate-400 italic text-xs sm:text-sm">"Nội dung tổng hợp từ buổi làm việc..."</p>
+
+                <div class="space-y-3">
+                    <div class="bg-[#F8FAFC] border border-slate-200/80 rounded-2xl p-4 flex items-center gap-3.5">
+                        <span class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm flex-shrink-0">✓</span>
+                        <span class="text-sm sm:text-base font-semibold text-slate-800">Tự động giao việc &amp; đẩy lịch sang hệ thống quản lý Task</span>
+                    </div>
+                    <div class="bg-[#F8FAFC] border border-slate-200/80 rounded-2xl p-4 flex items-center gap-3.5">
+                        <span class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm flex-shrink-0">✓</span>
+                        <span class="text-sm sm:text-base font-semibold text-slate-800">Đồng bộ CRM tức thì, lưu trữ trọn vẹn lịch sử trao đổi</span>
+                    </div>
+                    <div class="bg-[#F8FAFC] border border-slate-200/80 rounded-2xl p-4 flex items-center gap-3.5">
+                        <span class="w-7 h-7 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm flex-shrink-0">✓</span>
+                        <span class="text-sm sm:text-base font-semibold text-slate-800">Gửi biên bản &amp; kích hoạt lịch chăm sóc khách hàng đúng hẹn</span>
+                    </div>
                 </div>
-            </div>`,
-            `<div class="space-y-4 sm:space-y-6">
-                <div class="w-16 h-16 sm:w-24 sm:h-24 bg-[#1B2B7A] rounded-full mx-auto flex items-center justify-center mb-4 sm:mb-6 shadow-xl shadow-[#1B2B7A]/30">
-                    <svg class="w-8 h-8 sm:w-12 sm:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
-                </div>
-                <h4 class="text-lg sm:text-2xl font-bold text-white leading-snug">Check-in/Check-out minh bạch</h4>
-                <p class="text-slate-400 text-xs sm:text-sm">Hơn 100 chỗ ngồi cafe đối tác</p>
             </div>`
         ];
         const display = document.getElementById('step-preview');
-        display.style.opacity = '0'; display.style.transform = 'scale(0.96)';
+        display.style.opacity = '0'; display.style.transform = 'translateY(6px)';
         setTimeout(() => {
             display.innerHTML = previews[index];
-            display.style.opacity = '1'; display.style.transform = 'scale(1)';
-        }, 250);
+            display.style.opacity = '1'; display.style.transform = 'translateY(0)';
+        }, 160);
     }
-    window.addEventListener('load', () => {
+    document.addEventListener('DOMContentLoaded', () => {
         const firstStep = document.getElementById('step1');
-        if(firstStep) updateStep(0, firstStep);
+        if (firstStep) {
+            document.querySelectorAll('.step-trigger').forEach(item => item.classList.remove('active'));
+            firstStep.classList.add('active');
+        }
     });
 
     // ================= TOGGLE PLAN =================
@@ -2301,12 +2634,12 @@
     function updatePersonalPlan() {
         if (toggleCheckbox.checked) {
             priceSpan.innerText = '269k';
-            noteDiv.innerHTML = '14 ngày miễn phí.<br>Không cần thẻ tín dụng.';
+            noteDiv.innerHTML = '14 ngày miễn phí · Không cần thẻ tín dụng';
             priceHint.classList.remove('hidden');
             priceHint.innerText = '(thanh toán 807k cho 3 tháng)';
         } else {
             priceSpan.innerText = '319k';
-            noteDiv.innerHTML = '14 ngày miễn phí.<br>Không cần thẻ tín dụng.';
+            noteDiv.innerHTML = '14 ngày miễn phí · Không cần thẻ tín dụng';
             priceHint.classList.add('hidden');
         }
     }

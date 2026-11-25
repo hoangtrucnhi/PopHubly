@@ -2465,9 +2465,14 @@
         });
     });
 
-    function showSuccessModal(title, message) {
+    function showSuccessModal(title, message, isHtml = false) {
         document.getElementById('modalTitle').textContent = title;
-        document.getElementById('modalMessage').textContent = message;
+        const msgEl = document.getElementById('modalMessage');
+        if (isHtml) {
+            msgEl.innerHTML = message;
+        } else {
+            msgEl.textContent = message;
+        }
         openModal('successModal');
     }
 
@@ -2561,7 +2566,7 @@
                     if (formId === "pricingForm") {
                         closePricingModal();
                     }
-                    showSuccessModal("Thành công", successMessage);
+                    showSuccessModal("Thành công", successMessage, formId === "ctaForm");
                 } else {
                     console.warn('⚠️ Server returned error:', result);
                     showSuccessModal("Lỗi", result.message || "Có lỗi xảy ra, vui lòng thử lại.");
@@ -2580,7 +2585,15 @@
         });
     }
 
-    submitFormToGAS("ctaForm", "ctaSubmitBtn", "CTA", "Cảm ơn bạn! Vui lòng kiểm tra inbox/spam để kích hoạt.");
+    const CTA_SUCCESS_HTML = `
+        <span style="display:block;">Cảm ơn bạn đã đăng ký dùng thử <strong>PopMinutes</strong>!</span>
+        <span style="display:block; text-align:left; background:#F0F3FF; border:1px solid #CBD5E1; border-radius:14px; padding:14px 16px; margin-top:14px; font-size:0.9rem; color:#1E293B; line-height:1.6;">
+            <span style="display:block; margin-bottom:8px;"><strong>1.</strong> Kiểm tra email (<strong>Inbox</strong> hoặc <strong>Spam</strong>) để kích hoạt tài khoản theo hướng dẫn.</span>
+            <span style="display:block;"><strong>2.</strong> Để hỗ trợ nhanh nhất, kết bạn Zalo: <a href="https://zalo.me/0384744368" target="_blank" rel="noopener" style="color:#1B2B7A; font-weight:800; text-decoration:underline;">0384744368 (Ms. Nhi)</a></span>
+        </span>
+    `;
+
+    submitFormToGAS("ctaForm", "ctaSubmitBtn", "CTA", CTA_SUCCESS_HTML);
     submitFormToGAS("newsletterForm", "newsletterSubmitBtn", "NEWSLETTER", "Đăng ký nhận tin thành công!");
     submitFormToGAS("pricingForm", "pricingSubmitBtn", "PRICING", "Đăng ký gói dịch vụ thành công! Chúng tôi sẽ liên hệ để xác nhận.");
 

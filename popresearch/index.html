@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="color-scheme" content="light only">
     <title>PopResearch — Tình báo khách hàng B2B</title>
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png">
-    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="[https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png](https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png)">
+    <link rel="apple-touch-icon" href="[https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png](https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png)">
+    <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+    <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+    <link href="[https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap](https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap)" rel="stylesheet">
+    <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -49,20 +49,11 @@
             --radius-sm: 12px;
             --radius-md: 16px;
             --radius-lg: 24px;
-            --radius-xl: 32px;
-            --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
-            --shadow-md: 0 8px 24px rgba(27, 43, 122, 0.08);
             --shadow-lg: 0 20px 48px rgba(27, 43, 122, 0.16);
         }
 
         * { box-sizing: border-box; }
-
-        html {
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-            width: 100%;
-            max-width: 100%;
-        }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
 
         body {
             font-family: 'Be Vietnam Pro', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -73,50 +64,22 @@
             margin: 0;
             padding: 76px 0 0;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
-
-        @media (max-width: 640px) {
-            body { padding-top: 118px; }
-        }
+        @media (max-width: 768px) { body { padding-top: 118px; } }
 
         ::selection { background: var(--navy); color: #fff; }
 
-        .brand-logo-font {
-            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
-        }
-
-        .title-bold {
-            font-weight: 800;
-            letter-spacing: -0.025em;
-            line-height: 1.26;
-        }
-
-        .text-gradient { color: var(--navy); }
-
+        .title-bold { font-weight: 800; letter-spacing: -0.025em; line-height: 1.26; }
         .bg-noise {
             background-image: radial-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px);
             background-size: 28px 28px;
         }
-
         .glow-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(120px);
-            pointer-events: none;
-            z-index: 0;
+            position: absolute; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0;
         }
+        .wide-container { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
+        @media (min-width: 768px) { .wide-container { padding: 0 40px; } }
 
-        .wide-container {
-            max-width: 1320px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-        @media (min-width: 768px) {
-            .wide-container { padding: 0 40px; }
-        }
-
-        /* ===== HIGHLIGHT VIOLET ===== */
         .highlight-violet {
             color: #4D3B9C;
             font-weight: 800;
@@ -124,119 +87,53 @@
             margin: 0 -0.08em;
             border-radius: 0.5em 0.16em 0.45em 0.14em / 0.16em 0.5em 0.14em 0.45em;
             background:
-                linear-gradient(
-                    104deg,
-                    rgba(107, 84, 206, 0) 0.9%,
-                    rgba(107, 84, 206, 0.20) 2.6%,
-                    rgba(107, 84, 206, 0.13) 5.8%,
-                    rgba(107, 84, 206, 0.11) 93%,
-                    rgba(107, 84, 206, 0.22) 96.5%,
-                    rgba(107, 84, 206, 0) 98.5%
-                ),
-                linear-gradient(
-                    180deg,
-                    transparent 45%,
-                    rgba(124, 99, 224, 0.16) 45%,
-                    rgba(124, 99, 224, 0.25) 92%,
-                    transparent 92%
-                );
+                linear-gradient(104deg, rgba(107, 84, 206, 0) 0.9%, rgba(107, 84, 206, 0.20) 2.6%, rgba(107, 84, 206, 0.13) 5.8%, rgba(107, 84, 206, 0.11) 93%, rgba(107, 84, 206, 0.22) 96.5%, rgba(107, 84, 206, 0) 98.5%),
+                linear-gradient(180deg, transparent 45%, rgba(124, 99, 224, 0.16) 45%, rgba(124, 99, 224, 0.25) 92%, transparent 92%);
             -webkit-box-decoration-break: clone;
             box-decoration-break: clone;
         }
 
-        /* ===== NAV ===== */
+        /* NAV */
         .nav-mini {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid #edf0f5;
             padding: 13px 40px;
         }
         .nav-inner {
-            max-width: 1320px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
+            max-width: 1320px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between; gap: 16px;
         }
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            flex-shrink: 0;
-        }
-        .nav-logo img {
-            width: 40px;
-            height: 40px;
-            border-radius: 11px;
-            display: block;
-        }
+        .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
+        .nav-logo img { width: 40px; height: 40px; border-radius: 11px; display: block; }
         .nav-logo-text {
-            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
-            font-weight: 800;
-            font-size: 1.22rem;
-            color: #0F172A;
-            letter-spacing: -0.025em;
-            line-height: 1;
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+            font-weight: 800; font-size: 1.22rem; color: #0F172A; letter-spacing: -0.025em; line-height: 1;
         }
         .nav-logo-text .text-accent { color: var(--navy); }
 
-        .quota-cluster {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
+        .quota-cluster { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
         .quota-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--navy-pale);
-            color: var(--navy);
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--navy-pale); color: var(--navy);
             border: 1px solid rgba(27, 43, 122, 0.14);
-            padding: 7px 14px;
-            border-radius: 100px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 0.01em;
+            padding: 7px 14px; border-radius: 100px;
+            font-size: 0.8rem; font-weight: 700;
         }
-        .quota-chip.deep {
-            background: #F5F3FF;
-            color: #4D3B9C;
-            border-color: rgba(77, 59, 156, 0.16);
-        }
+        .quota-chip.deep { background: #F5F3FF; color: #4D3B9C; border-color: rgba(77, 59, 156, 0.16); }
+        .quota-chip.credit { background: #ECFDF5; color: #065F46; border-color: #A7F3D0; }
 
         .nav-cta-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: var(--navy);
-            color: #fff !important;
-            padding: 10px 20px;
-            border-radius: 100px;
-            font-weight: 800;
-            font-size: 0.85rem;
-            letter-spacing: 0.02em;
-            text-decoration: none;
-            transition: all 0.25s ease;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            background: var(--navy); color: #fff !important;
+            padding: 10px 20px; border-radius: 100px;
+            font-weight: 800; font-size: 0.85rem; letter-spacing: 0.02em;
+            border: none; cursor: pointer; white-space: nowrap;
             box-shadow: 0 6px 18px rgba(27, 43, 122, 0.18);
-            border: none;
-            cursor: pointer;
-            white-space: nowrap;
+            transition: all 0.25s ease;
         }
-        .nav-cta-btn:hover {
-            background: var(--navy-deep);
-            transform: translateY(-1px);
-            box-shadow: 0 10px 24px rgba(27, 43, 122, 0.28);
-        }
+        .nav-cta-btn:hover { background: var(--navy-deep); transform: translateY(-1px); }
 
         @media (max-width: 768px) {
             .nav-mini { padding: 12px 20px; }
@@ -244,343 +141,192 @@
             .quota-cluster { order: 3; width: 100%; justify-content: center; padding-top: 8px; border-top: 1px solid #edf0f5; }
         }
 
-        /* ===== INPUTS & BUTTONS ===== */
+        /* INPUTS & BUTTONS */
         .input-elegant {
-            width: 100%;
-            padding: 0.95rem 1.25rem;
-            background: #fff;
-            border: 1.5px solid var(--border);
-            border-radius: var(--radius-sm);
-            outline: none;
-            font-weight: 500;
-            font-size: 0.94rem;
-            transition: all 0.25s;
-            color: var(--text);
-            font-family: inherit;
+            width: 100%; padding: 0.95rem 1.25rem; background: #fff;
+            border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+            outline: none; font-weight: 500; font-size: 0.94rem;
+            color: var(--text); font-family: inherit; transition: all 0.25s;
         }
-        .input-elegant:focus {
-            border-color: var(--navy-light);
-            box-shadow: 0 0 0 4px rgba(45, 63, 166, 0.1);
-        }
-        .input-elegant::placeholder {
-            color: #94a3b8;
-            font-weight: 400;
-        }
+        .input-elegant:focus { border-color: var(--navy-light); box-shadow: 0 0 0 4px rgba(45, 63, 166, 0.1); }
+        .input-elegant::placeholder { color: #94a3b8; font-weight: 400; }
 
         .field-label {
-            display: block;
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: #475569;
-            margin-bottom: 7px;
+            display: block; font-size: 0.78rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.08em; color: #475569; margin-bottom: 7px;
         }
 
         .btn-main {
-            background: var(--navy);
-            color: white;
-            padding: 0.95rem 2rem;
-            border-radius: 100px;
-            font-weight: 800;
-            font-size: 0.9rem;
-            letter-spacing: 0.02em;
-            transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1.2);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 9px;
+            background: var(--navy); color: white; padding: 0.95rem 2rem;
+            border-radius: 100px; font-weight: 800; font-size: 0.9rem; letter-spacing: 0.02em;
+            display: inline-flex; align-items: center; justify-content: center; gap: 9px;
             box-shadow: 0 8px 24px rgba(27, 43, 122, 0.18);
-            border: none;
-            cursor: pointer;
-            font-family: inherit;
-            white-space: nowrap;
+            border: none; cursor: pointer; font-family: inherit; white-space: nowrap; transition: all 0.25s;
         }
-        .btn-main:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 16px 32px rgba(27, 43, 122, 0.28);
-            background: var(--navy-deep);
-        }
+        .btn-main:hover:not(:disabled) { transform: translateY(-2px); background: var(--navy-deep); box-shadow: 0 16px 32px rgba(27, 43, 122, 0.28); }
         .btn-main:disabled { opacity: 0.6; cursor: not-allowed; }
 
         .btn-outline {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 9px;
-            font-weight: 800;
-            font-size: 0.9rem;
-            letter-spacing: 0.02em;
-            padding: 0.95rem 2rem;
-            border-radius: 100px;
-            border: 1.5px solid #CBD5E1;
-            color: var(--text);
-            transition: all 0.25s;
-            background: #fff;
-            cursor: pointer;
-            font-family: inherit;
-            white-space: nowrap;
+            display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+            font-weight: 800; font-size: 0.9rem; letter-spacing: 0.02em;
+            padding: 0.95rem 2rem; border-radius: 100px;
+            border: 1.5px solid #CBD5E1; color: var(--text); background: #fff;
+            cursor: pointer; font-family: inherit; white-space: nowrap; transition: all 0.25s;
         }
-        .btn-outline:hover:not(:disabled) {
-            border-color: var(--navy);
-            color: var(--navy);
-            background: var(--navy-pale);
-        }
+        .btn-outline:hover:not(:disabled) { border-color: var(--navy); color: var(--navy); background: var(--navy-pale); }
         .btn-outline:disabled { opacity: 0.6; cursor: not-allowed; }
 
         .btn-copy {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
-            border-radius: 100px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            background: #fff;
-            color: var(--navy);
-            border: 1px solid #CBD5E1;
-            cursor: pointer;
-            transition: all 0.2s;
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 6px 14px; border-radius: 100px; font-size: 0.78rem; font-weight: 700;
+            background: #fff; color: var(--navy); border: 1px solid #CBD5E1;
+            cursor: pointer; transition: all 0.2s;
         }
-        .btn-copy:hover {
-            background: var(--navy-pale);
-            border-color: var(--navy);
-        }
+        .btn-copy:hover { background: var(--navy-pale); border-color: var(--navy); }
 
-        /* ===== CARDS & TABS ===== */
+        /* CARDS & SCORE BOX */
         .editorial-card {
-            background: #ffffff;
-            border: 1px solid rgba(226, 232, 240, 0.95);
-            border-radius: 28px;
-            padding: 28px;
-            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.04);
+            background: #ffffff; border: 1px solid rgba(226, 232, 240, 0.95);
+            border-radius: 28px; padding: 28px; box-shadow: 0 16px 40px rgba(15, 23, 42, 0.04);
         }
-        @media (max-width: 640px) {
-            .editorial-card { padding: 20px; border-radius: 22px; }
+        @media (max-width: 640px) { .editorial-card { padding: 20px; border-radius: 22px; } }
+
+        .score-badge-card {
+            min-width: 118px;
+            padding: 14px 18px;
+            border-radius: 20px;
+            background: var(--navy-pale);
+            border: 1.5px solid rgba(27, 43, 122, 0.16);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            text-align: center;
         }
 
+        /* TABS & SCRIPTS */
         .script-tabs {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 14px;
-            margin-bottom: 20px;
+            display: flex; gap: 8px; flex-wrap: wrap;
+            border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 20px;
         }
         .script-tab-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            padding: 10px 18px;
-            border-radius: 100px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            background: var(--surface);
-            color: var(--muted);
-            border: 1px solid transparent;
-            cursor: pointer;
-            transition: all 0.2s;
+            display: inline-flex; align-items: center; gap: 7px;
+            padding: 10px 18px; border-radius: 100px; font-size: 0.85rem; font-weight: 700;
+            background: var(--surface); color: var(--muted); border: 1px solid transparent;
+            cursor: pointer; transition: all 0.2s;
         }
-        .script-tab-btn:hover {
-            color: var(--navy);
-            background: var(--navy-pale);
-        }
-        .script-tab-btn.active {
-            background: var(--navy);
-            color: #fff;
-            box-shadow: 0 6px 16px rgba(27, 43, 122, 0.2);
-        }
+        .script-tab-btn:hover { color: var(--navy); background: var(--navy-pale); }
+        .script-tab-btn.active { background: var(--navy); color: #fff; box-shadow: 0 6px 16px rgba(27, 43, 122, 0.2); }
 
         .tab-panel { display: none; }
         .tab-panel.active { display: block; }
 
         .script-block {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 18px 20px;
-            margin-bottom: 14px;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 18px; padding: 18px 20px; margin-bottom: 14px;
         }
-        .script-block-head {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 10px;
-        }
-        .script-block-title {
-            font-size: 0.78rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.09em;
-            color: var(--navy);
-        }
-        .pre-text {
-            white-space: pre-wrap;
-            font-size: 0.94rem;
-            line-height: 1.68;
-            color: #1E293B;
-            margin: 0;
-        }
+        .script-block-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; }
+        .script-block-title { font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.09em; color: var(--navy); }
+        .pre-text { white-space: pre-wrap; font-size: 0.94rem; line-height: 1.68; color: #1E293B; margin: 0; }
 
-        /* ===== LOCKED & BLURRED OVERLAY ===== */
-        .locked-stage {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            min-height: 300px;
-        }
+        /* LOCKED & BLURRED OVERLAY */
+        .locked-stage { position: relative; border-radius: 20px; overflow: hidden; min-height: 310px; }
         .blurred-content {
-            filter: blur(6px);
-            -webkit-filter: blur(6px);
-            opacity: 0.55;
-            user-select: none;
-            pointer-events: none;
-            transition: filter 0.35s ease, opacity 0.35s ease;
+            filter: blur(6px); -webkit-filter: blur(6px); opacity: 0.52;
+            user-select: none; pointer-events: none; transition: filter 0.35s ease, opacity 0.35s ease;
         }
-        .locked-stage.unlocked .blurred-content {
-            filter: none;
-            -webkit-filter: none;
-            opacity: 1;
-            user-select: auto;
-            pointer-events: auto;
-        }
+        .locked-stage.unlocked .blurred-content { filter: none; -webkit-filter: none; opacity: 1; user-select: auto; pointer-events: auto; }
         .lock-overlay {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(248, 250, 252, 0.88) 100%);
+            position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+            padding: 20px; background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(248, 250, 252, 0.92) 100%);
             z-index: 10;
         }
-        .locked-stage.unlocked .lock-overlay {
-            display: none;
-        }
+        .locked-stage.unlocked .lock-overlay { display: none; }
         .lock-card {
-            background: #ffffff;
-            border: 1.5px solid rgba(27, 43, 122, 0.18);
-            border-radius: 24px;
-            padding: 28px 26px;
-            max-width: 440px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 20px 48px rgba(15, 23, 42, 0.12);
-        }
-        .lock-icon-badge {
-            width: 48px;
-            height: 48px;
-            border-radius: 16px;
-            background: var(--navy-pale);
-            color: var(--navy);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            margin-bottom: 14px;
+            background: #ffffff; border: 1.5px solid rgba(27, 43, 122, 0.18);
+            border-radius: 24px; padding: 28px 24px; max-width: 440px; width: 100%;
+            text-align: center; box-shadow: 0 20px 48px rgba(15, 23, 42, 0.12);
         }
 
-        /* ===== SPINNER & ALERTS ===== */
+        /* CONSENT CHECKBOX (ĐỒNG BỘ CTA FORM) */
+        .consent-wrapper { display: flex; align-items: flex-start; gap: 10px; margin-top: 4px; }
+        .consent-checkbox {
+            width: 20px; height: 20px; flex-shrink: 0; margin: 0; cursor: pointer;
+            border: 2px solid #cbd5e1; border-radius: 5px; background-color: #fff;
+            appearance: none; -webkit-appearance: none;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--navy); font-size: 14px; font-weight: 800;
+        }
+        .consent-checkbox:checked { border-color: var(--navy); }
+        .consent-checkbox:checked::before { content: "✓"; }
+        .consent-label { font-size: 0.84rem; color: #475569; font-weight: 500; line-height: 1.5; cursor: pointer; }
+        .consent-link { color: var(--navy); font-weight: 700; text-decoration: underline; }
+
+        /* OPTION CARDS IN MODAL */
+        .option-card {
+            border: 1.5px solid var(--border);
+            border-radius: 20px;
+            padding: 18px 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #fff;
+        }
+        .option-card:hover {
+            border-color: var(--navy);
+            background: var(--navy-pale);
+            transform: translateY(-2px);
+        }
+        .option-card.featured {
+            border-color: var(--navy);
+            background: linear-gradient(180deg, #F0F3FF 0%, #FFFFFF 100%);
+        }
+
+        /* SPINNER & MODAL */
         .spinner {
-            width: 34px;
-            height: 34px;
-            border: 3px solid #E2E8F0;
-            border-top-color: var(--navy);
-            border-radius: 50%;
-            animation: spin 0.75s linear infinite;
-            margin: 0 auto 12px;
+            width: 34px; height: 34px; border: 3px solid #E2E8F0; border-top-color: var(--navy);
+            border-radius: 50%; animation: spin 0.75s linear infinite; margin: 0 auto 12px;
         }
         .btn-spinner {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2.5px solid rgba(255, 255, 255, 0.35);
-            border-top-color: #fff;
-            border-radius: 50%;
-            animation: spin 0.7s linear infinite;
+            display: inline-block; width: 16px; height: 16px;
+            border: 2.5px solid rgba(255, 255, 255, 0.35); border-top-color: #fff;
+            border-radius: 50%; animation: spin 0.7s linear infinite;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* ===== MODAL ===== */
         .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(15, 23, 42, 0.65);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            padding: 16px;
-            overflow-y: auto;
+            position: fixed; inset: 0; background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            display: none; align-items: center; justify-content: center;
+            z-index: 9999; padding: 16px; overflow-y: auto;
         }
         .modal-overlay:not(.hidden) { display: flex; }
         .modal-box {
-            background: #ffffff;
-            border-radius: 28px;
-            width: 100%;
-            max-width: 480px;
-            padding: 28px;
-            box-shadow: var(--shadow-lg);
-            position: relative;
+            background: #ffffff; border-radius: 28px; width: 100%; max-width: 500px;
+            padding: 28px; box-shadow: var(--shadow-lg); position: relative; margin: auto 0;
         }
         .modal-close {
-            width: 36px;
-            height: 36px;
-            background: #F1F5F9;
-            border: none;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--muted);
-            cursor: pointer;
+            width: 36px; height: 36px; background: #F1F5F9; border: none; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: var(--muted); cursor: pointer;
         }
         .modal-close:hover { background: #E2E8F0; color: var(--text); }
 
-        /* ===== FOOTER (ĐỒNG BỘ POPMINUTES) ===== */
+        /* FOOTER */
         .site-footer {
-            background: #F8FAFC;
-            color: #64748B;
-            padding: 56px 0 24px;
-            border-top: 1px solid #E2E8F0;
-            margin-top: 72px;
+            background: #F8FAFC; color: #64748B; padding: 56px 0 24px;
+            border-top: 1px solid #E2E8F0; margin-top: 72px;
         }
         .footer-grid {
-            display: grid;
-            grid-template-columns: 1.1fr 1.3fr 1fr 1fr;
-            gap: 40px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid #E2E8F0;
+            display: grid; grid-template-columns: 1.1fr 1.3fr 1fr 1fr; gap: 40px;
+            padding-bottom: 40px; border-bottom: 1px solid #E2E8F0;
         }
-        .footer-col-title {
-            font-weight: 800;
-            font-size: 0.78rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: #94A3B8;
-            margin-bottom: 18px;
-        }
+        .footer-col-title { font-weight: 800; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: #94A3B8; margin-bottom: 18px; }
         .footer-info-block { display: flex; flex-direction: column; gap: 8px; }
-        .footer-company-name { font-weight: 800; font-size: 0.92rem; color: #334155; line-height: 1.4; }
+        .footer-company-name { font-weight: 800; font-size: 0.92rem; color: #334155; }
         .footer-info-line { font-size: 0.88rem; color: #64748B; line-height: 1.6; }
-        .footer-info-line strong { color: #64748B; font-weight: 600; }
-        .footer-logo-bottom {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-top: 24px;
-        }
+        .footer-logo-bottom { display: flex; align-items: center; gap: 14px; margin-top: 24px; }
         .footer-logo-bottom img { width: 52px; height: 52px; border-radius: 14px; }
-        .footer-logo-bottom span {
-            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
-            font-weight: 800;
-            font-size: 1.45rem;
-            color: #334155;
-            letter-spacing: -0.03em;
-        }
+        .footer-logo-bottom span { font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important; font-weight: 800; font-size: 1.45rem; color: #334155; }
         .footer-logo-bottom span .text-minutes { color: var(--navy); }
         .footer-contact-list { display: flex; flex-direction: column; gap: 12px; }
         .footer-contact-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.88rem; color: #64748B; line-height: 1.55; }
@@ -588,29 +334,15 @@
         .footer-contact-item a { color: #64748B; text-decoration: none; }
         .footer-contact-item a:hover { color: var(--navy); }
         .footer-socials { display: flex; gap: 4px; margin-top: 18px; }
-        .footer-socials a {
-            width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
-            color: #94A3B8; font-size: 18px; text-decoration: none; border-radius: 8px; transition: all 0.2s;
-        }
+        .footer-socials a { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; color: #94A3B8; font-size: 18px; border-radius: 8px; }
         .footer-socials a:hover { color: var(--navy); background: rgba(27, 43, 122, 0.06); }
         .footer-links { display: flex; flex-direction: column; gap: 11px; }
-        .footer-links a {
-            color: #64748B; text-decoration: none; font-size: 0.88rem; font-weight: 500;
-            display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s, transform 0.2s;
-        }
-        .footer-links a:hover { color: var(--navy); transform: translateX(3px); }
+        .footer-links a { color: #64748B; text-decoration: none; font-size: 0.88rem; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; }
+        .footer-links a:hover { color: var(--navy); }
         .footer-links a::before { content: '→'; color: #CBD5E1; font-size: 0.78rem; }
-        .footer-links a:hover::before { color: var(--navy); }
-        .footer-bottom {
-            text-align: center; padding-top: 24px; font-size: 0.72rem; font-weight: 700;
-            letter-spacing: 0.15em; color: #A0AEC0;
-        }
-        @media (max-width: 1024px) {
-            .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-        }
-        @media (max-width: 640px) {
-            .footer-grid { grid-template-columns: 1fr; gap: 28px; }
-        }
+        .footer-bottom { text-align: center; padding-top: 24px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; color: #A0AEC0; }
+        @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
+        @media (max-width: 640px) { .footer-grid { grid-template-columns: 1fr; gap: 28px; } }
     </style>
 </head>
 <body class="bg-noise">
@@ -620,24 +352,25 @@
     <div class="glow-orb w-[340px] h-[340px] bg-[#7c8ec9] bottom-[10%] right-[-90px]" style="opacity:0.07;"></div>
 </div>
 
-<!-- Fixed Navigation -->
+<!-- Navigation -->
 <nav class="nav-mini">
     <div class="nav-inner">
-        <a href="https://pophubly.com/popminutes/" class="nav-logo">
-            <img src="https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png" alt="PopResearch">
+        <a href="[https://pophubly.com/popminutes/](https://pophubly.com/popminutes/)" class="nav-logo">
+            <img src="[https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png](https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png)" alt="PopResearch">
             <span class="nav-logo-text">Pop<span class="text-accent">Research</span></span>
         </a>
 
         <div class="quota-cluster">
             <span class="quota-chip" id="fastQuotaBadge">Quét nhanh: 3/3</span>
             <span class="quota-chip deep" id="deepQuotaBadge">Quét sâu: 2/2</span>
-            <button type="button" onclick="loadUserProfile(true)" class="btn-copy" title="Đồng bộ lượt dùng">
+            <span class="quota-chip credit hidden" id="monthlyCreditBadge">Mở khóa tháng: 0/10</span>
+            <button type="button" onclick="loadUserProfile(true)" class="btn-copy">
                 <i class="fa-solid fa-rotate-right text-xs"></i>
                 <span>Đồng bộ</span>
             </button>
         </div>
 
-        <button type="button" onclick="openUnlockModal()" class="nav-cta-btn">
+        <button type="button" onclick="openUnlockModal('trial')" class="nav-cta-btn">
             <span>Dùng thử PopMinutes</span>
         </button>
     </div>
@@ -646,7 +379,7 @@
 <main class="relative z-10 pt-8 sm:pt-12">
     <div class="wide-container">
 
-        <!-- Hero Header -->
+        <!-- Hero -->
         <div class="max-w-3xl mb-8 sm:mb-10">
             <span class="text-xs font-extrabold uppercase tracking-[0.16em] text-[#1B2B7A] block mb-3">
                 PopHubly Sales Intelligence
@@ -659,7 +392,7 @@
             </p>
         </div>
 
-        <!-- Alert Banner -->
+        <!-- Alert -->
         <div id="alertBox" class="hidden mb-6 px-5 py-4 rounded-2xl text-sm font-semibold border"></div>
 
         <!-- Email Bar -->
@@ -679,7 +412,6 @@
 
         <!-- 2-Column Workspace -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-            <!-- Left: Customer Target -->
             <div class="editorial-card">
                 <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
                     <h2 class="text-lg font-extrabold text-slate-900 m-0">Doanh nghiệp mục tiêu</h2>
@@ -693,7 +425,7 @@
                     </div>
                     <div>
                         <label for="website" class="field-label">Website</label>
-                        <input type="text" id="website" class="input-elegant" placeholder="https://congtykhach.vn">
+                        <input type="text" id="website" class="input-elegant" placeholder="[https://congtykhach.vn](https://congtykhach.vn)">
                     </div>
                     <div>
                         <label for="companyName" class="field-label">Tên doanh nghiệp</label>
@@ -706,7 +438,6 @@
                 </div>
             </div>
 
-            <!-- Right: Seller Offer -->
             <div class="editorial-card flex flex-col">
                 <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
                     <h2 class="text-lg font-extrabold text-slate-900 m-0">Giải pháp của bạn</h2>
@@ -725,46 +456,40 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
 
         <!-- Action Bar -->
         <div class="editorial-card mb-8">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <div class="flex flex-wrap items-center gap-3">
-                    <button type="button" id="btnFast" onclick="runAnalysis('FAST')" class="btn-outline">
-                        <i class="fa-solid fa-bolt text-[#1B2B7A]"></i>
-                        <span>Quét nhanh</span>
-                    </button>
-                    <button type="button" id="btnDeep" onclick="runAnalysis('DEEP')" class="btn-main">
-                        <i class="fa-solid fa-magnifying-glass-chart"></i>
-                        <span>Quét sâu</span>
-                    </button>
-                </div>
-
-                <div id="inlineUnlockPrompt" class="hidden sm:flex items-center gap-3">
-                    <span class="text-xs font-semibold text-slate-500">Cần thêm lượt tra cứu?</span>
-                    <button type="button" onclick="openUnlockModal()" class="btn-copy">Mở khóa 25 lượt/ngày</button>
-                </div>
+            <div class="flex flex-wrap items-center gap-3">
+                <button type="button" id="btnFast" onclick="runAnalysis('FAST')" class="btn-outline">
+                    <i class="fa-solid fa-bolt text-[#1B2B7A]"></i>
+                    <span>Quét nhanh</span>
+                </button>
+                <button type="button" id="btnDeep" onclick="runAnalysis('DEEP')" class="btn-main">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    <span>Quét sâu</span>
+                </button>
             </div>
         </div>
 
-        <!-- Loading State -->
+        <!-- Loading -->
         <div id="loadingBox" class="hidden editorial-card text-center py-12 mb-8">
             <div class="spinner"></div>
             <p id="loadingText" class="text-sm sm:text-base font-bold text-slate-700 m-0">Đang tổng hợp dữ liệu doanh nghiệp...</p>
         </div>
 
-        <!-- Results Workspace -->
+        <!-- Results -->
         <section id="resultSection" class="hidden space-y-6">
 
             <!-- Score & Recommended Offer -->
             <div class="editorial-card">
-                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-100">
-                    <div class="flex items-center gap-5">
-                        <div class="w-20 h-20 rounded-2xl bg-[#F0F3FF] border border-[#1B2B7A]/15 flex flex-col items-center justify-center flex-shrink-0">
-                            <span class="text-[0.65rem] font-extrabold uppercase tracking-widest text-slate-400">Điểm</span>
-                            <span id="resScore" class="text-2xl font-black text-[#1B2B7A] leading-tight">--</span>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-5 pb-6 border-b border-slate-100">
+                    <div class="score-badge-card">
+                        <span class="text-[0.65rem] font-extrabold uppercase tracking-widest text-slate-400 mb-1">Điểm phù hợp</span>
+                        <div class="flex items-baseline justify-center whitespace-nowrap">
+                            <span id="resScoreNum" class="text-3xl font-black text-[#1B2B7A] leading-none">--</span>
+                            <span class="text-sm font-bold text-slate-400 ml-0.5">/100</span>
                         </div>
-                        <div>
-                            <span id="resPriority" class="inline-block text-xs font-extrabold uppercase tracking-wider text-[#1B2B7A] bg-[#F0F3FF] px-3 py-1 rounded-full mb-2"></span>
-                            <p id="resReasoning" class="text-sm sm:text-base text-slate-600 font-medium m-0 leading-relaxed"></p>
-                        </div>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <span id="resPriority" class="inline-block text-xs font-extrabold uppercase tracking-wider text-[#1B2B7A] bg-[#F0F3FF] px-3 py-1 rounded-full mb-2"></span>
+                        <p id="resReasoning" class="text-sm sm:text-base text-slate-600 font-medium m-0 leading-relaxed"></p>
                     </div>
                 </div>
 
@@ -784,7 +509,7 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
                 </div>
             </div>
 
-            <!-- Company Intelligence Profile -->
+            <!-- Company Profile -->
             <div class="editorial-card">
                 <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
                     <h2 class="text-lg font-extrabold text-slate-900 m-0">Chân dung doanh nghiệp</h2>
@@ -814,48 +539,22 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
                     </button>
                 </div>
 
-                <!-- Tab 1: Approach (Unlocked) -->
+                <!-- Tab 1: Approach -->
                 <div id="tabApproach" class="tab-panel active"></div>
 
-                <!-- Tab 2: Consultation (Locked / Blurred until PopMinutes Trial) -->
+                <!-- Tab 2: Consultation -->
                 <div id="tabConsult" class="tab-panel">
                     <div id="consultLockStage" class="locked-stage">
                         <div id="consultContent" class="blurred-content"></div>
-                        <div class="lock-overlay">
-                            <div class="lock-card">
-                                <div class="lock-icon-badge">
-                                    <i class="fa-solid fa-lock"></i>
-                                </div>
-                                <h3 class="text-lg font-extrabold text-slate-900 mb-2">Mở khóa kịch bản Tư vấn &amp; Đàm phán</h3>
-                                <p class="text-sm text-slate-500 font-medium mb-5 leading-relaxed">
-                                    Đăng ký dùng thử PopMinutes để xem trọn bộ câu hỏi chẩn đoán, phương án xử lý từ chối và nâng hạn mức lên 25 lượt mỗi ngày.
-                                </p>
-                                <button type="button" onclick="openUnlockModal()" class="btn-main w-full">
-                                    <span>Mở khóa miễn phí</span>
-                                </button>
-                            </div>
-                        </div>
+                        <div class="lock-overlay" id="consultOverlay"></div>
                     </div>
                 </div>
 
-                <!-- Tab 3: Negotiation (Locked / Blurred until PopMinutes Trial) -->
+                <!-- Tab 3: Negotiation -->
                 <div id="tabNegotiate" class="tab-panel">
                     <div id="negotiateLockStage" class="locked-stage">
                         <div id="negotiateContent" class="blurred-content"></div>
-                        <div class="lock-overlay">
-                            <div class="lock-card">
-                                <div class="lock-icon-badge">
-                                    <i class="fa-solid fa-lock"></i>
-                                </div>
-                                <h3 class="text-lg font-extrabold text-slate-900 mb-2">Mở khóa kịch bản Tư vấn &amp; Đàm phán</h3>
-                                <p class="text-sm text-slate-500 font-medium mb-5 leading-relaxed">
-                                    Đăng ký dùng thử PopMinutes để xem trọn bộ đòn bẩy thương lượng, câu thoại chốt bước tiếp theo và nâng hạn mức lên 25 lượt mỗi ngày.
-                                </p>
-                                <button type="button" onclick="openUnlockModal()" class="btn-main w-full">
-                                    <span>Mở khóa miễn phí</span>
-                                </button>
-                            </div>
-                        </div>
+                        <div class="lock-overlay" id="negotiateOverlay"></div>
                     </div>
                 </div>
             </div>
@@ -864,7 +563,7 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
     </div>
 </main>
 
-<!-- Footer đồng bộ PopMinutes -->
+<!-- Footer -->
 <footer class="site-footer">
     <div class="wide-container">
         <div class="footer-grid">
@@ -876,7 +575,7 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
                     <div class="footer-info-line"><strong>MST:</strong> 1602232842</div>
                 </div>
                 <div class="footer-logo-bottom">
-                    <img src="https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png" alt="PopMinutes">
+                    <img src="[https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png](https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png)" alt="PopMinutes">
                     <span>Pop<span class="text-minutes">Minutes</span></span>
                 </div>
             </div>
@@ -909,18 +608,18 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
             <div>
                 <div class="footer-col-title">Chính sách &amp; Điều khoản</div>
                 <div class="footer-links">
-                    <a href="https://pophubly.com/pophubly-privacy-policy/" target="_blank" rel="noopener">Chính sách bảo mật</a>
-                    <a href="https://pophubly.com/term-of-use/" target="_blank" rel="noopener">Điều khoản sử dụng</a>
-                    <a href="https://pophubly.com/chinh-sach-hoan-tien/" target="_blank" rel="noopener">Chính sách hoàn tiền</a>
-                    <a href="https://pophubly.com/quy-trinh-thanh-toan/" target="_blank" rel="noopener">Quy trình thanh toán</a>
-                    <a href="https://pophubly.com/quy-trinh-khieu-nai/" target="_blank" rel="noopener">Quy trình khiếu nại</a>
+                    <a href="[https://pophubly.com/pophubly-privacy-policy/](https://pophubly.com/pophubly-privacy-policy/)" target="_blank" rel="noopener">Chính sách bảo mật</a>
+                    <a href="[https://pophubly.com/term-of-use/](https://pophubly.com/term-of-use/)" target="_blank" rel="noopener">Điều khoản sử dụng</a>
+                    <a href="[https://pophubly.com/chinh-sach-hoan-tien/](https://pophubly.com/chinh-sach-hoan-tien/)" target="_blank" rel="noopener">Chính sách hoàn tiền</a>
+                    <a href="[https://pophubly.com/quy-trinh-thanh-toan/](https://pophubly.com/quy-trinh-thanh-toan/)" target="_blank" rel="noopener">Quy trình thanh toán</a>
+                    <a href="[https://pophubly.com/quy-trinh-khieu-nai/](https://pophubly.com/quy-trinh-khieu-nai/)" target="_blank" rel="noopener">Quy trình khiếu nại</a>
                 </div>
             </div>
 
             <div>
                 <div class="footer-col-title">Hệ sinh thái</div>
                 <div class="footer-links">
-                    <a href="https://pophubly.com/popminutes/" target="_blank" rel="noopener">PopMinutes App</a>
+                    <a href="[https://pophubly.com/popminutes/](https://pophubly.com/popminutes/)" target="_blank" rel="noopener">PopMinutes App</a>
                     <a href="#">Đối tác địa điểm</a>
                     <a href="#">Đối tác chiến lược</a>
                     <a href="#">Tiếp thị liên kết</a>
@@ -934,55 +633,137 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
     </div>
 </footer>
 
-<!-- Modal: Đăng ký dùng thử PopMinutes & Mở khóa -->
+<!-- Modal: Chọn phương án mở khóa -> Form Trial PopMinutes hoặc QR Thanh toán -->
 <div id="unlockModal" class="modal-overlay hidden">
     <div class="modal-box">
         <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-5">
-            <h3 class="text-lg font-extrabold text-slate-900 m-0">Dùng thử PopMinutes 90 ngày</h3>
+            <div class="flex items-center gap-2">
+                <button type="button" id="modalBackBtn" onclick="showModalStep('choose')" class="hidden modal-close mr-1" aria-label="Quay lại">
+                    <i class="fa-solid fa-arrow-left text-xs"></i>
+                </button>
+                <h3 id="unlockModalTitle" class="text-lg font-extrabold text-slate-900 m-0">Mở khóa kịch bản</h3>
+            </div>
             <button type="button" onclick="closeUnlockModal()" class="modal-close" aria-label="Đóng">
                 <i class="fa-solid fa-xmark"></i>
             </button>
         </div>
 
-        <p class="text-sm text-slate-500 font-medium mb-5 leading-relaxed">
-            Kích hoạt tài khoản trải nghiệm PopMinutes để mở khóa ngay <strong class="text-slate-800">kịch bản Tư vấn &amp; Đàm phán</strong> cùng <strong class="text-slate-800">20 lượt Quét nhanh + 5 lượt Quét sâu</strong> mỗi ngày.
-        </p>
+        <!-- BƯỚC 1: CHỌN 1 TRONG 2 OPTION -->
+        <div id="modalStepChoose" class="space-y-4">
+            <div class="option-card featured" onclick="showModalStep('trial')">
+                <div class="flex items-center justify-between mb-1.5">
+                    <span class="text-xs font-extrabold uppercase tracking-wider text-[#1B2B7A]">Khuyên dùng</span>
+                    <span class="text-xs font-extrabold bg-[#1B2B7A] text-white px-2.5 py-0.5 rounded-full">Miễn phí 10 lượt/tháng</span>
+                </div>
+                <h4 class="text-base font-extrabold text-slate-900 mb-1">Kích hoạt dùng thử PopMinutes</h4>
+                <p class="text-sm text-slate-600 m-0 leading-relaxed">
+                    Tạo tài khoản PopMinutes dùng thử 90 ngày, mở khóa ngay <strong>10 lượt kịch bản Tư vấn &amp; Đàm phán/tháng</strong> và ưu đãi chỉ <strong>2.500đ/lượt</strong> cho các lần sau.
+                </p>
+            </div>
 
-        <form id="unlockTrialForm" class="space-y-4">
-            <div>
-                <label for="trialName" class="field-label">Họ và tên</label>
-                <input type="text" id="trialName" class="input-elegant" placeholder="Nguyễn Văn A" required>
+            <div class="option-card" onclick="showModalStep('qr')">
+                <div class="flex items-center justify-between mb-1.5">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Không cần đăng ký</span>
+                    <span id="qrOptionPriceBadge" class="text-xs font-extrabold bg-slate-100 text-slate-800 px-2.5 py-0.5 rounded-full">3.500đ / lượt</span>
+                </div>
+                <h4 class="text-base font-extrabold text-slate-900 mb-1">Thanh toán lẻ qua mã QR</h4>
+                <p id="qrOptionDesc" class="text-sm text-slate-600 m-0 leading-relaxed">
+                    Mở khóa ngay trọn bộ kịch bản Tư vấn &amp; Đàm phán cho doanh nghiệp đang xem với mức phí <strong>3.500đ</strong>.
+                </p>
             </div>
-            <div>
-                <label for="trialEmail" class="field-label">Email công việc</label>
-                <input type="email" id="trialEmail" class="input-elegant" placeholder="ten.ban@congty.com" required>
+        </div>
+
+        <!-- BƯỚC 2A: FORM ĐĂNG KÝ TRIAL POPMINUTES (ĐỒNG BỘ CTA FORM) -->
+        <form id="unlockTrialForm" class="hidden space-y-4" novalidate>
+            <p class="text-sm text-slate-500 font-medium m-0 leading-relaxed">
+                Hệ thống sẽ khởi tạo tài khoản <strong>PopMinutes</strong> qua email và kích hoạt ngay <strong>10 lượt mở khóa kịch bản/tháng</strong>.
+            </p>
+            <input type="text" id="trialName" name="name" placeholder="Họ và tên của bạn *" class="input-elegant" required>
+            <input type="email" id="trialEmail" name="email" placeholder="Email công việc *" class="input-elegant" required>
+            <input type="tel" id="trialPhone" name="phone" placeholder="Số điện thoại của bạn *" class="input-elegant" required>
+            <textarea id="trialNote" name="note" placeholder="Ghi chú thêm cho chúng tôi..." rows="2" class="input-elegant resize-none"></textarea>
+            <input type="hidden" id="trialRef" name="ref" value="">
+
+            <div class="consent-wrapper">
+                <input type="checkbox" id="trialConsent" name="consent" required class="consent-checkbox">
+                <label for="trialConsent" class="consent-label">
+                    Tôi đồng ý với
+                    <a href="[https://pophubly.com/pophubly-privacy-policy/](https://pophubly.com/pophubly-privacy-policy/)" target="_blank" class="consent-link">Chính sách bảo mật</a>
+                    và
+                    <a href="[https://pophubly.com/term-of-use/](https://pophubly.com/term-of-use/)" target="_blank" class="consent-link">Điều khoản sử dụng</a>.
+                </label>
             </div>
-            <div>
-                <label for="trialPhone" class="field-label">Số điện thoại</label>
-                <input type="tel" id="trialPhone" class="input-elegant" placeholder="09xxxxxxxx" required>
-            </div>
+
             <button type="submit" id="unlockSubmitBtn" class="btn-main w-full py-4">
-                <span>Kích hoạt &amp; Mở khóa ngay</span>
+                <span>DÙNG THỬ 90 NGÀY &amp; MỞ KHÓA</span>
             </button>
         </form>
+
+        <!-- BƯỚC 2B: THANH TOÁN QR -->
+        <div id="modalStepQr" class="hidden text-center space-y-4">
+            <div class="bg-[#F8FAFC] border border-slate-200 rounded-2xl p-4 inline-block mx-auto">
+                <img id="vietqrImage" src="" alt="Mã QR thanh toán" class="w-56 h-56 object-contain mx-auto rounded-xl bg-white">
+            </div>
+
+            <div class="bg-[#F0F3FF] border border-[#1B2B7A]/15 rounded-2xl p-4 text-left text-sm space-y-1.5">
+                <div class="flex justify-between">
+                    <span class="text-slate-500">Số tiền:</span>
+                    <strong id="qrAmountText" class="text-[#1B2B7A] text-base">3.500đ</strong>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-500">Đơn vị thụ hưởng:</span>
+                    <strong class="text-slate-800">CÔNG TY TNHH POPHUBLY</strong>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-500">Nội dung chuyển khoản:</span>
+                    <strong id="qrMemoText" class="text-slate-900">PR0000</strong>
+                </div>
+            </div>
+
+            <button type="button" id="confirmQrBtn" onclick="submitQrPayment()" class="btn-main w-full py-4">
+                <span>Tôi đã chuyển khoản — Mở khóa ngay</span>
+            </button>
+        </div>
     </div>
 </div>
 
 <script>
-    // 1. URL Web App của PopResearch Backend
+    // 1. URL Web App PopResearch Backend
     const POPRESEARCH_API_URL = 'https://script.google.com/macros/s/AKfycbw7qwDnQCKRCVPffwVCH9MfD_3qCJJc1eJykQh51qpTfomgoOlyGf23uTTU1cM2Mj2s/exec';
-    // 2. URL ghi nhận Lead dùng thử PopMinutes
+    // 2. URL tạo tài khoản dùng thử PopMinutes (giống ctaForm)
     const POPMINUTES_LEAD_URL = 'https://script.google.com/macros/s/AKfycbxrYkvMg1JxGCzuPzdpUaBYIrqZu6DyX2Qh0IXV49OYhAaCb6NHBY9BZFmdBBxLe65i/exec';
 
+    // 3. Cấu hình tài khoản nhận VietQR (điền mã ngân hàng và số tài khoản công ty)
+    const VIETQR_CONFIG = {
+        BANK_ID: 'Ngân hàng Quân đội (MB Bank)',              // Ví dụ: MB, VCB, ACB, TCB, BIDV...
+        ACCOUNT_NO: '1602232842',   // Số tài khoản nhận thanh toán
+        ACCOUNT_NAME: 'CONG TY TNHH POPHUBLY'
+    };
+
     let currentQuotaState = {
-        isUnlocked: false,
+        isPopMinutesUser: false,
         fastLimit: 3,
         fastRemaining: 3,
         deepLimit: 2,
-        deepRemaining: 2
+        deepRemaining: 2,
+        scriptUnlockLimit: 0,
+        scriptUnlocksRemaining: 0,
+        singleUnlockPrice: 3500,
+        unlockedTargets: []
     };
 
+    let currentAnalysisTarget = {
+        targetKey: '',
+        targetUnlocked: false
+    };
+
+    let currentOrderCode = '';
+
     window.addEventListener('DOMContentLoaded', () => {
+        const ref = new URLSearchParams(window.location.search).get('ref') || localStorage.getItem('popminutes_affiliate_ref') || '';
+        const refInput = document.getElementById('trialRef');
+        if (refInput) refInput.value = ref;
+
         const savedEmail = localStorage.getItem('popresearch_email');
         if (savedEmail) {
             document.getElementById('userEmail').value = savedEmail;
@@ -993,13 +774,9 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
     function showAlert(type, msg) {
         const box = document.getElementById('alertBox');
         box.className = 'mb-6 px-5 py-4 rounded-2xl text-sm font-semibold border';
-        if (type === 'error') {
-            box.classList.add('bg-red-50', 'text-red-700', 'border-red-200');
-        } else if (type === 'warn') {
-            box.classList.add('bg-amber-50', 'text-amber-800', 'border-amber-200');
-        } else {
-            box.classList.add('bg-emerald-50', 'text-emerald-800', 'border-emerald-200');
-        }
+        if (type === 'error') box.classList.add('bg-red-50', 'text-red-700', 'border-red-200');
+        else if (type === 'warn') box.classList.add('bg-amber-50', 'text-amber-800', 'border-amber-200');
+        else box.classList.add('bg-emerald-50', 'text-emerald-800', 'border-emerald-200');
         box.textContent = msg;
         box.classList.remove('hidden');
     }
@@ -1014,26 +791,29 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
         if (!quota) return;
         currentQuotaState = quota;
 
-        document.getElementById('fastQuotaBadge').textContent =
-            `Quét nhanh: ${quota.fastRemaining}/${quota.fastLimit}`;
-        document.getElementById('deepQuotaBadge').textContent =
-            `Quét sâu: ${quota.deepRemaining}/${quota.deepLimit}`;
+        document.getElementById('fastQuotaBadge').textContent = `Quét nhanh: ${quota.fastRemaining}/${quota.fastLimit}`;
+        document.getElementById('deepQuotaBadge').textContent = `Quét sâu: ${quota.deepRemaining}/${quota.deepLimit}`;
 
+        const creditBadge = document.getElementById('monthlyCreditBadge');
         const statusEl = document.getElementById('quotaStatusText');
-        const inlinePrompt = document.getElementById('inlineUnlockPrompt');
 
-        if (quota.isUnlocked) {
-            statusEl.innerHTML = 'Tài khoản đã mở khóa: <strong class="text-[#1B2B7A]">20 Quét nhanh</strong> &amp; <strong class="text-[#1B2B7A]">5 Quét sâu</strong> mỗi ngày.';
-            if (inlinePrompt) inlinePrompt.classList.add('hidden');
+        if (quota.isPopMinutesUser) {
+            creditBadge.classList.remove('hidden');
+            creditBadge.textContent = `Mở khóa tháng: ${quota.scriptUnlocksRemaining}/${quota.scriptUnlockLimit}`;
+            statusEl.innerHTML = `Thành viên PopMinutes: Còn <strong class="text-[#1B2B7A]">${quota.scriptUnlocksRemaining}/${quota.scriptUnlockLimit}</strong> lượt mở khóa kịch bản tháng này (sau đó <strong>2.500đ/lượt</strong>).`;
         } else {
+            creditBadge.classList.add('hidden');
             statusEl.innerHTML = 'Hạn mức mặc định: <strong class="text-slate-800">3 Quét nhanh</strong> &amp; <strong class="text-slate-800">2 Quét sâu</strong> mỗi ngày.';
-            if (inlinePrompt) inlinePrompt.classList.remove('hidden');
         }
 
-        applyScriptLockState(Boolean(quota.isUnlocked));
+        if (currentAnalysisTarget.targetKey) {
+            const isUnlocked = quota.unlockedTargets && quota.unlockedTargets.indexOf(currentAnalysisTarget.targetKey) !== -1;
+            currentAnalysisTarget.targetUnlocked = isUnlocked;
+            renderLockOverlays(isUnlocked);
+        }
     }
 
-    function applyScriptLockState(isUnlocked) {
+    function renderLockOverlays(isUnlocked) {
         const consultStage = document.getElementById('consultLockStage');
         const negotiateStage = document.getElementById('negotiateLockStage');
         const badge = document.getElementById('scriptAccessBadge');
@@ -1042,19 +822,61 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
         if (consultStage) consultStage.classList.toggle('unlocked', isUnlocked);
         if (negotiateStage) negotiateStage.classList.toggle('unlocked', isUnlocked);
 
-        lockIcons.forEach(icon => {
-            icon.style.display = isUnlocked ? 'none' : 'inline-block';
-        });
+        lockIcons.forEach(icon => { icon.style.display = isUnlocked ? 'none' : 'inline-block'; });
 
-        if (badge) {
-            badge.textContent = isUnlocked ? 'Đã mở khóa toàn bộ 3 kịch bản' : 'Mở khóa 2 kịch bản còn lại với PopMinutes';
+        if (isUnlocked) {
+            if (badge) badge.textContent = 'Đã mở khóa toàn bộ 3 kịch bản';
+            return;
         }
+
+        if (badge) badge.textContent = 'Kịch bản Tư vấn & Đàm phán đang khóa';
+
+        const q = currentQuotaState;
+        let overlayHtml = '';
+
+        if (q.isPopMinutesUser && q.scriptUnlocksRemaining > 0) {
+            overlayHtml = `
+                <div class="lock-card">
+                    <div class="w-12 h-12 rounded-2xl bg-[#F0F3FF] text-[#1B2B7A] inline-flex items-center justify-center text-lg mb-3">
+                        <i class="fa-solid fa-unlock-keyhole"></i>
+                    </div>
+                    <h3 class="text-lg font-extrabold text-slate-900 mb-2">Mở khóa kịch bản Tư vấn &amp; Đàm phán</h3>
+                    <p class="text-sm text-slate-500 font-medium mb-5 leading-relaxed">
+                        Bạn còn <strong>${q.scriptUnlocksRemaining}/${q.scriptUnlockLimit} lượt</strong> mở khóa miễn phí trong tháng từ gói PopMinutes.
+                    </p>
+                    <button type="button" onclick="useMonthlyScriptCredit()" class="btn-main w-full">
+                        <span>Dùng 1 lượt mở khóa ngay</span>
+                    </button>
+                </div>
+            `;
+        } else {
+            const priceLabel = q.isPopMinutesUser ? '2.500đ' : '3.500đ';
+            const descText = q.isPopMinutesUser
+                ? 'Bạn đã dùng hết 10 lượt miễn phí trong tháng. Mở khóa tiếp doanh nghiệp này với ưu đãi thành viên <strong>2.500đ/lượt</strong>.'
+                : 'Kích hoạt dùng thử PopMinutes để nhận <strong>10 lượt mở khóa/tháng</strong> hoặc mở khóa lẻ <strong>3.500đ/lượt</strong>.';
+
+            overlayHtml = `
+                <div class="lock-card">
+                    <div class="w-12 h-12 rounded-2xl bg-[#F0F3FF] text-[#1B2B7A] inline-flex items-center justify-center text-lg mb-3">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <h3 class="text-lg font-extrabold text-slate-900 mb-2">Mở khóa kịch bản Tư vấn &amp; Đàm phán</h3>
+                    <p class="text-sm text-slate-500 font-medium mb-5 leading-relaxed">${descText}</p>
+                    <button type="button" onclick="openUnlockModal('auto')" class="btn-main w-full">
+                        <span>Mở khóa kịch bản (${priceLabel})</span>
+                    </button>
+                </div>
+            `;
+        }
+
+        document.getElementById('consultOverlay').innerHTML = overlayHtml;
+        document.getElementById('negotiateOverlay').innerHTML = overlayHtml;
     }
 
     async function loadUserProfile(showFeedback = false) {
         const email = document.getElementById('userEmail').value.trim().toLowerCase();
         if (!email) {
-            if (showFeedback) showAlert('warn', 'Vui lòng nhập email công việc để đồng bộ lượt.');
+            if (showFeedback) showAlert('warn', 'Vui lòng nhập email công việc.');
             return;
         }
         localStorage.setItem('popresearch_email', email);
@@ -1067,23 +889,103 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
             if (data.status === 'success') {
                 updateQuotaUI(data.quota);
                 const offerInput = document.getElementById('sellerOffer');
-                if (data.savedOffer && !offerInput.value.trim()) {
-                    offerInput.value = data.savedOffer;
-                }
-                if (showFeedback) showAlert('success', 'Đã đồng bộ hạn mức và gói giải pháp.');
+                if (data.savedOffer && !offerInput.value.trim()) offerInput.value = data.savedOffer;
+                if (showFeedback) showAlert('success', 'Đã đồng bộ dữ liệu tài khoản.');
             }
         } catch (err) {
             if (showFeedback) showAlert('error', 'Không thể đồng bộ dữ liệu.');
         }
     }
 
-    function openUnlockModal() {
-        const currentEmail = document.getElementById('userEmail').value.trim();
-        if (currentEmail) {
-            document.getElementById('trialEmail').value = currentEmail;
+    async function useMonthlyScriptCredit() {
+        const email = document.getElementById('userEmail').value.trim().toLowerCase();
+        if (!email || !currentAnalysisTarget.targetKey) return;
+
+        try {
+            const res = await fetch(POPRESEARCH_API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({
+                    action: 'useScriptCredit',
+                    email,
+                    targetKey: currentAnalysisTarget.targetKey
+                })
+            });
+            const data = await res.json();
+            if (data.status === 'success') {
+                updateQuotaUI(data.quota);
+                showAlert('success', 'Đã mở khóa kịch bản Tư vấn & Đàm phán.');
+            } else {
+                if (data.quota) updateQuotaUI(data.quota);
+                openUnlockModal('qr');
+            }
+        } catch (err) {
+            showAlert('error', 'Lỗi kết nối: ' + err.message);
         }
+    }
+
+    // ================= MODAL 2 LỰA CHỌN =================
+    function openUnlockModal(initialMode = 'auto') {
+        const currentEmail = document.getElementById('userEmail').value.trim();
+        if (currentEmail) document.getElementById('trialEmail').value = currentEmail;
+
+        const price = currentQuotaState.isPopMinutesUser ? 2500 : 3500;
+        const priceFormatted = price.toLocaleString('vi-VN') + 'đ';
+
+        document.getElementById('qrOptionPriceBadge').textContent = `${priceFormatted} / lượt`;
+        document.getElementById('qrOptionDesc').innerHTML =
+            `Mở khóa ngay trọn bộ kịch bản Tư vấn &amp; Đàm phán cho doanh nghiệp đang xem với mức phí <strong>${priceFormatted}</strong>.`;
+
         document.getElementById('unlockModal').classList.remove('hidden');
         document.body.style.overflow = 'hidden';
+
+        if (initialMode === 'trial') {
+            showModalStep('trial');
+        } else if (initialMode === 'qr' || currentQuotaState.isPopMinutesUser) {
+            // Nếu đã là thành viên PopMinutes (đã hết 10 lượt tháng) thì mở thẳng QR 2.500đ
+            showModalStep('qr');
+        } else {
+            showModalStep('choose');
+        }
+    }
+
+    function showModalStep(step) {
+        const stepChoose = document.getElementById('modalStepChoose');
+        const stepTrial = document.getElementById('unlockTrialForm');
+        const stepQr = document.getElementById('modalStepQr');
+        const backBtn = document.getElementById('modalBackBtn');
+        const titleEl = document.getElementById('unlockModalTitle');
+
+        stepChoose.classList.add('hidden');
+        stepTrial.classList.add('hidden');
+        stepQr.classList.add('hidden');
+
+        if (step === 'choose') {
+            stepChoose.classList.remove('hidden');
+            backBtn.classList.add('hidden');
+            titleEl.textContent = 'Chọn phương án mở khóa';
+        } else if (step === 'trial') {
+            stepTrial.classList.remove('hidden');
+            backBtn.classList.remove('hidden');
+            titleEl.textContent = 'Dùng thử PopMinutes 90 ngày';
+        } else if (step === 'qr') {
+            stepQr.classList.remove('hidden');
+            backBtn.classList.toggle('hidden', currentQuotaState.isPopMinutesUser);
+            titleEl.textContent = 'Thanh toán mở khóa lẻ';
+            prepareQrPayment();
+        }
+    }
+
+    function prepareQrPayment() {
+        const amount = currentQuotaState.isPopMinutesUser ? 2500 : 3500;
+        const priceFormatted = amount.toLocaleString('vi-VN') + 'đ';
+        currentOrderCode = 'PR' + Math.floor(100000 + Math.random() * 900000);
+
+        document.getElementById('qrAmountText').textContent = priceFormatted;
+        document.getElementById('qrMemoText').textContent = currentOrderCode;
+
+        const qrUrl = `[https://img.vietqr.io/image/$](https://img.vietqr.io/image/$){VIETQR_CONFIG.BANK_ID}-${VIETQR_CONFIG.ACCOUNT_NO}-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(currentOrderCode)}&accountName=${encodeURIComponent(VIETQR_CONFIG.ACCOUNT_NAME)}`;
+        document.getElementById('vietqrImage').src = qrUrl;
     }
 
     function closeUnlockModal() {
@@ -1095,47 +997,121 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
         if (e.target === this) closeUnlockModal();
     });
 
+    // Submit Form đăng ký PopMinutes (kiểm tra hợp lệ & chờ xác nhận từ hệ thống PopMinutes)
     document.getElementById('unlockTrialForm').addEventListener('submit', async function(e) {
         e.preventDefault();
+
         const name = document.getElementById('trialName').value.trim();
         const email = document.getElementById('trialEmail').value.trim().toLowerCase();
         const phone = document.getElementById('trialPhone').value.trim();
+        const note = document.getElementById('trialNote').value.trim();
+        const ref = document.getElementById('trialRef').value.trim();
+        const consent = document.getElementById('trialConsent').checked;
+
+        if (!name || name.length < 2) {
+            showAlert('error', 'Vui lòng nhập đầy đủ họ và tên.');
+            return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showAlert('error', 'Vui lòng nhập địa chỉ email hợp lệ.');
+            return;
+        }
+        if (!/^(0|\+84)[0-9]{8,10}$/.test(phone.replace(/\s+/g, ''))) {
+            showAlert('error', 'Vui lòng nhập số điện thoại hợp lệ.');
+            return;
+        }
+        if (!consent) {
+            showAlert('error', 'Vui lòng đồng ý với Chính sách bảo mật và Điều khoản sử dụng.');
+            return;
+        }
+
         const btn = document.getElementById('unlockSubmitBtn');
         const originalHTML = btn.innerHTML;
-
         btn.disabled = true;
-        btn.innerHTML = '<span class="btn-spinner"></span><span>Đang kích hoạt...</span>';
+        btn.innerHTML = '<span class="btn-spinner"></span><span>Đang khởi tạo tài khoản...</span>';
 
         try {
-            // 1. Gửi lead đăng ký dùng thử về hệ thống PopMinutes
-            fetch(POPMINUTES_LEAD_URL, {
+            // 1. Gửi đăng ký sang hệ thống PopMinutes giống hệt ctaForm
+            const leadRes = await fetch(POPMINUTES_LEAD_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                 body: JSON.stringify({
                     name,
                     email,
                     phone,
-                    note: 'Đăng ký dùng thử từ PopResearch',
-                    source: 'POPRESEARCH_UNLOCK'
+                    note: note ? `[PopResearch] ${note}` : '[PopResearch] Đăng ký dùng thử 90 ngày',
+                    ref,
+                    consent: 'on',
+                    source: 'CTA'
                 })
-            }).catch(() => {});
+            });
 
-            // 2. Mở khóa trực tiếp trên PopResearch Backend
+            const leadText = await leadRes.text();
+            let leadResult = {};
+            try { leadResult = JSON.parse(leadText); } catch (err) {}
+
+            const leadOk = leadResult.result === 'success' || leadResult.status === 'success' || leadResult.status === 200 || leadResult.success === true;
+            if (!leadOk) {
+                throw new Error(leadResult.message || 'Không thể tạo tài khoản PopMinutes. Vui lòng kiểm tra lại thông tin.');
+            }
+
+            // 2. Kích hoạt quyền lợi 10 lượt mở khóa/tháng trên PopResearch
+            const unlockRes = await fetch(POPRESEARCH_API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({
+                    action: 'activatePopMinutes',
+                    email,
+                    targetKey: currentAnalysisTarget.targetKey
+                })
+            });
+            const unlockData = await unlockRes.json();
+
+            if (unlockData.status === 'success') {
+                document.getElementById('userEmail').value = email;
+                localStorage.setItem('popresearch_email', email);
+                updateQuotaUI(unlockData.quota);
+                closeUnlockModal();
+                showAlert('success', 'Đã đăng ký PopMinutes thành công (kiểm tra email để kích hoạt) và mở khóa 10 lượt kịch bản/tháng.');
+            } else {
+                throw new Error(unlockData.message || 'Lỗi kích hoạt quyền lợi.');
+            }
+        } catch (err) {
+            showAlert('error', err.message);
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = originalHTML;
+        }
+    });
+
+    async function submitQrPayment() {
+        const email = document.getElementById('userEmail').value.trim().toLowerCase();
+        const amount = currentQuotaState.isPopMinutesUser ? 2500 : 3500;
+        const btn = document.getElementById('confirmQrBtn');
+        const originalHTML = btn.innerHTML;
+
+        btn.disabled = true;
+        btn.innerHTML = '<span class="btn-spinner"></span><span>Đang xác nhận...</span>';
+
+        try {
             const res = await fetch(POPRESEARCH_API_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                body: JSON.stringify({ action: 'unlockTrial', email })
+                body: JSON.stringify({
+                    action: 'confirmQrPayment',
+                    email,
+                    targetKey: currentAnalysisTarget.targetKey,
+                    amount,
+                    orderCode: currentOrderCode
+                })
             });
             const data = await res.json();
-
             if (data.status === 'success') {
-                document.getElementById('userEmail').value = email;
-                localStorage.setItem('popresearch_email', email);
                 updateQuotaUI(data.quota);
                 closeUnlockModal();
-                showAlert('success', 'Đã mở khóa toàn bộ kịch bản và nâng hạn mức lên 25 lượt/ngày.');
+                showAlert('success', `Đã ghi nhận giao dịch ${currentOrderCode} và mở khóa kịch bản cho doanh nghiệp này.`);
             } else {
-                showAlert('error', data.message || 'Không thể kích hoạt mở khóa.');
+                showAlert('error', data.message || 'Không thể xác nhận giao dịch.');
             }
         } catch (err) {
             showAlert('error', 'Lỗi kết nối: ' + err.message);
@@ -1143,8 +1119,9 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
             btn.disabled = false;
             btn.innerHTML = originalHTML;
         }
-    });
+    }
 
+    // ================= PHÂN TÍCH DOANH NGHIỆP =================
     function setLoading(isLoading, text = '') {
         document.getElementById('btnFast').disabled = isLoading;
         document.getElementById('btnDeep').disabled = isLoading;
@@ -1206,13 +1183,7 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
 
             if (data.quota) updateQuotaUI(data.quota);
 
-            if (data.status === 'quota_exceeded') {
-                showAlert('warn', data.message);
-                if (data.needUnlock) openUnlockModal();
-                return;
-            }
-
-            if (data.status === 'system_cap') {
+            if (data.status === 'quota_exceeded' || data.status === 'system_cap') {
                 showAlert('warn', data.message);
                 return;
             }
@@ -1222,7 +1193,12 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
                 return;
             }
 
-            renderResults(data.companyProfile, data.battlecard, data.executionMode, data.quota);
+            currentAnalysisTarget = {
+                targetKey: data.targetKey || '',
+                targetUnlocked: Boolean(data.targetUnlocked)
+            };
+
+            renderResults(data.companyProfile, data.battlecard, data.executionMode, data.targetUnlocked);
             const resultEl = document.getElementById('resultSection');
             resultEl.classList.remove('hidden');
             resultEl.scrollIntoView({ behavior: 'smooth' });
@@ -1265,8 +1241,8 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
         `;
     }
 
-    function renderResults(profile, card, execMode, quota) {
-        document.getElementById('resScore').textContent = `${card.fit_score ?? '--'}/100`;
+    function renderResults(profile, card, execMode, isTargetUnlocked) {
+        document.getElementById('resScoreNum').textContent = card.fit_score ?? '--';
         document.getElementById('resPriority').textContent = card.priority_level || 'Đánh giá cơ hội';
         document.getElementById('resReasoning').textContent = card.score_reasoning || '';
         document.getElementById('resOpportunity').textContent = card.opportunity_summary || '';
@@ -1335,8 +1311,7 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
             makeScriptCard('Xử lý lăn tăn chi phí', ne.concession_script || '') +
             makeScriptCard('Chốt bước tiếp theo', ne.closing_next_step || '');
 
-        const isUnlocked = quota ? Boolean(quota.isUnlocked) : currentQuotaState.isUnlocked;
-        applyScriptLockState(isUnlocked);
+        renderLockOverlays(Boolean(isTargetUnlocked));
     }
 
     function switchTab(tabId, btnEl) {

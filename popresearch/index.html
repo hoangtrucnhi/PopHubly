@@ -1,741 +1,1350 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PopResearch — Nghiên cứu khách hàng B2B & Kịch bản chốt deal</title>
-  <style>
-    :root {
-      --primary: #4a66a0;
-      --primary-dark: #364c7a;
-      --accent: #6c5ce7;
-      --bg: #f4f6fa;
-      --card: #ffffff;
-      --text: #1e293b;
-      --muted: #64748b;
-      --border: #e2e8f0;
-      --success: #0f766e;
-      --success-bg: #f0fdfa;
-      --warn: #b45309;
-      --warn-bg: #fffbeb;
-      --danger: #b91c1c;
-      --danger-bg: #fef2f2;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="color-scheme" content="light only">
+    <title>PopResearch — Tình báo khách hàng B2B</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#1B2B7A',
+                        'navy-deep': '#131F5C',
+                        'navy-mid': '#243086',
+                        'navy-light': '#2D3FA6',
+                        'navy-pale': '#F0F3FF',
+                        surface: '#F8FAFC',
+                    },
+                    fontFamily: {
+                        sans: ['"Be Vietnam Pro"', '"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+                        brand: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --navy: #1B2B7A;
+            --navy-deep: #131F5C;
+            --navy-mid: #243086;
+            --navy-light: #2D3FA6;
+            --navy-pale: #F0F3FF;
+            --white: #FFFFFF;
+            --surface: #F8FAFC;
+            --border: #E2E8F0;
+            --text: #0F172A;
+            --muted: #64748B;
+            --success: #10B981;
+            --danger: #EF4444;
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
+            --shadow-md: 0 8px 24px rgba(27, 43, 122, 0.08);
+            --shadow-lg: 0 20px 48px rgba(27, 43, 122, 0.16);
+        }
 
-    * { box-sizing: border-box; }
+        * { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
-    }
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+        }
 
-    .container {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 24px 16px 64px;
-    }
+        body {
+            font-family: 'Be Vietnam Pro', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            background-color: #ffffff;
+            color: var(--text);
+            overflow-x: hidden;
+            min-height: 100vh;
+            margin: 0;
+            padding: 76px 0 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
 
-    header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
+        @media (max-width: 640px) {
+            body { padding-top: 118px; }
+        }
 
-    .brand h1 {
-      margin: 0;
-      font-size: 22px;
-      color: var(--primary-dark);
-    }
+        ::selection { background: var(--navy); color: #fff; }
 
-    .brand p {
-      margin: 4px 0 0;
-      font-size: 13.5px;
-      color: var(--muted);
-    }
+        .brand-logo-font {
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+        }
 
-    .quota-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      background: var(--card);
-      border: 1px solid var(--border);
-      padding: 10px 14px;
-      border-radius: 10px;
-      font-size: 13px;
-    }
+        .title-bold {
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.26;
+        }
 
-    .quota-pill {
-      background: #eef2ff;
-      color: var(--primary-dark);
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-weight: 600;
-    }
+        .text-gradient { color: var(--navy); }
 
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
+        .bg-noise {
+            background-image: radial-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
 
-    @media (max-width: 820px) {
-      .grid-2 { grid-template-columns: 1fr; }
-    }
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+        }
 
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
-      margin-bottom: 18px;
-    }
+        .wide-container {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        @media (min-width: 768px) {
+            .wide-container { padding: 0 40px; }
+        }
 
-    .card h2 {
-      margin: 0 0 14px;
-      font-size: 16px;
-      color: var(--primary-dark);
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 8px;
-    }
+        /* ===== HIGHLIGHT VIOLET ===== */
+        .highlight-violet {
+            color: #4D3B9C;
+            font-weight: 800;
+            padding: 0.03em 0.32em 0.07em;
+            margin: 0 -0.08em;
+            border-radius: 0.5em 0.16em 0.45em 0.14em / 0.16em 0.5em 0.14em 0.45em;
+            background:
+                linear-gradient(
+                    104deg,
+                    rgba(107, 84, 206, 0) 0.9%,
+                    rgba(107, 84, 206, 0.20) 2.6%,
+                    rgba(107, 84, 206, 0.13) 5.8%,
+                    rgba(107, 84, 206, 0.11) 93%,
+                    rgba(107, 84, 206, 0.22) 96.5%,
+                    rgba(107, 84, 206, 0) 98.5%
+                ),
+                linear-gradient(
+                    180deg,
+                    transparent 45%,
+                    rgba(124, 99, 224, 0.16) 45%,
+                    rgba(124, 99, 224, 0.25) 92%,
+                    transparent 92%
+                );
+            -webkit-box-decoration-break: clone;
+            box-decoration-break: clone;
+        }
 
-    .form-group {
-      margin-bottom: 14px;
-    }
+        /* ===== NAV ===== */
+        .nav-mini {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid #edf0f5;
+            padding: 13px 40px;
+        }
+        .nav-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+        .nav-logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 11px;
+            display: block;
+        }
+        .nav-logo-text {
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+            font-weight: 800;
+            font-size: 1.22rem;
+            color: #0F172A;
+            letter-spacing: -0.025em;
+            line-height: 1;
+        }
+        .nav-logo-text .text-accent { color: var(--navy); }
 
-    label {
-      display: block;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 5px;
-      color: #334155;
-    }
+        .quota-cluster {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .quota-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--navy-pale);
+            color: var(--navy);
+            border: 1px solid rgba(27, 43, 122, 0.14);
+            padding: 7px 14px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+        }
+        .quota-chip.deep {
+            background: #F5F3FF;
+            color: #4D3B9C;
+            border-color: rgba(77, 59, 156, 0.16);
+        }
 
-    .hint {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 4px;
-    }
+        .nav-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--navy);
+            color: #fff !important;
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            letter-spacing: 0.02em;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            box-shadow: 0 6px 18px rgba(27, 43, 122, 0.18);
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .nav-cta-btn:hover {
+            background: var(--navy-deep);
+            transform: translateY(-1px);
+            box-shadow: 0 10px 24px rgba(27, 43, 122, 0.28);
+        }
 
-    input[type="text"],
-    input[type="email"],
-    textarea {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      font-size: 14px;
-      font-family: inherit;
-      color: var(--text);
-      background: #fff;
-    }
+        @media (max-width: 768px) {
+            .nav-mini { padding: 12px 20px; }
+            .nav-inner { flex-wrap: wrap; gap: 10px; }
+            .quota-cluster { order: 3; width: 100%; justify-content: center; padding-top: 8px; border-top: 1px solid #edf0f5; }
+        }
 
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(74, 102, 160, 0.12);
-    }
+        /* ===== INPUTS & BUTTONS ===== */
+        .input-elegant {
+            width: 100%;
+            padding: 0.95rem 1.25rem;
+            background: #fff;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            outline: none;
+            font-weight: 500;
+            font-size: 0.94rem;
+            transition: all 0.25s;
+            color: var(--text);
+            font-family: inherit;
+        }
+        .input-elegant:focus {
+            border-color: var(--navy-light);
+            box-shadow: 0 0 0 4px rgba(45, 63, 166, 0.1);
+        }
+        .input-elegant::placeholder {
+            color: #94a3b8;
+            font-weight: 400;
+        }
 
-    textarea {
-      min-height: 92px;
-      resize: vertical;
-    }
+        .field-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #475569;
+            margin-bottom: 7px;
+        }
 
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 8px;
-    }
+        .btn-main {
+            background: var(--navy);
+            color: white;
+            padding: 0.95rem 2rem;
+            border-radius: 100px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+            transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            box-shadow: 0 8px 24px rgba(27, 43, 122, 0.18);
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+        .btn-main:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 32px rgba(27, 43, 122, 0.28);
+            background: var(--navy-deep);
+        }
+        .btn-main:disabled { opacity: 0.6; cursor: not-allowed; }
 
-    button {
-      cursor: pointer;
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      padding: 11px 18px;
-      transition: 0.15s ease;
-    }
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+            padding: 0.95rem 2rem;
+            border-radius: 100px;
+            border: 1.5px solid #CBD5E1;
+            color: var(--text);
+            transition: all 0.25s;
+            background: #fff;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+        .btn-outline:hover:not(:disabled) {
+            border-color: var(--navy);
+            color: var(--navy);
+            background: var(--navy-pale);
+        }
+        .btn-outline:disabled { opacity: 0.6; cursor: not-allowed; }
 
-    button:disabled {
-      opacity: 0.55;
-      cursor: not-allowed;
-    }
+        .btn-copy {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            background: #fff;
+            color: var(--navy);
+            border: 1px solid #CBD5E1;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-copy:hover {
+            background: var(--navy-pale);
+            border-color: var(--navy);
+        }
 
-    .btn-primary {
-      background: var(--primary);
-      color: #fff;
-    }
+        /* ===== CARDS & TABS ===== */
+        .editorial-card {
+            background: #ffffff;
+            border: 1px solid rgba(226, 232, 240, 0.95);
+            border-radius: 28px;
+            padding: 28px;
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.04);
+        }
+        @media (max-width: 640px) {
+            .editorial-card { padding: 20px; border-radius: 22px; }
+        }
 
-    .btn-primary:hover:not(:disabled) {
-      background: var(--primary-dark);
-    }
+        .script-tabs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 14px;
+            margin-bottom: 20px;
+        }
+        .script-tab-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 10px 18px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            background: var(--surface);
+            color: var(--muted);
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .script-tab-btn:hover {
+            color: var(--navy);
+            background: var(--navy-pale);
+        }
+        .script-tab-btn.active {
+            background: var(--navy);
+            color: #fff;
+            box-shadow: 0 6px 16px rgba(27, 43, 122, 0.2);
+        }
 
-    .btn-deep {
-      background: var(--accent);
-      color: #fff;
-    }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
 
-    .btn-deep:hover:not(:disabled) {
-      filter: brightness(0.92);
-    }
+        .script-block {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 18px 20px;
+            margin-bottom: 14px;
+        }
+        .script-block-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .script-block-title {
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: var(--navy);
+        }
+        .pre-text {
+            white-space: pre-wrap;
+            font-size: 0.94rem;
+            line-height: 1.68;
+            color: #1E293B;
+            margin: 0;
+        }
 
-    .btn-outline {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 6px 12px;
-      font-size: 12.5px;
-    }
+        /* ===== LOCKED & BLURRED OVERLAY ===== */
+        .locked-stage {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            min-height: 300px;
+        }
+        .blurred-content {
+            filter: blur(6px);
+            -webkit-filter: blur(6px);
+            opacity: 0.55;
+            user-select: none;
+            pointer-events: none;
+            transition: filter 0.35s ease, opacity 0.35s ease;
+        }
+        .locked-stage.unlocked .blurred-content {
+            filter: none;
+            -webkit-filter: none;
+            opacity: 1;
+            user-select: auto;
+            pointer-events: auto;
+        }
+        .lock-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(248, 250, 252, 0.88) 100%);
+            z-index: 10;
+        }
+        .locked-stage.unlocked .lock-overlay {
+            display: none;
+        }
+        .lock-card {
+            background: #ffffff;
+            border: 1.5px solid rgba(27, 43, 122, 0.18);
+            border-radius: 24px;
+            padding: 28px 26px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 48px rgba(15, 23, 42, 0.12);
+        }
+        .lock-icon-badge {
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            background: var(--navy-pale);
+            color: var(--navy);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            margin-bottom: 14px;
+        }
 
-    .btn-outline:hover {
-      background: #f8fafc;
-    }
+        /* ===== SPINNER & ALERTS ===== */
+        .spinner {
+            width: 34px;
+            height: 34px;
+            border: 3px solid #E2E8F0;
+            border-top-color: var(--navy);
+            border-radius: 50%;
+            animation: spin 0.75s linear infinite;
+            margin: 0 auto 12px;
+        }
+        .btn-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2.5px solid rgba(255, 255, 255, 0.35);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-    .alert {
-      padding: 14px 16px;
-      border-radius: 10px;
-      margin-bottom: 18px;
-      font-size: 14px;
-      display: none;
-    }
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 16px;
+            overflow-y: auto;
+        }
+        .modal-overlay:not(.hidden) { display: flex; }
+        .modal-box {
+            background: #ffffff;
+            border-radius: 28px;
+            width: 100%;
+            max-width: 480px;
+            padding: 28px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            background: #F1F5F9;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            cursor: pointer;
+        }
+        .modal-close:hover { background: #E2E8F0; color: var(--text); }
 
-    .alert.error {
-      display: block;
-      background: var(--danger-bg);
-      color: var(--danger);
-      border: 1px solid #fecaca;
-    }
-
-    .alert.warn {
-      display: block;
-      background: var(--warn-bg);
-      color: var(--warn);
-      border: 1px solid #fde68a;
-    }
-
-    .alert.success {
-      display: block;
-      background: var(--success-bg);
-      color: var(--success);
-      border: 1px solid #99f6e4;
-    }
-
-    .loading {
-      display: none;
-      text-align: center;
-      padding: 28px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      margin-bottom: 18px;
-    }
-
-    .loading.active { display: block; }
-
-    .spinner {
-      width: 30px;
-      height: 30px;
-      border: 3px solid #e2e8f0;
-      border-top-color: var(--primary);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin: 0 auto 10px;
-    }
-
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    #resultSection { display: none; }
-    #resultSection.active { display: block; }
-
-    .score-box {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 18px;
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
-      margin-bottom: 16px;
-    }
-
-    .score-num {
-      font-size: 32px;
-      font-weight: 800;
-      color: var(--primary-dark);
-      min-width: 84px;
-      text-align: center;
-    }
-
-    .tabs {
-      display: flex;
-      gap: 8px;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 10px;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
-    }
-
-    .tab-btn {
-      background: #f1f5f9;
-      color: #475569;
-      padding: 8px 14px;
-      font-size: 13.5px;
-    }
-
-    .tab-btn.active {
-      background: var(--primary);
-      color: #fff;
-    }
-
-    .tab-panel { display: none; }
-    .tab-panel.active { display: block; }
-
-    .script-block {
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px;
-      margin-bottom: 12px;
-      position: relative;
-    }
-
-    .script-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 6px;
-      font-weight: 700;
-      font-size: 13.5px;
-      color: var(--primary-dark);
-    }
-
-    .pre-text {
-      white-space: pre-wrap;
-      font-size: 14px;
-      color: var(--text);
-      margin: 0;
-    }
-
-    ul.clean-list {
-      margin: 6px 0 0;
-      padding-left: 18px;
-    }
-
-    ul.clean-list li {
-      margin-bottom: 5px;
-    }
-
-    .unlock-box {
-      display: none;
-      background: linear-gradient(135deg, #eef2ff, #f5f3ff);
-      border: 1px solid #c7d2fe;
-      border-radius: 12px;
-      padding: 18px;
-      margin-top: 12px;
-    }
-
-    .unlock-box.active { display: block; }
-  </style>
+        /* ===== FOOTER (ĐỒNG BỘ POPMINUTES) ===== */
+        .site-footer {
+            background: #F8FAFC;
+            color: #64748B;
+            padding: 56px 0 24px;
+            border-top: 1px solid #E2E8F0;
+            margin-top: 72px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1.3fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #E2E8F0;
+        }
+        .footer-col-title {
+            font-weight: 800;
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #94A3B8;
+            margin-bottom: 18px;
+        }
+        .footer-info-block { display: flex; flex-direction: column; gap: 8px; }
+        .footer-company-name { font-weight: 800; font-size: 0.92rem; color: #334155; line-height: 1.4; }
+        .footer-info-line { font-size: 0.88rem; color: #64748B; line-height: 1.6; }
+        .footer-info-line strong { color: #64748B; font-weight: 600; }
+        .footer-logo-bottom {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-top: 24px;
+        }
+        .footer-logo-bottom img { width: 52px; height: 52px; border-radius: 14px; }
+        .footer-logo-bottom span {
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+            font-weight: 800;
+            font-size: 1.45rem;
+            color: #334155;
+            letter-spacing: -0.03em;
+        }
+        .footer-logo-bottom span .text-minutes { color: var(--navy); }
+        .footer-contact-list { display: flex; flex-direction: column; gap: 12px; }
+        .footer-contact-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.88rem; color: #64748B; line-height: 1.55; }
+        .footer-contact-item i { color: var(--navy); font-size: 0.9rem; width: 16px; text-align: center; margin-top: 3px; }
+        .footer-contact-item a { color: #64748B; text-decoration: none; }
+        .footer-contact-item a:hover { color: var(--navy); }
+        .footer-socials { display: flex; gap: 4px; margin-top: 18px; }
+        .footer-socials a {
+            width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+            color: #94A3B8; font-size: 18px; text-decoration: none; border-radius: 8px; transition: all 0.2s;
+        }
+        .footer-socials a:hover { color: var(--navy); background: rgba(27, 43, 122, 0.06); }
+        .footer-links { display: flex; flex-direction: column; gap: 11px; }
+        .footer-links a {
+            color: #64748B; text-decoration: none; font-size: 0.88rem; font-weight: 500;
+            display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s, transform 0.2s;
+        }
+        .footer-links a:hover { color: var(--navy); transform: translateX(3px); }
+        .footer-links a::before { content: '→'; color: #CBD5E1; font-size: 0.78rem; }
+        .footer-links a:hover::before { color: var(--navy); }
+        .footer-bottom {
+            text-align: center; padding-top: 24px; font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 0.15em; color: #A0AEC0;
+        }
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+        }
+        @media (max-width: 640px) {
+            .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+        }
+    </style>
 </head>
-<body>
-  <div class="container">
-    <header>
-      <div class="brand">
-        <h1>PopResearch</h1>
-        <p>Tra cứu doanh nghiệp B2B, chấm điểm cơ hội &amp; sinh 3 kịch bản Tiếp cận – Tư vấn – Đàm phán</p>
-      </div>
-      <div class="quota-bar">
-        <span>Quota hôm nay:</span>
-        <span class="quota-pill" id="fastQuotaBadge">Quét nhanh: 3/3</span>
-        <span class="quota-pill" id="deepQuotaBadge">Quét sâu: 2/2</span>
-        <button class="btn-outline" type="button" onclick="loadUserProfile()">Tải lại lượt</button>
-      </div>
-    </header>
+<body class="bg-noise">
 
-    <div id="alertBox" class="alert"></div>
+<div class="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
+    <div class="glow-orb w-[420px] h-[420px] bg-[#1B2B7A] top-[-120px] left-[-100px]" style="opacity:0.08;"></div>
+    <div class="glow-orb w-[340px] h-[340px] bg-[#7c8ec9] bottom-[10%] right-[-90px]" style="opacity:0.07;"></div>
+</div>
 
-    <div class="card">
-      <h2>0. Email làm việc của bạn (để lưu gói giải pháp &amp; quản lý lượt dùng)</h2>
-      <div class="form-group" style="margin-bottom: 0;">
-        <input type="email" id="userEmail" placeholder="ten.ban@congty.com" onchange="loadUserProfile()" />
-        <div class="hint">Mặc định: 5 lượt Quét nhanh + 2 lượt Quét sâu/ngày. Đăng ký dùng thử PopMinutes để mở khóa 20 lượt Quét nhanh + 5 lượt Quét sâu/ngày.</div>
-      </div>
-    </div>
+<!-- Fixed Navigation -->
+<nav class="nav-mini">
+    <div class="nav-inner">
+        <a href="https://pophubly.com/popminutes/" class="nav-logo">
+            <img src="https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png" alt="PopResearch">
+            <span class="nav-logo-text">Pop<span class="text-accent">Research</span></span>
+        </a>
 
-    <div class="grid-2">
-      <div class="card">
-        <h2>1. Thông tin khách hàng tiềm năng</h2>
-        <div class="form-group">
-          <label for="taxId">Mã số thuế (MST)</label>
-          <input type="text" id="taxId" placeholder="VD: 0316xxxxxx" />
+        <div class="quota-cluster">
+            <span class="quota-chip" id="fastQuotaBadge">Quét nhanh: 3/3</span>
+            <span class="quota-chip deep" id="deepQuotaBadge">Quét sâu: 2/2</span>
+            <button type="button" onclick="loadUserProfile(true)" class="btn-copy" title="Đồng bộ lượt dùng">
+                <i class="fa-solid fa-rotate-right text-xs"></i>
+                <span>Đồng bộ</span>
+            </button>
         </div>
-        <div class="form-group">
-          <label for="website">Website công ty</label>
-          <input type="text" id="website" placeholder="VD: https://congtykhach.vn" />
-        </div>
-        <div class="form-group">
-          <label for="companyName">Tên công ty (nếu chưa có MST/Website)</label>
-          <input type="text" id="companyName" placeholder="VD: Công ty TNHH Logistics Hoàng Long" />
-        </div>
-        <div class="form-group" style="margin-bottom: 0;">
-          <label for="socialNotes">Ghi chú / Bài đăng mạng xã hội của người phụ trách (tùy chọn)</label>
-          <textarea id="socialNotes" placeholder="Dán nhanh đoạn post LinkedIn/Facebook hoặc thông tin bối cảnh bạn nắm được..."></textarea>
-        </div>
-      </div>
 
-      <div class="card">
-        <h2>2. Sản phẩm / Dịch vụ / Gói giải pháp của bạn</h2>
-        <div class="form-group" style="margin-bottom: 0;">
-          <label for="sellerOffer">Mô tả các gói giải pháp, mức giá/quy mô phù hợp &amp; lợi thế nổi bật</label>
-          <textarea id="sellerOffer" style="min-height: 245px;" placeholder="VD:
-- Gói Starter (dưới 10 nhân sự): Tự động tóm tắt cuộc họp &amp; đồng bộ task cơ bản.
-- Gói Growth (10 - 50 nhân sự): Tóm tắt song ngữ 21 ngôn ngữ, tích hợp CRM/Trello/Calendar, hỗ trợ đào tạo team.
-- Gói Enterprise (trên 50 nhân sự): Triển khai theo phòng ban, phân quyền &amp; báo cáo quản trị."></textarea>
-          <div class="hint">Hệ thống sẽ tự lưu nội dung này theo email của bạn cho các lần tra cứu tiếp theo.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="actions">
-        <button class="btn-primary" id="btnFast" type="button" onclick="runAnalysis('FAST')">
-          ⚡ Quét nhanh &amp; Lập kịch bản (0 search quota)
+        <button type="button" onclick="openUnlockModal()" class="nav-cta-btn">
+            <span>Dùng thử PopMinutes</span>
         </button>
-        <button class="btn-deep" id="btnDeep" type="button" onclick="runAnalysis('DEEP')">
-          🔍 Quét sâu Tuyển dụng &amp; Tin tức + Lập kịch bản
-        </button>
-      </div>
+    </div>
+</nav>
 
-      <div id="unlockBox" class="unlock-box">
-        <strong>Bạn đã chạm giới hạn lượt miễn phí!</strong>
-        <p style="margin: 6px 0 12px; font-size: 13.5px;">
-          Đăng ký dùng thử <strong>PopMinutes</strong> để tiếp quản luôn khâu ghi nhận biên bản, công việc &amp; nhắc nhở sau buổi gặp, đồng thời mở khóa ngay <strong>20 lượt Quét nhanh + 5 lượt Quét sâu/ngày</strong>.
+<main class="relative z-10 pt-8 sm:pt-12">
+    <div class="wide-container">
+
+        <!-- Hero Header -->
+        <div class="max-w-3xl mb-8 sm:mb-10">
+            <span class="text-xs font-extrabold uppercase tracking-[0.16em] text-[#1B2B7A] block mb-3">
+                PopHubly Sales Intelligence
+            </span>
+            <h1 class="title-bold text-3xl sm:text-4xl md:text-[2.75rem] text-slate-900 mb-4">
+                Nghiên cứu khách hàng B2B &amp; <span class="highlight-violet">Kịch bản chốt deal</span>
+            </h1>
+            <p class="text-base sm:text-lg text-slate-500 font-medium leading-relaxed">
+                Phân tích dữ liệu doanh nghiệp theo mã số thuế hoặc website, chấm điểm cơ hội và đề xuất kịch bản tiếp cận sát thực tế.
+            </p>
+        </div>
+
+        <!-- Alert Banner -->
+        <div id="alertBox" class="hidden mb-6 px-5 py-4 rounded-2xl text-sm font-semibold border"></div>
+
+        <!-- Email Bar -->
+        <div class="editorial-card mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+                <div class="md:col-span-7">
+                    <label for="userEmail" class="field-label">Email công việc</label>
+                    <input type="email" id="userEmail" class="input-elegant" placeholder="ten.ban@congty.com" onchange="loadUserProfile(false)">
+                </div>
+                <div class="md:col-span-5 flex items-center md:pb-3">
+                    <p id="quotaStatusText" class="text-xs sm:text-sm text-slate-500 font-medium m-0">
+                        Hạn mức mặc định: <strong class="text-slate-800">3 Quét nhanh</strong> &amp; <strong class="text-slate-800">2 Quét sâu</strong> mỗi ngày.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2-Column Workspace -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <!-- Left: Customer Target -->
+            <div class="editorial-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
+                    <h2 class="text-lg font-extrabold text-slate-900 m-0">Doanh nghiệp mục tiêu</h2>
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Đầu vào</span>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label for="taxId" class="field-label">Mã số thuế</label>
+                        <input type="text" id="taxId" class="input-elegant" placeholder="0316xxxxxx">
+                    </div>
+                    <div>
+                        <label for="website" class="field-label">Website</label>
+                        <input type="text" id="website" class="input-elegant" placeholder="https://congtykhach.vn">
+                    </div>
+                    <div>
+                        <label for="companyName" class="field-label">Tên doanh nghiệp</label>
+                        <input type="text" id="companyName" class="input-elegant" placeholder="Công ty TNHH ...">
+                    </div>
+                    <div>
+                        <label for="socialNotes" class="field-label">Bối cảnh bổ sung</label>
+                        <textarea id="socialNotes" rows="3" class="input-elegant resize-y" placeholder="Bài đăng gần đây hoặc ghi chú về người phụ trách..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Seller Offer -->
+            <div class="editorial-card flex flex-col">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
+                    <h2 class="text-lg font-extrabold text-slate-900 m-0">Giải pháp của bạn</h2>
+                    <span class="text-xs font-bold uppercase tracking-wider text-[#1B2B7A]">Tự động lưu</span>
+                </div>
+
+                <div class="flex-1 flex flex-col">
+                    <label for="sellerOffer" class="field-label">Sản phẩm, gói dịch vụ &amp; mức giá</label>
+                    <textarea id="sellerOffer" class="input-elegant flex-1 min-h-[255px] resize-y" placeholder="Ví dụ:
+Gói Starter: 20k/user/tháng, tối thiểu 10 user, quản lý quy trình và công việc.
+Gói Business: 50k/user/tháng, tối thiểu 10 user, bao gồm Starter và quản trị tuyển dụng.
+Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn diện."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Bar -->
+        <div class="editorial-card mb-8">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div class="flex flex-wrap items-center gap-3">
+                    <button type="button" id="btnFast" onclick="runAnalysis('FAST')" class="btn-outline">
+                        <i class="fa-solid fa-bolt text-[#1B2B7A]"></i>
+                        <span>Quét nhanh</span>
+                    </button>
+                    <button type="button" id="btnDeep" onclick="runAnalysis('DEEP')" class="btn-main">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>
+                        <span>Quét sâu</span>
+                    </button>
+                </div>
+
+                <div id="inlineUnlockPrompt" class="hidden sm:flex items-center gap-3">
+                    <span class="text-xs font-semibold text-slate-500">Cần thêm lượt tra cứu?</span>
+                    <button type="button" onclick="openUnlockModal()" class="btn-copy">Mở khóa 25 lượt/ngày</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loadingBox" class="hidden editorial-card text-center py-12 mb-8">
+            <div class="spinner"></div>
+            <p id="loadingText" class="text-sm sm:text-base font-bold text-slate-700 m-0">Đang tổng hợp dữ liệu doanh nghiệp...</p>
+        </div>
+
+        <!-- Results Workspace -->
+        <section id="resultSection" class="hidden space-y-6">
+
+            <!-- Score & Recommended Offer -->
+            <div class="editorial-card">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-100">
+                    <div class="flex items-center gap-5">
+                        <div class="w-20 h-20 rounded-2xl bg-[#F0F3FF] border border-[#1B2B7A]/15 flex flex-col items-center justify-center flex-shrink-0">
+                            <span class="text-[0.65rem] font-extrabold uppercase tracking-widest text-slate-400">Điểm</span>
+                            <span id="resScore" class="text-2xl font-black text-[#1B2B7A] leading-tight">--</span>
+                        </div>
+                        <div>
+                            <span id="resPriority" class="inline-block text-xs font-extrabold uppercase tracking-wider text-[#1B2B7A] bg-[#F0F3FF] px-3 py-1 rounded-full mb-2"></span>
+                            <p id="resReasoning" class="text-sm sm:text-base text-slate-600 font-medium m-0 leading-relaxed"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-6">
+                    <div class="script-block m-0">
+                        <div class="script-block-head">
+                            <span class="script-block-title">Cơ hội trọng tâm</span>
+                        </div>
+                        <p id="resOpportunity" class="pre-text"></p>
+                    </div>
+                    <div class="script-block m-0 bg-[#F0F3FF]/60 border-[#1B2B7A]/15">
+                        <div class="script-block-head">
+                            <span class="script-block-title">Gói đề xuất</span>
+                        </div>
+                        <p id="resPackage" class="pre-text"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Company Intelligence Profile -->
+            <div class="editorial-card">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
+                    <h2 class="text-lg font-extrabold text-slate-900 m-0">Chân dung doanh nghiệp</h2>
+                    <span id="resExecTag" class="text-xs font-bold uppercase tracking-wider text-slate-400"></span>
+                </div>
+                <div id="resCompanySummary"></div>
+            </div>
+
+            <!-- 3 Sales Scripts -->
+            <div class="editorial-card">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                    <h2 class="text-lg font-extrabold text-slate-900 m-0">Kịch bản bán hàng</h2>
+                    <span id="scriptAccessBadge" class="text-xs font-bold text-slate-400"></span>
+                </div>
+
+                <div class="script-tabs">
+                    <button type="button" class="script-tab-btn active" onclick="switchTab('tabApproach', this)">
+                        <span>1. Tiếp cận</span>
+                    </button>
+                    <button type="button" class="script-tab-btn" onclick="switchTab('tabConsult', this)">
+                        <i class="fa-solid fa-lock text-xs lock-tab-icon"></i>
+                        <span>2. Tư vấn</span>
+                    </button>
+                    <button type="button" class="script-tab-btn" onclick="switchTab('tabNegotiate', this)">
+                        <i class="fa-solid fa-lock text-xs lock-tab-icon"></i>
+                        <span>3. Đàm phán</span>
+                    </button>
+                </div>
+
+                <!-- Tab 1: Approach (Unlocked) -->
+                <div id="tabApproach" class="tab-panel active"></div>
+
+                <!-- Tab 2: Consultation (Locked / Blurred until PopMinutes Trial) -->
+                <div id="tabConsult" class="tab-panel">
+                    <div id="consultLockStage" class="locked-stage">
+                        <div id="consultContent" class="blurred-content"></div>
+                        <div class="lock-overlay">
+                            <div class="lock-card">
+                                <div class="lock-icon-badge">
+                                    <i class="fa-solid fa-lock"></i>
+                                </div>
+                                <h3 class="text-lg font-extrabold text-slate-900 mb-2">Mở khóa kịch bản Tư vấn &amp; Đàm phán</h3>
+                                <p class="text-sm text-slate-500 font-medium mb-5 leading-relaxed">
+                                    Đăng ký dùng thử PopMinutes để xem trọn bộ câu hỏi chẩn đoán, phương án xử lý từ chối và nâng hạn mức lên 25 lượt mỗi ngày.
+                                </p>
+                                <button type="button" onclick="openUnlockModal()" class="btn-main w-full">
+                                    <span>Mở khóa miễn phí</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Negotiation (Locked / Blurred until PopMinutes Trial) -->
+                <div id="tabNegotiate" class="tab-panel">
+                    <div id="negotiateLockStage" class="locked-stage">
+                        <div id="negotiateContent" class="blurred-content"></div>
+                        <div class="lock-overlay">
+                            <div class="lock-card">
+                                <div class="lock-icon-badge">
+                                    <i class="fa-solid fa-lock"></i>
+                                </div>
+                                <h3 class="text-lg font-extrabold text-slate-900 mb-2">Mở khóa kịch bản Tư vấn &amp; Đàm phán</h3>
+                                <p class="text-sm text-slate-500 font-medium mb-5 leading-relaxed">
+                                    Đăng ký dùng thử PopMinutes để xem trọn bộ đòn bẩy thương lượng, câu thoại chốt bước tiếp theo và nâng hạn mức lên 25 lượt mỗi ngày.
+                                </p>
+                                <button type="button" onclick="openUnlockModal()" class="btn-main w-full">
+                                    <span>Mở khóa miễn phí</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</main>
+
+<!-- Footer đồng bộ PopMinutes -->
+<footer class="site-footer">
+    <div class="wide-container">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-col-title">Thông tin chung</div>
+                <div class="footer-info-block">
+                    <div class="footer-company-name">CÔNG TY TNHH POPHUBLY</div>
+                    <div class="footer-info-line"><strong>Người đại diện:</strong> HOÀNG TRÚC NHI</div>
+                    <div class="footer-info-line"><strong>MST:</strong> 1602232842</div>
+                </div>
+                <div class="footer-logo-bottom">
+                    <img src="https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png" alt="PopMinutes">
+                    <span>Pop<span class="text-minutes">Minutes</span></span>
+                </div>
+            </div>
+
+            <div>
+                <div class="footer-col-title">Liên hệ</div>
+                <div class="footer-contact-list">
+                    <div class="footer-contact-item">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>178 Tuy Biên, Tổ 6, Vĩnh Chánh 2, Vĩnh Ngươn, Phường Châu Đốc, Tỉnh An Giang, Việt Nam</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <a href="mailto:info@pophubly.com">info@pophubly.com</a>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <a href="tel:0384744368">0384 744 368</a>
+                    </div>
+                </div>
+                <div class="footer-socials">
+                    <a href="#" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" target="_blank" rel="noopener" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="#" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#" target="_blank" rel="noopener" aria-label="Zalo"><i class="fa-solid fa-comment-dots"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <div class="footer-col-title">Chính sách &amp; Điều khoản</div>
+                <div class="footer-links">
+                    <a href="https://pophubly.com/pophubly-privacy-policy/" target="_blank" rel="noopener">Chính sách bảo mật</a>
+                    <a href="https://pophubly.com/term-of-use/" target="_blank" rel="noopener">Điều khoản sử dụng</a>
+                    <a href="https://pophubly.com/chinh-sach-hoan-tien/" target="_blank" rel="noopener">Chính sách hoàn tiền</a>
+                    <a href="https://pophubly.com/quy-trinh-thanh-toan/" target="_blank" rel="noopener">Quy trình thanh toán</a>
+                    <a href="https://pophubly.com/quy-trinh-khieu-nai/" target="_blank" rel="noopener">Quy trình khiếu nại</a>
+                </div>
+            </div>
+
+            <div>
+                <div class="footer-col-title">Hệ sinh thái</div>
+                <div class="footer-links">
+                    <a href="https://pophubly.com/popminutes/" target="_blank" rel="noopener">PopMinutes App</a>
+                    <a href="#">Đối tác địa điểm</a>
+                    <a href="#">Đối tác chiến lược</a>
+                    <a href="#">Tiếp thị liên kết</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2026 POPHUBLY ECOSYSTEM &bull; POPRESEARCH
+        </div>
+    </div>
+</footer>
+
+<!-- Modal: Đăng ký dùng thử PopMinutes & Mở khóa -->
+<div id="unlockModal" class="modal-overlay hidden">
+    <div class="modal-box">
+        <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-5">
+            <h3 class="text-lg font-extrabold text-slate-900 m-0">Dùng thử PopMinutes 90 ngày</h3>
+            <button type="button" onclick="closeUnlockModal()" class="modal-close" aria-label="Đóng">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <p class="text-sm text-slate-500 font-medium mb-5 leading-relaxed">
+            Kích hoạt tài khoản trải nghiệm PopMinutes để mở khóa ngay <strong class="text-slate-800">kịch bản Tư vấn &amp; Đàm phán</strong> cùng <strong class="text-slate-800">20 lượt Quét nhanh + 5 lượt Quét sâu</strong> mỗi ngày.
         </p>
-        <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
-          <a href="https://pm.pophubly.com/" target="_blank" rel="noopener" class="btn-primary" style="text-decoration: none; display: inline-block;">
-            Mở trang dùng thử PopMinutes
-          </a>
-          <button class="btn-deep" type="button" onclick="confirmTrialUnlock()">
-            Tôi đã đăng ký dùng thử — Mở khóa lượt ngay
-          </button>
-        </div>
-      </div>
+
+        <form id="unlockTrialForm" class="space-y-4">
+            <div>
+                <label for="trialName" class="field-label">Họ và tên</label>
+                <input type="text" id="trialName" class="input-elegant" placeholder="Nguyễn Văn A" required>
+            </div>
+            <div>
+                <label for="trialEmail" class="field-label">Email công việc</label>
+                <input type="email" id="trialEmail" class="input-elegant" placeholder="ten.ban@congty.com" required>
+            </div>
+            <div>
+                <label for="trialPhone" class="field-label">Số điện thoại</label>
+                <input type="tel" id="trialPhone" class="input-elegant" placeholder="09xxxxxxxx" required>
+            </div>
+            <button type="submit" id="unlockSubmitBtn" class="btn-main w-full py-4">
+                <span>Kích hoạt &amp; Mở khóa ngay</span>
+            </button>
+        </form>
     </div>
+</div>
 
-    <div id="loadingBox" class="loading">
-      <div class="spinner"></div>
-      <div id="loadingText">Đang thu thập dữ liệu doanh nghiệp và đối chiếu gói giải pháp...</div>
-    </div>
+<script>
+    // 1. URL Web App của PopResearch Backend
+    const POPRESEARCH_API_URL = 'https://script.google.com/macros/s/YOUR_POPRESEARCH_DEPLOYMENT_ID/exec';
+    // 2. URL ghi nhận Lead dùng thử PopMinutes
+    const POPMINUTES_LEAD_URL = 'https://script.google.com/macros/s/AKfycbxrYkvMg1JxGCzuPzdpUaBYIrqZu6DyX2Qh0IXV49OYhAaCb6NHBY9BZFmdBBxLe65i/exec';
 
-    <section id="resultSection">
-      <div class="card">
-        <h2>3. Đánh giá mức độ phù hợp &amp; Gói giải pháp khuyên chào</h2>
-        <div class="score-box">
-          <div>
-            <div style="font-size: 12px; color: var(--muted); text-align: center;">ĐIỂM PHÙ HỢP</div>
-            <div class="score-num" id="resScore">--/100</div>
-          </div>
-          <div style="flex: 1; min-width: 240px;">
-            <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;" id="resPriority"></div>
-            <div style="font-size: 14px; color: #334155;" id="resReasoning"></div>
-          </div>
-        </div>
+    let currentQuotaState = {
+        isUnlocked: false,
+        fastLimit: 3,
+        fastRemaining: 3,
+        deepLimit: 2,
+        deepRemaining: 2
+    };
 
-        <div class="grid-2">
-          <div class="script-block">
-            <div class="script-header"><span>Cơ hội bán hàng cốt lõi</span></div>
-            <p class="pre-text" id="resOpportunity"></p>
-          </div>
-          <div class="script-block">
-            <div class="script-header"><span>Gói giải pháp khuyên chào</span></div>
-            <p class="pre-text" id="resPackage"></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>4. Hồ sơ hiện trạng, tuyển dụng &amp; Pain point khách hàng</h2>
-        <div id="resCompanySummary"></div>
-      </div>
-
-      <div class="card">
-        <h2>5. Bộ 3 kịch bản bán hàng (Tiếp cận – Tư vấn – Đàm phán)</h2>
-        <div class="tabs">
-          <button class="tab-btn active" type="button" onclick="switchTab('tabApproach', this)">1. Kịch bản Tiếp cận</button>
-          <button class="tab-btn" type="button" onclick="switchTab('tabConsult', this)">2. Kịch bản Tư vấn</button>
-          <button class="tab-btn" type="button" onclick="switchTab('tabNegotiate', this)">3. Kịch bản Đàm phán</button>
-        </div>
-
-        <div id="tabApproach" class="tab-panel active"></div>
-        <div id="tabConsult" class="tab-panel"></div>
-        <div id="tabNegotiate" class="tab-panel"></div>
-      </div>
-    </section>
-  </div>
-
-  <script>
-    // THAY BẰNG WEB APP URL TỪ GOOGLE APPS SCRIPT CỦA BẠN
-    const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbw7qwDnQCKRCVPffwVCH9MfD_3qCJJc1eJykQh51qpTfomgoOlyGf23uTTU1cM2Mj2s/exec';
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedEmail = localStorage.getItem('popresearch_email');
+        if (savedEmail) {
+            document.getElementById('userEmail').value = savedEmail;
+            loadUserProfile(false);
+        }
+    });
 
     function showAlert(type, msg) {
-      const box = document.getElementById('alertBox');
-      box.className = 'alert ' + type;
-      box.textContent = msg;
+        const box = document.getElementById('alertBox');
+        box.className = 'mb-6 px-5 py-4 rounded-2xl text-sm font-semibold border';
+        if (type === 'error') {
+            box.classList.add('bg-red-50', 'text-red-700', 'border-red-200');
+        } else if (type === 'warn') {
+            box.classList.add('bg-amber-50', 'text-amber-800', 'border-amber-200');
+        } else {
+            box.classList.add('bg-emerald-50', 'text-emerald-800', 'border-emerald-200');
+        }
+        box.textContent = msg;
+        box.classList.remove('hidden');
     }
 
     function clearAlert() {
-      const box = document.getElementById('alertBox');
-      box.className = 'alert';
-      box.textContent = '';
+        const box = document.getElementById('alertBox');
+        box.classList.add('hidden');
+        box.textContent = '';
     }
 
     function updateQuotaUI(quota) {
-      if (!quota) return;
-      document.getElementById('fastQuotaBadge').textContent =
-        `Quét nhanh: ${quota.fastRemaining}/${quota.fastLimit}`;
-      document.getElementById('deepQuotaBadge').textContent =
-        `Quét sâu: ${quota.deepRemaining}/${quota.deepLimit}`;
-    }
+        if (!quota) return;
+        currentQuotaState = quota;
 
-    async function loadUserProfile() {
-      const email = document.getElementById('userEmail').value.trim();
-      if (!email || !GAS_WEB_APP_URL.includes('/exec')) return;
+        document.getElementById('fastQuotaBadge').textContent =
+            `Quét nhanh: ${quota.fastRemaining}/${quota.fastLimit}`;
+        document.getElementById('deepQuotaBadge').textContent =
+            `Quét sâu: ${quota.deepRemaining}/${quota.deepLimit}`;
 
-      try {
-        const res = await fetch(`${GAS_WEB_APP_URL}?action=getProfile&email=${encodeURIComponent(email)}`);
-        const data = await res.json();
-        if (data.status === 'success') {
-          updateQuotaUI(data.quota);
-          const offerInput = document.getElementById('sellerOffer');
-          if (data.savedOffer && !offerInput.value.trim()) {
-            offerInput.value = data.savedOffer;
-          }
-        }
-      } catch (err) {
-        console.warn('Không tải được profile:', err);
-      }
-    }
+        const statusEl = document.getElementById('quotaStatusText');
+        const inlinePrompt = document.getElementById('inlineUnlockPrompt');
 
-    async function confirmTrialUnlock() {
-      const email = document.getElementById('userEmail').value.trim();
-      if (!email) {
-        showAlert('error', 'Vui lòng nhập email của bạn ở mục 0 trước khi mở khóa.');
-        return;
-      }
-      try {
-        const res = await fetch(GAS_WEB_APP_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ action: 'unlockTrial', email })
-        });
-        const data = await res.json();
-        if (data.status === 'success') {
-          updateQuotaUI(data.quota);
-          document.getElementById('unlockBox').classList.remove('active');
-          showAlert('success', data.message);
+        if (quota.isUnlocked) {
+            statusEl.innerHTML = 'Tài khoản đã mở khóa: <strong class="text-[#1B2B7A]">20 Quét nhanh</strong> &amp; <strong class="text-[#1B2B7A]">5 Quét sâu</strong> mỗi ngày.';
+            if (inlinePrompt) inlinePrompt.classList.add('hidden');
         } else {
-          showAlert('error', data.message || 'Không thể mở khóa.');
+            statusEl.innerHTML = 'Hạn mức mặc định: <strong class="text-slate-800">3 Quét nhanh</strong> &amp; <strong class="text-slate-800">2 Quét sâu</strong> mỗi ngày.';
+            if (inlinePrompt) inlinePrompt.classList.remove('hidden');
         }
-      } catch (err) {
-        showAlert('error', 'Lỗi kết nối: ' + err.message);
-      }
+
+        applyScriptLockState(Boolean(quota.isUnlocked));
     }
+
+    function applyScriptLockState(isUnlocked) {
+        const consultStage = document.getElementById('consultLockStage');
+        const negotiateStage = document.getElementById('negotiateLockStage');
+        const badge = document.getElementById('scriptAccessBadge');
+        const lockIcons = document.querySelectorAll('.lock-tab-icon');
+
+        if (consultStage) consultStage.classList.toggle('unlocked', isUnlocked);
+        if (negotiateStage) negotiateStage.classList.toggle('unlocked', isUnlocked);
+
+        lockIcons.forEach(icon => {
+            icon.style.display = isUnlocked ? 'none' : 'inline-block';
+        });
+
+        if (badge) {
+            badge.textContent = isUnlocked ? 'Đã mở khóa toàn bộ 3 kịch bản' : 'Mở khóa 2 kịch bản còn lại với PopMinutes';
+        }
+    }
+
+    async function loadUserProfile(showFeedback = false) {
+        const email = document.getElementById('userEmail').value.trim().toLowerCase();
+        if (!email) {
+            if (showFeedback) showAlert('warn', 'Vui lòng nhập email công việc để đồng bộ lượt.');
+            return;
+        }
+        localStorage.setItem('popresearch_email', email);
+
+        if (!POPRESEARCH_API_URL.includes('/exec') || POPRESEARCH_API_URL.includes('YOUR_POPRESEARCH')) return;
+
+        try {
+            const res = await fetch(`${POPRESEARCH_API_URL}?action=getProfile&email=${encodeURIComponent(email)}`);
+            const data = await res.json();
+            if (data.status === 'success') {
+                updateQuotaUI(data.quota);
+                const offerInput = document.getElementById('sellerOffer');
+                if (data.savedOffer && !offerInput.value.trim()) {
+                    offerInput.value = data.savedOffer;
+                }
+                if (showFeedback) showAlert('success', 'Đã đồng bộ hạn mức và gói giải pháp.');
+            }
+        } catch (err) {
+            if (showFeedback) showAlert('error', 'Không thể đồng bộ dữ liệu.');
+        }
+    }
+
+    function openUnlockModal() {
+        const currentEmail = document.getElementById('userEmail').value.trim();
+        if (currentEmail) {
+            document.getElementById('trialEmail').value = currentEmail;
+        }
+        document.getElementById('unlockModal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeUnlockModal() {
+        document.getElementById('unlockModal').classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+
+    document.getElementById('unlockModal').addEventListener('click', function(e) {
+        if (e.target === this) closeUnlockModal();
+    });
+
+    document.getElementById('unlockTrialForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const name = document.getElementById('trialName').value.trim();
+        const email = document.getElementById('trialEmail').value.trim().toLowerCase();
+        const phone = document.getElementById('trialPhone').value.trim();
+        const btn = document.getElementById('unlockSubmitBtn');
+        const originalHTML = btn.innerHTML;
+
+        btn.disabled = true;
+        btn.innerHTML = '<span class="btn-spinner"></span><span>Đang kích hoạt...</span>';
+
+        try {
+            // 1. Gửi lead đăng ký dùng thử về hệ thống PopMinutes
+            fetch(POPMINUTES_LEAD_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    phone,
+                    note: 'Đăng ký dùng thử từ PopResearch',
+                    source: 'POPRESEARCH_UNLOCK'
+                })
+            }).catch(() => {});
+
+            // 2. Mở khóa trực tiếp trên PopResearch Backend
+            const res = await fetch(POPRESEARCH_API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({ action: 'unlockTrial', email })
+            });
+            const data = await res.json();
+
+            if (data.status === 'success') {
+                document.getElementById('userEmail').value = email;
+                localStorage.setItem('popresearch_email', email);
+                updateQuotaUI(data.quota);
+                closeUnlockModal();
+                showAlert('success', 'Đã mở khóa toàn bộ kịch bản và nâng hạn mức lên 25 lượt/ngày.');
+            } else {
+                showAlert('error', data.message || 'Không thể kích hoạt mở khóa.');
+            }
+        } catch (err) {
+            showAlert('error', 'Lỗi kết nối: ' + err.message);
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = originalHTML;
+        }
+    });
 
     function setLoading(isLoading, text = '') {
-      document.getElementById('btnFast').disabled = isLoading;
-      document.getElementById('btnDeep').disabled = isLoading;
-      document.getElementById('loadingBox').classList.toggle('active', isLoading);
-      if (text) document.getElementById('loadingText').textContent = text;
+        document.getElementById('btnFast').disabled = isLoading;
+        document.getElementById('btnDeep').disabled = isLoading;
+        document.getElementById('loadingBox').classList.toggle('hidden', !isLoading);
+        if (text) document.getElementById('loadingText').textContent = text;
     }
 
     async function runAnalysis(mode) {
-      clearAlert();
-      document.getElementById('unlockBox').classList.remove('active');
+        clearAlert();
 
-      const email = document.getElementById('userEmail').value.trim();
-      const taxId = document.getElementById('taxId').value.trim();
-      const website = document.getElementById('website').value.trim();
-      const companyName = document.getElementById('companyName').value.trim();
-      const socialNotes = document.getElementById('socialNotes').value.trim();
-      const sellerOffer = document.getElementById('sellerOffer').value.trim();
+        const email = document.getElementById('userEmail').value.trim().toLowerCase();
+        const taxId = document.getElementById('taxId').value.trim();
+        const website = document.getElementById('website').value.trim();
+        const companyName = document.getElementById('companyName').value.trim();
+        const socialNotes = document.getElementById('socialNotes').value.trim();
+        const sellerOffer = document.getElementById('sellerOffer').value.trim();
 
-      if (!email) {
-        showAlert('error', 'Vui lòng nhập email công việc của bạn.');
-        return;
-      }
-      if (!taxId && !website && !companyName) {
-        showAlert('error', 'Vui lòng nhập ít nhất Mã số thuế, Website hoặc Tên công ty khách hàng.');
-        return;
-      }
-      if (!sellerOffer) {
-        showAlert('error', 'Vui lòng nhập mô tả sản phẩm/dịch vụ hoặc các gói giải pháp của bạn.');
-        return;
-      }
+        if (!email) {
+            showAlert('error', 'Vui lòng nhập email công việc.');
+            document.getElementById('userEmail').focus();
+            return;
+        }
+        localStorage.setItem('popresearch_email', email);
 
-      setLoading(
-        true,
-        mode === 'DEEP'
-          ? 'Đang quét Google Search, tin tuyển dụng & đối chiếu gói giải pháp (khoảng 8–12 giây)...'
-          : 'Đang tổng hợp dữ liệu doanh nghiệp & lập kịch bản bán hàng...'
-      );
-
-      try {
-        const res = await fetch(GAS_WEB_APP_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({
-            action: 'analyze',
-            mode,
-            email,
-            taxId,
-            website,
-            companyName,
-            socialNotes,
-            sellerOffer
-          })
-        });
-
-        const data = await res.json();
-        setLoading(false);
-
-        if (data.quota) updateQuotaUI(data.quota);
-
-        if (data.status === 'quota_exceeded') {
-          showAlert('warn', data.message);
-          if (data.needUnlock) {
-            document.getElementById('unlockBox').classList.add('active');
-          }
-          return;
+        if (!taxId && !website && !companyName) {
+            showAlert('error', 'Vui lòng nhập mã số thuế, website hoặc tên doanh nghiệp.');
+            return;
+        }
+        if (!sellerOffer) {
+            showAlert('error', 'Vui lòng nhập thông tin giải pháp và mức giá của bạn.');
+            return;
         }
 
-        if (data.status === 'system_cap') {
-          showAlert('warn', data.message);
-          return;
-        }
+        setLoading(
+            true,
+            mode === 'DEEP'
+                ? 'Đang quét dữ liệu tuyển dụng, tin tức và đối chiếu giải pháp...'
+                : 'Đang phân tích hồ sơ doanh nghiệp và lập kịch bản...'
+        );
 
-        if (data.status !== 'success') {
-          showAlert('error', data.message || 'Có lỗi xảy ra.');
-          return;
-        }
+        try {
+            const res = await fetch(POPRESEARCH_API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({
+                    action: 'analyze',
+                    mode,
+                    email,
+                    taxId,
+                    website,
+                    companyName,
+                    socialNotes,
+                    sellerOffer
+                })
+            });
 
-        renderResults(data.companyProfile, data.battlecard, data.executionMode);
-        document.getElementById('resultSection').classList.add('active');
-        document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
-      } catch (err) {
-        setLoading(false);
-        showAlert('error', 'Lỗi gọi API: ' + err.message);
-      }
+            const data = await res.json();
+            setLoading(false);
+
+            if (data.quota) updateQuotaUI(data.quota);
+
+            if (data.status === 'quota_exceeded') {
+                showAlert('warn', data.message);
+                if (data.needUnlock) openUnlockModal();
+                return;
+            }
+
+            if (data.status === 'system_cap') {
+                showAlert('warn', data.message);
+                return;
+            }
+
+            if (data.status !== 'success') {
+                showAlert('error', data.message || 'Có lỗi xảy ra.');
+                return;
+            }
+
+            renderResults(data.companyProfile, data.battlecard, data.executionMode, data.quota);
+            const resultEl = document.getElementById('resultSection');
+            resultEl.classList.remove('hidden');
+            resultEl.scrollIntoView({ behavior: 'smooth' });
+        } catch (err) {
+            setLoading(false);
+            showAlert('error', 'Lỗi kết nối: ' + err.message);
+        }
     }
 
     function escapeHtml(str) {
-      return String(str || '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
+        return String(str || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
     }
 
     function copyText(text, btnEl) {
-      navigator.clipboard.writeText(text).then(() => {
-        const old = btnEl.textContent;
-        btnEl.textContent = 'Đã copy';
-        setTimeout(() => { btnEl.textContent = old; }, 1500);
-      });
+        navigator.clipboard.writeText(text).then(() => {
+            const old = btnEl.innerHTML;
+            btnEl.innerHTML = '<i class="fa-solid fa-check text-emerald-600"></i><span>Đã chép</span>';
+            setTimeout(() => { btnEl.innerHTML = old; }, 1500);
+        });
     }
 
     function makeScriptCard(title, bodyText) {
-      const safeBody = escapeHtml(bodyText);
-      const encodedForCopy = encodeURIComponent(bodyText || '');
-      return `
-        <div class="script-block">
-          <div class="script-header">
-            <span>${escapeHtml(title)}</span>
-            <button class="btn-outline" type="button" onclick="copyText(decodeURIComponent('${encodedForCopy}'), this)">Copy</button>
-          </div>
-          <p class="pre-text">${safeBody}</p>
-        </div>
-      `;
+        const safeBody = escapeHtml(bodyText);
+        const encodedForCopy = encodeURIComponent(bodyText || '');
+        return `
+            <div class="script-block">
+                <div class="script-block-head">
+                    <span class="script-block-title">${escapeHtml(title)}</span>
+                    <button type="button" class="btn-copy" onclick="copyText(decodeURIComponent('${encodedForCopy}'), this)">
+                        <i class="fa-regular fa-copy"></i>
+                        <span>Sao chép</span>
+                    </button>
+                </div>
+                <p class="pre-text">${safeBody}</p>
+            </div>
+        `;
     }
 
-    function renderResults(profile, card, execMode) {
-      document.getElementById('resScore').textContent = `${card.fit_score ?? '--'}/100`;
-      document.getElementById('resPriority').textContent = `${card.priority_level || ''} (Chế độ: ${execMode})`;
-      document.getElementById('resReasoning').textContent = card.score_reasoning || '';
-      document.getElementById('resOpportunity').textContent = card.opportunity_summary || '';
+    function renderResults(profile, card, execMode, quota) {
+        document.getElementById('resScore').textContent = `${card.fit_score ?? '--'}/100`;
+        document.getElementById('resPriority').textContent = card.priority_level || 'Đánh giá cơ hội';
+        document.getElementById('resReasoning').textContent = card.score_reasoning || '';
+        document.getElementById('resOpportunity').textContent = card.opportunity_summary || '';
 
-      const pkg = card.recommended_package || {};
-      document.getElementById('resPackage').textContent =
-        `Gói khuyên dùng: ${pkg.package_name || 'Chưa xác định'}\n\nLý do: ${pkg.why_this_package || ''}`;
+        const pkg = card.recommended_package || {};
+        document.getElementById('resPackage').textContent =
+            `${pkg.package_name || 'Chưa xác định'}\n\n${pkg.why_this_package || ''}`;
 
-      const painList = (profile.pain_points || []).map(p => `<li>${escapeHtml(p)}</li>`).join('');
-      const signalList = (profile.recent_signals || []).map(s => `<li>${escapeHtml(s)}</li>`).join('');
-      const sourceList = (profile.data_sources || []).map(src => `<li>${escapeHtml(src)}</li>`).join('');
+        document.getElementById('resExecTag').textContent = execMode || '';
 
-      document.getElementById('resCompanySummary').innerHTML = `
-        <p><strong>Doanh nghiệp:</strong> ${escapeHtml(profile.company_name)} | <strong>MST:</strong> ${escapeHtml(profile.tax_id || 'N/A')} | <strong>Lĩnh vực:</strong> ${escapeHtml(profile.industry || 'N/A')}</p>
-        <p><strong>Quy mô &amp; giai đoạn ước tính:</strong> ${escapeHtml(profile.estimated_scale || 'N/A')}</p>
-        <p><strong>Tín hiệu tuyển dụng:</strong> ${escapeHtml(profile.hiring_signals || 'N/A')}</p>
-        <div class="grid-2" style="margin-top: 12px;">
-          <div class="script-block">
-            <div class="script-header"><span>Tín hiệu / Biến động đáng chú ý</span></div>
-            <ul class="clean-list">${signalList || '<li>Không có tín hiệu nổi bật</li>'}</ul>
-          </div>
-          <div class="script-block">
-            <div class="script-header"><span>Pain point / Điểm nghẽn dự đoán</span></div>
-            <ul class="clean-list">${painList || '<li>Chưa xác định rõ</li>'}</ul>
-          </div>
-        </div>
-        <div class="hint"><strong>Nguồn tham chiếu:</strong> ${escapeHtml((profile.data_sources || []).join(' • ') || 'Dữ liệu nhập vào')}</div>
-      `;
+        const painList = (profile.pain_points || []).map(p => `<li class="mb-1.5">${escapeHtml(p)}</li>`).join('');
+        const signalList = (profile.recent_signals || []).map(s => `<li class="mb-1.5">${escapeHtml(s)}</li>`).join('');
 
-      const ap = (card.scripts && card.scripts.approach) || {};
-      const co = (card.scripts && card.scripts.consultation) || {};
-      const ne = (card.scripts && card.scripts.negotiation) || {};
+        document.getElementById('resCompanySummary').innerHTML = `
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
+                <div class="bg-[#F8FAFC] border border-slate-200/80 rounded-2xl p-4">
+                    <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Doanh nghiệp</div>
+                    <div class="text-sm font-bold text-slate-900">${escapeHtml(profile.company_name || 'N/A')}</div>
+                    <div class="text-xs text-slate-500 mt-1">MST: ${escapeHtml(profile.tax_id || 'N/A')}</div>
+                </div>
+                <div class="bg-[#F8FAFC] border border-slate-200/80 rounded-2xl p-4">
+                    <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Lĩnh vực &amp; Quy mô</div>
+                    <div class="text-sm font-bold text-slate-900">${escapeHtml(profile.industry || 'N/A')}</div>
+                    <div class="text-xs text-slate-500 mt-1">${escapeHtml(profile.estimated_scale || '')}</div>
+                </div>
+                <div class="bg-[#F8FAFC] border border-slate-200/80 rounded-2xl p-4">
+                    <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Tín hiệu tuyển dụng</div>
+                    <div class="text-sm font-medium text-slate-800">${escapeHtml(profile.hiring_signals || 'Chưa ghi nhận')}</div>
+                </div>
+            </div>
 
-      document.getElementById('tabApproach').innerHTML =
-        makeScriptCard('Góc mở lời chủ đạo (Hook)', ap.hook_angle || '') +
-        makeScriptCard('Tin nhắn Zalo / LinkedIn (ngắn gọn xin 15 phút)', ap.zalo_or_linkedin_msg || '') +
-        makeScriptCard('Tiêu đề Cold Email', ap.cold_email_subject || '') +
-        makeScriptCard('Nội dung Cold Email', ap.cold_email_body || '');
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="script-block m-0">
+                    <div class="script-block-head">
+                        <span class="script-block-title">Biến động &amp; Tín hiệu</span>
+                    </div>
+                    <ul class="pl-4 m-0 text-sm text-slate-700 list-disc">${signalList || '<li>Chưa ghi nhận biến động mới</li>'}</ul>
+                </div>
+                <div class="script-block m-0">
+                    <div class="script-block-head">
+                        <span class="script-block-title">Điểm nghẽn vận hành</span>
+                    </div>
+                    <ul class="pl-4 m-0 text-sm text-slate-700 list-disc">${painList || '<li>Chưa xác định rõ</li>'}</ul>
+                </div>
+            </div>
+        `;
 
-      const qText = (co.discovery_questions || []).map((q, idx) => `${idx + 1}. ${q}`).join('\n\n');
-      document.getElementById('tabConsult').innerHTML =
-        makeScriptCard('Bộ câu hỏi chẩn đoán (Discovery Questions)', qText) +
-        makeScriptCard('Cách định vị giá trị & gói giải pháp', co.value_pitch || '') +
-        makeScriptCard('Chặn trước rào cản ngầm', co.hidden_objection_to_preempt || '');
+        const ap = (card.scripts && card.scripts.approach) || {};
+        const co = (card.scripts && card.scripts.consultation) || {};
+        const ne = (card.scripts && card.scripts.negotiation) || {};
 
-      document.getElementById('tabNegotiate').innerHTML =
-        makeScriptCard('Đòn bẩy thương lượng theo quy mô', ne.leverage_strategy || '') +
-        makeScriptCard('Câu thoại xử lý khi khách lăn tăn giá / thời gian', ne.concession_script || '') +
-        makeScriptCard('Đề xuất chốt bước tiếp theo', ne.closing_next_step || '');
+        document.getElementById('tabApproach').innerHTML =
+            makeScriptCard('Góc mở lời chủ đạo', ap.hook_angle || '') +
+            makeScriptCard('Tin nhắn Zalo / LinkedIn', ap.zalo_or_linkedin_msg || '') +
+            makeScriptCard('Tiêu đề Email', ap.cold_email_subject || '') +
+            makeScriptCard('Nội dung Email', ap.cold_email_body || '');
+
+        const qText = (co.discovery_questions || []).map((q, idx) => `${idx + 1}. ${q}`).join('\n\n');
+        document.getElementById('consultContent').innerHTML =
+            makeScriptCard('Câu hỏi chẩn đoán', qText) +
+            makeScriptCard('Định vị giá trị', co.value_pitch || '') +
+            makeScriptCard('Hóa giải rào cản ngầm', co.hidden_objection_to_preempt || '');
+
+        document.getElementById('negotiateContent').innerHTML =
+            makeScriptCard('Đòn bẩy thương lượng', ne.leverage_strategy || '') +
+            makeScriptCard('Xử lý lăn tăn chi phí', ne.concession_script || '') +
+            makeScriptCard('Chốt bước tiếp theo', ne.closing_next_step || '');
+
+        const isUnlocked = quota ? Boolean(quota.isUnlocked) : currentQuotaState.isUnlocked;
+        applyScriptLockState(isUnlocked);
     }
 
     function switchTab(tabId, btnEl) {
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById(tabId).classList.add('active');
-      btnEl.classList.add('active');
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.script-tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        btnEl.classList.add('active');
     }
-    window.addEventListener('DOMContentLoaded', () => {
-  const savedEmail = localStorage.getItem('popresearch_email');
-  if (savedEmail) {
-    document.getElementById('userEmail').value = savedEmail;
-    loadUserProfile();
-  }
-});
-
-// Sửa nhẹ dòng đầu của loadUserProfile() để lưu email vào localStorage:
-// localStorage.setItem('popresearch_email', email);
-  </script>
+</script>
 </body>
 </html>

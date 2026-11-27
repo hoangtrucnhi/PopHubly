@@ -726,6 +726,16 @@
       document.getElementById(tabId).classList.add('active');
       btnEl.classList.add('active');
     }
+    window.addEventListener('DOMContentLoaded', () => {
+  const savedEmail = localStorage.getItem('popresearch_email');
+  if (savedEmail) {
+    document.getElementById('userEmail').value = savedEmail;
+    loadUserProfile();
+  }
+});
+
+// Sửa nhẹ dòng đầu của loadUserProfile() để lưu email vào localStorage:
+// localStorage.setItem('popresearch_email', email);
   </script>
 </body>
 </html>

@@ -5,33 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="color-scheme" content="light only">
     <title>PopResearch — Tình báo khách hàng B2B</title>
-    <link rel="icon" type="image/png" href="[https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png](https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png)">
-    <link rel="apple-touch-icon" href="[https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png](https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png)">
-    <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
-    <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
-    <link href="[https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap](https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap)" rel="stylesheet">
-    <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
-    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        navy: '#1B2B7A',
-                        'navy-deep': '#131F5C',
-                        'navy-mid': '#243086',
-                        'navy-light': '#2D3FA6',
-                        'navy-pale': '#F0F3FF',
-                        surface: '#F8FAFC',
-                    },
-                    fontFamily: {
-                        sans: ['"Be Vietnam Pro"', '"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
-                        brand: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --navy: #1B2B7A;
@@ -52,8 +31,13 @@
             --shadow-lg: 0 20px 48px rgba(27, 43, 122, 0.16);
         }
 
-        * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; overflow-x: hidden; }
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
+        }
 
         body {
             font-family: 'Be Vietnam Pro', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -62,24 +46,64 @@
             overflow-x: hidden;
             min-height: 100vh;
             margin: 0;
-            padding: 76px 0 0;
+            padding: 78px 0 0;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-        @media (max-width: 768px) { body { padding-top: 118px; } }
+
+        @media (max-width: 768px) {
+            body { padding-top: 124px; }
+        }
 
         ::selection { background: var(--navy); color: #fff; }
 
-        .title-bold { font-weight: 800; letter-spacing: -0.025em; line-height: 1.26; }
+        .hidden { display: none !important; }
+
         .bg-noise {
             background-image: radial-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px);
             background-size: 28px 28px;
         }
-        .glow-orb {
-            position: absolute; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0;
-        }
-        .wide-container { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
-        @media (min-width: 768px) { .wide-container { padding: 0 40px; } }
 
+        .glow-bg {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+        }
+        .glow-orb-1 {
+            width: 420px;
+            height: 420px;
+            background: #1B2B7A;
+            top: -120px;
+            left: -100px;
+            opacity: 0.08;
+        }
+        .glow-orb-2 {
+            width: 340px;
+            height: 340px;
+            background: #7c8ec9;
+            bottom: 10%;
+            right: -90px;
+            opacity: 0.07;
+        }
+
+        .wide-container {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        @media (max-width: 768px) {
+            .wide-container { padding: 0 20px; }
+        }
+
+        /* ===== HIGHLIGHT VIOLET ===== */
         .highlight-violet {
             color: #4D3B9C;
             font-weight: 800;
@@ -93,106 +117,424 @@
             box-decoration-break: clone;
         }
 
-        /* NAV */
+        /* ===== NAVIGATION ===== */
         .nav-mini {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid #edf0f5;
             padding: 13px 40px;
         }
         .nav-inner {
-            max-width: 1320px; margin: 0 auto;
-            display: flex; align-items: center; justify-content: space-between; gap: 16px;
+            max-width: 1320px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
         }
-        .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
-        .nav-logo img { width: 40px; height: 40px; border-radius: 11px; display: block; }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+        .nav-logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 11px;
+            display: block;
+        }
         .nav-logo-text {
-            font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
-            font-weight: 800; font-size: 1.22rem; color: #0F172A; letter-spacing: -0.025em; line-height: 1;
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            font-weight: 800;
+            font-size: 1.22rem;
+            color: #0F172A;
+            letter-spacing: -0.025em;
+            line-height: 1;
         }
         .nav-logo-text .text-accent { color: var(--navy); }
 
-        .quota-cluster { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-        .quota-chip {
-            display: inline-flex; align-items: center; gap: 6px;
-            background: var(--navy-pale); color: var(--navy);
-            border: 1px solid rgba(27, 43, 122, 0.14);
-            padding: 7px 14px; border-radius: 100px;
-            font-size: 0.8rem; font-weight: 700;
+        .quota-cluster {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
         }
-        .quota-chip.deep { background: #F5F3FF; color: #4D3B9C; border-color: rgba(77, 59, 156, 0.16); }
-        .quota-chip.credit { background: #ECFDF5; color: #065F46; border-color: #A7F3D0; }
+        .quota-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--navy-pale);
+            color: var(--navy);
+            border: 1px solid rgba(27, 43, 122, 0.14);
+            padding: 7px 14px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .quota-chip.deep {
+            background: #F5F3FF;
+            color: #4D3B9C;
+            border-color: rgba(77, 59, 156, 0.16);
+        }
+        .quota-chip.credit {
+            background: #ECFDF5;
+            color: #065F46;
+            border-color: #A7F3D0;
+        }
 
         .nav-cta-btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            background: var(--navy); color: #fff !important;
-            padding: 10px 20px; border-radius: 100px;
-            font-weight: 800; font-size: 0.85rem; letter-spacing: 0.02em;
-            border: none; cursor: pointer; white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--navy);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            letter-spacing: 0.02em;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
             box-shadow: 0 6px 18px rgba(27, 43, 122, 0.18);
             transition: all 0.25s ease;
+            font-family: inherit;
         }
-        .nav-cta-btn:hover { background: var(--navy-deep); transform: translateY(-1px); }
+        .nav-cta-btn:hover {
+            background: var(--navy-deep);
+            transform: translateY(-1px);
+        }
 
         @media (max-width: 768px) {
             .nav-mini { padding: 12px 20px; }
             .nav-inner { flex-wrap: wrap; gap: 10px; }
-            .quota-cluster { order: 3; width: 100%; justify-content: center; padding-top: 8px; border-top: 1px solid #edf0f5; }
+            .quota-cluster {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                padding-top: 8px;
+                border-top: 1px solid #edf0f5;
+            }
         }
 
-        /* INPUTS & BUTTONS */
-        .input-elegant {
-            width: 100%; padding: 0.95rem 1.25rem; background: #fff;
-            border: 1.5px solid var(--border); border-radius: var(--radius-sm);
-            outline: none; font-weight: 500; font-size: 0.94rem;
-            color: var(--text); font-family: inherit; transition: all 0.25s;
+        /* ===== MAIN & HERO ===== */
+        .main-wrap {
+            position: relative;
+            z-index: 10;
+            padding-top: 40px;
         }
-        .input-elegant:focus { border-color: var(--navy-light); box-shadow: 0 0 0 4px rgba(45, 63, 166, 0.1); }
-        .input-elegant::placeholder { color: #94a3b8; font-weight: 400; }
+        @media (max-width: 640px) {
+            .main-wrap { padding-top: 24px; }
+        }
 
+        .hero-block {
+            max-width: 780px;
+            margin-bottom: 36px;
+        }
+        .hero-eyebrow {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+        .title-bold {
+            font-weight: 800;
+            font-size: 2.65rem;
+            letter-spacing: -0.025em;
+            line-height: 1.24;
+            color: #0F172A;
+            margin: 0 0 14px;
+        }
+        @media (max-width: 768px) {
+            .title-bold { font-size: 1.9rem; }
+        }
+        .hero-sub {
+            font-size: 1.05rem;
+            color: #64748B;
+            font-weight: 500;
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        /* ===== ALERTS ===== */
+        .alert-box {
+            margin-bottom: 24px;
+            padding: 15px 20px;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid transparent;
+        }
+        .alert-error { background: #FEF2F2; color: #B91C1C; border-color: #FECACA; }
+        .alert-warn { background: #FFFBEB; color: #92400E; border-color: #FDE68A; }
+        .alert-success { background: #ECFDF5; color: #065F46; border-color: #A7F3D0; }
+
+        /* ===== CARDS & GRIDS ===== */
+        .editorial-card {
+            background: #ffffff;
+            border: 1px solid rgba(226, 232, 240, 0.95);
+            border-radius: 28px;
+            padding: 28px;
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.04);
+        }
+        @media (max-width: 640px) {
+            .editorial-card { padding: 20px; border-radius: 22px; }
+        }
+
+        .mb-6 { margin-bottom: 24px; }
+        .mb-8 { margin-bottom: 32px; }
+
+        .email-bar-grid {
+            display: grid;
+            grid-template-columns: 7fr 5fr;
+            gap: 20px;
+            align-items: end;
+        }
+        @media (max-width: 768px) {
+            .email-bar-grid { grid-template-columns: 1fr; gap: 12px; }
+        }
+        .quota-note {
+            font-size: 0.88rem;
+            color: #64748B;
+            font-weight: 500;
+            margin: 0;
+            padding-bottom: 12px;
+            line-height: 1.5;
+        }
+        .quota-note strong { color: #0F172A; }
+        .quota-note .navy-strong { color: var(--navy); }
+        @media (max-width: 768px) {
+            .quota-note { padding-bottom: 0; }
+        }
+
+        .workspace-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        @media (max-width: 960px) {
+            .workspace-grid { grid-template-columns: 1fr; }
+        }
+
+        .flex-col-card {
+            display: flex;
+            flex-direction: column;
+        }
+        .flex-grow-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #F1F5F9;
+            padding-bottom: 14px;
+            margin-bottom: 20px;
+            gap: 12px;
+        }
+        .card-title {
+            font-size: 1.12rem;
+            font-weight: 800;
+            color: #0F172A;
+            margin: 0;
+        }
+        .card-tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #94A3B8;
+        }
+        .card-tag-accent { color: var(--navy); }
+
+        .form-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
         .field-label {
-            display: block; font-size: 0.78rem; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 0.08em; color: #475569; margin-bottom: 7px;
+            display: block;
+            font-size: 0.76rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #475569;
+            margin-bottom: 7px;
+        }
+        .input-elegant {
+            width: 100%;
+            padding: 14px 18px;
+            background: #ffffff;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            outline: none;
+            font-weight: 500;
+            font-size: 0.94rem;
+            color: var(--text);
+            font-family: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .input-elegant:focus {
+            border-color: var(--navy-light);
+            box-shadow: 0 0 0 4px rgba(45, 63, 166, 0.1);
+        }
+        .input-elegant::placeholder {
+            color: #94A3B8;
+            font-weight: 400;
+        }
+        .textarea-tall {
+            flex: 1;
+            min-height: 265px;
+            resize: vertical;
         }
 
-        .btn-main {
-            background: var(--navy); color: white; padding: 0.95rem 2rem;
-            border-radius: 100px; font-weight: 800; font-size: 0.9rem; letter-spacing: 0.02em;
-            display: inline-flex; align-items: center; justify-content: center; gap: 9px;
-            box-shadow: 0 8px 24px rgba(27, 43, 122, 0.18);
-            border: none; cursor: pointer; font-family: inherit; white-space: nowrap; transition: all 0.25s;
+        /* ===== BUTTONS ===== */
+        .action-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
         }
-        .btn-main:hover:not(:disabled) { transform: translateY(-2px); background: var(--navy-deep); box-shadow: 0 16px 32px rgba(27, 43, 122, 0.28); }
+        .btn-main {
+            background: var(--navy);
+            color: #ffffff;
+            padding: 14px 30px;
+            border-radius: 100px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            box-shadow: 0 8px 24px rgba(27, 43, 122, 0.18);
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+            transition: all 0.25s ease;
+        }
+        .btn-main:hover:not(:disabled) {
+            transform: translateY(-2px);
+            background: var(--navy-deep);
+            box-shadow: 0 16px 32px rgba(27, 43, 122, 0.28);
+        }
         .btn-main:disabled { opacity: 0.6; cursor: not-allowed; }
+        .btn-full { width: 100%; padding-top: 16px; padding-bottom: 16px; }
 
         .btn-outline {
-            display: inline-flex; align-items: center; justify-content: center; gap: 9px;
-            font-weight: 800; font-size: 0.9rem; letter-spacing: 0.02em;
-            padding: 0.95rem 2rem; border-radius: 100px;
-            border: 1.5px solid #CBD5E1; color: var(--text); background: #fff;
-            cursor: pointer; font-family: inherit; white-space: nowrap; transition: all 0.25s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+            padding: 14px 30px;
+            border-radius: 100px;
+            border: 1.5px solid #CBD5E1;
+            color: var(--text);
+            background: #ffffff;
+            cursor: pointer;
+            font-family: inherit;
+            white-space: nowrap;
+            transition: all 0.25s ease;
         }
-        .btn-outline:hover:not(:disabled) { border-color: var(--navy); color: var(--navy); background: var(--navy-pale); }
+        .btn-outline:hover:not(:disabled) {
+            border-color: var(--navy);
+            color: var(--navy);
+            background: var(--navy-pale);
+        }
         .btn-outline:disabled { opacity: 0.6; cursor: not-allowed; }
+        .icon-navy { color: var(--navy); }
 
         .btn-copy {
-            display: inline-flex; align-items: center; gap: 6px;
-            padding: 6px 14px; border-radius: 100px; font-size: 0.78rem; font-weight: 700;
-            background: #fff; color: var(--navy); border: 1px solid #CBD5E1;
-            cursor: pointer; transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            background: #ffffff;
+            color: var(--navy);
+            border: 1px solid #CBD5E1;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
         }
-        .btn-copy:hover { background: var(--navy-pale); border-color: var(--navy); }
-
-        /* CARDS & SCORE BOX */
-        .editorial-card {
-            background: #ffffff; border: 1px solid rgba(226, 232, 240, 0.95);
-            border-radius: 28px; padding: 28px; box-shadow: 0 16px 40px rgba(15, 23, 42, 0.04);
+        .btn-copy:hover {
+            background: var(--navy-pale);
+            border-color: var(--navy);
         }
-        @media (max-width: 640px) { .editorial-card { padding: 20px; border-radius: 22px; } }
 
+        /* ===== LOADING ===== */
+        .loading-card {
+            text-align: center;
+            padding: 48px 24px;
+            margin-bottom: 32px;
+        }
+        .spinner {
+            width: 34px;
+            height: 34px;
+            border: 3px solid #E2E8F0;
+            border-top-color: var(--navy);
+            border-radius: 50%;
+            animation: spin 0.75s linear infinite;
+            margin: 0 auto 12px;
+        }
+        .btn-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2.5px solid rgba(255, 255, 255, 0.35);
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #334155;
+            margin: 0;
+        }
+
+        /* ===== RESULTS & SCORE BADGE ===== */
+        .results-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .score-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #F1F5F9;
+        }
+        @media (max-width: 640px) {
+            .score-header { flex-direction: column; align-items: flex-start; }
+        }
         .score-badge-card {
-            min-width: 118px;
+            min-width: 122px;
             padding: 14px 18px;
             border-radius: 20px;
             background: var(--navy-pale);
@@ -204,73 +546,324 @@
             flex-shrink: 0;
             text-align: center;
         }
+        .score-label {
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #64748B;
+            margin-bottom: 4px;
+        }
+        .score-value-row {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            white-space: nowrap;
+        }
+        .score-num {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: var(--navy);
+            line-height: 1;
+        }
+        .score-denom {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #64748B;
+            margin-left: 2px;
+        }
+        .score-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .priority-pill {
+            display: inline-block;
+            font-size: 0.74rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--navy);
+            background: var(--navy-pale);
+            padding: 5px 12px;
+            border-radius: 100px;
+            margin-bottom: 8px;
+        }
+        .score-reasoning {
+            font-size: 0.95rem;
+            color: #475569;
+            font-weight: 500;
+            margin: 0;
+            line-height: 1.6;
+        }
 
-        /* TABS & SCRIPTS */
+        .two-col-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        @media (max-width: 768px) {
+            .two-col-grid { grid-template-columns: 1fr; }
+        }
+        .pt-6 { padding-top: 24px; }
+
+        .meta-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        @media (max-width: 768px) {
+            .meta-grid-3 { grid-template-columns: 1fr; }
+        }
+        .meta-box {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 18px;
+            padding: 16px;
+        }
+        .meta-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #94A3B8;
+            margin-bottom: 4px;
+        }
+        .meta-value {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #0F172A;
+        }
+        .meta-sub {
+            font-size: 0.8rem;
+            color: #64748B;
+            margin-top: 4px;
+        }
+
+        /* ===== SCRIPTS & LOCK OVERLAY ===== */
         .script-tabs {
-            display: flex; gap: 8px; flex-wrap: wrap;
-            border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 20px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 14px;
+            margin-bottom: 20px;
         }
         .script-tab-btn {
-            display: inline-flex; align-items: center; gap: 7px;
-            padding: 10px 18px; border-radius: 100px; font-size: 0.85rem; font-weight: 700;
-            background: var(--surface); color: var(--muted); border: 1px solid transparent;
-            cursor: pointer; transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 10px 18px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            background: var(--surface);
+            color: var(--muted);
+            border: 1px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
         }
-        .script-tab-btn:hover { color: var(--navy); background: var(--navy-pale); }
-        .script-tab-btn.active { background: var(--navy); color: #fff; box-shadow: 0 6px 16px rgba(27, 43, 122, 0.2); }
+        .script-tab-btn:hover {
+            color: var(--navy);
+            background: var(--navy-pale);
+        }
+        .script-tab-btn.active {
+            background: var(--navy);
+            color: #ffffff;
+            box-shadow: 0 6px 16px rgba(27, 43, 122, 0.2);
+        }
 
         .tab-panel { display: none; }
         .tab-panel.active { display: block; }
 
         .script-block {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: 18px; padding: 18px 20px; margin-bottom: 14px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 18px 20px;
+            margin-bottom: 14px;
         }
-        .script-block-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; }
-        .script-block-title { font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.09em; color: var(--navy); }
-        .pre-text { white-space: pre-wrap; font-size: 0.94rem; line-height: 1.68; color: #1E293B; margin: 0; }
+        .script-block-highlight {
+            background: rgba(240, 243, 255, 0.65);
+            border-color: rgba(27, 43, 122, 0.16);
+        }
+        .no-mb { margin-bottom: 0; }
+        .script-block-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .script-block-title {
+            font-size: 0.78rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: var(--navy);
+        }
+        .pre-text {
+            white-space: pre-wrap;
+            font-size: 0.94rem;
+            line-height: 1.68;
+            color: #1E293B;
+            margin: 0;
+        }
+        .bullet-list {
+            padding-left: 18px;
+            margin: 0;
+            font-size: 0.9rem;
+            color: #334155;
+            line-height: 1.6;
+        }
+        .bullet-list li { margin-bottom: 6px; }
 
-        /* LOCKED & BLURRED OVERLAY */
-        .locked-stage { position: relative; border-radius: 20px; overflow: hidden; min-height: 310px; }
-        .blurred-content {
-            filter: blur(6px); -webkit-filter: blur(6px); opacity: 0.52;
-            user-select: none; pointer-events: none; transition: filter 0.35s ease, opacity 0.35s ease;
+        .locked-stage {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            min-height: 310px;
         }
-        .locked-stage.unlocked .blurred-content { filter: none; -webkit-filter: none; opacity: 1; user-select: auto; pointer-events: auto; }
+        .blurred-content {
+            filter: blur(6px);
+            -webkit-filter: blur(6px);
+            opacity: 0.5;
+            user-select: none;
+            pointer-events: none;
+            transition: filter 0.35s ease, opacity 0.35s ease;
+        }
+        .locked-stage.unlocked .blurred-content {
+            filter: none;
+            -webkit-filter: none;
+            opacity: 1;
+            user-select: auto;
+            pointer-events: auto;
+        }
         .lock-overlay {
-            position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-            padding: 20px; background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(248, 250, 252, 0.92) 100%);
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, rgba(248, 250, 252, 0.94) 100%);
             z-index: 10;
         }
         .locked-stage.unlocked .lock-overlay { display: none; }
         .lock-card {
-            background: #ffffff; border: 1.5px solid rgba(27, 43, 122, 0.18);
-            border-radius: 24px; padding: 28px 24px; max-width: 440px; width: 100%;
-            text-align: center; box-shadow: 0 20px 48px rgba(15, 23, 42, 0.12);
+            background: #ffffff;
+            border: 1.5px solid rgba(27, 43, 122, 0.18);
+            border-radius: 24px;
+            padding: 28px 24px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 48px rgba(15, 23, 42, 0.12);
+        }
+        .lock-icon-badge {
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            background: var(--navy-pale);
+            color: var(--navy);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+        .lock-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #0F172A;
+            margin: 0 0 8px;
+        }
+        .lock-desc {
+            font-size: 0.9rem;
+            color: #64748B;
+            font-weight: 500;
+            margin: 0 0 20px;
+            line-height: 1.6;
         }
 
-        /* CONSENT CHECKBOX (ĐỒNG BỘ CTA FORM) */
-        .consent-wrapper { display: flex; align-items: flex-start; gap: 10px; margin-top: 4px; }
-        .consent-checkbox {
-            width: 20px; height: 20px; flex-shrink: 0; margin: 0; cursor: pointer;
-            border: 2px solid #cbd5e1; border-radius: 5px; background-color: #fff;
-            appearance: none; -webkit-appearance: none;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--navy); font-size: 14px; font-weight: 800;
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 16px;
+            overflow-y: auto;
         }
-        .consent-checkbox:checked { border-color: var(--navy); }
-        .consent-checkbox:checked::before { content: "✓"; }
-        .consent-label { font-size: 0.84rem; color: #475569; font-weight: 500; line-height: 1.5; cursor: pointer; }
-        .consent-link { color: var(--navy); font-weight: 700; text-decoration: underline; }
+        .modal-box {
+            background: #ffffff;
+            border-radius: 28px;
+            width: 100%;
+            max-width: 500px;
+            padding: 28px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            margin: auto 0;
+        }
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #F1F5F9;
+            margin-bottom: 20px;
+        }
+        .modal-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .modal-title {
+            font-size: 1.12rem;
+            font-weight: 800;
+            color: #0F172A;
+            margin: 0;
+        }
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            background: #F1F5F9;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .modal-close:hover { background: #E2E8F0; color: var(--text); }
+        .modal-desc {
+            font-size: 0.9rem;
+            color: #64748B;
+            font-weight: 500;
+            margin: 0;
+            line-height: 1.6;
+        }
 
-        /* OPTION CARDS IN MODAL */
+        .option-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
         .option-card {
             border: 1.5px solid var(--border);
             border-radius: 20px;
             padding: 18px 20px;
             cursor: pointer;
             transition: all 0.2s ease;
-            background: #fff;
+            background: #ffffff;
         }
         .option-card:hover {
             border-color: var(--navy);
@@ -281,82 +874,244 @@
             border-color: var(--navy);
             background: linear-gradient(180deg, #F0F3FF 0%, #FFFFFF 100%);
         }
+        .option-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        .option-tag {
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--navy);
+        }
+        .option-tag-muted { color: #94A3B8; }
+        .option-badge-navy {
+            font-size: 0.74rem;
+            font-weight: 800;
+            background: var(--navy);
+            color: #ffffff;
+            padding: 3px 10px;
+            border-radius: 100px;
+        }
+        .option-badge-muted {
+            font-size: 0.74rem;
+            font-weight: 800;
+            background: #F1F5F9;
+            color: #1E293B;
+            padding: 3px 10px;
+            border-radius: 100px;
+        }
+        .option-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: #0F172A;
+            margin: 0 0 6px;
+        }
+        .option-desc {
+            font-size: 0.88rem;
+            color: #475569;
+            margin: 0;
+            line-height: 1.55;
+        }
 
-        /* SPINNER & MODAL */
-        .spinner {
-            width: 34px; height: 34px; border: 3px solid #E2E8F0; border-top-color: var(--navy);
-            border-radius: 50%; animation: spin 0.75s linear infinite; margin: 0 auto 12px;
+        /* CONSENT CHECKBOX */
+        .consent-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 2px;
         }
-        .btn-spinner {
-            display: inline-block; width: 16px; height: 16px;
-            border: 2.5px solid rgba(255, 255, 255, 0.35); border-top-color: #fff;
-            border-radius: 50%; animation: spin 0.7s linear infinite;
+        .consent-checkbox {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            margin: 0;
+            cursor: pointer;
+            border: 2px solid #cbd5e1;
+            border-radius: 5px;
+            background-color: #ffffff;
+            appearance: none;
+            -webkit-appearance: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--navy);
+            font-size: 14px;
+            font-weight: 800;
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
+        .consent-checkbox:checked { border-color: var(--navy); }
+        .consent-checkbox:checked::before { content: "✓"; }
+        .consent-label {
+            font-size: 0.84rem;
+            color: #475569;
+            font-weight: 500;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+        .consent-link {
+            color: var(--navy);
+            font-weight: 700;
+            text-decoration: underline;
+        }
 
-        .modal-overlay {
-            position: fixed; inset: 0; background: rgba(15, 23, 42, 0.65);
-            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-            display: none; align-items: center; justify-content: center;
-            z-index: 9999; padding: 16px; overflow-y: auto;
+        /* QR PAYMENT BOX */
+        .qr-stage {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
-        .modal-overlay:not(.hidden) { display: flex; }
-        .modal-box {
-            background: #ffffff; border-radius: 28px; width: 100%; max-width: 500px;
-            padding: 28px; box-shadow: var(--shadow-lg); position: relative; margin: auto 0;
+        .qr-frame {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 20px;
+            padding: 16px;
+            display: inline-block;
+            margin: 0 auto;
         }
-        .modal-close {
-            width: 36px; height: 36px; background: #F1F5F9; border: none; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; color: var(--muted); cursor: pointer;
+        .qr-img {
+            width: 220px;
+            height: 220px;
+            object-fit: contain;
+            display: block;
+            border-radius: 12px;
+            background: #ffffff;
         }
-        .modal-close:hover { background: #E2E8F0; color: var(--text); }
+        .qr-summary {
+            background: var(--navy-pale);
+            border: 1px solid rgba(27, 43, 122, 0.16);
+            border-radius: 18px;
+            padding: 16px;
+            text-align: left;
+            font-size: 0.88rem;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .qr-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+        .qr-row span { color: #64748B; }
+        .qr-amount { color: var(--navy); font-size: 1rem; }
 
-        /* FOOTER */
+        /* ===== FOOTER ===== */
         .site-footer {
-            background: #F8FAFC; color: #64748B; padding: 56px 0 24px;
-            border-top: 1px solid #E2E8F0; margin-top: 72px;
+            background: #F8FAFC;
+            color: #64748B;
+            padding: 56px 0 24px;
+            border-top: 1px solid #E2E8F0;
+            margin-top: 72px;
         }
         .footer-grid {
-            display: grid; grid-template-columns: 1.1fr 1.3fr 1fr 1fr; gap: 40px;
-            padding-bottom: 40px; border-bottom: 1px solid #E2E8F0;
+            display: grid;
+            grid-template-columns: 1.1fr 1.3fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #E2E8F0;
         }
-        .footer-col-title { font-weight: 800; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: #94A3B8; margin-bottom: 18px; }
+        .footer-col-title {
+            font-weight: 800;
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #94A3B8;
+            margin-bottom: 18px;
+        }
         .footer-info-block { display: flex; flex-direction: column; gap: 8px; }
         .footer-company-name { font-weight: 800; font-size: 0.92rem; color: #334155; }
         .footer-info-line { font-size: 0.88rem; color: #64748B; line-height: 1.6; }
-        .footer-logo-bottom { display: flex; align-items: center; gap: 14px; margin-top: 24px; }
+        .footer-logo-bottom {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-top: 24px;
+        }
         .footer-logo-bottom img { width: 52px; height: 52px; border-radius: 14px; }
-        .footer-logo-bottom span { font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important; font-weight: 800; font-size: 1.45rem; color: #334155; }
+        .footer-logo-bottom span {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            font-weight: 800;
+            font-size: 1.45rem;
+            color: #334155;
+        }
         .footer-logo-bottom span .text-minutes { color: var(--navy); }
         .footer-contact-list { display: flex; flex-direction: column; gap: 12px; }
-        .footer-contact-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.88rem; color: #64748B; line-height: 1.55; }
-        .footer-contact-item i { color: var(--navy); font-size: 0.9rem; width: 16px; text-align: center; margin-top: 3px; }
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.88rem;
+            color: #64748B;
+            line-height: 1.55;
+        }
+        .footer-contact-item i {
+            color: var(--navy);
+            font-size: 0.9rem;
+            width: 16px;
+            text-align: center;
+            margin-top: 3px;
+        }
         .footer-contact-item a { color: #64748B; text-decoration: none; }
         .footer-contact-item a:hover { color: var(--navy); }
         .footer-socials { display: flex; gap: 4px; margin-top: 18px; }
-        .footer-socials a { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; color: #94A3B8; font-size: 18px; border-radius: 8px; }
+        .footer-socials a {
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94A3B8;
+            font-size: 18px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
         .footer-socials a:hover { color: var(--navy); background: rgba(27, 43, 122, 0.06); }
         .footer-links { display: flex; flex-direction: column; gap: 11px; }
-        .footer-links a { color: #64748B; text-decoration: none; font-size: 0.88rem; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; }
+        .footer-links a {
+            color: #64748B;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
         .footer-links a:hover { color: var(--navy); }
         .footer-links a::before { content: '→'; color: #CBD5E1; font-size: 0.78rem; }
-        .footer-bottom { text-align: center; padding-top: 24px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; color: #A0AEC0; }
-        @media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
-        @media (max-width: 640px) { .footer-grid { grid-template-columns: 1fr; gap: 28px; } }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 24px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: #A0AEC0;
+        }
+        @media (max-width: 1024px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+        }
+        @media (max-width: 640px) {
+            .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+        }
     </style>
 </head>
 <body class="bg-noise">
 
-<div class="fixed inset-0 overflow-hidden pointer-events-none z-0" aria-hidden="true">
-    <div class="glow-orb w-[420px] h-[420px] bg-[#1B2B7A] top-[-120px] left-[-100px]" style="opacity:0.08;"></div>
-    <div class="glow-orb w-[340px] h-[340px] bg-[#7c8ec9] bottom-[10%] right-[-90px]" style="opacity:0.07;"></div>
+<div class="glow-bg" aria-hidden="true">
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
 </div>
 
 <!-- Navigation -->
 <nav class="nav-mini">
     <div class="nav-inner">
-        <a href="[https://pophubly.com/popminutes/](https://pophubly.com/popminutes/)" class="nav-logo">
-            <img src="[https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png](https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png)" alt="PopResearch">
+        <a href="https://pophubly.com/popminutes/" class="nav-logo">
+            <img src="https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png" alt="PopResearch">
             <span class="nav-logo-text">Pop<span class="text-accent">Research</span></span>
         </a>
 
@@ -365,7 +1120,7 @@
             <span class="quota-chip deep" id="deepQuotaBadge">Quét sâu: 2/2</span>
             <span class="quota-chip credit hidden" id="monthlyCreditBadge">Mở khóa tháng: 0/10</span>
             <button type="button" onclick="loadUserProfile(true)" class="btn-copy">
-                <i class="fa-solid fa-rotate-right text-xs"></i>
+                <i class="fa-solid fa-rotate-right"></i>
                 <span>Đồng bộ</span>
             </button>
         </div>
@@ -376,56 +1131,54 @@
     </div>
 </nav>
 
-<main class="relative z-10 pt-8 sm:pt-12">
+<main class="main-wrap">
     <div class="wide-container">
 
         <!-- Hero -->
-        <div class="max-w-3xl mb-8 sm:mb-10">
-            <span class="text-xs font-extrabold uppercase tracking-[0.16em] text-[#1B2B7A] block mb-3">
-                PopHubly Sales Intelligence
-            </span>
-            <h1 class="title-bold text-3xl sm:text-4xl md:text-[2.75rem] text-slate-900 mb-4">
+        <div class="hero-block">
+            <span class="hero-eyebrow">PopHubly Sales Intelligence</span>
+            <h1 class="title-bold">
                 Nghiên cứu khách hàng B2B &amp; <span class="highlight-violet">Kịch bản chốt deal</span>
             </h1>
-            <p class="text-base sm:text-lg text-slate-500 font-medium leading-relaxed">
+            <p class="hero-sub">
                 Phân tích dữ liệu doanh nghiệp theo mã số thuế hoặc website, chấm điểm cơ hội và đề xuất kịch bản tiếp cận sát thực tế.
             </p>
         </div>
 
         <!-- Alert -->
-        <div id="alertBox" class="hidden mb-6 px-5 py-4 rounded-2xl text-sm font-semibold border"></div>
+        <div id="alertBox" class="alert-box hidden"></div>
 
         <!-- Email Bar -->
         <div class="editorial-card mb-6">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
-                <div class="md:col-span-7">
+            <div class="email-bar-grid">
+                <div>
                     <label for="userEmail" class="field-label">Email công việc</label>
                     <input type="email" id="userEmail" class="input-elegant" placeholder="ten.ban@congty.com" onchange="loadUserProfile(false)">
                 </div>
-                <div class="md:col-span-5 flex items-center md:pb-3">
-                    <p id="quotaStatusText" class="text-xs sm:text-sm text-slate-500 font-medium m-0">
-                        Hạn mức mặc định: <strong class="text-slate-800">3 Quét nhanh</strong> &amp; <strong class="text-slate-800">2 Quét sâu</strong> mỗi ngày.
+                <div>
+                    <p id="quotaStatusText" class="quota-note">
+                        Hạn mức mặc định: <strong>3 Quét nhanh</strong> &amp; <strong>2 Quét sâu</strong> mỗi ngày.
                     </p>
                 </div>
             </div>
         </div>
 
         <!-- 2-Column Workspace -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div class="workspace-grid">
             <div class="editorial-card">
-                <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
-                    <h2 class="text-lg font-extrabold text-slate-900 m-0">Doanh nghiệp mục tiêu</h2>
-                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Đầu vào</span>
+                <div class="card-head">
+                    <h2 class="card-title">Doanh nghiệp mục tiêu</h2>
+                    <span class="card-tag">Đầu vào</span>
                 </div>
 
-                <div class="space-y-4">
+                <div class="form-stack">
                     <div>
                         <label for="taxId" class="field-label">Mã số thuế</label>
                         <input type="text" id="taxId" class="input-elegant" placeholder="0316xxxxxx">
                     </div>
                     <div>
                         <label for="website" class="field-label">Website</label>
-                        <input type="text" id="website" class="input-elegant" placeholder="[https://congtykhach.vn](https://congtykhach.vn)">
+                        <input type="text" id="website" class="input-elegant" placeholder="https://congtykhach.vn">
                     </div>
                     <div>
                         <label for="companyName" class="field-label">Tên doanh nghiệp</label>
@@ -433,20 +1186,20 @@
                     </div>
                     <div>
                         <label for="socialNotes" class="field-label">Bối cảnh bổ sung</label>
-                        <textarea id="socialNotes" rows="3" class="input-elegant resize-y" placeholder="Bài đăng gần đây hoặc ghi chú về người phụ trách..."></textarea>
+                        <textarea id="socialNotes" rows="3" class="input-elegant" placeholder="Bài đăng gần đây hoặc ghi chú về người phụ trách..."></textarea>
                     </div>
                 </div>
             </div>
 
-            <div class="editorial-card flex flex-col">
-                <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
-                    <h2 class="text-lg font-extrabold text-slate-900 m-0">Giải pháp của bạn</h2>
-                    <span class="text-xs font-bold uppercase tracking-wider text-[#1B2B7A]">Tự động lưu</span>
+            <div class="editorial-card flex-col-card">
+                <div class="card-head">
+                    <h2 class="card-title">Giải pháp của bạn</h2>
+                    <span class="card-tag card-tag-accent">Tự động lưu</span>
                 </div>
 
-                <div class="flex-1 flex flex-col">
+                <div class="flex-grow-col">
                     <label for="sellerOffer" class="field-label">Sản phẩm, gói dịch vụ &amp; mức giá</label>
-                    <textarea id="sellerOffer" class="input-elegant flex-1 min-h-[255px] resize-y" placeholder="Ví dụ:
+                    <textarea id="sellerOffer" class="input-elegant textarea-tall" placeholder="Ví dụ:
 Gói Starter: 20k/user/tháng, tối thiểu 10 user, quản lý quy trình và công việc.
 Gói Business: 50k/user/tháng, tối thiểu 10 user, bao gồm Starter và quản trị tuyển dụng.
 Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn diện."></textarea>
@@ -456,9 +1209,9 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
 
         <!-- Action Bar -->
         <div class="editorial-card mb-8">
-            <div class="flex flex-wrap items-center gap-3">
+            <div class="action-row">
                 <button type="button" id="btnFast" onclick="runAnalysis('FAST')" class="btn-outline">
-                    <i class="fa-solid fa-bolt text-[#1B2B7A]"></i>
+                    <i class="fa-solid fa-bolt icon-navy"></i>
                     <span>Quét nhanh</span>
                 </button>
                 <button type="button" id="btnDeep" onclick="runAnalysis('DEEP')" class="btn-main">
@@ -469,38 +1222,38 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
         </div>
 
         <!-- Loading -->
-        <div id="loadingBox" class="hidden editorial-card text-center py-12 mb-8">
+        <div id="loadingBox" class="editorial-card loading-card hidden">
             <div class="spinner"></div>
-            <p id="loadingText" class="text-sm sm:text-base font-bold text-slate-700 m-0">Đang tổng hợp dữ liệu doanh nghiệp...</p>
+            <p id="loadingText" class="loading-text">Đang tổng hợp dữ liệu doanh nghiệp...</p>
         </div>
 
         <!-- Results -->
-        <section id="resultSection" class="hidden space-y-6">
+        <section id="resultSection" class="results-stack hidden">
 
             <!-- Score & Recommended Offer -->
             <div class="editorial-card">
-                <div class="flex flex-col sm:flex-row sm:items-center gap-5 pb-6 border-b border-slate-100">
+                <div class="score-header">
                     <div class="score-badge-card">
-                        <span class="text-[0.65rem] font-extrabold uppercase tracking-widest text-slate-400 mb-1">Điểm phù hợp</span>
-                        <div class="flex items-baseline justify-center whitespace-nowrap">
-                            <span id="resScoreNum" class="text-3xl font-black text-[#1B2B7A] leading-none">--</span>
-                            <span class="text-sm font-bold text-slate-400 ml-0.5">/100</span>
+                        <span class="score-label">Điểm phù hợp</span>
+                        <div class="score-value-row">
+                            <span id="resScoreNum" class="score-num">--</span>
+                            <span class="score-denom">/100</span>
                         </div>
                     </div>
-                    <div class="flex-1 min-w-0">
-                        <span id="resPriority" class="inline-block text-xs font-extrabold uppercase tracking-wider text-[#1B2B7A] bg-[#F0F3FF] px-3 py-1 rounded-full mb-2"></span>
-                        <p id="resReasoning" class="text-sm sm:text-base text-slate-600 font-medium m-0 leading-relaxed"></p>
+                    <div class="score-info">
+                        <span id="resPriority" class="priority-pill"></span>
+                        <p id="resReasoning" class="score-reasoning"></p>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-6">
-                    <div class="script-block m-0">
+                <div class="two-col-grid pt-6">
+                    <div class="script-block no-mb">
                         <div class="script-block-head">
                             <span class="script-block-title">Cơ hội trọng tâm</span>
                         </div>
                         <p id="resOpportunity" class="pre-text"></p>
                     </div>
-                    <div class="script-block m-0 bg-[#F0F3FF]/60 border-[#1B2B7A]/15">
+                    <div class="script-block script-block-highlight no-mb">
                         <div class="script-block-head">
                             <span class="script-block-title">Gói đề xuất</span>
                         </div>
@@ -511,18 +1264,18 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
 
             <!-- Company Profile -->
             <div class="editorial-card">
-                <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
-                    <h2 class="text-lg font-extrabold text-slate-900 m-0">Chân dung doanh nghiệp</h2>
-                    <span id="resExecTag" class="text-xs font-bold uppercase tracking-wider text-slate-400"></span>
+                <div class="card-head">
+                    <h2 class="card-title">Chân dung doanh nghiệp</h2>
+                    <span id="resExecTag" class="card-tag"></span>
                 </div>
                 <div id="resCompanySummary"></div>
             </div>
 
             <!-- 3 Sales Scripts -->
             <div class="editorial-card">
-                <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
-                    <h2 class="text-lg font-extrabold text-slate-900 m-0">Kịch bản bán hàng</h2>
-                    <span id="scriptAccessBadge" class="text-xs font-bold text-slate-400"></span>
+                <div class="card-head">
+                    <h2 class="card-title">Kịch bản bán hàng</h2>
+                    <span id="scriptAccessBadge" class="card-tag"></span>
                 </div>
 
                 <div class="script-tabs">
@@ -530,11 +1283,11 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
                         <span>1. Tiếp cận</span>
                     </button>
                     <button type="button" class="script-tab-btn" onclick="switchTab('tabConsult', this)">
-                        <i class="fa-solid fa-lock text-xs lock-tab-icon"></i>
+                        <i class="fa-solid fa-lock lock-tab-icon"></i>
                         <span>2. Tư vấn</span>
                     </button>
                     <button type="button" class="script-tab-btn" onclick="switchTab('tabNegotiate', this)">
-                        <i class="fa-solid fa-lock text-xs lock-tab-icon"></i>
+                        <i class="fa-solid fa-lock lock-tab-icon"></i>
                         <span>3. Đàm phán</span>
                     </button>
                 </div>
@@ -575,7 +1328,7 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
                     <div class="footer-info-line"><strong>MST:</strong> 1602232842</div>
                 </div>
                 <div class="footer-logo-bottom">
-                    <img src="[https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png](https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png)" alt="PopMinutes">
+                    <img src="https://raw.githubusercontent.com/hoangtrucnhi/PopMinutes-PWA/refs/heads/main/launchericon-512x512.png" alt="PopMinutes">
                     <span>Pop<span class="text-minutes">Minutes</span></span>
                 </div>
             </div>
@@ -608,18 +1361,18 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
             <div>
                 <div class="footer-col-title">Chính sách &amp; Điều khoản</div>
                 <div class="footer-links">
-                    <a href="[https://pophubly.com/pophubly-privacy-policy/](https://pophubly.com/pophubly-privacy-policy/)" target="_blank" rel="noopener">Chính sách bảo mật</a>
-                    <a href="[https://pophubly.com/term-of-use/](https://pophubly.com/term-of-use/)" target="_blank" rel="noopener">Điều khoản sử dụng</a>
-                    <a href="[https://pophubly.com/chinh-sach-hoan-tien/](https://pophubly.com/chinh-sach-hoan-tien/)" target="_blank" rel="noopener">Chính sách hoàn tiền</a>
-                    <a href="[https://pophubly.com/quy-trinh-thanh-toan/](https://pophubly.com/quy-trinh-thanh-toan/)" target="_blank" rel="noopener">Quy trình thanh toán</a>
-                    <a href="[https://pophubly.com/quy-trinh-khieu-nai/](https://pophubly.com/quy-trinh-khieu-nai/)" target="_blank" rel="noopener">Quy trình khiếu nại</a>
+                    <a href="https://pophubly.com/pophubly-privacy-policy/" target="_blank" rel="noopener">Chính sách bảo mật</a>
+                    <a href="https://pophubly.com/term-of-use/" target="_blank" rel="noopener">Điều khoản sử dụng</a>
+                    <a href="https://pophubly.com/chinh-sach-hoan-tien/" target="_blank" rel="noopener">Chính sách hoàn tiền</a>
+                    <a href="https://pophubly.com/quy-trinh-thanh-toan/" target="_blank" rel="noopener">Quy trình thanh toán</a>
+                    <a href="https://pophubly.com/quy-trinh-khieu-nai/" target="_blank" rel="noopener">Quy trình khiếu nại</a>
                 </div>
             </div>
 
             <div>
                 <div class="footer-col-title">Hệ sinh thái</div>
                 <div class="footer-links">
-                    <a href="[https://pophubly.com/popminutes/](https://pophubly.com/popminutes/)" target="_blank" rel="noopener">PopMinutes App</a>
+                    <a href="https://pophubly.com/popminutes/" target="_blank" rel="noopener">PopMinutes App</a>
                     <a href="#">Đối tác địa điểm</a>
                     <a href="#">Đối tác chiến lược</a>
                     <a href="#">Tiếp thị liên kết</a>
@@ -636,12 +1389,12 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
 <!-- Modal: Chọn phương án mở khóa -> Form Trial PopMinutes hoặc QR Thanh toán -->
 <div id="unlockModal" class="modal-overlay hidden">
     <div class="modal-box">
-        <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-5">
-            <div class="flex items-center gap-2">
-                <button type="button" id="modalBackBtn" onclick="showModalStep('choose')" class="hidden modal-close mr-1" aria-label="Quay lại">
-                    <i class="fa-solid fa-arrow-left text-xs"></i>
+        <div class="modal-header">
+            <div class="modal-header-left">
+                <button type="button" id="modalBackBtn" onclick="showModalStep('choose')" class="modal-close hidden" aria-label="Quay lại">
+                    <i class="fa-solid fa-arrow-left"></i>
                 </button>
-                <h3 id="unlockModalTitle" class="text-lg font-extrabold text-slate-900 m-0">Mở khóa kịch bản</h3>
+                <h3 id="unlockModalTitle" class="modal-title">Mở khóa kịch bản</h3>
             </div>
             <button type="button" onclick="closeUnlockModal()" class="modal-close" aria-label="Đóng">
                 <i class="fa-solid fa-xmark"></i>
@@ -649,78 +1402,78 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
         </div>
 
         <!-- BƯỚC 1: CHỌN 1 TRONG 2 OPTION -->
-        <div id="modalStepChoose" class="space-y-4">
+        <div id="modalStepChoose" class="option-list">
             <div class="option-card featured" onclick="showModalStep('trial')">
-                <div class="flex items-center justify-between mb-1.5">
-                    <span class="text-xs font-extrabold uppercase tracking-wider text-[#1B2B7A]">Khuyên dùng</span>
-                    <span class="text-xs font-extrabold bg-[#1B2B7A] text-white px-2.5 py-0.5 rounded-full">Miễn phí 10 lượt/tháng</span>
+                <div class="option-top">
+                    <span class="option-tag">Khuyên dùng</span>
+                    <span class="option-badge-navy">Miễn phí 10 lượt/tháng</span>
                 </div>
-                <h4 class="text-base font-extrabold text-slate-900 mb-1">Kích hoạt dùng thử PopMinutes</h4>
-                <p class="text-sm text-slate-600 m-0 leading-relaxed">
+                <h4 class="option-title">Kích hoạt dùng thử PopMinutes</h4>
+                <p class="option-desc">
                     Tạo tài khoản PopMinutes dùng thử 90 ngày, mở khóa ngay <strong>10 lượt kịch bản Tư vấn &amp; Đàm phán/tháng</strong> và ưu đãi chỉ <strong>2.500đ/lượt</strong> cho các lần sau.
                 </p>
             </div>
 
             <div class="option-card" onclick="showModalStep('qr')">
-                <div class="flex items-center justify-between mb-1.5">
-                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Không cần đăng ký</span>
-                    <span id="qrOptionPriceBadge" class="text-xs font-extrabold bg-slate-100 text-slate-800 px-2.5 py-0.5 rounded-full">3.500đ / lượt</span>
+                <div class="option-top">
+                    <span class="option-tag option-tag-muted">Không cần đăng ký</span>
+                    <span id="qrOptionPriceBadge" class="option-badge-muted">3.500đ / lượt</span>
                 </div>
-                <h4 class="text-base font-extrabold text-slate-900 mb-1">Thanh toán lẻ qua mã QR</h4>
-                <p id="qrOptionDesc" class="text-sm text-slate-600 m-0 leading-relaxed">
+                <h4 class="option-title">Thanh toán lẻ qua mã QR</h4>
+                <p id="qrOptionDesc" class="option-desc">
                     Mở khóa ngay trọn bộ kịch bản Tư vấn &amp; Đàm phán cho doanh nghiệp đang xem với mức phí <strong>3.500đ</strong>.
                 </p>
             </div>
         </div>
 
-        <!-- BƯỚC 2A: FORM ĐĂNG KÝ TRIAL POPMINUTES (ĐỒNG BỘ CTA FORM) -->
-        <form id="unlockTrialForm" class="hidden space-y-4" novalidate>
-            <p class="text-sm text-slate-500 font-medium m-0 leading-relaxed">
+        <!-- BƯỚC 2A: FORM ĐĂNG KÝ TRIAL POPMINUTES -->
+        <form id="unlockTrialForm" class="form-stack hidden" novalidate>
+            <p class="modal-desc">
                 Hệ thống sẽ khởi tạo tài khoản <strong>PopMinutes</strong> qua email và kích hoạt ngay <strong>10 lượt mở khóa kịch bản/tháng</strong>.
             </p>
             <input type="text" id="trialName" name="name" placeholder="Họ và tên của bạn *" class="input-elegant" required>
             <input type="email" id="trialEmail" name="email" placeholder="Email công việc *" class="input-elegant" required>
             <input type="tel" id="trialPhone" name="phone" placeholder="Số điện thoại của bạn *" class="input-elegant" required>
-            <textarea id="trialNote" name="note" placeholder="Ghi chú thêm cho chúng tôi..." rows="2" class="input-elegant resize-none"></textarea>
+            <textarea id="trialNote" name="note" placeholder="Ghi chú thêm cho chúng tôi..." rows="2" class="input-elegant"></textarea>
             <input type="hidden" id="trialRef" name="ref" value="">
 
             <div class="consent-wrapper">
                 <input type="checkbox" id="trialConsent" name="consent" required class="consent-checkbox">
                 <label for="trialConsent" class="consent-label">
                     Tôi đồng ý với
-                    <a href="[https://pophubly.com/pophubly-privacy-policy/](https://pophubly.com/pophubly-privacy-policy/)" target="_blank" class="consent-link">Chính sách bảo mật</a>
+                    <a href="https://pophubly.com/pophubly-privacy-policy/" target="_blank" class="consent-link">Chính sách bảo mật</a>
                     và
-                    <a href="[https://pophubly.com/term-of-use/](https://pophubly.com/term-of-use/)" target="_blank" class="consent-link">Điều khoản sử dụng</a>.
+                    <a href="https://pophubly.com/term-of-use/" target="_blank" class="consent-link">Điều khoản sử dụng</a>.
                 </label>
             </div>
 
-            <button type="submit" id="unlockSubmitBtn" class="btn-main w-full py-4">
+            <button type="submit" id="unlockSubmitBtn" class="btn-main btn-full">
                 <span>DÙNG THỬ 90 NGÀY &amp; MỞ KHÓA</span>
             </button>
         </form>
 
         <!-- BƯỚC 2B: THANH TOÁN QR -->
-        <div id="modalStepQr" class="hidden text-center space-y-4">
-            <div class="bg-[#F8FAFC] border border-slate-200 rounded-2xl p-4 inline-block mx-auto">
-                <img id="vietqrImage" src="" alt="Mã QR thanh toán" class="w-56 h-56 object-contain mx-auto rounded-xl bg-white">
+        <div id="modalStepQr" class="qr-stage hidden">
+            <div class="qr-frame">
+                <img id="vietqrImage" src="" alt="Mã QR thanh toán" class="qr-img">
             </div>
 
-            <div class="bg-[#F0F3FF] border border-[#1B2B7A]/15 rounded-2xl p-4 text-left text-sm space-y-1.5">
-                <div class="flex justify-between">
-                    <span class="text-slate-500">Số tiền:</span>
-                    <strong id="qrAmountText" class="text-[#1B2B7A] text-base">3.500đ</strong>
+            <div class="qr-summary">
+                <div class="qr-row">
+                    <span>Số tiền:</span>
+                    <strong id="qrAmountText" class="qr-amount">3.500đ</strong>
                 </div>
-                <div class="flex justify-between">
-                    <span class="text-slate-500">Đơn vị thụ hưởng:</span>
-                    <strong class="text-slate-800">CÔNG TY TNHH POPHUBLY</strong>
+                <div class="qr-row">
+                    <span>Đơn vị thụ hưởng:</span>
+                    <strong>CÔNG TY TNHH POPHUBLY</strong>
                 </div>
-                <div class="flex justify-between">
-                    <span class="text-slate-500">Nội dung chuyển khoản:</span>
-                    <strong id="qrMemoText" class="text-slate-900">PR0000</strong>
+                <div class="qr-row">
+                    <span>Nội dung chuyển khoản:</span>
+                    <strong id="qrMemoText">PR000000</strong>
                 </div>
             </div>
 
-            <button type="button" id="confirmQrBtn" onclick="submitQrPayment()" class="btn-main w-full py-4">
+            <button type="button" id="confirmQrBtn" onclick="submitQrPayment()" class="btn-main btn-full">
                 <span>Tôi đã chuyển khoản — Mở khóa ngay</span>
             </button>
         </div>
@@ -729,14 +1482,14 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
 
 <script>
     // 1. URL Web App PopResearch Backend
-    const POPRESEARCH_API_URL = 'https://script.google.com/macros/s/AKfycbw7qwDnQCKRCVPffwVCH9MfD_3qCJJc1eJykQh51qpTfomgoOlyGf23uTTU1cM2Mj2s/exec';
-    // 2. URL tạo tài khoản dùng thử PopMinutes (giống ctaForm)
+    const POPRESEARCH_API_URL = 'https://script.google.com/macros/s/YOUR_POPRESEARCH_DEPLOYMENT_ID/exec';
+    // 2. URL tạo tài khoản dùng thử PopMinutes
     const POPMINUTES_LEAD_URL = 'https://script.google.com/macros/s/AKfycbxrYkvMg1JxGCzuPzdpUaBYIrqZu6DyX2Qh0IXV49OYhAaCb6NHBY9BZFmdBBxLe65i/exec';
 
-    // 3. Cấu hình tài khoản nhận VietQR (điền mã ngân hàng và số tài khoản công ty)
+    // 3. Cấu hình tài khoản nhận VietQR
     const VIETQR_CONFIG = {
-        BANK_ID: 'Ngân hàng Quân đội (MB Bank)',              // Ví dụ: MB, VCB, ACB, TCB, BIDV...
-        ACCOUNT_NO: '1602232842',   // Số tài khoản nhận thanh toán
+        BANK_ID: 'MB',
+        ACCOUNT_NO: '0384744368',
         ACCOUNT_NAME: 'CONG TY TNHH POPHUBLY'
     };
 
@@ -773,17 +1526,16 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
 
     function showAlert(type, msg) {
         const box = document.getElementById('alertBox');
-        box.className = 'mb-6 px-5 py-4 rounded-2xl text-sm font-semibold border';
-        if (type === 'error') box.classList.add('bg-red-50', 'text-red-700', 'border-red-200');
-        else if (type === 'warn') box.classList.add('bg-amber-50', 'text-amber-800', 'border-amber-200');
-        else box.classList.add('bg-emerald-50', 'text-emerald-800', 'border-emerald-200');
+        box.className = 'alert-box';
+        if (type === 'error') box.classList.add('alert-error');
+        else if (type === 'warn') box.classList.add('alert-warn');
+        else box.classList.add('alert-success');
         box.textContent = msg;
-        box.classList.remove('hidden');
     }
 
     function clearAlert() {
         const box = document.getElementById('alertBox');
-        box.classList.add('hidden');
+        box.className = 'alert-box hidden';
         box.textContent = '';
     }
 
@@ -800,10 +1552,10 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
         if (quota.isPopMinutesUser) {
             creditBadge.classList.remove('hidden');
             creditBadge.textContent = `Mở khóa tháng: ${quota.scriptUnlocksRemaining}/${quota.scriptUnlockLimit}`;
-            statusEl.innerHTML = `Thành viên PopMinutes: Còn <strong class="text-[#1B2B7A]">${quota.scriptUnlocksRemaining}/${quota.scriptUnlockLimit}</strong> lượt mở khóa kịch bản tháng này (sau đó <strong>2.500đ/lượt</strong>).`;
+            statusEl.innerHTML = `Thành viên PopMinutes: Còn <strong class="navy-strong">${quota.scriptUnlocksRemaining}/${quota.scriptUnlockLimit}</strong> lượt mở khóa kịch bản tháng này (sau đó <strong>2.500đ/lượt</strong>).`;
         } else {
             creditBadge.classList.add('hidden');
-            statusEl.innerHTML = 'Hạn mức mặc định: <strong class="text-slate-800">3 Quét nhanh</strong> &amp; <strong class="text-slate-800">2 Quét sâu</strong> mỗi ngày.';
+            statusEl.innerHTML = 'Hạn mức mặc định: <strong>3 Quét nhanh</strong> &amp; <strong>2 Quét sâu</strong> mỗi ngày.';
         }
 
         if (currentAnalysisTarget.targetKey) {
@@ -837,14 +1589,14 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
         if (q.isPopMinutesUser && q.scriptUnlocksRemaining > 0) {
             overlayHtml = `
                 <div class="lock-card">
-                    <div class="w-12 h-12 rounded-2xl bg-[#F0F3FF] text-[#1B2B7A] inline-flex items-center justify-center text-lg mb-3">
+                    <div class="lock-icon-badge">
                         <i class="fa-solid fa-unlock-keyhole"></i>
                     </div>
-                    <h3 class="text-lg font-extrabold text-slate-900 mb-2">Mở khóa kịch bản Tư vấn &amp; Đàm phán</h3>
-                    <p class="text-sm text-slate-500 font-medium mb-5 leading-relaxed">
+                    <h3 class="lock-title">Mở khóa kịch bản Tư vấn &amp; Đàm phán</h3>
+                    <p class="lock-desc">
                         Bạn còn <strong>${q.scriptUnlocksRemaining}/${q.scriptUnlockLimit} lượt</strong> mở khóa miễn phí trong tháng từ gói PopMinutes.
                     </p>
-                    <button type="button" onclick="useMonthlyScriptCredit()" class="btn-main w-full">
+                    <button type="button" onclick="useMonthlyScriptCredit()" class="btn-main btn-full">
                         <span>Dùng 1 lượt mở khóa ngay</span>
                     </button>
                 </div>
@@ -857,12 +1609,12 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
 
             overlayHtml = `
                 <div class="lock-card">
-                    <div class="w-12 h-12 rounded-2xl bg-[#F0F3FF] text-[#1B2B7A] inline-flex items-center justify-center text-lg mb-3">
+                    <div class="lock-icon-badge">
                         <i class="fa-solid fa-lock"></i>
                     </div>
-                    <h3 class="text-lg font-extrabold text-slate-900 mb-2">Mở khóa kịch bản Tư vấn &amp; Đàm phán</h3>
-                    <p class="text-sm text-slate-500 font-medium mb-5 leading-relaxed">${descText}</p>
-                    <button type="button" onclick="openUnlockModal('auto')" class="btn-main w-full">
+                    <h3 class="lock-title">Mở khóa kịch bản Tư vấn &amp; Đàm phán</h3>
+                    <p class="lock-desc">${descText}</p>
+                    <button type="button" onclick="openUnlockModal('auto')" class="btn-main btn-full">
                         <span>Mở khóa kịch bản (${priceLabel})</span>
                     </button>
                 </div>
@@ -924,7 +1676,6 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
         }
     }
 
-    // ================= MODAL 2 LỰA CHỌN =================
     function openUnlockModal(initialMode = 'auto') {
         const currentEmail = document.getElementById('userEmail').value.trim();
         if (currentEmail) document.getElementById('trialEmail').value = currentEmail;
@@ -942,7 +1693,6 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
         if (initialMode === 'trial') {
             showModalStep('trial');
         } else if (initialMode === 'qr' || currentQuotaState.isPopMinutesUser) {
-            // Nếu đã là thành viên PopMinutes (đã hết 10 lượt tháng) thì mở thẳng QR 2.500đ
             showModalStep('qr');
         } else {
             showModalStep('choose');
@@ -984,7 +1734,7 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
         document.getElementById('qrAmountText').textContent = priceFormatted;
         document.getElementById('qrMemoText').textContent = currentOrderCode;
 
-        const qrUrl = `[https://img.vietqr.io/image/$](https://img.vietqr.io/image/$){VIETQR_CONFIG.BANK_ID}-${VIETQR_CONFIG.ACCOUNT_NO}-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(currentOrderCode)}&accountName=${encodeURIComponent(VIETQR_CONFIG.ACCOUNT_NAME)}`;
+        const qrUrl = `https://img.vietqr.io/image/${VIETQR_CONFIG.BANK_ID}-${VIETQR_CONFIG.ACCOUNT_NO}-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(currentOrderCode)}&accountName=${encodeURIComponent(VIETQR_CONFIG.ACCOUNT_NAME)}`;
         document.getElementById('vietqrImage').src = qrUrl;
     }
 
@@ -997,7 +1747,6 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
         if (e.target === this) closeUnlockModal();
     });
 
-    // Submit Form đăng ký PopMinutes (kiểm tra hợp lệ & chờ xác nhận từ hệ thống PopMinutes)
     document.getElementById('unlockTrialForm').addEventListener('submit', async function(e) {
         e.preventDefault();
 
@@ -1031,7 +1780,6 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
         btn.innerHTML = '<span class="btn-spinner"></span><span>Đang khởi tạo tài khoản...</span>';
 
         try {
-            // 1. Gửi đăng ký sang hệ thống PopMinutes giống hệt ctaForm
             const leadRes = await fetch(POPMINUTES_LEAD_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -1055,7 +1803,6 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
                 throw new Error(leadResult.message || 'Không thể tạo tài khoản PopMinutes. Vui lòng kiểm tra lại thông tin.');
             }
 
-            // 2. Kích hoạt quyền lợi 10 lượt mở khóa/tháng trên PopResearch
             const unlockRes = await fetch(POPRESEARCH_API_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -1121,7 +1868,6 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
         }
     }
 
-    // ================= PHÂN TÍCH DOANH NGHIỆP =================
     function setLoading(isLoading, text = '') {
         document.getElementById('btnFast').disabled = isLoading;
         document.getElementById('btnDeep').disabled = isLoading;
@@ -1219,7 +1965,7 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
     function copyText(text, btnEl) {
         navigator.clipboard.writeText(text).then(() => {
             const old = btnEl.innerHTML;
-            btnEl.innerHTML = '<i class="fa-solid fa-check text-emerald-600"></i><span>Đã chép</span>';
+            btnEl.innerHTML = '<i class="fa-solid fa-check"></i><span>Đã chép</span>';
             setTimeout(() => { btnEl.innerHTML = old; }, 1500);
         });
     }
@@ -1253,39 +1999,39 @@ Gói Enterprise: 100k/user/tháng, tối thiểu 10 user, tích hợp CRM toàn 
 
         document.getElementById('resExecTag').textContent = execMode || '';
 
-        const painList = (profile.pain_points || []).map(p => `<li class="mb-1.5">${escapeHtml(p)}</li>`).join('');
-        const signalList = (profile.recent_signals || []).map(s => `<li class="mb-1.5">${escapeHtml(s)}</li>`).join('');
+        const painList = (profile.pain_points || []).map(p => `<li>${escapeHtml(p)}</li>`).join('');
+        const signalList = (profile.recent_signals || []).map(s => `<li>${escapeHtml(s)}</li>`).join('');
 
         document.getElementById('resCompanySummary').innerHTML = `
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
-                <div class="bg-[#F8FAFC] border border-slate-200/80 rounded-2xl p-4">
-                    <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Doanh nghiệp</div>
-                    <div class="text-sm font-bold text-slate-900">${escapeHtml(profile.company_name || 'N/A')}</div>
-                    <div class="text-xs text-slate-500 mt-1">MST: ${escapeHtml(profile.tax_id || 'N/A')}</div>
+            <div class="meta-grid-3">
+                <div class="meta-box">
+                    <div class="meta-label">Doanh nghiệp</div>
+                    <div class="meta-value">${escapeHtml(profile.company_name || 'N/A')}</div>
+                    <div class="meta-sub">MST: ${escapeHtml(profile.tax_id || 'N/A')}</div>
                 </div>
-                <div class="bg-[#F8FAFC] border border-slate-200/80 rounded-2xl p-4">
-                    <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Lĩnh vực &amp; Quy mô</div>
-                    <div class="text-sm font-bold text-slate-900">${escapeHtml(profile.industry || 'N/A')}</div>
-                    <div class="text-xs text-slate-500 mt-1">${escapeHtml(profile.estimated_scale || '')}</div>
+                <div class="meta-box">
+                    <div class="meta-label">Lĩnh vực &amp; Quy mô</div>
+                    <div class="meta-value">${escapeHtml(profile.industry || 'N/A')}</div>
+                    <div class="meta-sub">${escapeHtml(profile.estimated_scale || '')}</div>
                 </div>
-                <div class="bg-[#F8FAFC] border border-slate-200/80 rounded-2xl p-4">
-                    <div class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Tín hiệu tuyển dụng</div>
-                    <div class="text-sm font-medium text-slate-800">${escapeHtml(profile.hiring_signals || 'Chưa ghi nhận')}</div>
+                <div class="meta-box">
+                    <div class="meta-label">Tín hiệu tuyển dụng</div>
+                    <div class="meta-value">${escapeHtml(profile.hiring_signals || 'Chưa ghi nhận')}</div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="script-block m-0">
+            <div class="two-col-grid">
+                <div class="script-block no-mb">
                     <div class="script-block-head">
                         <span class="script-block-title">Biến động &amp; Tín hiệu</span>
                     </div>
-                    <ul class="pl-4 m-0 text-sm text-slate-700 list-disc">${signalList || '<li>Chưa ghi nhận biến động mới</li>'}</ul>
+                    <ul class="bullet-list">${signalList || '<li>Chưa ghi nhận biến động mới</li>'}</ul>
                 </div>
-                <div class="script-block m-0">
+                <div class="script-block no-mb">
                     <div class="script-block-head">
                         <span class="script-block-title">Điểm nghẽn vận hành</span>
                     </div>
-                    <ul class="pl-4 m-0 text-sm text-slate-700 list-disc">${painList || '<li>Chưa xác định rõ</li>'}</ul>
+                    <ul class="bullet-list">${painList || '<li>Chưa xác định rõ</li>'}</ul>
                 </div>
             </div>
         `;
